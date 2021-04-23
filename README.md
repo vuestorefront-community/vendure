@@ -1,90 +1,33 @@
-![Vue Storefront](https://camo.githubusercontent.com/48c886ac0703e3a46bc0ec963e20f126337229fc/68747470733a2f2f643968687267346d6e767a6f772e636c6f756466726f6e742e6e65742f7777772e76756573746f726566726f6e742e696f2f32383062313964302d6c6f676f2d76735f3062793032633062793032633030303030302e6a7067)
+<img src="https://blog.vuestorefront.io/wp-content/uploads/2020/01/1QU9F6hQlFyHsJIbsdmt6FA.png" height="100px" />
 
-# Vue Storefront Next integration with Vendure
+## Vue Storefront 2 integration with Vendure (WIP)
 
-<a href="https://slack.vuestorefront.io">![Branch Develop](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)</a>
+> This integration is under development
 
-> **Disclaimer:** This project is is in early stages.
+This project is a Vendure integration for [Vue Storefront 2](https://github.com/vuestorefront/vue-storefront/).
+This integration is being developed and maintained by Rafael Garcia Lepper.
 
-This repository is a monorepo containing three projects:
 
-- **api-client** - communicates with a backend;
-- **composables** - exposes composable functions used to retrieve data using `api-client` and to map them to universal data formats using `getters`;
-- **theme** - `nuxt` project that glues everything together. It extends our core theme and uses `composables` to retrieve data.
+## How to start if you want to try out the integration
 
-## How to make it work locally?
+Right now it's not possible.
 
-1. Install all required dependencies:
+## How to start if you want to contribute?
 
-```sh
-yarn install
-```
+Want to contribute? Ping us on `vendure` channel on [our Discord](discord.vuestorefront.io)!
 
-2. (optional) Then you can verify if everything works properly by building all three projects:
+1. Clone the repo
+2. Run `yarn` to install dependencies
+3. Build dependencies `yarn build:api-client && yarn build:composables`
+4. Run `yarn dev:theme` to run theme. You can find other commands in `package.json`
+5. If you need HMR on Api Client/Composables run `yarn dev:api-client` or `yarn dev:composables` on a separate terminal window.
 
-```sh
-yarn build
-```
+## Resources
 
-3. If everything built properly, run:
+- [Vue Storefront Documentation](https://docs.vuestorefront.io/v2/)
+- Vendure integration Documentation - WIP
+- [Community Chat](https://discord.vuestorefront.io)
 
-```sh
-yarn dev
-```
+## Support
 
-## Progress
-
-### Product
-
-- [ ] fetch single/multiple products based on uuid/sku/catId/query
-- [ ] fetch product variants
-
-### Category
-
-- [ ] fetch single category
-- [ ] fetch category tree
-
-### Cart
-
-- [ ] create cart
-- [ ] add to cart
-- [ ] remove from the cart
-- [ ] change the quantity of an item in the cart
-- [ ] change the configuration of the item in the cart
-- [ ] clear cart
-- [ ] add promo coupon
-- [ ] remove promo coupon
-
-### User
-
-- [ ] log in
-- [ ] log out
-- [ ] register
-- [ ] forgot password
-- [ ] add/remove shipping address
-- [ ] set the default shipping address
-- [ ] add/remove billing address
-- [ ] set the default billing address
-- [ ] see past orders
-
-### Wishlist
-
-- [ ] add/remove the product
-- [ ] associate with the logged-in user
-
-### Checkout
-
-- [ ] get shipping methods
-- [ ] get payment methods (depends on integration)
-- [ ] place order
-
-### i18n
-
-- [ ] change currency
-- [ ] change locale
-- [ ] change language
-
-### Additional features (optional)
-
-- [ ] facet filtering
-- [ ] order notifications
+If you have any questions about this integration we will be happy to answer them on  `vendure` channel on [our Discord](discord.vuestorefront.io).
