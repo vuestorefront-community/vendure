@@ -1,8 +1,8 @@
 module.exports = {
   integrations: {
-    boilerplate: {
+    vendure: {
       location: "@vue-storefront/vendure-api/server",
-      configuration: {},
-    },
-  },
+      configuration: {}
+    }
+  }
 };

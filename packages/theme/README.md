@@ -1,10 +1,10 @@
 # theme
 
-> Boilerplate theme
+> Vendure - Vue Storefront theme
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ yarn install
 

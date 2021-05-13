@@ -3,7 +3,7 @@ import { integrationPlugin } from '@vue-storefront/core';
 const moduleOptions = <%= serialize(options) %>;
 
 export default integrationPlugin(({ integration }) => {
-  integration.configure('boilerplate', {
+  integration.configure('vendure', {
     ...moduleOptions
     // other options
   });
