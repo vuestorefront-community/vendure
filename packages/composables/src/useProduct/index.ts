@@ -1,15 +1,13 @@
 import { useProductFactory, UseProduct, Context, CustomQuery } from '@vue-storefront/core';
-import type { ProductVariant, ProductFilter } from '@vue-storefront/vendure-api';
+import type { Product, ProductFilter } from '@vue-storefront/vendure-api';
 
 interface SearchParams {
   customQuery?: CustomQuery;
   [key: string]: any;
 }
 
-// TODO: add types
 const useProductFactoryParams = {
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  productsSearch: async (context: Context, { customQuery, ...searchParams }: SearchParams): Promise<ProductVariant[]> => {
+  productsSearch: async (context: Context, { customQuery, ...searchParams }: SearchParams): Promise<Product[]> => {
     const productResponse = await context.$vendure.api.getProduct(searchParams, customQuery);
 
     const { variants, ...rest } = productResponse?.data?.product;
@@ -37,8 +35,7 @@ const useProductFactoryParams = {
   }
 };
 
-// TODO: add types
-const useProduct: (cacheId: string) => UseProduct<ProductVariant[], ProductFilter> = useProductFactory<ProductVariant[], ProductFilter>(useProductFactoryParams);
+const useProduct: (cacheId: string) => UseProduct<Product[], ProductFilter> = useProductFactory<Product[], ProductFilter>(useProductFactoryParams);
 
 export {
   useProduct,

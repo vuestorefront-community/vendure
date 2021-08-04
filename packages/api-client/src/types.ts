@@ -48,21 +48,6 @@ export type ProductCollections = {
 }
 
 export type Product = {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  sku: string;
-  price: number;
-  priceWithTax: number;
-  currencyCode: string;
-  featuredAsset: ProductAsset;
-  assets: ProductAsset[];
-  collections: ProductCollections[];
-  optionGroups: ProductOptionGroups
-};
-
-export type ProductVariant = {
   _id: string;
   _description: string;
   _categoriesRef: string[];
@@ -78,6 +63,20 @@ export type ProductVariant = {
   optionGroups?: ProductOptionGroups;
   featuredAsset?: ProductAsset;
   assets?: ProductAsset[];
+}
+
+export type ProductData = {
+  data: {
+    product: {
+      variants: Product[];
+      slug: string;
+      description: string;
+      collections?: ProductCollections[];
+      optionGroups?: ProductOptionGroups;
+      featuredAsset?: ProductAsset;
+      assets?: ProductAsset[];
+    }
+  }
 }
 
 export type ProductFilter = {
