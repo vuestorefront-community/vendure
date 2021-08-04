@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/vendure",
-  "version": "2.3.0",
+  "version": "0.1.0",
   "private": true,
   "sideEffects": false,
   "main": "lib/index.cjs.js",
@@ -13,7 +13,7 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@vue-storefront/vendure-api": "^2.3.0",
+    "@vue-storefront/vendure-api": "link:../api-client",
     "@vue-storefront/core": "^2.3.0"
   },
   "peerDependencies": {
