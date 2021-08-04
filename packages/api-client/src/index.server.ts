@@ -4,13 +4,12 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from 'apollo-link-http';
 import { ApolloLink } from 'apollo-link';
 import fetch from 'isomorphic-fetch';
-// import type { Settings, Endpoints } from './types';
 import * as api from './api';
+import { Config } from './types';
 
 const defaultSettings = {};
 
-// TODO: add types
-function onCreate(settings): { config, client } {
+function onCreate(settings: Config): { config: Config, client: ApolloClient } {
   const httpLink = createHttpLink({ uri: settings.api.uri, fetch });
   return {
     config: {

@@ -1,5 +1,14 @@
 export type TODO = unknown;
 
+export type Config = {
+  api: {
+    uri: string;
+    tokenMethod: string;
+  };
+  currency: string;
+  lang: string;
+}
+
 export type Setttings = TODO;
 
 export type Endpoints = TODO;
