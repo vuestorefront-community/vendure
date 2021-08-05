@@ -24,7 +24,16 @@
     "apollo-link-http": "^1.5.17",
     "apollo-link-retry": "^2.2.16",
     "graphql": "^15.5.0",
-    "graphql-tag": "^2.12.4"
+    "graphql-tag": "^2.12.4",
+    "isomorphic-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-graphql": "^1.0.0",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "apollo-link-schema": "^1.2.5",
+    "rollup": "^2.47.0"
   },
   "files": [
     "lib/**/*"

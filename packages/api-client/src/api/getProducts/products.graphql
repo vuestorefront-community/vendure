@@ -1,0 +1,16 @@
+query getProducts($options: ProductListOptions) {
+  products(options: $options) {
+    totalItems
+    items {
+      id
+      slug
+      name
+      variants {
+        id
+        sku
+        name
+        price
+      }
+    }
+  }
+}

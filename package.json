@@ -19,10 +19,12 @@
     "test:composables": "cd packages/composables && yarn test --passWithNoTests",
     "test:theme": "cd packages/theme && yarn test --passWithNoTests",
     "lint": "eslint . --ext .ts,.vue",
-    "start": "cd packages/theme && yarn start"
+    "start": "cd packages/theme && yarn start",
+    "codegen": "graphql-codegen --config config.json"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
+    "@graphql-codegen/cli": "1.21.7",
     "@types/jest": "^24.0.23",
     "@types/node": "^12.12.14",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
@@ -36,6 +38,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^7.0.1",
+    "graphql": "^15.5.1",
     "husky": "^4.2.3",
     "jest": "^24.9.0",
     "lerna": "^3.15.0",
@@ -47,7 +50,11 @@
     "ts-node": "^8.4.1",
     "tslib": "^2.0.3",
     "typescript": "~4.2",
-    "vue-eslint-parser": "^7.0.0"
+    "vue-eslint-parser": "^7.0.0",
+    "@graphql-codegen/fragment-matcher": "2.0.1",
+    "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
+    "@graphql-codegen/typescript-operations": "1.18.4",
+    "@graphql-codegen/typescript": "1.23.0"
   },
   "workspaces": [
     "packages/*"

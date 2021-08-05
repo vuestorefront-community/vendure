@@ -1,0 +1,15 @@
+{
+  "overwrite": true,
+  "schema": "http://localhost:3456/shop-api",
+  "documents": "packages/api-client/**/*.graphql",
+  "generates": {
+    "packages/api-client/src/types/generated.d.ts": {
+      "plugins": [
+        "typescript",
+        "typescript-operations",
+        "typescript-graphql-files-modules",
+        "fragment-matcher"
+      ]
+    }
+  }
+}

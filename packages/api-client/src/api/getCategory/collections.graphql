@@ -1,0 +1,16 @@
+query getCategory($options: CollectionListOptions) {
+  collections(options: $options) {
+    totalItems
+    items {
+      id
+      name
+      slug
+      parent {
+        id
+      }
+      items: children {
+        id
+      }
+    }
+  }
+}

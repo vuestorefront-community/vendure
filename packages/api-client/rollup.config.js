@@ -1,29 +1,34 @@
-import pkg from './package.json';
-import typescript from 'rollup-plugin-typescript2';
-import { generateBaseConfig } from '../../rollup.base.config';
+import nodeResolve from "@rollup/plugin-node-resolve";
+import typescript from "rollup-plugin-typescript2";
+import graphql from "@rollup/plugin-graphql";
+import json from "@rollup/plugin-json";
+import pkg from "./package.json";
+import { generateBaseConfig } from "../../rollup.base.config";
+
+const extensions = [".ts", ".graphql", ".js"];
 
 const server = {
-  input: 'src/index.server.ts',
+  input: "src/index.server.ts",
   output: [
     {
       file: pkg.server,
-      format: 'cjs',
-      sourcemap: true
-    }
+      format: "cjs",
+      sourcemap: true,
+    },
   ],
   external: [
+    "@apollo/client/utilities",
     ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.peerDependencies || {})
+    ...Object.keys(pkg.peerDependencies || {}),
   ],
   plugins: [
-    typescript({
-      // eslint-disable-next-line global-require
-      typescript: require('typescript')
-    })
-  ]
+    nodeResolve({
+      extensions,
+    }),
+    typescript({ useTsconfigDeclarationDir: true }),
+    graphql(),
+    json(),
+  ],
 };
 
-export default [
-  generateBaseConfig(pkg),
-  server
-];
+export default [generateBaseConfig(pkg), server];
