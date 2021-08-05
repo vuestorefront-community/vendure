@@ -4,8 +4,7 @@ module.exports = {
       location: '@vue-storefront/vendure-api/server',
       configuration: {
         api: {
-          // for demo replace with https://demo.vendure.io/shop-api
-          uri: 'http://localhost:3000/shop-api',
+          uri: 'https://demo.vendure.io/shop-api',
           // to be used later with authentication
           tokenMethod: 'cookie'
         },
