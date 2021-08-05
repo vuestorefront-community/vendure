@@ -8,11 +8,11 @@ import type { Product, ProductFilter } from '@vue-storefront/vendure-api';
 import { createPrice } from './_utils';
 
 function getName(product: Product): string {
-  return product.name;
+  return product?.name || '';
 }
 
 function getSlug(product: Product): string {
-  return product.slug;
+  return product?.slug || '';
 }
 
 function getPrice(product: Product): AgnosticPrice {
@@ -23,6 +23,8 @@ function getPrice(product: Product): AgnosticPrice {
 }
 
 function getGallery(product: Product): AgnosticMediaGalleryItem[] {
+  if (!product?.images.length) return [];
+
   return [
     {
       small: product?.images[0],
@@ -33,10 +35,12 @@ function getGallery(product: Product): AgnosticMediaGalleryItem[] {
 }
 
 function getCoverImage(product: Product): string {
-  return product?.images[0];
+  return product?.images[0] || '';
 }
 
 function getFiltered(products: Product[], filters: ProductFilter): Product[] {
+  if (!products?.length) return [];
+
   const mappedProducts = products.map(product => ({
     _id: product?._id,
     _description: product?._description,
@@ -46,12 +50,12 @@ function getFiltered(products: Product[], filters: ProductFilter): Product[] {
     slug: product?.slug,
     images: [product?.featuredAsset?.source],
     price: {
-      original: product?.price.original,
-      current: product?.price.current
+      original: product?.price?.original,
+      current: product?.price?.current
     }
   }));
 
-  if (filters.master) {
+  if (filters?.master) {
     return [mappedProducts[0]];
   }
 
@@ -78,15 +82,15 @@ function getAttributes(products: Product[] | Product, filterByAttributeName?: st
 }
 
 function getDescription(product: Product): string {
-  return product?._description;
+  return product?._description || '';
 }
 
 function getCategoryIds(product: Product): string[] {
-  return product?._categoriesRef;
+  return product?._categoriesRef || [];
 }
 
 function getId(product: Product): string {
-  return product?._id;
+  return product?._id || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -105,10 +109,11 @@ function getAverageRating(product: Product): number {
 }
 
 function getSku(product: Product): string {
-  return product?.sku;
+  return product?.sku || '';
 }
 
 function getCategoryNames(products: Product[]): string[] {
+  if (!products.length || !products[0].collections.length) return [];
   return products[0]?.collections.map(collection => collection.name);
 }
 

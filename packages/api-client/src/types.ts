@@ -69,7 +69,7 @@ export type Product = {
     current: number;
   };
   collections?: ProductCollections[];
-  optionGroups?: ProductOptionGroups;
+  optionGroups?: ProductOptionGroups[];
   featuredAsset?: ProductAsset;
   assets?: ProductAsset[];
 }
@@ -81,7 +81,7 @@ export type ProductData = {
       slug: string;
       description: string;
       collections?: ProductCollections[];
-      optionGroups?: ProductOptionGroups;
+      optionGroups?: ProductOptionGroups[];
       featuredAsset?: ProductAsset;
       assets?: ProductAsset[];
     }
