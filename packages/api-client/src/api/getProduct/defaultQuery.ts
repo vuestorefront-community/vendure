@@ -14,10 +14,10 @@ export default gql`
         currencyCode
       }
       featuredAsset {
-        source
+        preview
       }
       assets {
-        source
+        preview
       }
       collections {
         id

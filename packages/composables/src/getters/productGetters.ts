@@ -48,7 +48,7 @@ function getFiltered(products: Product[], filters: ProductFilter): Product[] {
     name: product?.name,
     sku: product?.sku,
     slug: product?.slug,
-    images: [product?.featuredAsset?.source],
+    images: [product?.featuredAsset?.preview],
     price: {
       original: product?.price?.original,
       current: product?.price?.current
