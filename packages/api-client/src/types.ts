@@ -92,6 +92,13 @@ export type ProductFilter = {
   master: boolean;
 };
 
+export type CategoryData = {
+  data: {
+    // TODO: add correct types later after developing getCategory
+    collections: any
+  }
+}
+
 export type Review = TODO;
 
 export type ReviewItem = TODO;

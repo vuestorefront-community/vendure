@@ -1,8 +1,7 @@
 import gql from 'graphql-tag';
 import defaultQuery from './defaultQuery';
-import ApolloClient from 'apollo-client';
+import ApolloClient, { ApolloQueryResult } from 'apollo-client';
 import { CustomQuery, Context } from '@vue-storefront/core';
-import { ApolloQueryResult } from 'apollo-client';
 import { ProductData } from '../../types';
 
 interface ProductParams {

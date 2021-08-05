@@ -1,11 +1,15 @@
 import gql from 'graphql-tag';
 import defaultQuery from './defaultQuery';
-import ApolloClient from 'apollo-client';
+import ApolloClient, { ApolloQueryResult } from 'apollo-client';
 import { CustomQuery, Context } from '@vue-storefront/core';
+import { CategoryData } from '../../types';
+
+interface CategoryParams {
+  id: string;
+}
 
 // TODO: add types
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const getCategory = async (context: Context, params, customQuery?: CustomQuery): Promise<unknown> => {
+const getCategory = async (context: Context, params: CategoryParams, customQuery?: CustomQuery): Promise<ApolloQueryResult<CategoryData>> => {
 
   const defaultVariables = {
     ...params
@@ -15,7 +19,7 @@ const getCategory = async (context: Context, params, customQuery?: CustomQuery):
     { collections: { query: defaultQuery, variables: defaultVariables } }
   );
 
-  const request = await (context.client as ApolloClient<any>).query<any>({
+  const request = await (context.client as ApolloClient<any>).query<CategoryData>({
     query: gql`${collections.query}`,
     variables: collections.variables,
     fetchPolicy: 'no-cache'
