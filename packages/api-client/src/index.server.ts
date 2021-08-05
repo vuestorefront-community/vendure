@@ -9,7 +9,7 @@ import { Config } from './types';
 
 const defaultSettings = {};
 
-function onCreate(settings: Config): { config: Config, client: ApolloClient } {
+function onCreate(settings: Config): { config: Config, client: ApolloClient<any> } {
   const httpLink = createHttpLink({ uri: settings.api.uri, fetch });
   return {
     config: {
@@ -26,7 +26,7 @@ function onCreate(settings: Config): { config: Config, client: ApolloClient } {
 // TODO: add extensions here later
 const extensions = [];
 
-const { createApiClient } = apiClientFactory<any, any>({
+const { createApiClient } = apiClientFactory({
   onCreate,
   api,
   extensions
