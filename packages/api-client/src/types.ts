@@ -152,6 +152,11 @@ export type CategoryParams = {
   }
 }
 
+export type CategoryNavigation = {
+  name: string;
+  link: string;
+}
+
 export type Review = TODO;
 
 export type ReviewItem = TODO;

@@ -1,5 +1,5 @@
 import { CategoryGetters, AgnosticCategoryTree, AgnosticBreadcrumb } from '@vue-storefront/core';
-import type { CollectionItem } from '@vue-storefront/vendure-api';
+import type { CollectionItem, CategoryNavigation } from '@vue-storefront/vendure-api';
 
 const ROOT_COLLECTION = '__root_collection__';
 
@@ -30,7 +30,18 @@ function getBreadcrumbs(category): AgnosticBreadcrumb[] {
   return agnosticBreadcrums;
 }
 
+function getNavigation(categories: CollectionItem[]): CategoryNavigation[] {
+  const rootCategories = categories?.filter(category => category?.parent?.name === ROOT_COLLECTION);
+  const categoryNavigation = rootCategories.map(category => ({
+    name: category?.name,
+    link: category?.slug
+  }));
+
+  return categoryNavigation;
+}
+
 export const categoryGetters: CategoryGetters<CollectionItem> = {
   getTree,
-  getBreadcrumbs
+  getBreadcrumbs,
+  getNavigation
 };
