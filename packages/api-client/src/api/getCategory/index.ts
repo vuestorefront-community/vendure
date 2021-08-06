@@ -2,13 +2,8 @@ import gql from 'graphql-tag';
 import defaultQuery from './defaultQuery';
 import ApolloClient, { ApolloQueryResult } from 'apollo-client';
 import { CustomQuery, Context } from '@vue-storefront/core';
-import { CategoryData } from '../../types';
+import type { CategoryData, CategoryParams } from '../../types';
 
-interface CategoryParams {
-  id: string;
-}
-
-// TODO: add types
 const getCategory = async (context: Context, params: CategoryParams, customQuery?: CustomQuery): Promise<ApolloQueryResult<CategoryData>> => {
 
   const defaultVariables = {

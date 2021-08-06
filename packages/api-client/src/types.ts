@@ -99,6 +99,55 @@ export type CategoryData = {
   }
 }
 
+export type CollectionItem = {
+  id: string;
+  name: string;
+  breadcrumbs: {
+    name: string;
+    slug: string;
+  }
+  slug: string;
+  parent: {
+    id: string;
+    name: string
+  }
+}
+
+export type Collection = {
+  items: CollectionItem[];
+  totalItems: number;
+}
+
+enum SortOrder {
+  ASC,
+  DESC
+}
+
+export type CategoryParams = {
+  options?: {
+    skip?: number;
+    take?: number;
+    sort?: {
+      id: SortOrder
+      createdAt: SortOrder
+      updatedAt: SortOrder
+      name: SortOrder
+      slug: SortOrder
+      position: SortOrder
+      description: SortOrder
+    }
+    filter?: {
+      createdAt: Date;
+      updatedAt: Date;
+      languageCode: string;
+      name: string;
+      slug: string;
+      position: number;
+      description: string;
+    }
+  }
+}
+
 export type Review = TODO;
 
 export type ReviewItem = TODO;

@@ -1,12 +1,42 @@
 import {
-  ProductsSearchParams
+  ProductsSearchParams,
+  CustomQuery
 } from '@vue-storefront/core';
+
+enum SortOrder {
+  ASC,
+  DESC
+}
 
 export type TODO = any;
 
 export type UseBillingAddParams = TODO;
 
-export type UseCategorySearchParams = TODO;
+export type UseCategorySearchParams = {
+  customQuery?: CustomQuery;
+  searchParams?: {
+    skip?: number;
+    take?: number;
+    sort?: {
+      id: SortOrder
+      createdAt: SortOrder
+      updatedAt: SortOrder
+      name: SortOrder
+      slug: SortOrder
+      position: SortOrder
+      description: SortOrder
+    }
+    filter?: {
+      createdAt: Date;
+      updatedAt: Date;
+      languageCode: string;
+      name: string;
+      slug: string;
+      position: number;
+      description: string;
+    }
+  }
+};
 
 export type UseFacetSearchParams = TODO;
 
