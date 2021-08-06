@@ -16,6 +16,10 @@ export default gql`
           id
           name
         }
+        children {
+          id
+          name
+        }
       }
     }
   }
