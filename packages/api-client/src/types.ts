@@ -187,10 +187,10 @@ export type SearchProduct = {
     preview: string
   };
   price: {
-    value: number;
+    min: number;
   };
   priceWithTax: {
-    value: number;
+    min: number;
   }
 }
 

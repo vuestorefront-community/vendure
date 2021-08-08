@@ -36,13 +36,13 @@ export default gql`
           preview
         }
         price {
-          ... on SinglePrice {
-            value
+          ... on PriceRange {
+            min
           }
         }
         priceWithTax {
-          ... on SinglePrice {
-            value
+          ... on PriceRange {
+            min
           }
         }
       }
