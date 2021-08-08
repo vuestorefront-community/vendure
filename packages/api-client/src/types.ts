@@ -72,6 +72,7 @@ export type Product = {
   optionGroups?: ProductOptionGroups[];
   featuredAsset?: ProductAsset;
   assets?: ProductAsset[];
+  [key: string]: any;
 }
 
 export type ProductData = {
@@ -92,13 +93,6 @@ export type ProductFilter = {
   master: boolean;
 };
 
-export type CategoryData = {
-  data: {
-    // TODO: add correct types later after developing getCategory
-    collections: any
-  }
-}
-
 export type CollectionItem = {
   id: string;
   name: string;
@@ -114,6 +108,12 @@ export type CollectionItem = {
   children: {
     id: string;
     name: string;
+  }
+}
+
+export type CategoryData = {
+  data: {
+    collections: CollectionItem[]
   }
 }
 
@@ -155,6 +155,52 @@ export type CategoryParams = {
 export type CategoryNavigation = {
   name: string;
   link: string;
+}
+
+export type SearchInputParams = {
+  collectionSlug?: string;
+  groupByProduct?: boolean;
+  take? : number;
+  [key: string]: any;
+}
+
+export type FacetData = {
+  data: {
+    collections: CollectionItem[];
+    totalItems: number;
+    // TODO: replace with types from extracted API types
+    facetValues: any;
+    items: any
+  }
+}
+
+export type SearchProduct = {
+  productId: string;
+  slug: string;
+  sku: string;
+  productVariantId: string;
+  collectionIds: string[];
+  description: string;
+  productName: string;
+  currencyCode: string;
+  productAsset: {
+    preview: string
+  };
+  price: {
+    value: number;
+  };
+  priceWithTax: {
+    value: number;
+  }
+}
+
+export interface FacetResultsData {
+  products: SearchProduct[];
+  categories: CollectionItem[];
+  facets: any;
+  total: number;
+  perPageOptions: number[];
+  itemsPerPage: number;
 }
 
 export type Review = TODO;
