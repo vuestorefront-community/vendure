@@ -26,7 +26,6 @@
         <div class="product__price-and-rating">
           <SfPrice
             :regular="$n(productGetters.getPrice(product).regular, 'currency')"
-            :special="productGetters.getPrice(product).special && $n(productGetters.getPrice(product).special, 'currency')"
           />
           <div>
             <div class="product__rating">
@@ -48,7 +47,7 @@
           <SfButton class="sf-button--text desktop-only product__guide">
             {{ $t('Size guide') }}
           </SfButton>
-          <div v-if="options.length">
+          <div v-if="options && options.length">
             <SfSelect
               v-for="optionGroup in options"
               :key="optionGroup.id"
