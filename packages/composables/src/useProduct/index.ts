@@ -21,8 +21,8 @@ const useProductFactoryParams = {
         slug: rest.slug,
         images: [rest.featuredAsset],
         price: {
-          original: variant.priceWithTax,
-          current: variant.price
+          original: variant.price,
+          current: variant.priceWithTax
         },
         collections: rest.collections,
         optionGroups: rest.optionGroups,

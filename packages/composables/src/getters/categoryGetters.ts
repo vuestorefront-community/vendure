@@ -22,7 +22,7 @@ function getTree(category: CollectionItem): AgnosticCategoryTree {
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function getBreadcrumbs(category): AgnosticBreadcrumb[] {
-  const agnosticBreadcrums = category?.breadcrumbs.map(breadcrumb => ({
+  const agnosticBreadcrums = category?.breadcrumbs?.map(breadcrumb => ({
     text: breadcrumb?.name,
     // TODO: adjust root category logic. For now it will return { link: "/c/__root_collection__", text: "__root_collection__" }. It should return correct root category.
     link: `/c/${breadcrumb?.slug}`

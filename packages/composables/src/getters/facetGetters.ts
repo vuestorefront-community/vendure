@@ -49,8 +49,8 @@ function getProducts(params: FacetSearchResult<FacetResultsData>): any {
     sku: product.sku,
     images: [product.productAsset.preview],
     price: {
-      original: product.price.value,
-      current: product.priceWithTax.value
+      original: product.price.min,
+      current: product.priceWithTax.min
     },
     slug: product.slug
   }));
