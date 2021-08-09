@@ -74,7 +74,9 @@ export default {
     /* project-only-start
     ['@vue-storefront/nuxt-theme'],
     project-only-end */
-    ['@vue-storefront/vendure/nuxt', {}]
+    ['@vue-storefront/vendure/nuxt', {
+      i18n: { useNuxtI18nConfig: true }
+    }]
   ],
   modules: [
     'nuxt-i18n',
@@ -85,8 +87,24 @@ export default {
   i18n: {
     currency: 'USD',
     country: 'US',
-    locales: ['en'],
+    countries: [
+      { name: 'US', label: 'United States', states: ['California', 'Nevada'] },
+      { name: 'AT', label: 'Austria' },
+      { name: 'DE', label: 'Germany' },
+      { name: 'NL', label: 'Netherlands' }
+    ],
+    currencies: [
+      { name: 'EUR', label: 'Euro' },
+      { name: 'USD', label: 'Dollar' }
+    ],
+    locales: [
+      { code: 'en', label: 'English', file: 'en.js', iso: 'en' },
+      { code: 'de', label: 'German', file: 'de.js', iso: 'de' }
+    ],
     defaultLocale: 'en',
+    lazy: true,
+    seo: true,
+    langDir: 'lang/',
     strategy: 'no_prefix',
     vueI18n: {
       fallbackLocale: 'en',
@@ -104,14 +122,6 @@ export default {
             currency: 'EUR',
             currencyDisplay: 'symbol'
           }
-        }
-      },
-      messages: {
-        en: {
-          welcome: 'Welcome 1'
-        },
-        de: {
-          welcome: 'Welcome 2'
         }
       }
     }
