@@ -21,10 +21,17 @@ function getGrouped(params: FacetSearchResult<FacetResultsData>, criteria?: Face
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getSortOptions(params: FacetSearchResult<FacetResultsData>): AgnosticSort {
+function getSortOptions(searchData: FacetSearchResult<FacetResultsData>): AgnosticSort {
+  const options = [
+    { type: 'sort', id: 'latest', value: 'Latest', count: null },
+    { type: 'sort', id: 'ASC', value: 'Price from low to high', count: null },
+    { type: 'sort', id: 'DESC', value: 'Price from high to low', count: null }
+  ].map(o => ({ ...o, selected: o.id === searchData.input.sort }));
+
+  const selected = options.find(o => o.id === searchData.input.input.sort)?.id || 'latest';
   return {
-    options: [],
-    selected: ''
+    options,
+    selected
   };
 }
 

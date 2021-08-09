@@ -37,7 +37,8 @@ const useUiHelpers = () => {
     return {
       collectionSlug: categorySlug,
       take: parseInt(query.itemsPerPage, 10) || 20,
-      groupByProduct: true
+      groupByProduct: true,
+      sort: { price: query.sort || 'ASC'}
     };
   };
 
