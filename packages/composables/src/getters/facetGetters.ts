@@ -16,8 +16,21 @@ function getAll(params: FacetSearchResult<FacetResultsData>, criteria?: FacetSea
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getGrouped(params: FacetSearchResult<FacetResultsData>, criteria?: FacetSearchCriteria): AgnosticGroupedFacet[] {
-  return [];
+function getGrouped(searchData: FacetSearchResult<FacetResultsData>, criteria?: string[]): AgnosticGroupedFacet[] {
+  const facets = searchData?.data?.facets;
+  return [{
+    id: '1',
+    label: 'Attributes',
+    count: null,
+    options: facets.map(facet => ({
+      type: 'attribute',
+      id: facet.facetValue.name,
+      attrName: facet.facetValue.name,
+      value: facet.facetValue.code,
+      selected: false,
+      count: facet.count
+    }))
+  }];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

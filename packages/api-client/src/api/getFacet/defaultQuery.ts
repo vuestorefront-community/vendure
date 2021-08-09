@@ -52,6 +52,7 @@ export default gql`
           name
           code
         }
+        count
       }
     }
   }

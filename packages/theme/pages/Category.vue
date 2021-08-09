@@ -269,21 +269,7 @@
               class="filters__title sf-heading--left"
               :key="`filter-title-${facet.id}`"
             />
-              <div
-                v-if="isFacetColor(facet)"
-                class="filters__colors"
-                :key="`${facet.id}-colors`"
-              >
-                <SfColor
-                  v-for="option in facet.options"
-                  :key="`${facet.id}-${option.value}`"
-                  :color="option.value"
-                  :selected="isFilterSelected(facet, option)"
-                  class="filters__color"
-                  @click="() => selectFilter(facet, option)"
-                />
-              </div>
-              <div v-else>
+              <div>
                 <SfFilter
                   v-for="option in facet.options"
                   :key="`${facet.id}-${option.value}`"
@@ -360,6 +346,7 @@ import Vue from 'vue';
 
 // TODO(addToCart qty, horizontal): https://github.com/vuestorefront/storefront-ui/issues/1606
 export default {
+  name: 'Category',
   transition: 'fade',
   setup(props, context) {
     const th = useUiHelpers();
@@ -372,7 +359,7 @@ export default {
     const categoryTree = computed(() => facetGetters.getCategoryTree(result.value));
     const breadcrumbs = computed(() => facetGetters.getBreadcrumbs(result.value));
     const sortBy = computed(() => facetGetters.getSortOptions(result.value));
-    const facets = computed(() => facetGetters.getGrouped(result.value, ['color', 'size']));
+    const facets = computed(() => facetGetters.getGrouped(result.value));
     const facetPagination = computed(() => facetGetters.getPagination(result.value));
     const pagination = computed(() => ({ page: parseInt(context.root.$route.query.page, 10) || 1, ...facetPagination.value }));
     const activeCategory = computed(() => {
@@ -686,6 +673,9 @@ export default {
     --product-card-title-margin: var(--spacer-base) 0 0 0;
     --product-card-title-font-weight: var(--font-weight--medium);
     --product-card-title-margin: var(--spacer-xs) 0 0 0;
+    ::v-deep .sf-image {
+      --image-height: unset;
+    }
     flex: 1 1 50%;
     @include for-desktop {
       --product-card-title-font-weight: var(--font-weight--normal);
