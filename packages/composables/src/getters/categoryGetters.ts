@@ -4,6 +4,8 @@ import type { CollectionItem, CategoryNavigation } from '@vue-storefront/vendure
 const ROOT_COLLECTION = '__root_collection__';
 
 function getTree(category: CollectionItem): AgnosticCategoryTree {
+  if (!category) return null;
+
   const getRoot = (category) => (category?.parent?.name === ROOT_COLLECTION ? category : getRoot(category?.children));
   const buildTree = (rootCategory) => ({
     label: rootCategory.name,
@@ -12,10 +14,6 @@ function getTree(category: CollectionItem): AgnosticCategoryTree {
     isCurrent: rootCategory.id === category.id,
     items: rootCategory.children
   });
-
-  if (!category) {
-    return null;
-  }
 
   return buildTree(getRoot(category));
 }

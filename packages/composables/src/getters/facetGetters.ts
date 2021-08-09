@@ -33,7 +33,6 @@ function getGrouped(searchData: FacetSearchResult<FacetResultsData>, criteria?: 
   }];
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getSortOptions(searchData: FacetSearchResult<FacetResultsData>): AgnosticSort {
   const options = [
     { type: 'sort', id: 'latest', value: 'Latest', count: null },
@@ -59,7 +58,6 @@ function getCategoryTree(params: FacetSearchResult<FacetResultsData>): AgnosticC
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getProducts(params: FacetSearchResult<FacetResultsData>): any {
   return params?.data?.products?.length && params.data.products.map(product => ({
     _id: product.productId,
@@ -76,7 +74,6 @@ function getProducts(params: FacetSearchResult<FacetResultsData>): any {
   }));
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getPagination(searchData: FacetSearchResult<FacetResultsData>): AgnosticPagination {
   if (!searchData.data) {
     return {

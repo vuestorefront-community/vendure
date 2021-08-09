@@ -187,7 +187,6 @@
               :description="productGetters.getDescription(product)"
               :image="productGetters.getCoverImage(product)"
               :regular-price="$n(productGetters.getPrice(product).regular, 'currency')"
-              :special-price="productGetters.getPrice(product).special && $n(productGetters.getPrice(product).special, 'currency')"
               :max-rating="5"
               :score-rating="3"
               :isOnWishlist="isInWishlist({ product })"
@@ -395,6 +394,7 @@ export default {
 
     onMounted(() => {
       context.root.$scrollTo(context.root.$el, 2000);
+      console.log(result.value);
       setSelectedFilters();
     });
 
