@@ -58,8 +58,28 @@ const useUiHelpers = () => {
     };
   };
 
+  const doesUrlIncludesCategory = (categorySlug) => {
+    const paramSlugs = Object.values(instance.$route.params);
+    return paramSlugs.includes(categorySlug);
+  };
+
+  const getLastSlugFromParams = () => {
+    const params = Object.values(instance.$route.params);
+    const truthySlugs = params.filter(param => Boolean(param));
+    return truthySlugs[truthySlugs.length - 1];
+  };
+
   const getCatLink = (category: CollectionItem): string => {
-    return `/c/${instance.$route.params.slug_1}/${category.slug}`;
+    const urlCategorySlug = instance.$route.params.slug_1;
+    return urlCategorySlug.includes(category.slug) ? `/c/${urlCategorySlug}` : `/c/${urlCategorySlug}/${category.slug}`;
+  };
+
+  const getFormattedBreadcrumbs = (breadcrumbs) => {
+    const urlCategorySlug = instance.$route.params.slug_1;
+    return breadcrumbs.map(breadcrumb => ({
+      text: breadcrumb.text,
+      link: breadcrumb.link === urlCategorySlug ? `/c/${breadcrumb.link}` : breadcrumb.link
+    }));
   };
 
   const changeSorting = (sort: string) => {
@@ -107,7 +127,10 @@ const useUiHelpers = () => {
     setTermForUrl,
     isFacetColor,
     isFacetCheckbox,
-    getSearchTermFromUrl
+    getSearchTermFromUrl,
+    doesUrlIncludesCategory,
+    getLastSlugFromParams,
+    getFormattedBreadcrumbs
   };
 };
 
