@@ -96,7 +96,7 @@
               :show-chevron="true"
             >
               <SfAccordionItem
-                v-for="(cat, i) in categoryTree && categoryTree.items"
+                v-for="(cat, i) in categoryTree && categoryTree"
                 :key="i"
                 :header="cat.label"
               >
@@ -337,8 +337,9 @@ import {
   SfProperty
 } from '@storefront-ui/vue';
 import { ref, computed, onMounted } from '@vue/composition-api';
-import { useCart, useWishlist, productGetters, useFacet, facetGetters } from '@vue-storefront/vendure';
+import { useCart, useWishlist, productGetters, useFacet, facetGetters, categoryGetters } from '@vue-storefront/vendure';
 import { useUiHelpers, useUiState } from '~/composables';
+import { getTreeWithoutEmptyCategories } from '~/helpers';
 import { onSSR } from '@vue-storefront/core';
 import LazyHydrate from 'vue-lazy-hydration';
 import Vue from 'vue';
@@ -353,16 +354,30 @@ export default {
     const { addItem: addItemToCart, isInCart } = useCart();
     const { addItem: addItemToWishlist, isInWishlist, removeItem: removeItemFromWishlist } = useWishlist();
     const { result, search, loading } = useFacet();
+    const { changeFilters, isFacetColor } = useUiHelpers();
+    const { toggleFilterSidebar } = useUiState();
 
-    const products = computed(() => facetGetters.getProducts(result.value));
-    const categoryTree = computed(() => facetGetters.getCategoryTree(result.value));
-    const breadcrumbs = computed(() => facetGetters.getBreadcrumbs(result.value));
+    const lastSlug = th.getLastSlugFromParams();
+
     const sortBy = computed(() => facetGetters.getSortOptions(result.value));
     const facets = computed(() => facetGetters.getGrouped(result.value));
-    const facetPagination = computed(() => facetGetters.getPagination(result.value));
-    const pagination = computed(() => ({ page: parseInt(context.root.$route.query.page, 10) || 1, ...facetPagination.value }));
+    const products = computed(() => facetGetters.getProducts(result.value));
+
+    const rawBreadcrumbs = computed(() => categoryGetters.getBreadcrumbsFromSlug(result.value, lastSlug));
+    const breadcrumbs = computed(() => th.getFormattedBreadcrumbs(rawBreadcrumbs.value));
+    const rawPagination = computed(() => facetGetters.getPagination(result.value));
+    const pagination = computed(() => ({
+      page: parseInt(context.root.$route.query.page, 10) || 1,
+      ...rawPagination.value
+    }));
+    const rawCategoryTree = computed(() => result.value.data.categories.map(category => {
+      const tree = categoryGetters.getTree(category.collection);
+      tree.isCurrent = th.doesUrlIncludesCategory(tree.slug);
+      return tree;
+    }));
+    const categoryTree = computed(() => getTreeWithoutEmptyCategories(rawCategoryTree));
     const activeCategory = computed(() => {
-      const items = categoryTree.value.items;
+      const items = categoryTree.value;
 
       if (!items || !items.length) {
         return '';
@@ -389,12 +404,8 @@ export default {
       setSelectedFilters();
     });
 
-    const { changeFilters, isFacetColor } = useUiHelpers();
-    const { toggleFilterSidebar } = useUiState();
-
     onMounted(() => {
       context.root.$scrollTo(context.root.$el, 2000);
-      console.log(result.value);
       setSelectedFilters();
     });
 
