@@ -76,9 +76,9 @@ const useUiHelpers = () => {
 
   const getFormattedBreadcrumbs = (breadcrumbs) => {
     const urlCategorySlug = instance.$route.params.slug_1;
-    return breadcrumbs.map(breadcrumb => ({
-      text: breadcrumb.text,
-      link: breadcrumb.link === urlCategorySlug ? `/c/${breadcrumb.link}` : breadcrumb.link
+    return breadcrumbs?.map(breadcrumb => ({
+      text: breadcrumb?.text,
+      link: breadcrumb?.link === urlCategorySlug ? `/c/${breadcrumb?.link}` : breadcrumb?.link
     }));
   };
 

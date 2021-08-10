@@ -38,7 +38,7 @@ function getNavigation(categories: CollectionItem[]): CategoryNavigation[] {
 function getBreadcrumbsFromSlug(searchData, slug: string): AgnosticBreadcrumb[] {
   const categoryFromSlug = searchData?.data?.categories?.find(category => category.collection.slug === slug);
 
-  const breadcrumbsFromSlug = categoryFromSlug.collection?.breadcrumbs?.map(breadcrumb => ({
+  const breadcrumbsFromSlug = categoryFromSlug?.collection?.breadcrumbs?.map(breadcrumb => ({
     text: breadcrumb?.name === ROOT_COLLECTION ? 'Home' : breadcrumb?.name,
     link: breadcrumb?.slug === ROOT_COLLECTION ? '/' : breadcrumb?.slug
   }));
