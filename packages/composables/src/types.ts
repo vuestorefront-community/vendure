@@ -14,7 +14,7 @@ export type UseBillingAddParams = TODO;
 
 export type UseCategorySearchParams = {
   customQuery?: CustomQuery;
-  searchParams?: {
+  options?: {
     skip?: number;
     take?: number;
     sort?: {

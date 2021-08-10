@@ -9,8 +9,7 @@ import type { UseCategorySearchParams } from '../types';
 
 const useCategoryFactoryParams: UseCategoryFactoryParams<Collection, any> = {
   categorySearch: async (context: Context, params?: UseCategorySearchParams): Promise<Collection[]> => {
-    // TODO: Fix problem with passing options
-    const categorySearchParams = { options: { ...params?.searchParams } };
+    const categorySearchParams = { options: { ...params?.options } };
     const categoryResponse = await context.$vendure.api.getCategory(categorySearchParams, params?.customQuery);
     return categoryResponse?.data?.collections;
   }
