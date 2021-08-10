@@ -101,14 +101,8 @@ export type CollectionItem = {
     slug: string;
   }
   slug: string;
-  parent: {
-    id: string;
-    name: string
-  }
-  children: {
-    id: string;
-    name: string;
-  }
+  parent?: CollectionItem
+  children?: CollectionItem[]
 }
 
 export type CategoryData = {

@@ -1,25 +1,16 @@
 import gql from 'graphql-tag';
+import { CategoryCollection, RecursiveCollections } from '../../fragments';
 
 export default gql`
+  ${CategoryCollection}
+  ${RecursiveCollections}
+
   query search ($input: SearchInput!) {
     search(input: $input) {
       collections {
         collection {
-          id
-          name
-          breadcrumbs {
-            name
-            slug
-          }
-          slug
-          parent {
-            id
-            name
-          }
-          children {
-            id
-            name
-          }
+          ...CategoryCollection
+          ...RecursiveCollections
         }
       }
       totalItems
