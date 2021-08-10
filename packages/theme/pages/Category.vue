@@ -375,7 +375,7 @@ export default {
       tree.isCurrent = th.doesUrlIncludesCategory(tree.slug);
       return tree;
     }));
-    const categoryTree = computed(() => getTreeWithoutEmptyCategories(rawCategoryTree));
+    const categoryTree = computed(() => getTreeWithoutEmptyCategories(rawCategoryTree.value));
     const activeCategory = computed(() => {
       const items = categoryTree.value;
 
