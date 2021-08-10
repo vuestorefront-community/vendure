@@ -5,7 +5,7 @@ import { Config } from '../../src/types';
 describe('[vendure-api-client] getCategory', () => {
   it('fetches categories (collections)', async () => {
     const givenVariables = {
-      id: '1'
+      options: {}
     };
 
     const context = {
@@ -28,7 +28,7 @@ describe('[vendure-api-client] getCategory', () => {
       extendQuery: (customQuery, args) => args
     };
 
-    const { data } = await getCategory(context, { id: '1' });
+    const { data } = await getCategory(context, { options: {}});
 
     expect(data).toBe('category response');
   });
