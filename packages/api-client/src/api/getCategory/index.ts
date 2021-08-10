@@ -1,78 +1,26 @@
-import { CustomQuery } from '@vue-storefront/core';
+import gql from 'graphql-tag';
+import defaultQuery from './defaultQuery';
+import ApolloClient, { ApolloQueryResult } from 'apollo-client';
+import { CustomQuery, Context } from '@vue-storefront/core';
+import type { CategoryData, CategoryParams } from '../../types';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default async function getCategory(context, params, customQuery?: CustomQuery) {
-  return Promise.resolve([
-    {
-      id: 1,
-      name: 'Women',
-      slug: 'women',
-      items: [
-        {
-          id: 4,
-          name: 'Women jackets',
-          slug: 'women-jackets',
-          items: [
-            {
-              id: 9,
-              name: 'Winter jackets',
-              slug: 'winter-jackets',
-              items: []
-            },
-            {
-              id: 10,
-              name: 'Autumn jackets',
-              slug: 'autmun-jackets',
-              items: []
-            }
-          ]
-        },
-        {
-          id: 5,
-          name: 'Skirts',
-          slug: 'skirts',
-          items: []
-        }
-      ]
-    },
-    {
-      id: 2,
-      name: 'Men',
-      slug: 'men',
-      items: [
-        {
-          id: 6,
-          name: 'Men T-shirts',
-          slug: 'men-tshirts',
-          items: []
-        }
-      ]
-    },
-    {
-      id: 3,
-      name: 'Kids',
-      slug: 'kids',
-      items: [
-        {
-          id: 7,
-          name: 'Toys',
-          slug: 'toys',
-          items: [
-            {
-              id: 8,
-              name: 'Toy Cars',
-              slug: 'toy-cars',
-              items: []
-            },
-            {
-              id: 8,
-              name: 'Dolls',
-              slug: 'dolls',
-              items: []
-            }
-          ]
-        }
-      ]
-    }
-  ]);
-}
+const getCategory = async (context: Context, params: CategoryParams, customQuery?: CustomQuery): Promise<ApolloQueryResult<CategoryData>> => {
+
+  const defaultVariables = {
+    ...params
+  };
+
+  const { collections } = context.extendQuery(customQuery,
+    { collections: { query: defaultQuery, variables: defaultVariables } }
+  );
+
+  const request = await (context.client as ApolloClient<any>).query<CategoryData>({
+    query: gql`${collections.query}`,
+    variables: collections.variables,
+    fetchPolicy: 'no-cache'
+  });
+
+  return request;
+};
+
+export default getCategory;

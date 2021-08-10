@@ -1,17 +1,23 @@
 import {
   Context,
+  UseCategory,
   useCategoryFactory,
-  UseCategoryFactoryParams,
-} from "@vue-storefront/core";
-import { Category } from "../types";
+  UseCategoryFactoryParams
+} from '@vue-storefront/core';
+import type { Collection } from '@vue-storefront/vendure-api';
+import type { UseCategorySearchParams } from '../types';
 
-const params: UseCategoryFactoryParams<Category, any> = {
-  categorySearch: async (context: Context, params) => {
-    console.log("Mocked: categorySearch");
-    const { customQuery, ...searchParams } = params;
-
-    return await context.$vendure.api.getCategory(searchParams, customQuery);
-  },
+const useCategoryFactoryParams: UseCategoryFactoryParams<Collection, any> = {
+  categorySearch: async (context: Context, params?: UseCategorySearchParams): Promise<Collection[]> => {
+    const categorySearchParams = { options: { ...params?.options } };
+    const categoryResponse = await context.$vendure.api.getCategory(categorySearchParams, params?.customQuery);
+    return categoryResponse?.data?.collections;
+  }
 };
 
-export default useCategoryFactory<Category, any>(params);
+const useCategory: (id: string) => UseCategory<Collection, any> = useCategoryFactory<Collection, any>(useCategoryFactoryParams);
+
+export {
+  useCategory,
+  useCategoryFactoryParams
+};

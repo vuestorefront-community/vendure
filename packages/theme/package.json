@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/vendure-theme",
-  "version": "2.3.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -11,12 +11,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "@nuxtjs/pwa": "^3.3.5",
+    "@nuxtjs/style-resources": "^1.0.0",
     "@storefront-ui/vue": "^0.10.3",
-    "@vue-storefront/vendure": "^2.3.0",
     "@vue-storefront/middleware": "^2.3.0",
     "@vue-storefront/nuxt": "^2.3.0",
     "@vue-storefront/nuxt-theme": "^2.3.0",
-    "@nuxtjs/style-resources": "^1.0.0",
+    "@vue-storefront/vendure": "link:../composables",
     "cookie-universal-nuxt": "^2.1.3",
     "core-js": "^2.6.5",
     "nuxt": "^2.13.3",
@@ -30,8 +31,8 @@
     "@vue/test-utils": "^1.0.0-beta.27",
     "babel-jest": "^24.1.0",
     "cypress": "^6.6.0",
-    "cypress-tags": "^0.0.20",
     "cypress-pipe": "^2.0.0",
+    "cypress-tags": "^0.0.20",
     "jest": "^24.1.0",
     "mochawesome": "^6.2.2",
     "mochawesome-merge": "^4.2.0",

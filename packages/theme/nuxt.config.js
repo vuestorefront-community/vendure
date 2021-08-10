@@ -1,121 +1,149 @@
-import webpack from "webpack";
+import webpack from 'webpack';
 
 export default {
-  mode: "universal",
+  mode: 'universal',
   server: {
     port: 3000,
-    host: "0.0.0.0",
+    host: '0.0.0.0'
   },
   head: {
-    title: "Vue Storefront",
+    title: 'Vue Storefront',
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
-        hid: "description",
-        name: "description",
-        content: process.env.npm_package_description || "",
-      },
+        hid: 'description',
+        name: 'description',
+        content: process.env.npm_package_description || ''
+      }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossorigin: "crossorigin",
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: 'crossorigin'
       },
       {
-        rel: "preload",
+        rel: 'preload',
         href:
-          "https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,600,700|Roboto:300,300i,400,400i,500,700&display=swap",
-        as: "style",
+          'https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,600,700|Roboto:300,300i,400,400i,500,700&display=swap',
+        as: 'style'
       },
       {
-        rel: "stylesheet",
+        rel: 'stylesheet',
         href:
-          "https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,600,700|Roboto:300,300i,400,400i,500,700&display=swap",
-        media: "print",
-        onload: "this.media='all'",
-        once: true,
-      },
-    ],
+          'https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,600,700|Roboto:300,300i,400,400i,500,700&display=swap',
+        media: 'print',
+        onload: 'this.media=\'all\'',
+        once: true
+      }
+    ]
   },
-  loading: { color: "#fff" },
+  loading: { color: '#fff' },
   plugins: [],
   buildModules: [
     // to core
-    "@nuxt/typescript-build",
-    "@nuxtjs/style-resources",
+    '@nuxt/typescript-build',
+    '@nuxtjs/style-resources',
     [
-      "@vue-storefront/nuxt",
+      '@vue-storefront/nuxt',
       {
         // @core-development-only-start
         coreDevelopment: true,
         // @core-development-only-end
         useRawSource: {
-          dev: ["@vue-storefront/vendure", "@vue-storefront/core"],
-          prod: ["@vue-storefront/vendure", "@vue-storefront/core"],
-        },
-      },
+          dev: ['@vue-storefront/vendure', '@vue-storefront/core'],
+          prod: ['@vue-storefront/vendure', '@vue-storefront/core']
+        }
+      }
     ],
     // @core-development-only-start
     [
-      "@vue-storefront/nuxt-theme",
+      '@vue-storefront/nuxt-theme',
       {
         generate: {
           replace: {
-            apiClient: "@vue-storefront/vendure-api",
-            composables: "@vue-storefront/vendure",
-          },
-        },
-      },
+            apiClient: '@vue-storefront/vendure-api',
+            composables: '@vue-storefront/vendure'
+          }
+        }
+      }
     ],
     // @core-development-only-end
     /* project-only-start
     ['@vue-storefront/nuxt-theme'],
     project-only-end */
-    ["@vue-storefront/vendure/nuxt", {}],
+    ['@vue-storefront/vendure/nuxt', {
+      i18n: { useNuxtI18nConfig: true }
+    }]
   ],
   modules: [
-    "nuxt-i18n",
-    "cookie-universal-nuxt",
-    "vue-scrollto/nuxt",
-    "@vue-storefront/middleware/nuxt",
+    'nuxt-i18n',
+    'cookie-universal-nuxt',
+    'vue-scrollto/nuxt',
+    '@vue-storefront/middleware/nuxt'
   ],
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
-    strategy: "no_prefix",
+    currency: 'USD',
+    country: 'US',
+    countries: [
+      { name: 'US', label: 'United States', states: ['California', 'Nevada'] },
+      { name: 'AT', label: 'Austria' },
+      { name: 'DE', label: 'Germany' },
+      { name: 'NL', label: 'Netherlands' }
+    ],
+    currencies: [
+      { name: 'EUR', label: 'Euro' },
+      { name: 'USD', label: 'Dollar' }
+    ],
+    locales: [
+      { code: 'en', label: 'English', file: 'en.js', iso: 'en' },
+      { code: 'de', label: 'German', file: 'de.js', iso: 'de' }
+    ],
+    defaultLocale: 'en',
+    lazy: true,
+    seo: true,
+    langDir: 'lang/',
+    strategy: 'no_prefix',
     vueI18n: {
-      fallbackLocale: "en",
-      messages: {
+      fallbackLocale: 'en',
+      numberFormats: {
         en: {
-          welcome: "Welcome 1",
+          currency: {
+            style: 'currency',
+            currency: 'USD',
+            currencyDisplay: 'symbol'
+          }
         },
         de: {
-          welcome: "Welcome 2",
-        },
-      },
-    },
+          currency: {
+            style: 'currency',
+            currency: 'EUR',
+            currencyDisplay: 'symbol'
+          }
+        }
+      }
+    }
   },
   styleResources: {
     scss: [
-      require.resolve("@storefront-ui/shared/styles/_helpers.scss", {
-        paths: [process.cwd()],
-      }),
-    ],
+      require.resolve('@storefront-ui/shared/styles/_helpers.scss', {
+        paths: [process.cwd()]
+      })
+    ]
   },
   build: {
-    transpile: ["vee-validate/dist/rules"],
+    transpile: ['vee-validate/dist/rules'],
     plugins: [
       new webpack.DefinePlugin({
-        "process.VERSION": JSON.stringify({
+        'process.VERSION': JSON.stringify({
           // eslint-disable-next-line global-require
-          version: require("./package.json").version,
-          lastCommit: process.env.LAST_COMMIT || "",
-        }),
-      }),
-    ],
+          version: require('./package.json').version,
+          lastCommit: process.env.LAST_COMMIT || ''
+        })
+      })
+    ]
   },
   router: {
     scrollBehavior(_to, _from, savedPosition) {
@@ -124,6 +152,6 @@ export default {
       } else {
         return { x: 0, y: 0 };
       }
-    },
-  },
+    }
+  }
 };

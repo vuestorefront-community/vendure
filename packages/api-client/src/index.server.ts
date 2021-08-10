@@ -1,23 +1,35 @@
 import { apiClientFactory } from '@vue-storefront/core';
-import getProduct from './api/getProduct';
-import getCategory from './api/getCategory';
+import ApolloClient from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { createHttpLink } from 'apollo-link-http';
+import { ApolloLink } from 'apollo-link';
+import fetch from 'isomorphic-fetch';
+import * as api from './api';
+import { Config } from './types';
 
 const defaultSettings = {};
 
-const onCreate = (settings) => ({
-  config: {
-    ...defaultSettings,
-    ...settings
-  },
-  client: {}
-});
+function onCreate(settings: Config): { config: Config, client: ApolloClient<any> } {
+  const httpLink = createHttpLink({ uri: settings.api.uri, fetch });
+  return {
+    config: {
+      ...settings,
+      ...defaultSettings
+    },
+    client: new ApolloClient({
+      cache: new InMemoryCache(),
+      link: ApolloLink.from([httpLink])
+    })
+  };
+}
 
-const { createApiClient } = apiClientFactory<any, any>({
+// TODO: add extensions here later
+const extensions = [];
+
+const { createApiClient } = apiClientFactory({
   onCreate,
-  api: {
-    getProduct,
-    getCategory
-  }
+  api,
+  extensions
 });
 
 export {
