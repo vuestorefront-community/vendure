@@ -1,21 +1,17 @@
 import { CategoryGetters, AgnosticCategoryTree, AgnosticBreadcrumb } from '@vue-storefront/core';
 import type { CollectionItem, CategoryNavigation } from '@vue-storefront/vendure-api';
+import { ROOT_COLLECTION } from './_utils';
 
-const ROOT_COLLECTION = '__root_collection__';
+function getTree(category: CollectionItem): AgnosticCategoryTree | null {
+  if (!category || !category.id) return null;
 
-function getTree(category: CollectionItem): AgnosticCategoryTree {
-  if (!category) return null;
-
-  const getRoot = (category) => (category?.parent?.name === ROOT_COLLECTION ? category : getRoot(category?.children));
-  const buildTree = (rootCategory) => ({
-    label: rootCategory.name,
-    slug: rootCategory.slug,
-    id: rootCategory.id,
-    isCurrent: rootCategory.id === category.id,
-    items: rootCategory.children
-  });
-
-  return buildTree(getRoot(category));
+  return {
+    label: category.name,
+    slug: category.slug,
+    id: category.id,
+    isCurrent: false,
+    items: category.children.map(child => getTree(child))
+  };
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -38,8 +34,21 @@ function getNavigation(categories: CollectionItem[]): CategoryNavigation[] {
   return categoryNavigation;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+function getBreadcrumbsFromSlug(searchData, slug: string): AgnosticBreadcrumb[] {
+  const categoryFromSlug = searchData?.data?.categories?.find(category => category.collection.slug === slug);
+
+  const breadcrumbsFromSlug = categoryFromSlug.collection?.breadcrumbs?.map(breadcrumb => ({
+    text: breadcrumb?.name === ROOT_COLLECTION ? 'Home' : breadcrumb?.name,
+    link: breadcrumb?.slug === ROOT_COLLECTION ? '/' : breadcrumb?.slug
+  }));
+
+  return breadcrumbsFromSlug;
+}
+
 export const categoryGetters: CategoryGetters<CollectionItem> = {
   getTree,
   getBreadcrumbs,
+  getBreadcrumbsFromSlug,
   getNavigation
 };
