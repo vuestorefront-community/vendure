@@ -9,8 +9,8 @@ const product = (id) => ([{
   slug: 'laptop',
   images: [{}],
   price: {
-    original: 2,
-    current: 1
+    original: 1,
+    current: 2
   },
   collections: [
     {

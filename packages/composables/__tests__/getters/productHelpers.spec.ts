@@ -42,7 +42,7 @@ const product = {
     }
   ],
   featuredAsset: {
-    source: 'imageV11/url.jpg'
+    preview: 'imageV11/url.jpg'
   },
   assets: ['1', '2', '3']
 } as any;
@@ -122,7 +122,7 @@ describe('[vendure-getters] product getters', () => {
         }
       ],
       featuredAsset: {
-        source: 'imageV11/url.jpg'
+        preview: 'imageV11/url.jpg'
       },
       assets: ['1', '2', '3']
     } as any;
