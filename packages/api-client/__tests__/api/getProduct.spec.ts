@@ -10,14 +10,7 @@ describe('[vendure-api-client] getProduct', () => {
     };
 
     const context = {
-      config: {
-        api: {
-          uri: 'http://localhost:3000/shop-api',
-          tokenMethod: 'cookie'
-        },
-        currency: 'USD',
-        lang: 'en'
-      } as Config,
+      config: {} as Config,
       client: {
         query: ({ variables, query }) => {
           expect(variables).toEqual(givenVariables);
