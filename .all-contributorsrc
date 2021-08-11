@@ -27,6 +27,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "michaelbromley",
+      "name": "Michael Bromley",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6275952?v=4",
+      "profile": "http://www.michaelbromley.co.uk/",
+      "contributions": [
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 6
