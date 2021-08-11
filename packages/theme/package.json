@@ -23,7 +23,6 @@
     "@nuxtjs/style-resources": "^1.0.0",
     "@vue-storefront/vendure": "link:../composables",
     "@storefront-ui/vue": "^0.10.8",
-    "@vue-storefront/boilerplate": "^2.3.0",
     "@vue-storefront/middleware": "^2.3.4",
     "@vue-storefront/nuxt": "^2.3.4",
     "@vue-storefront/nuxt-theme": "^2.3.4",
