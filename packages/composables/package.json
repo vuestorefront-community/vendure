@@ -16,8 +16,8 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/vendure-api": "link:../api-client",
-    "@vue-storefront/core": "^2.3.0"
+    "@vue-storefront/vendure-api": "0.1.0",
+    "@vue-storefront/core": "^2.3.4"
   },
   "peerDependencies": {
     "@vue/composition-api": "1.0.0-beta.21"

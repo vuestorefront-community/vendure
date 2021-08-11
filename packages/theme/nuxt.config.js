@@ -141,13 +141,13 @@ export default {
           version: require('./package.json').version,
           lastCommit: process.env.LAST_COMMIT || ''
         })
-      }),
+      })
     ],
     babel: {
       plugins: [
-        ["@babel/plugin-proposal-class-properties", { "loose": true }],
-        ["@babel/plugin-proposal-private-methods", { "loose": true }],
-        ["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+        ['@babel/plugin-proposal-class-properties', { loose: true }],
+        ['@babel/plugin-proposal-private-methods', { loose: true }],
+        ['@babel/plugin-proposal-private-property-in-object', { loose: true }]
       ]
     },
     extend (config, ctx) {
@@ -176,5 +176,5 @@ export default {
         };
       }
     }
-  },
+  }
 };
