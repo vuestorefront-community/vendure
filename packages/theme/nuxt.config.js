@@ -133,7 +133,14 @@ export default {
     ]
   },
   build: {
-    transpile: ['vee-validate/dist/rules'],
+    babel: {
+      plugins: [
+        ['@babel/plugin-proposal-private-property-in-object', { loose: true }]
+      ]
+    },
+    transpile: [
+      'vee-validate/dist/rules'
+    ],
     plugins: [
       new webpack.DefinePlugin({
         'process.VERSION': JSON.stringify({
@@ -143,15 +150,12 @@ export default {
         })
       })
     ],
-    babel: {
-      plugins: [
-        ['@babel/plugin-proposal-class-properties', { loose: true }],
-        ['@babel/plugin-proposal-private-methods', { loose: true }],
-        ['@babel/plugin-proposal-private-property-in-object', { loose: true }]
-      ]
-    },
-    extend (config, ctx) {
+    extend(config, ctx) {
+      // eslint-disable-next-line no-param-reassign
+      config.devtool = ctx.isClient ? 'eval-source-map' : 'inline-source-map';
+
       if (ctx && ctx.isClient) {
+        // eslint-disable-next-line no-param-reassign
         config.optimization = {
           ...config.optimization,
           mergeDuplicateChunks: true,
