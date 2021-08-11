@@ -10,11 +10,14 @@
   "scripts": {
     "build": "rimraf lib server && rollup -c",
     "dev": "rollup -c -w",
+    "precommit": "lint-staged",
+    "prepublish": "yarn build",
     "test": "jest",
-    "prepublish": "yarn build"
+    "update:check": "ncu",
+    "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/core": "^2.3.0",
+    "@vue-storefront/core": "^2.3.4",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",
