@@ -9,6 +9,16 @@
   "imageSize": 100,
   "commit": true,
   "commitConvention": "angular",
-  "contributors": [],
+  "contributors": [
+    {
+      "login": "Baroshem",
+      "name": "Jakub Andrzejewski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37120330?v=4",
+      "profile": "https://github.com/Baroshem",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
   "contributorsPerLine": 6
 }
