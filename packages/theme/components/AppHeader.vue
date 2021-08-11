@@ -106,7 +106,7 @@ import { useUiState, useUiHelpers } from '~/composables';
 import { useCart, useWishlist, useUser, cartGetters, useCategory, categoryGetters } from '@vue-storefront/vendure';
 import { computed, ref, onBeforeUnmount, watch } from '@vue/composition-api';
 import { onSSR } from '@vue-storefront/core';
-import LocaleSelector from './LocaleSelector';
+import LocaleSelector from '~/components/LocaleSelector';
 import SearchResults from '~/components/SearchResults';
 import { clickOutside } from '@storefront-ui/vue/src/utilities/directives/click-outside/click-outside-directive.js';
 import {
@@ -114,7 +114,6 @@ import {
   unMapMobileObserver
 } from '@storefront-ui/vue/src/utilities/mobile-observer.js';
 import debounce from 'lodash.debounce';
-import mockedSearchProducts from '../mockedSearchProducts.json';
 
 export default {
   components: {
@@ -150,7 +149,7 @@ export default {
 
     const accountIcon = computed(() => isAuthenticated.value ? 'profile_fill' : 'profile');
 
-    // TODO: https://github.com/DivanteLtd/vue-storefront/issues/4927
+    // TODO: https://github.com/vuestorefront/vue-storefront/issues/4927
     const handleAccountClick = async () => {
       if (isAuthenticated.value) {
         return root.$router.push('/my-account');
@@ -181,7 +180,7 @@ export default {
       } else {
         term.value = paramValue.target.value;
       }
-      result.value = mockedSearchProducts;
+      result.value = { };
 
     }, 1000);
 
