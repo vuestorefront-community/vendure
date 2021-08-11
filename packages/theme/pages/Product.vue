@@ -171,7 +171,7 @@ import {
 } from '@storefront-ui/vue';
 
 import InstagramFeed from '~/components/InstagramFeed.vue';
-import RelatedProducts from '~/components/RelatedProducts.vue';
+// import RelatedProducts from '~/components/RelatedProducts.vue';
 import { ref, computed } from '@vue/composition-api';
 import { useProduct, useCart, productGetters, useReview, reviewGetters } from '@vue-storefront/vendure';
 import { onSSR } from '@vue-storefront/core';
@@ -273,15 +273,13 @@ export default {
     SfBreadcrumbs,
     SfButton,
     InstagramFeed,
-    RelatedProducts,
+    // RelatedProducts,
     MobileStoreBanner,
     LazyHydrate
   },
   data() {
     return {
       stock: 5,
-      description: 'Find stunning women cocktail and party dresses. Stand out in lace and metallic cocktail dresses and party dresses from all your favorite brands.',
-      detailsIsActive: false,
       brand:
           'Brand name is the perfect pairing of quality and design. This label creates major everyday vibes with its collection of modern brooches, silver and gold jewellery, or clips it back with hair accessories in geo styles.',
       careInstructions: 'Do not wash!',

@@ -1,7 +1,6 @@
 import webpack from 'webpack';
 
 export default {
-  mode: 'universal',
   server: {
     port: 3000,
     host: '0.0.0.0'
@@ -142,8 +141,15 @@ export default {
           version: require('./package.json').version,
           lastCommit: process.env.LAST_COMMIT || ''
         })
-      })
+      }),
     ],
+    babel: {
+      plugins: [
+        ["@babel/plugin-proposal-class-properties", { "loose": true }],
+        ["@babel/plugin-proposal-private-methods", { "loose": true }],
+        ["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+      ]
+    },
     extend (config, ctx) {
       if (ctx && ctx.isClient) {
         config.optimization = {
@@ -171,13 +177,4 @@ export default {
       }
     }
   },
-  router: {
-    scrollBehavior(_to, _from, savedPosition) {
-      if (savedPosition) {
-        return savedPosition;
-      } else {
-        return { x: 0, y: 0 };
-      }
-    }
-  }
 };
