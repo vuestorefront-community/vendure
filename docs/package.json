@@ -1,0 +1,15 @@
+{
+  "name": "vsf-vendure-integration-docs",
+  "version": "1.0.0-beta.0",
+  "description": "Documentation for Vendure integration for Vue Storefront",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": "https://github.com/vuestorefront/vendure/docs",
+  "scripts": {
+    "dev": "vuepress dev",
+    "build": "vuepress build"
+  },
+  "devDependencies": {
+    "vuepress": "^1.5.3"
+  }
+}
