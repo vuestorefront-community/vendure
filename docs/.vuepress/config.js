@@ -1,7 +1,7 @@
 module.exports = {
-  title: 'Vue Storefront 2 for <% INTEGRATION %>',
+  title: 'Vue Storefront 2 for Vendure',
   base: '/',
-  description: 'Documentation for the <% INTEGRATION %> connector for Vue Storefront 2',
+  description: 'Documentation for the Vendure connector for Vue Storefront 2',
   head: [
     ['link', { rel: 'icon', href: '/favicon.png' }]
   ],
