@@ -39,8 +39,8 @@
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.7",
     "@graphql-codegen/fragment-matcher": "2.0.1",
+    "@graphql-codegen/typescript": "1.23.0",
     "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
-    "@graphql-codegen/typescript-operations": "1.18.4",
-    "@graphql-codegen/typescript": "1.23.0"
+    "@graphql-codegen/typescript-operations": "1.18.4"
   }
 }
