@@ -1,7 +1,6 @@
 import webpack from 'webpack';
 
 export default {
-  mode: 'universal',
   server: {
     port: 3000,
     host: '0.0.0.0'
@@ -134,7 +133,14 @@ export default {
     ]
   },
   build: {
-    transpile: ['vee-validate/dist/rules'],
+    babel: {
+      plugins: [
+        ['@babel/plugin-proposal-private-property-in-object', { loose: true }]
+      ]
+    },
+    transpile: [
+      'vee-validate/dist/rules'
+    ],
     plugins: [
       new webpack.DefinePlugin({
         'process.VERSION': JSON.stringify({
@@ -143,14 +149,35 @@ export default {
           lastCommit: process.env.LAST_COMMIT || ''
         })
       })
-    ]
-  },
-  router: {
-    scrollBehavior(_to, _from, savedPosition) {
-      if (savedPosition) {
-        return savedPosition;
-      } else {
-        return { x: 0, y: 0 };
+    ],
+    extend(config, ctx) {
+      // eslint-disable-next-line no-param-reassign
+      config.devtool = ctx.isClient ? 'eval-source-map' : 'inline-source-map';
+
+      if (ctx && ctx.isClient) {
+        // eslint-disable-next-line no-param-reassign
+        config.optimization = {
+          ...config.optimization,
+          mergeDuplicateChunks: true,
+          splitChunks: {
+            ...config.optimization.splitChunks,
+            chunks: 'all',
+            automaticNameDelimiter: '.',
+            maxSize: 128_000,
+            maxInitialRequests: Number.POSITIVE_INFINITY,
+            minSize: 0,
+            maxAsyncRequests: 10,
+            cacheGroups: {
+              vendor: {
+                test: /[/\\]node_modules[/\\]/,
+                name: (module) => `${module
+                  .context
+                  .match(/[/\\]node_modules[/\\](.*?)([/\\]|$)/)[1]
+                  .replace(/[.@_]/gm, '')}`
+              }
+            }
+          }
+        };
       }
     }
   }

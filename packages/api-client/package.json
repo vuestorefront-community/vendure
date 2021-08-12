@@ -10,19 +10,22 @@
   "scripts": {
     "build": "rimraf lib server && rollup -c",
     "dev": "rollup -c -w",
+    "precommit": "lint-staged",
+    "prepublish": "yarn build",
     "test": "jest",
-    "prepublish": "yarn build"
+    "update:check": "ncu",
+    "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/core": "^2.3.0",
+    "@vue-storefront/core": "^2.3.4",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",
     "apollo-link-http": "^1.5.17",
     "apollo-link-retry": "^2.2.16",
-    "graphql": "^15.5.0",
-    "graphql-tag": "^2.12.4",
-    "isomorphic-fetch": "^2.2.1"
+    "graphql": "^15.5.1",
+    "graphql-tag": "^2.12.5",
+    "isomorphic-fetch": "^3.0.0"
   },
   "files": [
     "lib/**/*"

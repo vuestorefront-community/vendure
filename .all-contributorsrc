@@ -1,0 +1,42 @@
+{
+  "projectName": "@vuestorefront/vendure",
+  "projectOwner": "vuestorefront",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 80,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Baroshem",
+      "name": "Jakub Andrzejewski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37120330?v=4",
+      "profile": "https://github.com/Baroshem",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "rglepper",
+      "name": "Rafael Garcia Lepper",
+      "avatar_url": "https://avatars.githubusercontent.com/u/73605?v=4",
+      "profile": "https://rafagarcialepper.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "michaelbromley",
+      "name": "Michael Bromley",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6275952?v=4",
+      "profile": "http://www.michaelbromley.co.uk/",
+      "contributions": [
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 5
+}
