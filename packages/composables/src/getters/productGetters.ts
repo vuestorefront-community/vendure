@@ -4,25 +4,25 @@ import {
   AgnosticPrice,
   ProductGetters
 } from '@vue-storefront/core';
-import type { Product, ProductFilter } from '@vue-storefront/vendure-api';
+import { ProductVariantType, ProductFilter } from '@vue-storefront/vendure-api';
 import { createPrice } from './_utils';
 
-function getName(product: Product): string {
+function getName(product: ProductVariantType): string {
   return product?.name || '';
 }
 
-function getSlug(product: Product): string {
+function getSlug(product: ProductVariantType): string {
   return product?.slug || '';
 }
 
-function getPrice(product: Product): AgnosticPrice {
+function getPrice(product: ProductVariantType): AgnosticPrice {
   return {
     regular: createPrice(product?.price?.original),
     special: createPrice(product?.price?.current)
   };
 }
 
-function getGallery(product: Product): AgnosticMediaGalleryItem[] {
+function getGallery(product: ProductVariantType): AgnosticMediaGalleryItem[] {
   if (!product?.images.length) return [];
 
   return [
@@ -34,11 +34,11 @@ function getGallery(product: Product): AgnosticMediaGalleryItem[] {
   ];
 }
 
-function getCoverImage(product: Product): string {
+function getCoverImage(product: ProductVariantType): string {
   return product?.images[0] || '';
 }
 
-function getFiltered(products: Product[], filters: ProductFilter): Product[] {
+function getFiltered(products: ProductVariantType[], filters: ProductFilter): ProductVariantType[] {
   if (!products?.length) return [];
 
   const mappedProducts = products.map(product => ({
@@ -63,7 +63,7 @@ function getFiltered(products: Product[], filters: ProductFilter): Product[] {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getAttributes(products: Product[] | Product, filterByAttributeName?: string[]): Record<string, AgnosticAttribute | string> {
+function getAttributes(products: ProductVariantType[] | ProductVariantType, filterByAttributeName?: string[]): Record<string, AgnosticAttribute | string> {
   const mappedOptions = products[0]?.optionGroups.map(optionGroup => {
     const options = optionGroup.options.map(option => ({
       id: option.id,
@@ -81,15 +81,15 @@ function getAttributes(products: Product[] | Product, filterByAttributeName?: st
   return mappedOptions;
 }
 
-function getDescription(product: Product): string {
+function getDescription(product: ProductVariantType): string {
   return product?._description || '';
 }
 
-function getCategoryIds(product: Product): string[] {
+function getCategoryIds(product: ProductVariantType): string[] {
   return product?._categoriesRef || [];
 }
 
-function getId(product: Product): string {
+function getId(product: ProductVariantType): string {
   return product?._id || '';
 }
 
@@ -99,25 +99,25 @@ function getFormattedPrice(price: number): string {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getTotalReviews(product: Product): number {
+function getTotalReviews(product: ProductVariantType): number {
   return 0;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getAverageRating(product: Product): number {
+function getAverageRating(product: ProductVariantType): number {
   return 0;
 }
 
-function getSku(product: Product): string {
+function getSku(product: ProductVariantType): string {
   return product?.sku || '';
 }
 
-function getCategoryNames(products: Product[]): string[] {
+function getCategoryNames(products: ProductVariantType[]): string[] {
   if (!products.length || !products[0].collections.length) return [];
   return products[0]?.collections.map(collection => collection.name);
 }
 
-export const productGetters: ProductGetters<Product, ProductFilter> = {
+export const productGetters: ProductGetters<ProductVariantType, ProductFilter> = {
   getName,
   getSlug,
   getPrice,

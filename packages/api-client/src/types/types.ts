@@ -1,15 +1,4 @@
-import { Product } from "./GraphQL";
-
 export type TODO = unknown;
-
-// export type Config = {
-//   api: {
-//     uri: string;
-//     tokenMethod: string;
-//   };
-//   currency: string;
-//   lang: string;
-// }
 
 export type Setttings = TODO;
 
@@ -58,29 +47,29 @@ export type ProductCollections = {
   [key: string]: string
 }
 
-// export type Product = {
-//   _id: string;
-//   _description: string;
-//   _categoriesRef: string[];
-//   name: string;
-//   sku: string;
-//   slug: string;
-//   images: string[];
-//   price: {
-//     original: number;
-//     current: number;
-//   };
-//   collections?: ProductCollections[];
-//   optionGroups?: ProductOptionGroups[];
-//   featuredAsset?: ProductAsset;
-//   assets?: ProductAsset[];
-//   [key: string]: any;
-// }
+export type ProductVariantType = {
+  _id: string;
+  _description: string;
+  _categoriesRef: string[];
+  name: string;
+  sku: string;
+  slug: string;
+  images: string[];
+  price: {
+    original: number;
+    current: number;
+  };
+  collections?: ProductCollections[];
+  optionGroups?: ProductOptionGroups[];
+  featuredAsset?: ProductAsset;
+  assets?: ProductAsset[];
+  [key: string]: any;
+}
 
 export type ProductData = {
   data: {
     product: {
-      variants: Product[];
+      variants: ProductVariantType[];
       slug: string;
       description: string;
       collections?: ProductCollections[];

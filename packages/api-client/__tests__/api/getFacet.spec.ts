@@ -1,6 +1,6 @@
 import getFacet from '../../src/api/getFacet';
 import defaultQuery from '../../src/api/getFacet/defaultQuery';
-import { Config } from '../../src/types';
+import { Context } from '../../src/types';
 
 describe('[vendure-api-client] getFacet', () => {
   it('fetches products, collections, and facets for the current query', async () => {
@@ -9,7 +9,7 @@ describe('[vendure-api-client] getFacet', () => {
     };
 
     const context = {
-      config: {} as Config,
+      config: {},
       client: {
         query: ({ variables, query }) => {
           expect(variables).toEqual(givenVariables);
@@ -19,7 +19,7 @@ describe('[vendure-api-client] getFacet', () => {
         }
       },
       extendQuery: (customQuery, args) => args
-    };
+    } as unknown as Context;
 
     const { data } = await getFacet(context, { input: {}});
 
