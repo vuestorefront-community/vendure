@@ -1,10 +1,9 @@
 import gql from 'graphql-tag';
 import collectionsQuery from './collectionsQuery';
-import { ApolloQueryResult } from 'apollo-client';
 import { CustomQuery } from '@vue-storefront/core';
-import type { CollectionList, CollectionParams, Context } from '../../types';
+import type { CollectionList, CollectionParams, Context, GetCategoryResponse, RequestDataStructure } from '../../types';
 
-const getCategory = async (context: Context, params: CollectionParams, customQuery?: CustomQuery): Promise<ApolloQueryResult<CollectionList>> => {
+const getCategory = async (context: Context, params: CollectionParams, customQuery?: CustomQuery): Promise<GetCategoryResponse> => {
   const collectionsVariables = {
     ...params
   };
@@ -13,7 +12,7 @@ const getCategory = async (context: Context, params: CollectionParams, customQue
     { collections: { query: collectionsQuery, variables: collectionsVariables } }
   );
 
-  const request = await context.client.query<CollectionList>({
+  const request = await context.client.query<RequestDataStructure<'collections', CollectionList>>({
     query: gql`${collections.query}`,
     variables: collections.variables,
     fetchPolicy: 'no-cache'

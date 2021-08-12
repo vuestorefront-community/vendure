@@ -1,10 +1,9 @@
 import gql from 'graphql-tag';
 import productQuery from './productQuery';
-import { ApolloQueryResult } from 'apollo-client';
 import { CustomQuery } from '@vue-storefront/core';
-import { Context, ProductParams, Product } from '../../types';
+import { Context, ProductParams, Product, GetProductResponse, RequestDataStructure } from '../../types';
 
-const getProduct = async (context: Context, params: ProductParams, customQuery?: CustomQuery): Promise<ApolloQueryResult<Product>> => {
+const getProduct = async (context: Context, params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse> => {
   const productVariables = {
     ...params
   };
@@ -13,7 +12,7 @@ const getProduct = async (context: Context, params: ProductParams, customQuery?:
     customQuery, { product: { query: productQuery, variables: productVariables } }
   );
 
-  const request = await context.client.query<Product>({
+  const request = await context.client.query<RequestDataStructure<'product', Product>>({
     query: gql`${product.query}`,
     variables: product.variables,
     fetchPolicy: 'no-cache'
