@@ -1,9 +1,8 @@
 import { useProductFactory, UseProduct, Context, CustomQuery } from '@vue-storefront/core';
-import type { Product, ProductFilter } from '@vue-storefront/vendure-api';
+import type { Product, ProductFilter, ProductParams } from '@vue-storefront/vendure-api';
 
-interface SearchParams {
+interface SearchParams extends ProductParams {
   customQuery?: CustomQuery;
-  [key: string]: any;
 }
 
 const useProductFactoryParams = {
