@@ -3,13 +3,14 @@ import {
   useUserFactory,
   UseUserFactoryParams
 } from '@vue-storefront/core';
-import type { User } from '@vue-storefront/vendure-api';
+// TODO: ucomment later when working with use functionality
+// import type { User } from '@vue-storefront/vendure-api';
 import type {
   UseUserUpdateParams as UpdateParams,
   UseUserRegisterParams as RegisterParams
 } from '../types';
 
-const params: UseUserFactoryParams<User, UpdateParams, RegisterParams> = {
+const params: UseUserFactoryParams<any, UpdateParams, RegisterParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context) => {
     console.log('Mocked: useUser.load');
@@ -46,4 +47,4 @@ const params: UseUserFactoryParams<User, UpdateParams, RegisterParams> = {
   }
 };
 
-export const useUser = useUserFactory<User, UpdateParams, RegisterParams>(params);
+export const useUser = useUserFactory<any, UpdateParams, RegisterParams>(params);
