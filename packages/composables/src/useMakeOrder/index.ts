@@ -3,9 +3,10 @@ import {
   useMakeOrderFactory,
   UseMakeOrderFactoryParams
 } from '@vue-storefront/core';
-import type { Order } from '@vue-storefront/vendure-api';
+// TODO: replace any with Order when working on order functionality
+// import type { Order } from '@vue-storefront/vendure-api';
 
-const factoryParams: UseMakeOrderFactoryParams<Order> = {
+const factoryParams: UseMakeOrderFactoryParams<any> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   make: async (context: Context, { customQuery }) => {
     console.log('Mocked: useMakeOrder.make');
@@ -13,4 +14,4 @@ const factoryParams: UseMakeOrderFactoryParams<Order> = {
   }
 };
 
-export const useMakeOrder = useMakeOrderFactory<Order>(factoryParams);
+export const useMakeOrder = useMakeOrderFactory<any>(factoryParams);

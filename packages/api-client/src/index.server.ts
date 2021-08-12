@@ -1,30 +1,45 @@
-import { apiClientFactory } from '@vue-storefront/core';
-import ApolloClient from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { createHttpLink } from 'apollo-link-http';
-import { ApolloLink } from 'apollo-link';
-import fetch from 'isomorphic-fetch';
+import { ApiClientExtension, apiClientFactory } from '@vue-storefront/core';
 import * as api from './api';
-import { Config } from './types';
+import { ClientInstance, Config } from './types/setup';
+import { apolloClientFactory } from './helpers/vendureLink/graphQL';
+import { createVendureConnection } from './helpers/vendureLink';
+import { defaultSettings } from './helpers/apiClient/defaultSettings';
 
-const defaultSettings = {};
+const onCreate = (settings: Config): { config: Config, client: ClientInstance } => {
+  const config = {
+    ...defaultSettings,
+    ...settings
+  } as Config;
 
-function onCreate(settings: Config): { config: Config, client: ApolloClient<any> } {
-  const httpLink = createHttpLink({ uri: settings.api.uri, fetch });
+  if (settings.client) {
+    return {
+      client: settings.client,
+      config
+    };
+  }
+
+  if (settings.customOptions && settings.customOptions.link) {
+    return {
+      client: apolloClientFactory(settings.customOptions),
+      config
+    };
+  }
+
+  const { apolloLink } = createVendureConnection(config);
+
+  const client = apolloClientFactory({
+    link: apolloLink,
+    ...settings.customOptions
+  });
+
   return {
-    config: {
-      ...settings,
-      ...defaultSettings
-    },
-    client: new ApolloClient({
-      cache: new InMemoryCache(),
-      link: ApolloLink.from([httpLink])
-    })
+    config,
+    client
   };
-}
+};
 
 // TODO: add extensions here later
-const extensions = [];
+const extensions: ApiClientExtension[] = [];
 
 const { createApiClient } = apiClientFactory({
   onCreate,

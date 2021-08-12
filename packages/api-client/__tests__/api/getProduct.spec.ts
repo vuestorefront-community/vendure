@@ -1,6 +1,6 @@
 import getProduct from '../../src/api/getProduct';
-import defaultQuery from '../../src/api/getProduct/defaultQuery';
-import { Config } from '../../src/types';
+import defaultQuery from '../../src/api/getProduct/productQuery';
+import { Context } from '../../src/types';
 
 describe('[vendure-api-client] getProduct', () => {
   it('fetches product by id and/or slug', async () => {
@@ -10,7 +10,7 @@ describe('[vendure-api-client] getProduct', () => {
     };
 
     const context = {
-      config: {} as Config,
+      config: {},
       client: {
         query: ({ variables, query }) => {
           expect(variables).toEqual(givenVariables);
@@ -20,7 +20,7 @@ describe('[vendure-api-client] getProduct', () => {
         }
       },
       extendQuery: (customQuery, args) => args
-    };
+    } as unknown as Context;
 
     const { data } = await getProduct(context, { id: '1', slug: 'laptop' });
 

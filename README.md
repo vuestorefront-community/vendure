@@ -31,17 +31,16 @@ Want to contribute? Ping us on `vendure` channel on [our Discord](https://discor
     cd vendure
     ```
 2. Run `yarn` to install dependencies
-3. Add your Vendure server GraphQL API uri
-    ```js
-    // packages/theme/middleware.config.js
+3. Add your Vendure server GraphQL API uri to env file in packages/api-client and packages/theme
+    ```bash
+    cd packages/api-client
+    cp .env.example .env
 
-    api: {
-      uri: {YOUR_VENDURE_GRAPHQL_API_URI}, // by default https://demo.vendure.io/shop-api
-    }
+    cd packages/theme
+    cp .env.example .env
     ```
-4. Build dependencies `yarn build:api-client && yarn build:composables`
-5. Run `yarn dev:theme` to run theme. You can find other commands in `package.json`
-6. If you need HMR on Api Client/Composables run `yarn dev:api-client` or `yarn dev:composables` on a separate terminal window or run `yarn dev`
+4. Build dependencies `yarn build`
+5. Run `yarn dev` to run theme. You can find other commands in `package.json`
 
 ## Resources
 

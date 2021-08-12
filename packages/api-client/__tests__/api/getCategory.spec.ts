@@ -1,6 +1,6 @@
 import getCategory from '../../src/api/getCategory';
-import defaultQuery from '../../src/api/getCategory/defaultQuery';
-import { Config } from '../../src/types';
+import defaultQuery from '../../src/api/getCategory/collectionsQuery';
+import { Context } from '../../src/types';
 
 describe('[vendure-api-client] getCategory', () => {
   it('fetches categories (collections)', async () => {
@@ -9,7 +9,7 @@ describe('[vendure-api-client] getCategory', () => {
     };
 
     const context = {
-      config: {} as Config,
+      config: {},
       client: {
         query: ({ variables, query }) => {
           expect(variables).toEqual(givenVariables);
@@ -19,7 +19,7 @@ describe('[vendure-api-client] getCategory', () => {
         }
       },
       extendQuery: (customQuery, args) => args
-    };
+    } as unknown as Context;
 
     const { data } = await getCategory(context, { options: {}});
 

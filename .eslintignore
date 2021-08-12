@@ -3,3 +3,5 @@
 packages/theme/_theme
 packages/theme/.nuxt
 **/tests/*
+packages/api-client/server
+packages/api-client/src/types/GraphQL.ts
