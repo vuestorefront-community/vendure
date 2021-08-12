@@ -4,7 +4,7 @@ module.exports = {
       location: '@vue-storefront/vendure-api/server',
       configuration: {
         api: {
-          uri: 'https://demo.vendure.io/shop-api',
+          uri: process.env.GRAPHQL_API,
           // to be used later with authentication
           tokenMethod: 'cookie'
         },

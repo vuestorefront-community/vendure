@@ -14,7 +14,8 @@
     "prepublish": "yarn build",
     "test": "jest",
     "update:check": "ncu",
-    "update:update": "ncu -u"
+    "update:update": "ncu -u",
+    "generate:graphql-types": "graphql-codegen --config ./configs/codegen.config.yml -r dotenv/config"
   },
   "dependencies": {
     "@vue-storefront/core": "^2.3.4",
@@ -32,5 +33,12 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "1.21.7",
+    "@graphql-codegen/fragment-matcher": "2.0.1",
+    "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
+    "@graphql-codegen/typescript-operations": "1.18.4",
+    "@graphql-codegen/typescript": "1.23.0"
   }
 }

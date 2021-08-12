@@ -1,0 +1,6 @@
+schema: ${GRAPHQL_API}
+generates:
+  ./src/types/GraphQL.ts:
+    plugins:
+      - typescript
+      - typescript-operations
