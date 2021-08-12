@@ -1,7 +1,16 @@
-import { IntegrationContext } from '@vue-storefront/core';
+import { ApiClientMethods, IntegrationContext } from "@vue-storefront/core";
+import {
+  ClientInstance,
+  Config,
+  VendureApiMethods,
+} from "@vue-storefront/vendure-api";
 
-declare module '@vue-storefront/core' {
+declare module "@vue-storefront/core" {
   export interface Context {
-    $vendure: IntegrationContext<any, any, any>;
+    $vendure: IntegrationContext<
+      ClientInstance,
+      Config,
+      ApiClientMethods<VendureApiMethods>
+    >;
   }
 }
