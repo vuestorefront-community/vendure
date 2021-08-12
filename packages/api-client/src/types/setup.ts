@@ -1,5 +1,5 @@
-import ApolloClient, { ApolloClientOptions } from "apollo-client";
-import { VendureApiMethods } from "./API";
+import ApolloClient, { ApolloClientOptions } from 'apollo-client';
+import { VendureApiMethods } from './API';
 
 export interface Storage {
   set: (name: string, value: any) => void;
@@ -32,4 +32,4 @@ export interface Config<T = any> extends ClientConfig {
   overrides: VendureApiMethods;
 }
 
-export interface ClientInstance extends ApolloClient<any> {}
+export type ClientInstance = ApolloClient<any>

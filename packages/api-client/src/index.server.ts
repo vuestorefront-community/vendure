@@ -8,20 +8,20 @@ import { defaultSettings } from './helpers/apiClient/defaultSettings';
 const onCreate = (settings: Config): { config: Config, client: ClientInstance } => {
   const config = {
     ...defaultSettings,
-    ...settings,
+    ...settings
   } as Config;
 
   if (settings.client) {
     return {
       client: settings.client,
-      config,
+      config
     };
   }
 
   if (settings.customOptions && settings.customOptions.link) {
     return {
       client: apolloClientFactory(settings.customOptions),
-      config,
+      config
     };
   }
 
@@ -29,14 +29,14 @@ const onCreate = (settings: Config): { config: Config, client: ClientInstance } 
 
   const client = apolloClientFactory({
     link: apolloLink,
-    ...settings.customOptions,
+    ...settings.customOptions
   });
 
   return {
     config,
     client
-  }
-}
+  };
+};
 
 // TODO: add extensions here later
 const extensions: ApiClientExtension[] = [];

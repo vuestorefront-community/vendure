@@ -1,5 +1,5 @@
 import getProduct from '../../src/api/getProduct';
-import defaultQuery from '../../src/api/getProduct/defaultQuery';
+import defaultQuery from '../../src/api/getProduct/productQuery';
 import { Context } from '../../src/types';
 
 describe('[vendure-api-client] getProduct', () => {

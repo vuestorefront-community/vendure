@@ -96,7 +96,6 @@ export type CategoryData = {
   }
 }
 
-
 export type CategoryNavigation = {
   name: string;
   link: string;

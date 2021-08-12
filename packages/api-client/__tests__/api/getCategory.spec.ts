@@ -1,5 +1,5 @@
 import getCategory from '../../src/api/getCategory';
-import defaultQuery from '../../src/api/getCategory/defaultQuery';
+import defaultQuery from '../../src/api/getCategory/collectionsQuery';
 import { Context } from '../../src/types';
 
 describe('[vendure-api-client] getCategory', () => {
