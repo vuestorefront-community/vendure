@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import defaultQuery from './defaultQuery';
+import productQuery from './productQuery';
 import { ApolloQueryResult } from 'apollo-client';
 import { CustomQuery } from '@vue-storefront/core';
 import { ProductData, Context } from '../../types';
@@ -10,12 +10,12 @@ interface ProductParams {
 }
 
 const getProduct = async (context: Context, params: ProductParams, customQuery?: CustomQuery): Promise<ApolloQueryResult<ProductData>> => {
-  const defaultVariables = {
+  const productVariables = {
     ...params
   };
 
   const { product } = context.extendQuery(
-    customQuery, { product: { query: defaultQuery, variables: defaultVariables } }
+    customQuery, { product: { query: productQuery, variables: productVariables } }
   );
 
   try {
