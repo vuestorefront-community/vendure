@@ -14,13 +14,7 @@ export type Category = TODO;
 
 export type Coupon = TODO;
 
-// export type Facet = TODO;
-
 export type FacetSearchCriteria = TODO;
-
-// export type Order = TODO;
-
-// export type OrderItem = TODO;
 
 export type ProductAsset = {
   source: string;
@@ -102,51 +96,10 @@ export type CategoryData = {
   }
 }
 
-// export type Collection = {
-//   items: CollectionItem[];
-//   totalItems: number;
-// }
-
-enum SortOrder {
-  ASC,
-  DESC
-}
-
-export type CategoryParams = {
-  options?: {
-    skip?: number;
-    take?: number;
-    sort?: {
-      id: SortOrder
-      createdAt: SortOrder
-      updatedAt: SortOrder
-      name: SortOrder
-      slug: SortOrder
-      position: SortOrder
-      description: SortOrder
-    }
-    filter?: {
-      createdAt: Date;
-      updatedAt: Date;
-      languageCode: string;
-      name: string;
-      slug: string;
-      position: number;
-      description: string;
-    }
-  }
-}
 
 export type CategoryNavigation = {
   name: string;
   link: string;
-}
-
-export type SearchInputParams = {
-  collectionSlug?: string;
-  groupByProduct?: boolean;
-  take? : number;
-  [key: string]: any;
 }
 
 export type FacetData = {
@@ -191,8 +144,6 @@ export interface FacetResultsData {
 export type Review = TODO;
 
 export type ReviewItem = TODO;
-
-// export type User = TODO;
 
 export type UserBillingAddress = TODO;
 

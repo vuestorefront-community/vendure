@@ -5,8 +5,8 @@ import { CustomQuery } from '@vue-storefront/core';
 import { ProductData, Context } from '../../types';
 
 interface ProductParams {
-  id: string;
-  slug: string;
+  id?: string;
+  slug?: string;
 }
 
 const getProduct = async (context: Context, params: ProductParams, customQuery?: CustomQuery): Promise<ApolloQueryResult<ProductData>> => {
