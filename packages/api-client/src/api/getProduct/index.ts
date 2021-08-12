@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 import defaultQuery from './defaultQuery';
-import ApolloClient, { ApolloQueryResult } from 'apollo-client';
-import { CustomQuery, Context } from '@vue-storefront/core';
-import { ProductData } from '../../types';
+import { ApolloQueryResult } from 'apollo-client';
+import { CustomQuery } from '@vue-storefront/core';
+import { ProductData, Context } from '../../types';
 
 interface ProductParams {
   id: string;
@@ -19,7 +19,7 @@ const getProduct = async (context: Context, params: ProductParams, customQuery?:
   );
 
   try {
-    const request = await (context.client as ApolloClient<any>).query<ProductData>({
+    const request = await context.client.query<ProductData>({
       query: gql`${product.query}`,
       variables: product.variables,
       // temporary, seems like bug in apollo:

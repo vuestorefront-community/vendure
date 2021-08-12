@@ -1,13 +1,15 @@
+import { Product } from "./GraphQL";
+
 export type TODO = unknown;
 
-export type Config = {
-  api: {
-    uri: string;
-    tokenMethod: string;
-  };
-  currency: string;
-  lang: string;
-}
+// export type Config = {
+//   api: {
+//     uri: string;
+//     tokenMethod: string;
+//   };
+//   currency: string;
+//   lang: string;
+// }
 
 export type Setttings = TODO;
 
@@ -23,13 +25,13 @@ export type Category = TODO;
 
 export type Coupon = TODO;
 
-export type Facet = TODO;
+// export type Facet = TODO;
 
 export type FacetSearchCriteria = TODO;
 
-export type Order = TODO;
+// export type Order = TODO;
 
-export type OrderItem = TODO;
+// export type OrderItem = TODO;
 
 export type ProductAsset = {
   source: string;
@@ -56,24 +58,24 @@ export type ProductCollections = {
   [key: string]: string
 }
 
-export type Product = {
-  _id: string;
-  _description: string;
-  _categoriesRef: string[];
-  name: string;
-  sku: string;
-  slug: string;
-  images: string[];
-  price: {
-    original: number;
-    current: number;
-  };
-  collections?: ProductCollections[];
-  optionGroups?: ProductOptionGroups[];
-  featuredAsset?: ProductAsset;
-  assets?: ProductAsset[];
-  [key: string]: any;
-}
+// export type Product = {
+//   _id: string;
+//   _description: string;
+//   _categoriesRef: string[];
+//   name: string;
+//   sku: string;
+//   slug: string;
+//   images: string[];
+//   price: {
+//     original: number;
+//     current: number;
+//   };
+//   collections?: ProductCollections[];
+//   optionGroups?: ProductOptionGroups[];
+//   featuredAsset?: ProductAsset;
+//   assets?: ProductAsset[];
+//   [key: string]: any;
+// }
 
 export type ProductData = {
   data: {
@@ -111,10 +113,10 @@ export type CategoryData = {
   }
 }
 
-export type Collection = {
-  items: CollectionItem[];
-  totalItems: number;
-}
+// export type Collection = {
+//   items: CollectionItem[];
+//   totalItems: number;
+// }
 
 enum SortOrder {
   ASC,
@@ -201,7 +203,7 @@ export type Review = TODO;
 
 export type ReviewItem = TODO;
 
-export type User = TODO;
+// export type User = TODO;
 
 export type UserBillingAddress = TODO;
 
@@ -217,7 +219,7 @@ export type UserShippingAddressSearchCriteria = TODO;
 
 export type ShippingAddress = TODO;
 
-export type ShippingMethod = TODO;
+// export type ShippingMethod = TODO;
 
 export type ShippingProvider = TODO;
 
