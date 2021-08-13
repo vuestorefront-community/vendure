@@ -4,25 +4,32 @@ import {
   AgnosticPrice,
   ProductGetters
 } from '@vue-storefront/core';
-import { ProductVariantType, ProductFilter } from '@vue-storefront/vendure-api';
+import { ProductFilter, Product } from '@vue-storefront/vendure-api';
+import { AgnosticProductOptions, AgnosticProductVariant } from '../types';
 import { createPrice } from './_utils';
 
-function getName(product: ProductVariantType): string {
+interface ExtendedProductGetters extends ProductGetters<AgnosticProductVariant, ProductFilter> {
+  getByFilters: (product: Product, filters?: ProductFilter) => AgnosticProductVariant[] | AgnosticProductVariant;
+  getOptions: (product: Product, filters?: string[]) => AgnosticProductOptions[]
+  getCategoryNames: (product: Product) => string[];
+};
+
+const getName = (product: AgnosticProductVariant): string => {
   return product?.name || '';
 }
 
-function getSlug(product: ProductVariantType): string {
+const getSlug = (product: AgnosticProductVariant): string => {
   return product?.slug || '';
 }
 
-function getPrice(product: ProductVariantType): AgnosticPrice {
+const getPrice = (product: AgnosticProductVariant): AgnosticPrice => {
   return {
     regular: createPrice(product?.price?.original),
     special: createPrice(product?.price?.current)
   };
 }
 
-function getGallery(product: ProductVariantType): AgnosticMediaGalleryItem[] {
+const getGallery = (product: AgnosticProductVariant): AgnosticMediaGalleryItem[] => {
   if (!product?.images.length) return [];
 
   return [
@@ -34,90 +41,108 @@ function getGallery(product: ProductVariantType): AgnosticMediaGalleryItem[] {
   ];
 }
 
-function getCoverImage(product: ProductVariantType): string {
+const getCoverImage = (product: AgnosticProductVariant): string => {
   return product?.images[0] || '';
 }
 
-function getFiltered(products: ProductVariantType[], filters: ProductFilter): ProductVariantType[] {
-  if (!products?.length) return [];
-
-  const mappedProducts = products.map(product => ({
-    _id: product?._id,
-    _description: product?._description,
-    _categoriesRef: product?._categoriesRef,
-    name: product?.name,
-    sku: product?.sku,
-    slug: product?.slug,
-    images: [product?.featuredAsset?.preview],
-    price: {
-      original: product?.price?.original,
-      current: product?.price?.current
-    }
-  }));
-
-  if (filters?.master) {
-    return [mappedProducts[0]];
-  }
-
-  return mappedProducts;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getAttributes(products: ProductVariantType[] | ProductVariantType, filterByAttributeName?: string[]): Record<string, AgnosticAttribute | string> {
-  const mappedOptions = products[0]?.optionGroups.map(optionGroup => {
-    const options = optionGroup.options.map(option => ({
-      id: option.id,
-      value: option.code,
-      label: option.name
+// TODO: Implement filter by attribute functionality
+const getOptions = (product: Product, filters?: string[]): AgnosticProductOptions[] => {
+  const mappedOptions = product?.optionGroups?.map(optionGroup => {
+    const options = optionGroup?.options.map(option => ({
+      id: option?.id,
+      value: option?.code,
+      label: option?.name
     }));
 
     return {
-      id: optionGroup.id,
-      name: optionGroup.name,
-      code: optionGroup.code,
+      id: optionGroup?.id,
+      value: optionGroup?.code,
+      label: optionGroup?.name,
       options
     };
   });
   return mappedOptions;
 }
 
-function getDescription(product: ProductVariantType): string {
+const getDescription = (product: AgnosticProductVariant): string => {
   return product?._description || '';
 }
 
-function getCategoryIds(product: ProductVariantType): string[] {
+const getCategoryIds = (product: AgnosticProductVariant): string[] => {
   return product?._categoriesRef || [];
 }
 
-function getId(product: ProductVariantType): string {
+const getId = (product: AgnosticProductVariant): string => {
   return product?._id || '';
 }
 
+const getSku = (product: AgnosticProductVariant): string => {
+  return product?.sku || '';
+}
+
+const getCategoryNames = (product: Product): string[] => {
+  if (!product.collections.length) return [];
+  return product?.collections.map(collection => collection.name);
+}
+
+const getByFilters = (product: Product, filters?: ProductFilter): AgnosticProductVariant[] | AgnosticProductVariant => {
+  const { variants, collections, featuredAsset, ...masterVariant } = product;
+
+  if (!variants?.length) return [];
+
+  const productVariants = variants.map(variant => ({
+    _id: variant?.id,
+    _description: masterVariant?.description,
+    _categoriesRef: collections?.map(collection => collection.id),
+    name: variant?.name,
+    sku: variant?.sku,
+    slug: masterVariant?.slug,
+    images: [featuredAsset?.preview],
+    price: {
+      original: variant?.price,
+      current: variant?.priceWithTax
+    }
+  }));
+
+  if (filters?.master) {
+    return productVariants[0];
+  }
+
+  return productVariants;
+}
+
+// Not used in favor of getByFilters
+const getFiltered = (products: AgnosticProductVariant[], filters: ProductFilter): AgnosticProductVariant[] => {
+  return [];
+}
+
+// Not used in favor of getOptions
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getFormattedPrice(price: number): string {
+const getAttributes = (products: AgnosticProductVariant[] | AgnosticProductVariant, filterByAttributeName?: string[]): Record<string, AgnosticAttribute | string> => {
+    return {
+      id: '1',
+      name: '1',
+      code: '1',
+      options: 'options'
+    };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const getFormattedPrice = (price: number): string => {
   return '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getTotalReviews(product: ProductVariantType): number {
+const getTotalReviews = (product: AgnosticProductVariant): number => {
   return 0;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getAverageRating(product: ProductVariantType): number {
+const getAverageRating = (product: AgnosticProductVariant): number => {
   return 0;
 }
 
-function getSku(product: ProductVariantType): string {
-  return product?.sku || '';
-}
-
-function getCategoryNames(products: ProductVariantType[]): string[] {
-  if (!products.length || !products[0].collections.length) return [];
-  return products[0]?.collections.map(collection => collection.name);
-}
-
-export const productGetters: ProductGetters<ProductVariantType, ProductFilter> = {
+export const productGetters: ExtendedProductGetters = {
   getName,
   getSlug,
   getPrice,
@@ -132,5 +157,7 @@ export const productGetters: ProductGetters<ProductVariantType, ProductFilter> =
   getTotalReviews,
   getAverageRating,
   getSku,
-  getCategoryNames
+  getCategoryNames,
+  getByFilters,
+  getOptions
 };
