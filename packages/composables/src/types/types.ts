@@ -1,4 +1,5 @@
 import { AgnosticAttribute } from "@vue-storefront/core";
+import { CollectionResult, FacetValueResult, SearchResult } from "@vue-storefront/vendure-api";
 
 export type TODO = any;
 
@@ -41,4 +42,13 @@ export type AgnosticProductOptions = {
   value?: string;
   label?: string;
   options?: AgnosticAttribute[]
+}
+
+export type AgnosticSearchResult = {
+  products: SearchResult[];
+  categories: CollectionResult[];
+  facets: FacetValueResult[];
+  total: number;
+  perPageOptions: number[];
+  itemsPerPage: number;
 }
