@@ -1,6 +1,6 @@
 import { AgnosticCategoryTree, CategoryGetters } from '@vue-storefront/core';
 import type { CategoryNavigation, Collection, CollectionList } from '@vue-storefront/vendure-api';
-import { ROOT_COLLECTION } from './_utils';
+import { ROOT_COLLECTION } from '../helpers';
 
 interface ExtendedCategoryGetters extends CategoryGetters<Collection> {
   getNavigation: (categories: Collection[]) => CategoryNavigation[];
