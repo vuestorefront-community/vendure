@@ -1,32 +1,25 @@
 import {
   Context,
-  useFacetFactory,
-  FacetSearchResult
+  UseFacet
 } from '@vue-storefront/core';
-import type { FacetResultsData } from '@vue-storefront/vendure-api';
+import type { SearchInput, SearchResponse } from '@vue-storefront/vendure-api';
+import { SearchResultParams, UseFacetFactoryParams } from './interfaces';
 
-const ITEMS_PER_PAGE = [20, 40, 100];
+declare const useFacetFactory: <SEARCH_DATA>(factoryParams: UseFacetFactoryParams<SEARCH_DATA>) => (id?: string) => UseFacet<SearchResultParams<SearchResponse, SearchInput>>;
 
-const factoryParams = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  search: async (context: Context, params: FacetSearchResult<FacetResultsData>): Promise<FacetResultsData> => {
-    const { customQuery, ...rest } = params.input;
-    const searchParams = { input: { ...rest.input } };
-    const itemsPerPage = searchParams?.input?.take;
+const useFacetFactoryParams: UseFacetFactoryParams<SearchResultParams<SearchResponse, SearchInput>> = {
+  search: async (context: Context, params?: SearchResultParams<SearchResponse, SearchInput>): Promise<SearchResponse> => {
+    const searchParams = { input: { ...params?.input } };
 
-    const facetResponse = await context.$vendure.api.getFacet(searchParams, customQuery);
+    const searchResponse = await context.$vendure.api.getFacet(searchParams, params?.customQuery);
 
-    const responseData = facetResponse?.data?.search;
-
-    return {
-      products: responseData?.items,
-      categories: responseData?.collections,
-      facets: responseData?.facetValues,
-      total: responseData?.totalItems,
-      perPageOptions: ITEMS_PER_PAGE,
-      itemsPerPage
-    };
+    return searchResponse?.data?.search;
   }
 };
 
-export const useFacet = useFacetFactory<FacetResultsData>(factoryParams);
+const useFacet: () => UseFacet<SearchResultParams<SearchResponse, SearchInput>> = useFacetFactory<SearchResultParams<SearchResponse, SearchInput>>(useFacetFactoryParams);
+
+export {
+  useFacet,
+  useFacetFactoryParams
+}
