@@ -2,10 +2,9 @@ import { AgnosticCategoryTree, CategoryGetters } from '@vue-storefront/core';
 import type { CategoryNavigation, Collection, CollectionList } from '@vue-storefront/vendure-api';
 import { ROOT_COLLECTION } from './_utils';
 
-
 interface ExtendedCategoryGetters extends CategoryGetters<Collection> {
   getNavigation: (categories: Collection[]) => CategoryNavigation[];
-  getTotalCategoryItems: (collectionList: CollectionList) => number;
+  getTotalItems: (collectionList: CollectionList) => number;
 }
 
 const getNavigation = (categories: Collection[]): CategoryNavigation[] => {
@@ -16,7 +15,7 @@ const getNavigation = (categories: Collection[]): CategoryNavigation[] => {
   }));
 
   return categoryNavigation;
-}
+};
 
 const getTree = (category: Collection): AgnosticCategoryTree => {
   if (!category || !category.id) return null;
@@ -30,12 +29,12 @@ const getTree = (category: Collection): AgnosticCategoryTree => {
   };
 };
 
-const getTotalCategoryItems = (collectionList: CollectionList): number => {
-  return collectionList?.totalItems ? collectionList?.totalItems : 0
+const getTotalItems = (collectionList: CollectionList): number => {
+  return collectionList?.totalItems ? collectionList?.totalItems : 0;
 };
 
 export const categoryGetters: ExtendedCategoryGetters = {
   getTree,
   getNavigation,
-  getTotalCategoryItems
+  getTotalItems
 };

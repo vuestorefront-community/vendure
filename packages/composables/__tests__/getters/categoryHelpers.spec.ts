@@ -3,16 +3,16 @@ import { categoryGetters } from './../../src/getters/categoryGetters';
 
 describe('[vendure-getters] category helpers', () => {
   it('returns navigation based on current categories', () => {
-    const navigation = categoryGetters.getNavigation(mockedCollectionList.items)
+    const navigation = categoryGetters.getNavigation(mockedCollectionList.items);
     expect(navigation).toBe([
       { name: 'Electronics', link: 'electronics'},
       { name: 'Home & Garden', link: 'home-garden'},
-      { name: 'Sports & Outdoor', link: 'sports-outdoor'},
+      { name: 'Sports & Outdoor', link: 'sports-outdoor'}
     ]);
   });
 
   it('returns total number of category items', () => {
-    const totalCategoryItems = categoryGetters.getTotalCategoryItems(mockedCollectionList);
+    const totalCategoryItems = categoryGetters.getTotalItems(mockedCollectionList);
     expect(totalCategoryItems).toBe(9);
   });
 });
