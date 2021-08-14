@@ -8,7 +8,7 @@ import {
   AgnosticBreadcrumb,
   AgnosticFacet
 } from '@vue-storefront/core';
-import type { Collection, FacetSearchCriteria, PriceRange, SearchInput, SearchResponse } from '@vue-storefront/vendure-api';
+import type { Collection, FacetSearchCriteria, PriceRange, SearchInput, SearchResponse, SearchResultSortParameter } from '@vue-storefront/vendure-api';
 import { AgnosticProductVariant, AgnosticSearchResult } from '../types';
 import { ITEMS_PER_PAGE, ROOT_COLLECTION } from '../helpers';
 
@@ -34,11 +34,11 @@ const getGrouped = (searchResult: FacetSearchResult<AgnosticSearchResult>, crite
       count: facet.count
     }))
   }];
-}
+};
 
 const getSortOptions = (searchResult: FacetSearchResult<AgnosticSearchResult>): AgnosticSort => {
-  // In Vendure `sort:{ name: string, price: string }` while in VSF Core `sort: string`
-  const sortName = (searchResult.input as any).sort.name;
+  // TODO: Fix this with custom type/interface. In Vendure `sort: SearchResultSortParameter` while in VSF Core `sort: string`
+  const sortName = (searchResult.input.sort as SearchResultSortParameter).name;
   const options = [
     { type: 'sort', id: 'latest', value: 'Latest', count: null },
     { type: 'sort', id: 'ASC', value: 'Price from low to high', count: null },
@@ -50,7 +50,7 @@ const getSortOptions = (searchResult: FacetSearchResult<AgnosticSearchResult>): 
     options,
     selected
   };
-}
+};
 
 const getProducts = (searchResult: FacetSearchResult<AgnosticSearchResult>): AgnosticProductVariant[] => {
   return searchResult?.data?.products?.length && searchResult.data.products.map(product => ({
@@ -66,7 +66,7 @@ const getProducts = (searchResult: FacetSearchResult<AgnosticSearchResult>): Agn
     },
     slug: product.slug
   }));
-}
+};
 
 const getPagination = (searchResult: FacetSearchResult<AgnosticSearchResult>): AgnosticPagination => {
   if (!searchResult.data) {
@@ -86,7 +86,7 @@ const getPagination = (searchResult: FacetSearchResult<AgnosticSearchResult>): A
     pageOptions: searchResult.data.perPageOptions,
     currentPage: 1
   };
-}
+};
 
 const getBreadcrumbsFromSlug = (searchResult: FacetSearchResult<AgnosticSearchResult>, slug: string): AgnosticBreadcrumb[] => {
   const categoryFromSlug = searchResult?.data?.categories?.find(category => category.collection.slug === slug);
@@ -97,7 +97,7 @@ const getBreadcrumbsFromSlug = (searchResult: FacetSearchResult<AgnosticSearchRe
   }));
 
   return breadcrumbsFromSlug;
-}
+};
 
 const getTree = (category: Collection): AgnosticCategoryTree | null => {
   if (!category || !category.id) return null;
@@ -109,7 +109,7 @@ const getTree = (category: Collection): AgnosticCategoryTree | null => {
     isCurrent: false,
     items: category.children.map(child => getTree(child))
   };
-}
+};
 
 const getAgnosticSearchResult = (response: SearchResponse, input: SearchInput): FacetSearchResult<AgnosticSearchResult> => {
   return {
@@ -127,18 +127,18 @@ const getAgnosticSearchResult = (response: SearchResponse, input: SearchInput): 
       sort: input.sort as any
     }
   };
-}
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getAll = (params: FacetSearchResult<AgnosticSearchResult>, criteria?: FacetSearchCriteria): AgnosticFacet[] => {
   return [];
-}
+};
 
 // Not used in favor of getBreadcrumbsBySlug
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getBreadcrumbs = (params: FacetSearchResult<AgnosticSearchResult>): AgnosticBreadcrumb[] => {
   return [];
-}
+};
 
 // Not used in favor of getTree
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -150,7 +150,7 @@ const getCategoryTree = (params: FacetSearchResult<AgnosticSearchResult>): Agnos
     isCurrent: false,
     count: 0
   };
-}
+};
 
 export const facetGetters: ExtendedSearchGetters = {
   getSortOptions,

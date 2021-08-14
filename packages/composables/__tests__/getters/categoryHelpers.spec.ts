@@ -4,7 +4,7 @@ import { categoryGetters } from './../../src/getters/categoryGetters';
 describe('[vendure-getters] category helpers', () => {
   it('returns navigation based on current categories', () => {
     const navigation = categoryGetters.getNavigation(mockedCollectionList.items);
-    expect(navigation).toBe([
+    expect(navigation).toStrictEqual([
       { name: 'Electronics', link: 'electronics'},
       { name: 'Home & Garden', link: 'home-garden'},
       { name: 'Sports & Outdoor', link: 'sports-outdoor'}

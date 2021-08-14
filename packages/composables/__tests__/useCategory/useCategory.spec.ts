@@ -9,7 +9,7 @@ const categoriesResult = [
     id: 'fcd' }
 ];
 
-jest.mock('@vue-storefront/core', () => ({
+jest.mock('../../src/factories/', () => ({
   useCategoryFactory: (params) => () => params
 }));
 

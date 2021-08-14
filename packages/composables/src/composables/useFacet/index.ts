@@ -1,14 +1,14 @@
 import {
   Context,
-  UseFacet
+  FacetSearchResult,
+  useFacetFactory
 } from '@vue-storefront/core';
 import type { SearchInput, SearchResponse } from '@vue-storefront/vendure-api';
 import { SearchResultParams, UseFacetFactoryParams } from './interfaces';
 
-declare const useFacetFactory: <SEARCH_DATA>(factoryParams: UseFacetFactoryParams<SEARCH_DATA>) => (id?: string) => UseFacet<SearchResultParams<SearchResponse, SearchInput>>;
-
-const useFacetFactoryParams: UseFacetFactoryParams<SearchResultParams<SearchResponse, SearchInput>> = {
-  search: async (context: Context, params?: SearchResultParams<SearchResponse, SearchInput>): Promise<SearchResponse> => {
+const useFacetFactoryParams: UseFacetFactoryParams<FacetSearchResult<SearchResponse>> = {
+  // TODO: Fix this with custom type/interface. In Vendure `sort: SearchResultSortParameter` while in VSF Core `sort: string`
+  search: async (context: Context, params?: SearchResultParams<SearchResponse, SearchInput> & { input: { sort?: string } }): Promise<SearchResponse> => {
     const searchParams = { input: { ...params?.input } };
 
     const searchResponse = await context.$vendure.api.getFacet(searchParams, params?.customQuery);
@@ -17,9 +17,9 @@ const useFacetFactoryParams: UseFacetFactoryParams<SearchResultParams<SearchResp
   }
 };
 
-const useFacet: () => UseFacet<SearchResultParams<SearchResponse, SearchInput>> = useFacetFactory<SearchResultParams<SearchResponse, SearchInput>>(useFacetFactoryParams);
+const useFacet = useFacetFactory<SearchResponse>(useFacetFactoryParams);
 
 export {
   useFacet,
   useFacetFactoryParams
-}
+};

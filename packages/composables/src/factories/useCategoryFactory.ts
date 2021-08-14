@@ -1,7 +1,5 @@
-import { CustomQuery, Context, FactoryParams, UseCategoryErrors } from '@vue-storefront/core';
+import { CustomQuery, Context, FactoryParams, UseCategoryErrors, sharedRef, Logger, configureFactoryParams, ComputedProperty, ComposableFunctionArgs } from '@vue-storefront/core';
 import { Ref, computed } from '@vue/composition-api';
-import { sharedRef, Logger, configureFactoryParams } from '@vue-storefront/core/lib/src/utils';
-import { ComputedProperty, ComposableFunctionArgs } from '@vue-storefront/core/lib/src/types';
 
 export interface UseCategoryFactoryParams<
   CATEGORY,

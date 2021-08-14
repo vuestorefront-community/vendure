@@ -1,5 +1,5 @@
 import { useProduct } from '../../src//composables/useProduct';
-import { mockedProduct } from '../mocks'
+import { mockedProduct } from '../mocks';
 
 jest.mock('@vue-storefront/core', () => ({
   useProductFactory: (params) => () => params
@@ -11,7 +11,7 @@ const context = {
       store: ''
     },
     api: {
-      getProduct: jest.fn(() => Promise.resolve(mockedProduct))
+      getProduct: jest.fn(() => Promise.resolve({ data: { product: mockedProduct }}))
     }
   }
 };

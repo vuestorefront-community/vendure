@@ -1,5 +1,5 @@
 import { Product } from '@vue-storefront/vendure-api';
-import { AgnosticProductVariant } from '../../src/types';
+import { AgnosticProductOptions, AgnosticProductVariant } from '../../src/types';
 
 export const mockedProduct: Product = {
   slug: 'laptop',
@@ -112,7 +112,6 @@ export const mockedProduct: Product = {
   __typename: 'Product'
 } as any;
 
-
 export const mockedProductVariant: AgnosticProductVariant = {
   _id: '1',
   _description: 'Now equipped with seventh-generation Intel Core processors, Laptop is snappier than ever. From daily tasks like launching apps and opening files to more advanced computing, you can power through your day thanks to faster SSDs and Turbo Boost processing up to 3.6GHz.',
@@ -125,9 +124,9 @@ export const mockedProductVariant: AgnosticProductVariant = {
     original: 129900,
     current: 155880
   }
-}
+};
 
-export const mockedAllProductVariants = [
+export const mockedAllProductVariants: AgnosticProductVariant[] = [
   {
     _id: '1',
     _description: 'Now equipped with seventh-generation Intel Core processors, Laptop is snappier than ever. From daily tasks like launching apps and opening files to more advanced computing, you can power through your day thanks to faster SSDs and Turbo Boost processing up to 3.6GHz.',
@@ -182,7 +181,7 @@ export const mockedAllProductVariants = [
   }
 ];
 
-export const mockedOptions = [
+export const mockedOptions: AgnosticProductOptions[] = [
   {
     id: '1',
     label: 'screen size',
@@ -191,17 +190,14 @@ export const mockedOptions = [
       {
         id: '1',
         label: '13 inch',
-        value: '13-inch',
-        __typename: 'ProductOption'
+        value: '13-inch'
       },
       {
         id: '2',
         label: '15 inch',
-        value: '15-inch',
-        __typename: 'ProductOption'
+        value: '15-inch'
       }
-    ],
-    __typename: 'ProductOptionGroup'
+    ]
   },
   {
     id: '2',
@@ -211,16 +207,13 @@ export const mockedOptions = [
       {
         id: '4',
         label: '16GB',
-        value: '16gb',
-        __typename: 'ProductOption'
+        value: '16gb'
       },
       {
         id: '3',
         label: '8GB',
-        value: '8gb',
-        __typename: 'ProductOption'
+        value: '8gb'
       }
-    ],
-    __typename: 'ProductOptionGroup'
+    ]
   }
-]
+];
