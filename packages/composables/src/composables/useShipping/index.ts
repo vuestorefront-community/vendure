@@ -6,7 +6,7 @@ import {
 import type { ShippingAddress } from '@vue-storefront/vendure-api';
 import type {
   UseShippingAddParams as AddParams
-} from '../types';
+} from '../../types';
 
 const params: UseShippingParams<ShippingAddress, AddParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,19 +1,19 @@
 // Composables
-export { useBilling } from './useBilling';
-export { useCart } from './useCart';
-export { useCategory } from './useCategory';
-export { useContent } from './useContent';
-export { useFacet } from './useFacet';
-export { useMakeOrder } from './useMakeOrder';
-export { useProduct } from './useProduct';
-export { useReview } from './useReview';
-export { useShipping } from './useShipping';
-export { useShippingProvider } from './useShippingProvider';
-export { useUser } from './useUser';
-export { useUserBilling } from './useUserBilling';
-export { useUserOrder } from './useUserOrder';
-export { useUserShipping } from './useUserShipping';
-export { useWishlist } from './useWishlist';
+export { useBilling } from './composables/useBilling';
+export { useCart } from './composables/useCart';
+export { useCategory } from './composables/useCategory';
+export { useContent } from './composables/useContent';
+export { useFacet } from './composables/useFacet';
+export { useMakeOrder } from './composables/useMakeOrder';
+export { useProduct } from './composables/useProduct';
+export { useReview } from './composables/useReview';
+export { useShipping } from './composables/useShipping';
+export { useShippingProvider } from './composables/useShippingProvider';
+export { useUser } from './composables/useUser';
+export { useUserBilling } from './composables/useUserBilling';
+export { useUserOrder } from './composables/useUserOrder';
+export { useUserShipping } from './composables/useUserShipping';
+export { useWishlist } from './composables/useWishlist';
 
 // Getters
 export { cartGetters } from './getters/cartGetters';
@@ -29,4 +29,4 @@ export { userShippingGetters } from './getters/userShippingGetters';
 export { wishlistGetters } from './getters/wishlistGetters';
 
 // Types
-export * from './types';
+export * from './types/types';

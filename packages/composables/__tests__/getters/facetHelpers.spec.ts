@@ -1,29 +1,6 @@
 import { facetGetters } from './../../src/getters/facetGetters';
 
 describe('[vendure-getters] facet getters', () => {
-  it('returns sorting options', () => {
-    expect(facetGetters.getSortOptions({ input: { input: { sort: null } } } as any)).toEqual({
-      options: [
-        { type: 'sort', id: 'latest', selected: false, value: 'Latest', count: null },
-        {
-          type: 'sort',
-          id: 'ASC',
-          selected: false,
-          value: 'Price from low to high',
-          count: null
-        },
-        {
-          type: 'sort',
-          id: 'DESC',
-          selected: false,
-          value: 'Price from high to low',
-          count: null
-        }
-      ],
-      selected: 'latest'
-    });
-  });
-
   it('returns grouped facets', () => {
     const searchData = {
       input: {},
@@ -62,10 +39,8 @@ describe('[vendure-getters] facet getters', () => {
 
     const searchData = {
       input: {
-        input: {
-          take: 10,
-          page: 2
-        }
+        take: 10,
+        page: 2
       },
       data: {
         total: 120,

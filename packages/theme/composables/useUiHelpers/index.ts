@@ -1,5 +1,4 @@
 import { getCurrentInstance } from '@vue/composition-api';
-import { CollectionItem } from '@vue-storefront/vendure-api';
 import { AgnosticFacet } from '@vue-storefront/core';
 
 const nonFilters = ['page', 'sort', 'phrase', 'itemsPerPage'];
@@ -69,7 +68,7 @@ const useUiHelpers = () => {
     return truthySlugs[truthySlugs.length - 1];
   };
 
-  const getCatLink = (category: CollectionItem): string => {
+  const getCatLink = (category): string => {
     const urlCategorySlug = instance.$route.params.slug_1;
     return urlCategorySlug.includes(category.slug) ? `/c/${urlCategorySlug}` : `/c/${urlCategorySlug}/${category.slug}`;
   };

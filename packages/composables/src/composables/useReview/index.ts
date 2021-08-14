@@ -7,7 +7,7 @@ import type { Review } from '@vue-storefront/vendure-api';
 import type {
   UseReviewSearchParams as SearchParams,
   UseReviewAddParams as AddParams
-} from '../types';
+} from '../../types';
 
 const params: UseReviewFactoryParams<Review, SearchParams, AddParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

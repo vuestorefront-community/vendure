@@ -6,7 +6,7 @@ import {
 import type { BillingAddress } from '@vue-storefront/vendure-api';
 import type {
   UseBillingAddParams as AddParams
-} from '../types';
+} from '../../types';
 
 const params: UseBillingParams<BillingAddress, AddParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

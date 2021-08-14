@@ -21,7 +21,7 @@ const createErrorHandler = () => onError(({
       locations,
       path
     }) => {
-      if (!message.includes('Resource Owner Password Credentials Grant')) {
+      if (!message?.includes('Resource Owner Password Credentials Grant')) {
         if (!locations) {
           Logger.error(`[GraphQL error]: Message: ${message}, Path: ${path}`);
           return;

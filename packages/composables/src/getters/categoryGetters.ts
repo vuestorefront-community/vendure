@@ -1,30 +1,13 @@
-import { CategoryGetters, AgnosticCategoryTree, AgnosticBreadcrumb } from '@vue-storefront/core';
-import type { CollectionItem, CategoryNavigation } from '@vue-storefront/vendure-api';
-import { ROOT_COLLECTION } from './_utils';
+import { AgnosticCategoryTree, CategoryGetters } from '@vue-storefront/core';
+import type { CategoryNavigation, Collection, CollectionList } from '@vue-storefront/vendure-api';
+import { ROOT_COLLECTION } from '../helpers';
 
-function getTree(category: CollectionItem): AgnosticCategoryTree | null {
-  if (!category || !category.id) return null;
-
-  return {
-    label: category.name,
-    slug: category.slug,
-    id: category.id,
-    isCurrent: false,
-    items: category.children.map(child => getTree(child))
-  };
+interface ExtendedCategoryGetters extends CategoryGetters<Collection> {
+  getNavigation: (categories: Collection[]) => CategoryNavigation[];
+  getTotalItems: (collectionList: CollectionList) => number;
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function getBreadcrumbs(category): AgnosticBreadcrumb[] {
-  const agnosticBreadcrums = category?.breadcrumbs?.map(breadcrumb => ({
-    text: breadcrumb?.name,
-    // TODO: adjust root category logic. For now it will return { link: "/c/__root_collection__", text: "__root_collection__" }. It should return correct root category.
-    link: `/c/${breadcrumb?.slug}`
-  }));
-  return agnosticBreadcrums;
-}
-
-function getNavigation(categories: CollectionItem[]): CategoryNavigation[] {
+const getNavigation = (categories: Collection[]): CategoryNavigation[] => {
   const rootCategories = categories?.filter(category => category?.parent?.name === ROOT_COLLECTION);
   const categoryNavigation = rootCategories.map(category => ({
     name: category?.name,
@@ -32,23 +15,26 @@ function getNavigation(categories: CollectionItem[]): CategoryNavigation[] {
   }));
 
   return categoryNavigation;
-}
+};
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function getBreadcrumbsFromSlug(searchData, slug: string): AgnosticBreadcrumb[] {
-  const categoryFromSlug = searchData?.data?.categories?.find(category => category.collection.slug === slug);
+const getTree = (category: Collection): AgnosticCategoryTree => {
+  if (!category || !category.id) return null;
 
-  const breadcrumbsFromSlug = categoryFromSlug?.collection?.breadcrumbs?.map(breadcrumb => ({
-    text: breadcrumb?.name === ROOT_COLLECTION ? 'Home' : breadcrumb?.name,
-    link: breadcrumb?.slug === ROOT_COLLECTION ? '/' : breadcrumb?.slug
-  }));
+  return {
+    label: '',
+    slug: '',
+    id: '',
+    isCurrent: false,
+    items: []
+  };
+};
 
-  return breadcrumbsFromSlug;
-}
+const getTotalItems = (collectionList: CollectionList): number => {
+  return collectionList?.totalItems ? collectionList?.totalItems : 0;
+};
 
-export const categoryGetters: CategoryGetters<CollectionItem> = {
+export const categoryGetters: ExtendedCategoryGetters = {
   getTree,
-  getBreadcrumbs,
-  getBreadcrumbsFromSlug,
-  getNavigation
+  getNavigation,
+  getTotalItems
 };

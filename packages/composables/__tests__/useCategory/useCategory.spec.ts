@@ -1,4 +1,4 @@
-import { useCategory } from './../../src/useCategory';
+import { useCategory } from './../../src//composables/useCategory';
 
 const categoriesResult = [
   { name: 'cat1',
@@ -9,7 +9,7 @@ const categoriesResult = [
     id: 'fcd' }
 ];
 
-jest.mock('@vue-storefront/core', () => ({
+jest.mock('../../src/factories/', () => ({
   useCategoryFactory: (params) => () => params
 }));
 
