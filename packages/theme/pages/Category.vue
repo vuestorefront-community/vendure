@@ -337,7 +337,7 @@ import {
   SfProperty
 } from '@storefront-ui/vue';
 import { ref, computed, onMounted } from '@vue/composition-api';
-import { useCart, useWishlist, productGetters, useFacet, facetGetters, categoryGetters } from '@vue-storefront/vendure';
+import { useCart, useWishlist, productGetters, useFacet, facetGetters } from '@vue-storefront/vendure';
 import { useUiHelpers, useUiState } from '~/composables';
 import { getTreeWithoutEmptyCategories } from '~/helpers';
 import { onSSR } from '@vue-storefront/core';

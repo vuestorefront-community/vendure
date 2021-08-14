@@ -1,4 +1,4 @@
-import { CollectionListOptions, SearchInput } from "./GraphQL";
+import { CollectionListOptions, SearchInput } from './GraphQL';
 
 export type TODO = unknown;
 
