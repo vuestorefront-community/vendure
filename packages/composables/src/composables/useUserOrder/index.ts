@@ -7,7 +7,7 @@ import {
 // import type { Order } from '@vue-storefront/vendure-api';
 import type {
   useUserOrderSearchParams as SearchParams
-} from '../types';
+} from '../../types';
 
 const params: UseUserOrderFactoryParams<any, SearchParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
