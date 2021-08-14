@@ -44,16 +44,13 @@
           <p class="product__description desktop-only">
             {{ productGetters.getDescription(product) }}
           </p>
-          <SfButton class="sf-button--text desktop-only product__guide">
-            {{ $t('Size guide') }}
-          </SfButton>
           <div v-if="options && options.length">
             <SfSelect
               v-for="optionGroup in options"
               :key="optionGroup.id"
-              v-model="configuration[optionGroup.code]"
-              @input="option => updateFilter({ [optionGroup.code]: option })"
-              :label="optionGroup.name"
+              v-model="configuration[optionGroup.value]"
+              @input="option => updateFilter({ [optionGroup.value]: option })"
+              :label="optionGroup.label"
               class="sf-select--underlined product__select-size"
               :required="true"
             >
@@ -185,13 +182,15 @@ export default {
     const qty = ref(1);
     const { id } = context.root.$route.params;
     const { products, search } = useProduct('products');
+    // TODO: Implement related products
     // const { products: relatedProducts, search: searchRelatedProducts, loading: relatedLoading } = useProduct('relatedProducts');
     const { addItem, loading } = useCart();
     const { reviews: productReviews, search: searchReviews } = useReview('productReviews');
 
-    const product = computed(() => productGetters.getFiltered(products.value, { master: true, attributes: context.root.$route.query })[0]);
-    const options = computed(() => productGetters.getAttributes(products.value, ['color', 'size']));
+    const product = computed(() => productGetters.getByFilters(products.value, { master: true, attributes: context.root.$route.query }));
+    const options = computed(() => productGetters.getOptions(products.value, ['color', 'size']));
     // const categories = computed(() => productGetters.getCategoryIds(product.value));
+    // TODO: Implement reviews
     const reviews = computed(() => reviewGetters.getItems(productReviews.value));
     const configuration = ref({});
 
@@ -214,7 +213,7 @@ export default {
       }
     ]);
 
-    // TODO: Breadcrumbs are temporary disabled because productGetters return undefined. We have a mocks in data
+    // TODO: Implement breadcrumbs
     // const breadcrumbs = computed(() => productGetters.getBreadcrumbs ? productGetters.getBreadcrumbs(product.value) : props.fallbackBreadcrumbs);
     const productGallery = computed(() => productGetters.getGallery(product.value).map(img => ({
       mobile: { url: img.small },

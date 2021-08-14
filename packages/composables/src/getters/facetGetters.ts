@@ -9,23 +9,25 @@ import {
   AgnosticFacet
 } from '@vue-storefront/core';
 import type { Collection, FacetSearchCriteria, PriceRange, SearchInput, SearchResponse, SearchResultSortParameter } from '@vue-storefront/vendure-api';
-import { AgnosticProductVariant, AgnosticSearchResult } from '../types';
+import { AgnosticProductVariant, AgnosticSearchResult, SearchResultValue } from '../types';
 import { ITEMS_PER_PAGE, ROOT_COLLECTION } from '../helpers';
 
 interface ExtendedSearchGetters extends FacetsGetters<AgnosticSearchResult, FacetSearchCriteria> {
   getTree: (category: Collection) => AgnosticCategoryTree | null;
-  getAgnosticSearchResult: (response: SearchResponse, input: SearchInput) => FacetSearchResult<AgnosticSearchResult>;
+  getBreadcrumbsFromSlug: (searchResult: FacetSearchResult<AgnosticSearchResult>, slug: string) => AgnosticBreadcrumb[]
+  getAgnosticSearchResult: (searchResultValue: SearchResultValue<SearchResponse, SearchInput>) => FacetSearchResult<AgnosticSearchResult>;
 }
 
 // TODO: Implement search by criteria
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getGrouped = (searchResult: FacetSearchResult<AgnosticSearchResult>, criteria?: string[]): AgnosticGroupedFacet[] => {
+  if (!searchResult?.data?.facets) return [];
   const facets = searchResult?.data?.facets;
   return [{
     id: '1',
     label: 'Attributes',
     count: null,
-    options: facets.map(facet => ({
+    options: facets?.map(facet => ({
       type: 'attribute',
       id: facet.facetValue.name,
       attrName: facet.facetValue.name,
@@ -69,7 +71,7 @@ const getProducts = (searchResult: FacetSearchResult<AgnosticSearchResult>): Agn
 };
 
 const getPagination = (searchResult: FacetSearchResult<AgnosticSearchResult>): AgnosticPagination => {
-  if (!searchResult.data) {
+  if (!searchResult.data?.total) {
     return {
       totalPages: 1,
       totalItems: 1,
@@ -80,10 +82,10 @@ const getPagination = (searchResult: FacetSearchResult<AgnosticSearchResult>): A
   }
 
   return {
-    totalPages: Math.ceil(searchResult.data.total / searchResult.data.itemsPerPage),
-    totalItems: searchResult.data.total,
-    itemsPerPage: searchResult.input.take,
-    pageOptions: searchResult.data.perPageOptions,
+    totalPages: Math.ceil(searchResult?.data?.total / searchResult?.data?.itemsPerPage) || 1,
+    totalItems: searchResult?.data?.total || 0,
+    itemsPerPage: searchResult?.input?.take,
+    pageOptions: searchResult?.data?.perPageOptions,
     currentPage: 1
   };
 };
@@ -111,13 +113,14 @@ const getTree = (category: Collection): AgnosticCategoryTree | null => {
   };
 };
 
-const getAgnosticSearchResult = (response: SearchResponse, input: SearchInput): FacetSearchResult<AgnosticSearchResult> => {
+const getAgnosticSearchResult = (searchResultValue: SearchResultValue<SearchResponse, SearchInput>): FacetSearchResult<AgnosticSearchResult> => {
+  const { data, input } = searchResultValue;
   return {
     data: {
-      products: response?.items,
-      categories: response?.collections,
-      facets: response?.facetValues,
-      total: response?.totalItems,
+      products: data?.items,
+      categories: data?.collections,
+      facets: data?.facetValues,
+      total: data?.totalItems,
       perPageOptions: ITEMS_PER_PAGE,
       itemsPerPage: input?.take
     },

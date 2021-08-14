@@ -359,19 +359,22 @@ export default {
 
     const lastSlug = th.getLastSlugFromParams();
 
-    const sortBy = computed(() => facetGetters.getSortOptions(result.value));
-    const facets = computed(() => facetGetters.getGrouped(result.value));
-    const products = computed(() => facetGetters.getProducts(result.value));
+    const searchResult = computed(() => facetGetters.getAgnosticSearchResult(result.value));
 
-    const rawBreadcrumbs = computed(() => categoryGetters.getBreadcrumbsFromSlug(result.value, lastSlug));
+    const sortBy = computed(() => facetGetters.getSortOptions(searchResult.value));
+    const facets = computed(() => facetGetters.getGrouped(searchResult.value));
+    const products = computed(() => facetGetters.getProducts(searchResult.value));
+
+    const rawBreadcrumbs = computed(() => facetGetters.getBreadcrumbsFromSlug(searchResult.value, lastSlug));
     const breadcrumbs = computed(() => th.getFormattedBreadcrumbs(rawBreadcrumbs.value));
-    const rawPagination = computed(() => facetGetters.getPagination(result.value));
+    const rawPagination = computed(() => facetGetters.getPagination(searchResult.value));
+    console.log(rawPagination);
     const pagination = computed(() => ({
       page: parseInt(context.root.$route.query.page, 10) || 1,
       ...rawPagination.value
     }));
-    const rawCategoryTree = computed(() => result.value.data.categories.map(category => {
-      const tree = categoryGetters.getTree(category.collection);
+    const rawCategoryTree = computed(() => searchResult.value?.data?.categories?.map(category => {
+      const tree = facetGetters.getTree(category.collection);
       tree.isCurrent = th.doesUrlIncludesCategory(tree.slug);
       return tree;
     }));
@@ -400,7 +403,7 @@ export default {
     };
 
     onSSR(async () => {
-      await search({ input: th.getFacetsFromURL() });
+      await search({ ...th.getFacetsFromURL() });
       setSelectedFilters();
     });
 
