@@ -32,6 +32,15 @@ module.exports = {
           ['/guide/about', 'About'],
         ]
       },
+      {
+        title: 'Composables',
+        collapsable: false,
+        children: [
+          ['/composables/use-product', 'useProduct'],
+          ['/composables/use-category', 'useCategory'],
+          ['/composables/use-facet', 'useFacet'],
+        ]
+      },
     ]
   }
 }
