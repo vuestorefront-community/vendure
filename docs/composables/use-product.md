@@ -7,46 +7,23 @@
 ## API
 
 - `search` - a main querying function that is used to query products from eCommerce platform and populate the `products` object with the result. Every time you invoke this function API request is made. This method accepts a single `params` object. The `params` has the following options:
- 
-    - `searchParams: ProductsSearchParams`
 
-    - `customQuery?: CustomQuery`
+  - `params?: ProductParams & { customQuery?: CustomQuery }`
 
 ```ts
-interface ProductsSearchParams {
-  perPage?: number;
-  page?: number;
-  sort?: any;
-  term?: any;
-  filters?: Record<string, Filter>;
-  catId?: string | string[];
-  skus?: string[];
-  slug?: string;
+export type ProductParams = {
   id?: string;
+  slug?: string;
 }
 
 type CustomQuery = {
   products: string
 }
 ```
-- `products: ProductVariant[]` - a main data object that contains an array of products fetched by `search` method.
 
-```ts
-type ProductVariant = {
-  __typename?: "ProductVariant";
-  id: Scalars["Int"];
-  key?: Maybe<Scalars["String"]>;
-  sku?: Maybe<Scalars["String"]>;
-  prices?: Maybe<Array<ProductPrice>>;
-  price?: Maybe<ProductPrice>;
-  images: Array<Image>;
-  assets: Array<Asset>;
-  availability?: Maybe<ProductVariantAvailabilityWithChannels>;
-  attributesRaw: Array<RawProductAttribute>;
-  attributes: ProductType;
-  attributeList: Array<Attribute>;
-}
-```
+- `products: Product` - a main data object that contains a master variant data and specific variants array fetched by `search` method.
+
+<https://www.vendure.io/docs/graphql-api/shop/object-types/#product>
 
 - `loading: boolean` - a reactive object containing information about loading state of your `search` method.
 
@@ -70,37 +47,46 @@ interface UseProductErrors {
 
 - `getCoverImage` - returns cover image of product.
 
-- `getFiltered` - returns filtered product.
-
-- `getAttributes` - returns product attributes.
-
 - `getDescription` - returns product description.
 
 - `getCategoryIds` - returns all product categories.
 
 - `getId` - returns product ID.
 
-- `getFormattedPrice` - returns product price with currency sign.
+- `getByFilters` - returns agnostic product variant by filters like master.
 
-- `getTotalReviews` - returns total number of reviews product has. 
+- `getOptions` - returns agnostic product options.
 
-- `getAverageRating` - returns average rating from all reviews.
+- `getCategoryNames` - returns category names for certain product.
+
+- `getFiltered` - returns filtered product (not used in favor of `getByFilters`).
+
+- `getAttributes` - returns product attributes (not used in favor of `getOptions`).
+
+- `getFormattedPrice` - TBA.
+
+- `getTotalReviews` - TBA.
+
+- `getAverageRating` - TBA.
 
 ```ts
-interface ProductGetters {
-  getName: (product: ProductVariant | Readonly<ProductVariant>) => string;
-  getSlug: (product: ProductVariant | Readonly<ProductVariant>) => string;
-  getPrice: (product: ProductVariant | Readonly<ProductVariant>) => AgnosticPrice;
-  getGallery: (product: ProductVariant) => AgnosticMediaGalleryItem[];
-  getCoverImage: (product: ProductVariant) => string;
-  getFiltered: (products: ProductVariant[], filters: ProductVariantFilters | any = {}) => ProductVariant[];
-  getAttributes: (products: ProductVariant[] | ProductVariant, filterByAttributeName?: string[]) => Record<string, AgnosticAttribute | string>;
-  getDescription: (product: ProductVariant) => string;
-  getCategoryIds: (product: ProductVariant) => string[];
-  getId: (product: ProductVariant) => string;
+interface ExtendedProductGetters extends ProductGetters<AgnosticProductVariant {
+  getName: (product: AgnosticProductVariant | Readonly<AgnosticProductVariant>) => string;
+  getSlug: (product: AgnosticProductVariant | Readonly<AgnosticProductVariant>) => string;
+  getPrice: (product: AgnosticProductVariant | Readonly<AgnosticProductVariant>) => AgnosticPrice;
+  getGallery: (product: AgnosticProductVariant) => AgnosticMediaGalleryItem[];
+  getCoverImage: (product: AgnosticProductVariant) => string;
+  getFiltered: (products: AgnosticProductVariant[], filters: ProductVariantFilters | any = {}) => AgnosticProductVariant[];
+  getAttributes: (products: AgnosticProductVariant[] | AgnosticProductVariant, filterByAttributeName?: string[]) => Record<string, AgnosticAttribute | string>;
+  getDescription: (product: AgnosticProductVariant) => string;
+  getCategoryIds: (product: AgnosticProductVariant) => string[];
+  getId: (product: AgnosticProductVariant) => string;
   getFormattedPrice: (price: number) => string;
-  getTotalReviews: (product: ProductVariant) => number;
-  getAverageRating: (product: ProductVariant) => number;
+  getTotalReviews: (product: AgnosticProductVariant) => number;
+  getAverageRating: (product: AgnosticProductVariant) => number;
+  getByFilters: (product: Product, filters?: ProductFilter) => AgnosticProductVariant[] | AgnosticProductVariant;
+  getOptions: (product: Product, filters?: string[]) => AgnosticProductOptions[]
+  getCategoryNames: (product: Product) => string[];
 }
 
 interface AgnosticPrice {
@@ -120,26 +106,37 @@ interface AgnosticAttribute {
   label: string;
 }
 
-type ProductVariant = {
-  __typename?: "ProductVariant";
-  id: Scalars["Int"];
-  key?: Maybe<Scalars["String"]>;
-  sku?: Maybe<Scalars["String"]>;
-  prices?: Maybe<Array<ProductPrice>>;
-  price?: Maybe<ProductPrice>;
-  images: Array<Image>;
-  assets: Array<Asset>;
-  availability?: Maybe<ProductVariantAvailabilityWithChannels>;
-  attributesRaw: Array<RawProductAttribute>;
-  attributes: ProductType;
-  attributeList: Array<Attribute>;
-}
+type AgnosticProductVariant = {
+  _id: string,
+  _description: string,
+  _categoriesRef: string[],
+  name: string,
+  sku: string,
+  slug: string,
+  images: string [],
+  price: {
+    original: number,
+    current: number
+  },
+};
 
 interface ProductVariantFilters {
   master?: boolean;
   attributes?: Record<string, string>;
 }
+
+type AgnosticProductOptions = {
+  id?: string,
+  value?: string;
+  label?: string;
+  options?: AgnosticAttribute[] & {
+    id?: string
+  };
+  __typename?: string;
+}
 ```
+
+<https://www.vendure.io/docs/graphql-api/shop/object-types/#product>
 
 ## Examples
 
@@ -154,38 +151,16 @@ export default {
     const { products, search, loading, error } = useProduct('<UNIQUE_ID>');
 
     onSSR(async () => {
-      await search({ slug: 'super-t-shirt' })
+      await search({ id: '1' })
     })
 
     return {
       loading,
       error,
-      product: computed(() => productGetters.getFiltered(products.value, { master: true, attributes: context.root.$route.query })[0]),
-      option: computed(() => productGetters.getAttributes(products.value, ['color', 'size'])),
+      product: computed(() => productGetters.getByFilters(products.value, { master: true, attributes: context.root.$route.query })),
+      option: computed(() => productGetters.getOptions(products.value)),
       configuration: computed(() => productGetters.getCategoryIds(product.value))
     }
-  }
-}
-```
-
-```js
-// search products by ids
-import { useProduct, productGetters } from '@vue-storefront/commercetools';
-import { onSSR } from '@vue-storefront/core';
-import { computed } from '@vue/composition-api';
-
-export defaut {
-  setup () {
-    const { products, search } = useProduct('<UNIQUE_ID>');
-
-    onSSR(async () => {
-      await search({ ids: ['id-1', 'id-2'] });
-    });
-
-    return {
-      products,
-      masterProducts: computed(() => productGetters.getFiltered(products.value, { master: true }))
-    };
   }
 }
 ```

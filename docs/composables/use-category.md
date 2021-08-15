@@ -4,61 +4,31 @@
 
 `useCategory` composable is responsible for fetching a list of categories. A common usage scenario for this composable is navigation.
 
+::: warning
+This composable uses a custom useCategoryFactory that is not part of the Vue Storefront Core package. Functionality and types can differ from other integrations. For more details visit [code repository](https://github.com/vuestorefront/vendure/blob/main/packages/composables/src/factories/useCategoryFactory.ts)
+:::
+
 ## API
 
 - `search` - a main querying function that is used to query categories from eCommerce platform and populate the `categories` object with the result. Every time you invoke this function API request is made. This method accepts a single `params` object. The `params` has the following options:
 
-    - `searchParams`
-      
-      - `id: string`
-      - `slug: string`
-    
-    - `customQuery?: CustomQuery` 
-    
+  - `params: CollectionParams & { customQuery?: CustomQuery }`
+
 ```ts
+type CollectionParams = {
+  options?: CollectionListOptions;
+}
+
 type CustomQuery = {
   categories: string
 }
 ```
 
-- `categories: Category[]` - a main data object that contains an array of categories fetched by `search` method.
+<https://www.vendure.io/docs/graphql-api/shop/input-types/#collectionlistoptions>
 
-```ts
-type Category = {
-  __typename?: "Category";
-  id: Scalars["String"];
-  key?: Maybe<Scalars["String"]>;
-  version: Scalars["Long"];
-  name?: Maybe<Scalars["String"]>;
-  nameAllLocales: Array<LocalizedString>;
-  description?: Maybe<Scalars["String"]>;
-  descriptionAllLocales?: Maybe<Array<LocalizedString>>;
-  slug?: Maybe<Scalars["String"]>;
-  slugAllLocales: Array<LocalizedString>;
-  ancestorsRef: Array<Reference>;
-  ancestors: Array<Category>;
-  parentRef?: Maybe<Reference>;
-  parent?: Maybe<Category>;
-  orderHint: Scalars["String"];
-  externalId?: Maybe<Scalars["String"]>;
-  metaTitle?: Maybe<Scalars["String"]>;
-  metaKeywords?: Maybe<Scalars["String"]>;
-  metaDescription?: Maybe<Scalars["String"]>;
-  productCount: Scalars["Int"];
-  stagedProductCount: Scalars["Int"];
-  childCount: Scalars["Int"];
-  children?: Maybe<Array<Category>>;
-  createdAt: Scalars["DateTime"];
-  lastModifiedAt: Scalars["DateTime"];
-  assets: Array<Asset>;
-  customFieldsRaw?: Maybe<Array<RawCustomField>>;
-  customFields?: Maybe<Type>;
-  custom?: Maybe<CustomFieldsType>;
-  createdBy?: Maybe<Initiator>;
-  lastModifiedBy?: Maybe<Initiator>;
-  customFieldList?: Maybe<Array<CustomField>>;
-}
-```
+- `categories: CollectionList` - a main data object that contains an array of category items fetched by `search` method.
+
+<https://www.vendure.io/docs/graphql-api/shop/object-types/#collectionlist>
 
 - `loading: boolean` - a reactive object containing information about loading state of your `search` method.
 
@@ -73,13 +43,16 @@ interface UseCategoryErrors {
 ## Getters
 
 - `getNavigation` - returns global category navigation.
+
 - `getTotalItems` - returns total number of categories.
 
+- `getTree` - returns category tree (not used in favor of `facetGetters.getTree`)
 
 ```ts
 interface ExtendedCategoryGetters extends CategoryGetters<Collection> {
   getNavigation: (collectionList: CollectionList) => AgnosticCategoryNavigation[];
   getTotalItems: (collectionList: CollectionList) => number;
+  getTree: (category: Collection) => AgnosticCategoryTree
 }
 
 type AgnosticCategoryNavigation = {

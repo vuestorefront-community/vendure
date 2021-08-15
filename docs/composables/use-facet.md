@@ -7,36 +7,23 @@
 * products,
 * categories,
 * breadcrumbs.
-
-What makes it powerful is the ability to accept multiple filters, allowing to narrow down the results to a specific category, search term, etc.
-
-For more information about faceting, please refer to [this page](../composables/use-facet.md).
+* facets
 
 ## API
 
 `useFacet` contains the following properties:
 
-- `search` - function for searching and classifying records, allowing users to browse the catalog data. It accepts a single object as a parameter with following signature:
+* `search` - function for searching and classifying records, allowing users to browse the catalog data. It accepts a single object as a parameter with following signature:
 
-```ts
-interface AgnosticFacetSearchParams {
-  categorySlug?: string;
-  rootCatSlug?: string;
-  term?: string;
-  page?: number;
-  itemsPerPage?: number;
-  sort?: string;
-  filters?: Record<string, string[]>;
-  metadata?: any;
-  [x: string]: any;
-}
-```
+<https://www.vendure.io/docs/graphql-api/shop/input-types/#searchinput>
 
-- `result` - reactive data object containing the response from the backend.
+* `result` - reactive data object containing the response from the backend.
 
-- `loading` - reactive object containing information about the loading state of `search`.
+<https://www.vendure.io/docs/graphql-api/shop/object-types/#searchresponse>
 
-- `error` - reactive object containing the error message, if `search` failed for any reason.
+* `loading` - reactive object containing information about the loading state of `search`.
+
+* `error` - reactive object containing the error message, if `search` failed for any reason.
 
 ```ts
 interface UseFacetErrors {
@@ -45,32 +32,39 @@ interface UseFacetErrors {
 ```
 
 ## Getters
-Because the `result` property is a raw response with some additional properties, it's recommended to use `facetGetters` for accessing any data from it. It includes the following helper functions:
 
-- `getAll` - returns all available facets.
+* `getGrouped` - returns grouped facets by facet name.
 
-- `getGrouped` - returns grouped facets by facet name.
+* `getSortOptions` - returns available and currently selected sorting options.
 
-- `getCategoryTree` - return the tree of nested categories.
+* `getProducts` - returns products matching current filters.
 
-- `getSortOptions` - returns available and currently selected sorting options.
+* `getPagination` - returns pagination information.
 
-- `getProducts` - returns products matching current filters.
+* `getTree` - returns current category tree.
 
-- `getPagination` - returns pagination information.
+* `getBreadcrumbsFromSlug` - returns breadcrumbs from current slug.
 
-- `getBreadcrumbs` - returns breadcrumbs information.
+* `getAgnosticSearchResult` - returns agnostic search result.
 
+* `getCategoryTree` - return the tree of nested categories (not used in favor of `getTree`).
+
+* `getBreadcrumbs` - returns breadcrumbs information (not used in favor of `getBreadcrumbsFromSlug`).
+
+* `getAll` - TBA.
 
 ```ts
 interface FacetsGetters {
-  getAll: (searchData: SearchData, criteria?: string[]) => AgnosticFacet[];
-  getGrouped: (searchData: SearchData, criteria?: string[]) => AgnosticGroupedFacet[];
-  getCategoryTree: (searchData: SearchData) => AgnosticCategoryTree;
-  getSortOptions: (searchData: SearchData) => AgnosticSort;
-  getProducts: (searchData: SearchData) => ProductVariant[];
-  getPagination: (searchData: SearchData) => AgnosticPagination;
-  getBreadcrumbs: (searchData: SearchData) => AgnosticBreadcrumb[];
+  getAll: (searchData: FacetSearchResult<AgnosticSearchResult>, criteria?: string[]) => AgnosticFacet[];
+  getGrouped: (searchData: FacetSearchResult<AgnosticSearchResult>, criteria?: string[]) => AgnosticGroupedFacet[];
+  getCategoryTree: (searchData: FacetSearchResult<AgnosticSearchResult>) => AgnosticCategoryTree;
+  getSortOptions: (searchData: FacetSearchResult<AgnosticSearchResult>) => AgnosticSort;
+  getProducts: (searchData: FacetSearchResult<AgnosticSearchResult>) => ProductVariant[];
+  getPagination: (searchData: FacetSearchResult<AgnosticSearchResult>) => AgnosticPagination;
+  getBreadcrumbs: (searchData: FacetSearchResult<AgnosticSearchResult>) => AgnosticBreadcrumb[];
+  getTree: (category: Collection) => AgnosticCategoryTree | null;
+  getBreadcrumbsFromSlug: (searchResult: FacetSearchResult<AgnosticSearchResult>, slug: string) => AgnosticBreadcrumb[]
+  getAgnosticSearchResult: (searchResultValue: SearchResultValue<SearchResponse, SearchInput>) => FacetSearchResult<AgnosticSearchResult>;
 }
 
 interface AgnosticFacet {
@@ -104,7 +98,6 @@ interface AgnosticSort {
   selected: string;
 }
 
-type SearchData = FacetSearchResult<FacetResultsData>
 
 interface FacetSearchResult {
   data;
@@ -136,30 +129,22 @@ interface AgnosticBreadcrumb {
   link: string;
 }
 
-interface FacetResultsData {
-  products: ProductVariant[];
-  categories: Category[];
-  facets: Record<string, Filter>;
+type AgnosticSearchResult = {
+  products: SearchResult[];
+  categories: CollectionResult[];
+  facets: FacetValueResult[];
   total: number;
   perPageOptions: number[];
   itemsPerPage: number;
 }
 
-type ProductVariant = {
-  __typename?: "ProductVariant";
-  id: Scalars["Int"];
-  key?: Maybe<Scalars["String"]>;
-  sku?: Maybe<Scalars["String"]>;
-  prices?: Maybe<Array<ProductPrice>>;
-  price?: Maybe<ProductPrice>;
-  images: Array<Image>;
-  assets: Array<Asset>;
-  availability?: Maybe<ProductVariantAvailabilityWithChannels>;
-  attributesRaw: Array<RawProductAttribute>;
-  attributes: ProductType;
-  attributeList: Array<Attribute>;
+type SearchResultValue<SEARCH_DATA, SEARCH_INPUT> = {
+  data?: SEARCH_DATA;
+  input?: SEARCH_INPUT;
 }
 ```
+
+<https://www.vendure.io/docs/graphql-api/shop/object-types/#searchresponse>
 
 ## Example
 
@@ -171,20 +156,24 @@ setup(props, context) {
 
   onSSR(async () => {
     await search({
-      categorySlug: 'clothing',
-      sort: 'latest',
-      itemsPerPage: 10,
-      term: 'some search query'
+      collectionSlug: 'clothing',
+      sort: { price: 'ASC'},
+      take: 10,
+      groupByProduct: true, // To return only master variant
     });
   });
 
+    // Will be refactored to data mapper in theme folder
+    const searchResult = computed(() => facetGetters.getAgnosticSearchResult(result.value)); // Convert raw result to agnostic search result 
+
+    const sortBy = computed(() => facetGetters.getSortOptions(searchResult.value));
+    const facets = computed(() => facetGetters.getGrouped(searchResult.value));
+    const products = computed(() => facetGetters.getProducts(searchResult.value));
+
   return {
-    products: computed(() => facetGetters.getProducts(result.value)),
-    categoryTree: computed(() => facetGetters.getCategoryTree(result.value)),
-    breadcrumbs: computed(() => facetGetters.getBreadcrumbs(result.value)),
-    sortBy: computed(() => facetGetters.getSortOptions(result.value)),
-    facets: computed(() => facetGetters.getGrouped(result.value, ['color', 'size'])),
-    pagination: computed(() => facetGetters.getPagination(result.value)),
+    sortBy,
+    facets,
+    products,
     loading
   }
 }
