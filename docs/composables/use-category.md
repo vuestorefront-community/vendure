@@ -78,11 +78,11 @@ interface UseCategoryErrors {
 
 ```ts
 interface ExtendedCategoryGetters extends CategoryGetters<Collection> {
-  getNavigation: (collectionList: CollectionList) => CategoryNavigation[];
+  getNavigation: (collectionList: CollectionList) => AgnosticCategoryNavigation[];
   getTotalItems: (collectionList: CollectionList) => number;
 }
 
-type CategoryNavigation = {
+type AgnosticCategoryNavigation = {
   name: string;
   link: string;
 }
