@@ -3,7 +3,7 @@ import { categoryGetters } from './../../src/getters/categoryGetters';
 
 describe('[vendure-getters] category helpers', () => {
   it('returns navigation based on current categories', () => {
-    const navigation = categoryGetters.getNavigation(mockedCollectionList.items);
+    const navigation = categoryGetters.getNavigation(mockedCollectionList);
     expect(navigation).toStrictEqual([
       { name: 'Electronics', link: 'electronics'},
       { name: 'Home & Garden', link: 'home-garden'},
