@@ -165,7 +165,7 @@ export default {
       await search();
     });
 
-    const headerNavigation = computed(() => categoryGetters.getNavigation(categories.value.items));
+    const headerNavigation = computed(() => categoryGetters.getNavigation(categories.value));
 
     const closeSearch = () => {
       if (!isSearchOpen.value) return;

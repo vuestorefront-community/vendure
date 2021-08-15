@@ -56,6 +56,11 @@ export type AgnosticSearchResult = {
   itemsPerPage: number;
 }
 
+export type AgnosticCategoryNavigation = {
+  name: string;
+  link: string;
+}
+
 export type SearchResultValue<SEARCH_DATA, SEARCH_INPUT> = {
   data?: SEARCH_DATA;
   input?: SEARCH_INPUT;

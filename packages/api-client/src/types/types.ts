@@ -58,8 +58,3 @@ export type ProductParams = {
 export type ProductFilter = {
   master: boolean;
 };
-
-export type CategoryNavigation = {
-  name: string;
-  link: string;
-}
