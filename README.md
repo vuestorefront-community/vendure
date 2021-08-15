@@ -45,7 +45,7 @@ Want to contribute? Ping us on `vendure` channel on [our Discord](https://discor
 ## Resources
 
 - [Vue Storefront Documentation](https://docs.vuestorefront.io/v2/)
-- Vendure integration Documentation - WIP
+- Vendure integration Documentation - WIP (Currently only available in local environment)
 - [Community Chat](https://discord.vuestorefront.io)
 
 ## Support

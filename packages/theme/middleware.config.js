@@ -6,10 +6,10 @@ module.exports = {
         api: {
           uri: process.env.GRAPHQL_API,
           // to be used later with authentication
-          tokenMethod: 'cookie'
+          tokenMethod: process.env.TOKEN_METHOD
         },
-        currency: 'USD',
-        lang: 'en'
+        currency: process.env.CURRENCY,
+        lang: process.env.LANG
       }
     }
   }
