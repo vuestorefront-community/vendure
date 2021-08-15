@@ -21,6 +21,10 @@ module.exports = {
     }))
   },
   themeConfig: {
+    nav: [
+			{ text: 'Main Docs', link: 'https://docs.vuestorefront.io/v2/' },
+			{ text: 'Github', link: 'https://github.com/vuestorefront/vendure' }
+		],
     sidebar: [
       {
         title: 'Essentials',
@@ -39,6 +43,14 @@ module.exports = {
           ['/composables/use-product', 'useProduct'],
           ['/composables/use-category', 'useCategory'],
           ['/composables/use-facet', 'useFacet'],
+        ]
+      },
+      {
+        title: 'Theme',
+        collapsable: false,
+        children: [
+          ['/theme/getters', 'Getters'],
+          ['/theme/data-mappers', 'Data mappers'],
         ]
       },
     ]
