@@ -357,8 +357,10 @@ export default {
     const { changeFilters, isFacetColor } = useUiHelpers();
     const { toggleFilterSidebar } = useUiState();
 
+    // TODO: Refactor this to work on path rather than slugs because slug params are undefined so we have to filter them.
     const lastSlug = th.getLastSlugFromParams();
 
+    // TODO: Covert this getter into data mapper in theme
     const searchResult = computed(() => facetGetters.getAgnosticSearchResult(result.value));
 
     const sortBy = computed(() => facetGetters.getSortOptions(searchResult.value));
@@ -367,12 +369,13 @@ export default {
 
     const rawBreadcrumbs = computed(() => facetGetters.getBreadcrumbsFromSlug(searchResult.value, lastSlug));
     const breadcrumbs = computed(() => th.getFormattedBreadcrumbs(rawBreadcrumbs.value));
+    // TODO: Refactor this getter
     const rawPagination = computed(() => facetGetters.getPagination(searchResult.value));
-    console.log(rawPagination);
     const pagination = computed(() => ({
       page: parseInt(context.root.$route.query.page, 10) || 1,
       ...rawPagination.value
     }));
+    // TODO: Refactor this getter
     const rawCategoryTree = computed(() => searchResult.value?.data?.categories?.map(category => {
       const tree = facetGetters.getTree(category.collection);
       tree.isCurrent = th.doesUrlIncludesCategory(tree.slug);
