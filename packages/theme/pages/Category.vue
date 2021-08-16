@@ -337,7 +337,9 @@ import {
   SfProperty
 } from '@storefront-ui/vue';
 import { ref, computed, onMounted } from '@vue/composition-api';
-import { useCart, useWishlist, productGetters, useFacet, facetGetters } from '@vue-storefront/vendure';
+import { useCart, useWishlist, useFacet } from '@vue-storefront/vendure';
+import { facetGetters, productGetters } from '~/getters';
+import { getAgnosticSearchResult } from '~/mappers';
 import { useUiHelpers, useUiState } from '~/composables';
 import { getTreeWithoutEmptyCategories } from '~/helpers';
 import { onSSR } from '@vue-storefront/core';
@@ -359,7 +361,7 @@ export default {
 
     const lastSlug = th.getLastSlugFromParams();
 
-    const searchResult = computed(() => facetGetters.getAgnosticSearchResult(result.value));
+    const searchResult = computed(() => getAgnosticSearchResult(result.value));
 
     const sortBy = computed(() => facetGetters.getSortOptions(searchResult.value));
     const facets = computed(() => facetGetters.getGrouped(searchResult.value));
@@ -368,7 +370,6 @@ export default {
     const rawBreadcrumbs = computed(() => facetGetters.getBreadcrumbsFromSlug(searchResult.value, lastSlug));
     const breadcrumbs = computed(() => th.getFormattedBreadcrumbs(rawBreadcrumbs.value));
     const rawPagination = computed(() => facetGetters.getPagination(searchResult.value));
-    console.log(rawPagination);
     const pagination = computed(() => ({
       page: parseInt(context.root.$route.query.page, 10) || 1,
       ...rawPagination.value

@@ -103,9 +103,10 @@
 <script>
 import { SfHeader, SfImage, SfIcon, SfButton, SfBadge, SfSearchBar, SfOverlay, SfMenuItem, SfLink } from '@storefront-ui/vue';
 import { useUiState, useUiHelpers } from '~/composables';
-import { useCart, useWishlist, useUser, cartGetters, useCategory, categoryGetters } from '@vue-storefront/vendure';
+import { useCart, useWishlist, useUser, cartGetters, useCategory } from '@vue-storefront/vendure';
 import { computed, ref, onBeforeUnmount, watch } from '@vue/composition-api';
 import { onSSR } from '@vue-storefront/core';
+import { categoryGetters } from '~/getters';
 import LocaleSelector from '~/components/LocaleSelector';
 import SearchResults from '~/components/SearchResults';
 import { clickOutside } from '@storefront-ui/vue/src/utilities/directives/click-outside/click-outside-directive.js';
