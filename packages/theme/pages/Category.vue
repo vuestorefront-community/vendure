@@ -360,7 +360,6 @@ export default {
     // TODO: Refactor this to work on path rather than slugs because slug params are undefined so we have to filter them.
     const lastSlug = th.getLastSlugFromParams();
 
-    // TODO: Covert this getter into data mapper in theme
     const searchResult = computed(() => facetGetters.getAgnosticSearchResult(result.value));
 
     const sortBy = computed(() => facetGetters.getSortOptions(searchResult.value));
