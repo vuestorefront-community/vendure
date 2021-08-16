@@ -58,3 +58,8 @@ export type ProductParams = {
 export type ProductFilter = {
   master: boolean;
 };
+
+export type AddToCartParams = {
+  productVariantId: string;
+  quantity: number;
+}
