@@ -22,6 +22,7 @@ module.exports = {
   },
   themeConfig: {
     nav: [
+      { text: 'Vue Storefront', link: 'https://vuestorefront.io/' },
 			{ text: 'Main Docs', link: 'https://docs.vuestorefront.io/v2/' },
 			{ text: 'Github', link: 'https://github.com/vuestorefront/vendure' }
 		],
