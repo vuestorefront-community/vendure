@@ -46,14 +46,6 @@ module.exports = {
           ['/composables/use-facet', 'useFacet'],
         ]
       },
-      {
-        title: 'Theme',
-        collapsable: false,
-        children: [
-          ['/theme/getters', 'Getters'],
-          ['/theme/data-mappers', 'Data mappers'],
-        ]
-      },
     ]
   }
 }
