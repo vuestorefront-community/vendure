@@ -65,11 +65,13 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant, Cou
     };
   },
 
+  // FIXME: later change the coupon property to couponCode to work similarly to applyCoupon method
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  removeCoupon: async (context: Context, { currentCart, coupon, customQuery }) => {
-    console.log('Mocked: useCart.removeCoupon');
+  removeCoupon: async (context: Context, { coupon, customQuery }) => {
+    const response = await context.$vendure.api.removeCouponCode({ couponCode: coupon }, customQuery);
+
     return {
-      updatedCart: {} as Order
+      updatedCart: response?.data?.removeCouponCode
     };
   },
 

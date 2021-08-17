@@ -13,6 +13,9 @@ const context = {
       })),
       applyCouponCode: jest.fn(() => ({
         data: { applyCouponCode: 'apply coupon code' }
+      })),
+      removeCouponCode: jest.fn(() => ({
+        data: { removeCouponCode: 'remove coupon code' }
       }))
     }
   }
@@ -84,6 +87,19 @@ describe('[vendure-composables] useCart', () => {
       updatedCoupon: '1'
     });
     expect(context.$vendure.api.applyCouponCode).toBeCalledWith(
+      { couponCode: '1' },
+      customQuery
+    );
+  });
+
+  it('removes cart coupon', async () => {
+    const { removeCoupon } = useCart() as any;
+    const response = await removeCoupon(context, { coupon: '1' });
+
+    expect(response).toEqual({
+      updatedCart: 'remove coupon code'
+    });
+    expect(context.$vendure.api.removeCouponCode).toBeCalledWith(
       { couponCode: '1' },
       customQuery
     );

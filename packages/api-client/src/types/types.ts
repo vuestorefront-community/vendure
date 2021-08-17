@@ -14,7 +14,7 @@ export type CartItem = TODO;
 
 export type Category = TODO;
 
-export type Coupon = TODO;
+export type Coupon = string;
 
 export type FacetSearchCriteria = TODO;
 
