@@ -72,3 +72,7 @@ export type UpdateCartParams = {
   orderLineId: string;
   quantity: number;
 };
+
+export type ApplyCartCouponParams = {
+  couponCode: string;
+};
