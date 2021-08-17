@@ -25,12 +25,13 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant, Cou
 
   // TODO: update to use currentCart
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  addItem: async (context: Context, { product, quantity, customQuery }): Promise<Order> => {
+  addItem: async (context: Context, { currentCart, product, quantity, customQuery }): Promise<Order> => {
     const response = await context.$vendure.api.addToCart({ productVariantId: product._id, quantity }, customQuery);
 
     return response?.data?.addItemToOrder as Order;
   },
 
+  // TODO: update to use currentCart
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   removeItem: async (context: Context, { currentCart, product, customQuery }): Promise<Order> => {
     const response = await context.$vendure.api.removeFromCart({ orderLineId: product.id}, customQuery);
@@ -38,10 +39,12 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant, Cou
     return response?.data?.removeOrderLine as Order;
   },
 
+  // TODO: update to use currentCart
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updateItemQty: async (context: Context, { currentCart, product, quantity, customQuery }): Promise<Order> => {
-    console.log('Mocked: useCart.updateItemQty');
-    return Promise.resolve({}) as Promise<Order>;
+    const response = await context.$vendure.api.updateCartQuantity({ orderLineId: product.id, quantity }, customQuery);
+
+    return response?.data?.adjustOrderLine as Order;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
