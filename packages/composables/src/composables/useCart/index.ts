@@ -7,15 +7,17 @@ import type {
   Cart,
   CartItem,
   Coupon,
+  Order,
   UpdateOrderItemsResult
 } from '@vue-storefront/vendure-api';
 import { AgnosticProductVariant } from '../../types';
 
 const params: UseCartFactoryParams<Cart, CartItem, AgnosticProductVariant, Coupon> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  load: async (context: Context, { customQuery }) => {
-    console.log('Mocked: useCart.load');
-    return {};
+  load: async (context: Context, { customQuery }): Promise<Order> => {
+    const response = await context.$vendure.api.getCart(customQuery);
+
+    return response?.data?.activeOrder;
   },
 
   // TODO: update to use currentCart
