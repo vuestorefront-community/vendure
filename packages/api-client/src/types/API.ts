@@ -2,7 +2,7 @@ import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
 import { CollectionList, Order, Product, RemoveOrderItemsResult, SearchResponse, UpdateOrderItemsResult } from './GraphQL';
-import { AddToCartParams, CollectionParams, ProductParams, removeFromCartParams, SearchParams } from './types';
+import { AddToCartParams, CollectionParams, ProductParams, RemoveFromCartParams, SearchParams, UpdateCartParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
 export type MutationResponse<K extends string, V> = FetchResult<Record<K, V>>;
@@ -13,7 +13,8 @@ export type GetCategoryResponse = QueryResponse<'collections', CollectionList>;
 export type GetFacetResponse = QueryResponse<'search', SearchResponse>;
 export type GetCartResponse = QueryResponse<'activeOrder', Order>;
 export type AddToCartResponse = MutationResponse<'addItemToOrder', UpdateOrderItemsResult>;
-export type RemoveFromCartResponse = MutationResponse<'removeOrderLine', RemoveOrderItemsResult>
+export type RemoveFromCartResponse = MutationResponse<'removeOrderLine', RemoveOrderItemsResult>;
+export type UpdateCartQuantityResponse = MutationResponse<'adjustOrderLine', UpdateOrderItemsResult>;
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
@@ -21,5 +22,6 @@ export interface VendureApiMethods {
   getCategory(params: CollectionParams, customQuery?: CustomQuery): Promise<GetCategoryResponse>;
   getCart(customQuery?: CustomQuery): Promise<GetCartResponse>;
   addToCart(params: AddToCartParams, customQuery?: CustomQuery): Promise<AddToCartResponse>;
-  removeFromCart(params: removeFromCartParams, customQuery?: CustomQuery): Promise<RemoveFromCartResponse>;
+  removeFromCart(params: RemoveFromCartParams, customQuery?: CustomQuery): Promise<RemoveFromCartResponse>;
+  updateCartQuantity(params: UpdateCartParams, customQuery?: CustomQuery): Promise<UpdateCartQuantityResponse>;
 }

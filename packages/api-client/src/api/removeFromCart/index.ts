@@ -1,9 +1,9 @@
 import removeOrderLineMutation from './removeOrderLineMutation';
 import { CustomQuery } from '@vue-storefront/core';
 import gql from 'graphql-tag';
-import { Context, removeFromCartParams, RemoveFromCartResponse } from '../../types';
+import { Context, RemoveFromCartParams, RemoveFromCartResponse } from '../../types';
 
-const removeFromCart = async (context: Context, params: removeFromCartParams, customQuery?: CustomQuery): Promise<RemoveFromCartResponse> => {
+const removeFromCart = async (context: Context, params: RemoveFromCartParams, customQuery?: CustomQuery): Promise<RemoveFromCartResponse> => {
   const removeFromCartVariables = {
     ...params
   };

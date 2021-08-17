@@ -44,16 +44,16 @@ export type WishlistItem = TODO;
 
 export type CollectionParams = {
   options?: CollectionListOptions;
-}
+};
 
 export type SearchParams = {
   input?: SearchInput;
-}
+};
 
 export type ProductParams = {
   id?: string;
   slug?: string;
-}
+};
 
 export type ProductFilter = {
   master: boolean;
@@ -64,6 +64,11 @@ export type AddToCartParams = {
   quantity: number;
 };
 
-export type removeFromCartParams = {
+export type RemoveFromCartParams = {
   orderLineId: string;
-}
+};
+
+export type UpdateCartParams = {
+  orderLineId: string;
+  quantity: number;
+};
