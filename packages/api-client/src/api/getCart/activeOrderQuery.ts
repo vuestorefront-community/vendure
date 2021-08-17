@@ -4,7 +4,7 @@ import { CartFragment } from '../../fragments';
 export default gql`
   ${CartFragment}
 
-  query GetActiveOrder {
+  query activeOrder {
     activeOrder {
       ...Cart
     }

@@ -62,4 +62,8 @@ export type ProductFilter = {
 export type AddToCartParams = {
   productVariantId: string;
   quantity: number;
+};
+
+export type removeFromCartParams = {
+  orderLineId: string;
 }

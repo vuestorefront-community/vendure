@@ -6,13 +6,13 @@ import { Context, RequestDataStructure, GetCartResponse, Order } from '../../typ
 const getCart = async (context: Context, customQuery?: CustomQuery): Promise<GetCartResponse> => {
   const getCartVariables = {};
 
-  const { product } = context.extendQuery(
-    customQuery, { product: { query: activeOrderQuery, variables: getCartVariables } }
+  const { activeOrder } = context.extendQuery(
+    customQuery, { activeOrder: { query: activeOrderQuery, variables: getCartVariables } }
   );
 
   const request = await context.client.query<RequestDataStructure<'activeOrder', Order>>({
-    query: gql`${product.query}`,
-    variables: product.variables,
+    query: gql`${activeOrder.query}`,
+    variables: activeOrder.variables,
     fetchPolicy: 'no-cache'
   });
   return request;
