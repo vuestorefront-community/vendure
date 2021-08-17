@@ -73,6 +73,6 @@ export type UpdateCartParams = {
   quantity: number;
 };
 
-export type ApplyCartCouponParams = {
+export type CartCouponParams = {
   couponCode: string;
 };

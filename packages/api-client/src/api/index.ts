@@ -6,3 +6,4 @@ export { default as getCart } from './getCart';
 export { default as removeFromCart } from './removeFromCart';
 export { default as updateCartQuantity } from './updateCartQuantity';
 export { default as applyCartCoupon } from './applyCartCoupon';
+export { default as removeCartCoupon } from './removeCartCoupon';

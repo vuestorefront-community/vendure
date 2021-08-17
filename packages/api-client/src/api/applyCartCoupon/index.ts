@@ -1,9 +1,9 @@
 import applyCouponCodeMutation from './applyCouponCodeMutation';
 import { CustomQuery } from '@vue-storefront/core';
 import gql from 'graphql-tag';
-import { ApplyCartCouponParams, ApplyCouponCodeResponse, Context } from '../../types';
+import { CartCouponParams, ApplyCouponCodeResponse, Context } from '../../types';
 
-const applyCartCoupon = async (context: Context, params: ApplyCartCouponParams, customQuery?: CustomQuery): Promise<ApplyCouponCodeResponse> => {
+const applyCartCoupon = async (context: Context, params: CartCouponParams, customQuery?: CustomQuery): Promise<ApplyCouponCodeResponse> => {
   const applyCartCouponVariables = {
     ...params
   };
