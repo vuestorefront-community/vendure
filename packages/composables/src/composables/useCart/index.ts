@@ -47,18 +47,21 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant, Cou
     return response?.data?.adjustOrderLine as Order;
   },
 
+  // Not used in VSF for now
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   clear: async (context: Context, { currentCart }): Promise<Order> => {
     console.log('Mocked: useCart.clear');
     return Promise.resolve({}) as Promise<Order>;
   },
 
+  // TODO: update to use currentCart
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   applyCoupon: async (context: Context, { currentCart, couponCode, customQuery }) => {
-    console.log('Mocked: useCart.applyCoupon');
+    const response = await context.$vendure.api.applyCouponCode({ couponCode }, customQuery);
+
     return {
-      updatedCart: {} as Order,
-      updatedCoupon: {}
+      updatedCart: response?.data?.applyCouponCode as Order,
+      updatedCoupon: couponCode
     };
   },
 
