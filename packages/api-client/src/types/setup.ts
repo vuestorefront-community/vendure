@@ -8,19 +8,17 @@ export interface Storage {
   removeAll: () => void;
 }
 
-export type ConfigState = {
-  getCartId(): string;
-  setCartId(id: string): void;
-  getCustomerToken(): string;
-  setCustomerToken(token: string): void;
-  getStore(): string;
-  setStore(id: string): void;
+export type AuthMethods = {
+  getAuthCookie(): string;
+  setAuthCookie(token: string): void;
+  removeAuthCookie(): void;
 };
 
 export interface ClientConfig {
   api: {
       uri: string;
   }
+  auth: AuthMethods;
   currency: string;
   lang: string;
 }

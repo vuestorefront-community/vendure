@@ -7,54 +7,57 @@ import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { Logger } from '@vue-storefront/core';
 import { onError } from 'apollo-link-error';
 import { RetryLink } from 'apollo-link-retry';
-// import { setContext } from 'apollo-link-context';
+import { setContext } from 'apollo-link-context';
 import { handleRetry } from './linkHandlers';
 import { Config } from '../../types/setup';
+import { VENDURE_AUTH_TOKEN_NAME } from '../constants';
 
-const createErrorHandler = () => onError(({
-  graphQLErrors,
-  networkError
-}) => {
-  if (graphQLErrors) {
-    graphQLErrors.forEach(({
-      message,
-      locations,
-      path
-    }) => {
-      if (!message?.includes('Resource Owner Password Credentials Grant')) {
-        if (!locations) {
-          Logger.error(`[GraphQL error]: Message: ${message}, Path: ${path}`);
-          return;
+const createErrorHandler = () =>
+  onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors) {
+      graphQLErrors.forEach(({ message, locations, path }) => {
+        if (!message?.includes('Resource Owner Password Credentials Grant')) {
+          if (!locations) {
+            Logger.error(`[GraphQL error]: Message: ${message}, Path: ${path}`);
+            return;
+          }
+
+          const parsedLocations = locations.map(
+            ({ column, line }) => `[column: ${column}, line: ${line}]`
+          );
+
+          Logger.error(
+            `[GraphQL error]: Message: ${message}, Location: ${parsedLocations.join(
+              ', '
+            )}, Path: ${path}`
+          );
         }
+      });
+    }
 
-        const parsedLocations = locations.map(({
-          column,
-          line
-        }) => `[column: ${column}, line: ${line}]`);
-
-        Logger.error(`[GraphQL error]: Message: ${message}, Location: ${parsedLocations.join(', ')}, Path: ${path}`);
-      }
-    });
-  }
-
-  if (networkError) {
-    Logger.error(`[Network error]: ${networkError}`);
-  }
-});
+    if (networkError) {
+      Logger.error(`[Network error]: ${networkError}`);
+    }
+  });
 
 export const apolloLinkFactory = (
-  settings: Config
-  // handlers?: {
-  // authLink?: ApolloLink;
-  // }
+  settings: Config,
+  handlers?: {
+    authLink?: ApolloLink;
+  }
 ): ApolloLink => {
-  // TODO: Configure later when token management will be needed
-//   const baseAuthLink = handlers?.authLink || setContext((apolloReq, { headers }) => ({
-//     headers: {
-//       ...headers,
-//     },
-//   }));
-  const httpLink = createHttpLink({ uri: settings.api.uri, fetch });
+  const baseAuthLink =
+    handlers?.authLink ||
+    setContext((apolloReq, { headers }) => ({
+      headers: {
+        ...headers
+      }
+    }));
+  const httpLink = createHttpLink({
+    uri: settings.api.uri,
+    credentials: 'true',
+    fetch
+  });
 
   const onErrorLink = createErrorHandler();
 
@@ -63,15 +66,30 @@ export const apolloLinkFactory = (
     delay: () => 0
   });
 
+  const afterwareLink = new ApolloLink((operation, forward) => {
+    return forward(operation).map((response) => {
+      const context = operation.getContext();
+      if (!settings.auth.getAuthCookie()) {
+        const authCookie = context.response.headers.get(VENDURE_AUTH_TOKEN_NAME);
+        settings.auth.setAuthCookie(authCookie);
+      }
+
+      return response;
+    });
+  });
+
   return ApolloLink.from([
     onErrorLink,
     errorRetry,
-    httpLink
-    // baseAuthLink.concat(httpLink)
+    baseAuthLink,
+    afterwareLink.concat(httpLink)
   ]);
 };
 
-export const apolloClientFactory = (customOptions: Record<string, any>): ApolloClient<NormalizedCacheObject> => new ApolloClient({
-  cache: new InMemoryCache(),
-  ...customOptions
-});
+export const apolloClientFactory = (
+  customOptions: Record<string, any>
+): ApolloClient<NormalizedCacheObject> =>
+  new ApolloClient({
+    cache: new InMemoryCache(),
+    ...customOptions
+  });

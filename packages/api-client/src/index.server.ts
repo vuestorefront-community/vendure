@@ -1,11 +1,14 @@
-import { ApiClientExtension, apiClientFactory } from '@vue-storefront/core';
+import { apiClientFactory } from '@vue-storefront/core';
 import * as api from './api';
 import { ClientInstance, Config } from './types/setup';
 import { apolloClientFactory } from './helpers/vendureLink/graphQL';
 import { createVendureConnection } from './helpers/vendureLink';
 import { defaultSettings } from './helpers/apiClient/defaultSettings';
+import { extensions } from './extensions';
 
-const onCreate = (settings: Config): { config: Config, client: ClientInstance } => {
+const onCreate = (
+  settings: Config
+): { config: Config; client: ClientInstance } => {
   const config = {
     ...defaultSettings,
     ...settings
@@ -38,15 +41,10 @@ const onCreate = (settings: Config): { config: Config, client: ClientInstance } 
   };
 };
 
-// TODO: add extensions here later
-const extensions: ApiClientExtension[] = [];
-
 const { createApiClient } = apiClientFactory({
   onCreate,
   api,
   extensions
 });
 
-export {
-  createApiClient
-};
+export { createApiClient };
