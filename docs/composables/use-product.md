@@ -142,7 +142,7 @@ type AgnosticProductOptions = {
 
 ```js
 // search single product
-import { useProduct, productGetters } from '@vue-storefront/commercetools';
+import { useProduct, productGetters } from '@vue-storefront/vendure';
 import { onSSR } from '@vue-storefront/core'
 import { computed } from '@vue/composition-api';
 

@@ -31,8 +31,17 @@ export const CartFragment = `
             linePriceWithTax
             discountedLinePriceWithTax
             productVariant {
+                sku
                 id
                 name
+                options {
+                    id
+                    code
+                    name
+                    group {
+                        name
+                    } 
+                }
             }
             discounts {
                 amount
