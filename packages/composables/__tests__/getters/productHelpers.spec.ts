@@ -21,7 +21,7 @@ describe('[vendure-getters] product getters', () => {
   });
 
   it('returns price', () => {
-    expect(productGetters.getPrice(mockedProductVariant)).toEqual({ regular: 129900, special: 155880 });
+    expect(productGetters.getPrice(mockedProductVariant)).toEqual({ regular: 155880, special: 129900 });
   });
 
   it('returns gallery', () => {

@@ -35,7 +35,7 @@ describe('[vendure-composables] useCart', () => {
   it('adds to cart', async () => {
     const { addItem } = useCart() as any;
     const response = await addItem(context, {
-      product: { _id: 'product1' },
+      product: { _variantId: 'product1' },
       quantity: 3
     });
 
