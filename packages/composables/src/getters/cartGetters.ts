@@ -7,7 +7,7 @@ import {
   AgnosticAttribute
 } from '@vue-storefront/core';
 import type { Order, OrderLine } from '@vue-storefront/vendure-api';
-import { createPrice } from './_utils';
+import { createPrice } from '../helpers/_utils';
 
 interface ExtendedCartGetters extends CartGetters<Order, OrderLine> {
   getItemOptions: (cart: OrderLine, filterByAttributeName?: string[]) => AgnosticAttribute[]

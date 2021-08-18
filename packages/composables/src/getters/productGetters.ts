@@ -6,7 +6,7 @@ import {
 } from '@vue-storefront/core';
 import { ProductFilter, Product } from '@vue-storefront/vendure-api';
 import { AgnosticProductOptions, AgnosticProductVariant } from '../types';
-import { createPrice } from './_utils';
+import { createPrice } from '../helpers/_utils';
 
 interface ExtendedProductGetters extends ProductGetters<AgnosticProductVariant, ProductFilter> {
   getByFilters: (product: Product, filters?: ProductFilter) => AgnosticProductVariant[] | AgnosticProductVariant;

@@ -1,6 +1,6 @@
 import { mockedAllProductVariants, mockedOptions, mockedProduct, mockedProductVariant } from '../mocks';
 import { productGetters } from './../../src/getters/productGetters';
-import * as utils from './../../src/getters/_utils';
+import * as utils from './../../src/helpers/_utils';
 
 jest.spyOn(utils, 'createPrice').mockImplementation((price) => price);
 

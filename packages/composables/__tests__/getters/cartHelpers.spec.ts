@@ -1,6 +1,6 @@
 import { mockedCart } from '../mocks';
 import { cartGetters } from './../../src/getters/cartGetters';
-import * as utils from './../../src/getters/_utils';
+import * as utils from './../../src/helpers/_utils';
 
 jest.spyOn(utils, 'createPrice').mockImplementation((price) => price);
 const item = mockedCart.lines[0];
