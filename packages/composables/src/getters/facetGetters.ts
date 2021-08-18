@@ -57,6 +57,7 @@ const getSortOptions = (searchResult: FacetSearchResult<AgnosticSearchResult>): 
 const getProducts = (searchResult: FacetSearchResult<AgnosticSearchResult>): AgnosticProductVariant[] => {
   return searchResult?.data?.products?.length && searchResult.data.products.map(product => ({
     _id: product.productId,
+    _variantId: product.productVariantId,
     _description: product.description,
     _categoriesRef: product.collectionIds,
     name: product.productName,

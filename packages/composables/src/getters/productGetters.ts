@@ -24,8 +24,8 @@ const getSlug = (product: AgnosticProductVariant): string => {
 
 const getPrice = (product: AgnosticProductVariant): AgnosticPrice => {
   return {
-    regular: createPrice(product?.price?.original),
-    special: createPrice(product?.price?.current)
+    regular: createPrice(product?.price?.current),
+    special: createPrice(product?.price?.original)
   };
 };
 
