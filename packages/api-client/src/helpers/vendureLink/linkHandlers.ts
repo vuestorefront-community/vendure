@@ -16,6 +16,7 @@ export const handleRetry = () => (count: number, operation: { operationName: any
   return false;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const authLinkFactory = ({ auth }: {
   auth: AuthMethods;
 }) => setContext((apolloReq, { headers }) => {
