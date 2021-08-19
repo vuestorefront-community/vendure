@@ -63,11 +63,11 @@ interface UseProductErrors {
 
 - `getAttributes` - returns product attributes (not used in favor of `getOptions`).
 
-- `getFormattedPrice` - TBA.
+- `getFormattedPrice` - TBD.
 
-- `getTotalReviews` - TBA.
+- `getTotalReviews` - TBD.
 
-- `getAverageRating` - TBA.
+- `getAverageRating` - TBD.
 
 ```ts
 interface ExtendedProductGetters extends ProductGetters<AgnosticProductVariant {
