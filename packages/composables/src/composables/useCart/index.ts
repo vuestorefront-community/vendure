@@ -26,7 +26,8 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant, Cou
   // TODO: update to use currentCart
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addItem: async (context: Context, { currentCart, product, quantity, customQuery }): Promise<Order> => {
-    const response = await context.$vendure.api.addToCart({ productVariantId: product._variantId, quantity }, customQuery);
+    const productVariantId = product?._variantId || product?._id;
+    const response = await context.$vendure.api.addToCart({ productVariantId, quantity }, customQuery);
 
     return response?.data?.addItemToOrder as Order;
   },

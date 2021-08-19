@@ -10,7 +10,7 @@ import type { Order, OrderLine } from '@vue-storefront/vendure-api';
 import { createPrice } from '../helpers/_utils';
 
 interface ExtendedCartGetters extends CartGetters<Order, OrderLine> {
-  getItemOptions: (cart: OrderLine, filterByAttributeName?: string[]) => AgnosticAttribute[]
+  getItemOptions: (item: OrderLine, filterByAttributeName?: string[]) => AgnosticAttribute[]
 }
 
 const getItems = (cart: Order): OrderLine[] => {
