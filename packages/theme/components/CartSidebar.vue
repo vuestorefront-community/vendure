@@ -34,8 +34,8 @@
                 <template #configuration>
                   <div class="collected-product__properties">
                     <SfProperty
-                      v-for="(attribute, key) in cartGetters.getItemOptions(product)"
-                      :key="key"
+                      v-for="attribute in cartGetters.getItemOptions(product)"
+                      :key="`${attribute.label}-${attribute.value}`"
                       :name="attribute.label"
                       :value="attribute.value"
                     />
@@ -138,12 +138,11 @@ export default {
   },
   setup() {
     const { isCartSidebarOpen, toggleCartSidebar } = useUiState();
-    const { cart, removeItem, updateItemQty, load: loadCart, loading } = useCart();
+    const { cart, removeItem, updateItemQty, loading } = useCart();
     const { isAuthenticated } = useUser();
     const products = computed(() => cartGetters.getItems(cart.value));
     const totals = computed(() => cartGetters.getTotals(cart.value));
     const totalItems = computed(() => cartGetters.getTotalItems(cart.value));
-    loadCart();
 
     return {
       loading,

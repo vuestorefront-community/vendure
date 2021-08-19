@@ -220,7 +220,7 @@ interface AgnosticDiscount {
 
 ```js
 import { useCart, cartGetters } from '@vue-storefront/vendure';
-import { onSSR } from '@vue-storefront/core'
+import { onSSR } from '@vue-storefront/core';
 
 export default {
   setup () {

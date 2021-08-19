@@ -28,12 +28,6 @@ const getItemImage = (item: OrderLine): string => {
 };
 
 const getItemPrice = (item: OrderLine): AgnosticPrice => {
-  if (!item) {
-    return {
-      regular: 2,
-      special: 1
-    };
-  }
   return {
     regular: createPrice(item?.linePriceWithTax),
     special: createPrice(item?.discountedLinePrice)
@@ -49,12 +43,6 @@ const getItemSku = (item: OrderLine): string => {
 };
 
 const getTotals = (cart: Order): AgnosticTotals => {
-  if (!cart) {
-    return {
-      total: 10,
-      subtotal: 10
-    };
-  }
   return {
     total: createPrice(cart?.subTotal),
     subtotal: createPrice(cart?.subTotalWithTax)
