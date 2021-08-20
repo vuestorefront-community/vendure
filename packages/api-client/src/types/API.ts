@@ -1,8 +1,8 @@
 import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
-import { ApplyCouponCodeResult, CollectionList, Customer, Order, Product, RemoveOrderItemsResult, SearchResponse, UpdateOrderItemsResult } from './GraphQL';
-import { AddToCartParams, CartCouponParams, CollectionParams, ProductParams, RemoveFromCartParams, SearchParams, UpdateCartParams } from './types';
+import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, Customer, Order, Product, RemoveOrderItemsResult, SearchResponse, UpdateOrderItemsResult } from './GraphQL';
+import { AddToCartParams, CartCouponParams, CollectionParams, ProductParams, RemoveFromCartParams, SearchParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
 export type MutationResponse<K extends string, V> = FetchResult<Record<K, V>>;
@@ -18,6 +18,7 @@ export type RemoveFromCartResponse = MutationResponse<'removeOrderLine', RemoveO
 export type UpdateCartQuantityResponse = MutationResponse<'adjustOrderLine', UpdateOrderItemsResult>;
 export type ApplyCouponCodeResponse = MutationResponse<'applyCouponCode', ApplyCouponCodeResult>;
 export type RemoveCouponCodeResponse = MutationResponse<'removeCouponCode', Order>;
+export type UpdateAddressDetailsResponse = MutationResponse<'setOrderShippingAddress' | 'setOrderBilliingAddress', ActiveOrderResult>;
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
@@ -28,6 +29,7 @@ export interface VendureApiMethods {
   addToCart(params: AddToCartParams, customQuery?: CustomQuery): Promise<AddToCartResponse>;
   removeFromCart(params: RemoveFromCartParams, customQuery?: CustomQuery): Promise<RemoveFromCartResponse>;
   updateCartQuantity(params: UpdateCartParams, customQuery?: CustomQuery): Promise<UpdateCartQuantityResponse>;
-  applyCouponCode(params: CartCouponParams, customQuery?:CustomQuery): Promise<ApplyCouponCodeResponse>;
-  removeCouponCode(params: CartCouponParams, customQuery?:CustomQuery): Promise<RemoveCouponCodeResponse>;
+  applyCouponCode(params: CartCouponParams, customQuery?: CustomQuery): Promise<ApplyCouponCodeResponse>;
+  removeCouponCode(params: CartCouponParams, customQuery?: CustomQuery): Promise<RemoveCouponCodeResponse>;
+  updateAddressDetails(params: UpdateAddressDetailsParams, customQuery?: CustomQuery): Promise<UpdateAddressDetailsResponse>;
 }
