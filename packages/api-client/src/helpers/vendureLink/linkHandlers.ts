@@ -1,7 +1,6 @@
 import { Logger } from '@vue-storefront/core';
-// import { ApolloLink } from 'apollo-link';
-// import { setContext } from 'apollo-link-context';
-// import { ConfigState } from '../../types/setup';
+import { setContext } from 'apollo-link-context';
+import { AuthMethods } from '../../types/setup';
 
 export const handleRetry = () => (count: number, operation: { operationName: any; }, error: { result: { message: string; }; }): boolean => {
   if (count > 3) {
@@ -17,22 +16,21 @@ export const handleRetry = () => (count: number, operation: { operationName: any
   return false;
 };
 
-// TODO: Configure later when token management will be needed
-// export const authLinkFactory = ({ state }: {
-//   state: ConfigState;
-// }) => setContext((apolloReq, { headers }) => {
-//   Logger.debug('Apollo authLinkFactory', apolloReq.operationName);
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const authLinkFactory = ({ auth }: {
+  auth: AuthMethods;
+}) => setContext((apolloReq, { headers }) => {
+  Logger.debug('Apollo authLinkFactory', apolloReq.operationName);
+  const token: string = auth.getAuthCookie();
 
-//   const token: string = state.getCustomerToken();
+  if (token) {
+    Logger.debug('Apollo authLinkFactory, finished, token: ', token);
+  }
 
-//   if (token) {
-//     Logger.debug('Apollo authLinkFactory, finished, token: ', token);
-//   }
-
-//   return {
-//     headers: {
-//       ...headers,
-//       ...(token ? { authorization: `Bearer ${token}` } : {})
-//     }
-//   };
-// });
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : ''
+    }
+  };
+});

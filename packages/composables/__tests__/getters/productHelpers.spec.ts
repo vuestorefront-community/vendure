@@ -1,6 +1,6 @@
 import { mockedAllProductVariants, mockedOptions, mockedProduct, mockedProductVariant } from '../mocks';
 import { productGetters } from './../../src/getters/productGetters';
-import * as utils from './../../src/getters/_utils';
+import * as utils from './../../src/helpers/_utils';
 
 jest.spyOn(utils, 'createPrice').mockImplementation((price) => price);
 
@@ -21,7 +21,7 @@ describe('[vendure-getters] product getters', () => {
   });
 
   it('returns price', () => {
-    expect(productGetters.getPrice(mockedProductVariant)).toEqual({ regular: 129900, special: 155880 });
+    expect(productGetters.getPrice(mockedProductVariant)).toEqual({ regular: 155880, special: 129900 });
   });
 
   it('returns gallery', () => {

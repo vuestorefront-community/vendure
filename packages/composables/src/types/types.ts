@@ -25,6 +25,7 @@ export type useUserOrderSearchParams = TODO;
 
 export type AgnosticProductVariant = {
   _id: string,
+  _variantId?: string,
   _description: string,
   _categoriesRef: string[],
   name: string,

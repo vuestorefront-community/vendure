@@ -6,7 +6,7 @@ import {
 } from '@vue-storefront/core';
 import { ProductFilter, Product } from '@vue-storefront/vendure-api';
 import { AgnosticProductOptions, AgnosticProductVariant } from '../types';
-import { createPrice } from './_utils';
+import { createPrice } from '../helpers/_utils';
 
 interface ExtendedProductGetters extends ProductGetters<AgnosticProductVariant, ProductFilter> {
   getByFilters: (product: Product, filters?: ProductFilter) => AgnosticProductVariant[] | AgnosticProductVariant;
@@ -24,8 +24,8 @@ const getSlug = (product: AgnosticProductVariant): string => {
 
 const getPrice = (product: AgnosticProductVariant): AgnosticPrice => {
   return {
-    regular: createPrice(product?.price?.original),
-    special: createPrice(product?.price?.current)
+    regular: createPrice(product?.price?.current),
+    special: createPrice(product?.price?.original)
   };
 };
 

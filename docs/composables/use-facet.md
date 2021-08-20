@@ -51,7 +51,7 @@ interface UseFacetErrors {
 
 * `getBreadcrumbs` - returns breadcrumbs information (not used in favor of `getBreadcrumbsFromSlug`).
 
-* `getAll` - TBA.
+* `getAll` - TBD.
 
 ```ts
 interface FacetsGetters {

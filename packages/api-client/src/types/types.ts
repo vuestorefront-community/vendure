@@ -14,7 +14,7 @@ export type CartItem = TODO;
 
 export type Category = TODO;
 
-export type Coupon = TODO;
+export type Coupon = string;
 
 export type FacetSearchCriteria = TODO;
 
@@ -44,17 +44,35 @@ export type WishlistItem = TODO;
 
 export type CollectionParams = {
   options?: CollectionListOptions;
-}
+};
 
 export type SearchParams = {
   input?: SearchInput;
-}
+};
 
 export type ProductParams = {
   id?: string;
   slug?: string;
-}
+};
 
 export type ProductFilter = {
   master: boolean;
+};
+
+export type AddToCartParams = {
+  productVariantId: string;
+  quantity: number;
+};
+
+export type RemoveFromCartParams = {
+  orderLineId: string;
+};
+
+export type UpdateCartParams = {
+  orderLineId: string;
+  quantity: number;
+};
+
+export type CartCouponParams = {
+  couponCode: string;
 };
