@@ -18,7 +18,7 @@ export type RemoveFromCartResponse = MutationResponse<'removeOrderLine', RemoveO
 export type UpdateCartQuantityResponse = MutationResponse<'adjustOrderLine', UpdateOrderItemsResult>;
 export type ApplyCouponCodeResponse = MutationResponse<'applyCouponCode', ApplyCouponCodeResult>;
 export type RemoveCouponCodeResponse = MutationResponse<'removeCouponCode', Order>;
-export type UpdateAddressDetailsResponse = MutationResponse<'setOrderShippingAddress' | 'setOrderBilliingAddress', ActiveOrderResult>;
+export type UpdateAddressDetailsResponse = MutationResponse<'setOrderShippingAddress' | 'setOrderBillingAddress', ActiveOrderResult>;
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
