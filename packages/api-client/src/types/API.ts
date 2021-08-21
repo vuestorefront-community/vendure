@@ -1,7 +1,7 @@
 import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
-import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, Customer, Order, PaymentMethodQuote, Product, RemoveOrderItemsResult, SearchResponse, UpdateOrderItemsResult } from './GraphQL';
+import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, Customer, Order, Product, RemoveOrderItemsResult, SearchResponse, ShippingMethodQuote, UpdateOrderItemsResult } from './GraphQL';
 import { AddToCartParams, CartCouponParams, CollectionParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
@@ -13,7 +13,7 @@ export type GetCategoryResponse = QueryResponse<'collections', CollectionList>;
 export type GetFacetResponse = QueryResponse<'search', SearchResponse>;
 export type GetCartResponse = QueryResponse<'activeOrder', Order>;
 export type GetMeResponse = QueryResponse<'activeCustomer', Customer>;
-export type GetShippingMethodsResponse = QueryResponse<'eligiblePaymentMethods', PaymentMethodQuote[]>;
+export type GetShippingMethodsResponse = QueryResponse<'eligibleShippingMethods', ShippingMethodQuote[]>;
 export type AddToCartResponse = MutationResponse<'addItemToOrder', UpdateOrderItemsResult>;
 export type RemoveFromCartResponse = MutationResponse<'removeOrderLine', RemoveOrderItemsResult>;
 export type UpdateCartQuantityResponse = MutationResponse<'adjustOrderLine', UpdateOrderItemsResult>;

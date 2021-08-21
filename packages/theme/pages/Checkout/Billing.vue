@@ -7,6 +7,14 @@
       class="sf-heading--left sf-heading--no-underline title"
     />
     <form @submit.prevent="handleSubmit(handleFormSubmit)">
+      <SfCheckbox
+        v-e2e="'copy-address'"
+        :selected="sameAsShipping"
+        @change="handleCheckSameAddress"
+        :label="$t('Copy address data from shipping')"
+        name="copyShippingAddress"
+        class="form__element"
+      />
       <div class="form">
         <ValidationProvider
           name="firstName"
@@ -16,7 +24,7 @@
         >
           <SfInput
             v-e2e="'billing-firstName'"
-            v-model="form.firstName"
+            v-model="billingDetails.firstName"
             label="First name"
             name="firstName"
             class="form__element form__element--half"
@@ -33,7 +41,7 @@
         >
           <SfInput
             v-e2e="'billing-lastName'"
-            v-model="form.lastName"
+            v-model="billingDetails.lastName"
             label="Last name"
             name="lastName"
             class="form__element form__element--half form__element--half-even"
@@ -50,7 +58,7 @@
         >
           <SfInput
             v-e2e="'billing-streetName'"
-            v-model="form.streetName"
+            v-model="billingDetails.streetName"
             label="Street name"
             name="streetName"
             class="form__element form__element--half"
@@ -67,7 +75,7 @@
         >
           <SfInput
             v-e2e="'billing-apartment'"
-            v-model="form.apartment"
+            v-model="billingDetails.apartment"
             label="House/Apartment number"
             name="apartment"
             class="form__element form__element--half form__element--half-even"
@@ -84,7 +92,7 @@
         >
           <SfInput
             v-e2e="'billing-city'"
-            v-model="form.city"
+            v-model="billingDetails.city"
             label="City"
             name="city"
             class="form__element form__element--half"
@@ -99,7 +107,7 @@
         >
           <SfInput
             v-e2e="'billing-state'"
-            v-model="form.state"
+            v-model="billingDetails.state"
             label="State/Province"
             name="state"
             class="form__element form__element--half form__element--half-even"
@@ -113,7 +121,7 @@
         >
           <SfSelect
             v-e2e="'billing-country'"
-            v-model="form.country"
+            :value="billingDetails.country"
             label="Country"
             name="country"
             class="form__element form__element--half form__select sf-select--underlined"
@@ -138,7 +146,7 @@
         >
           <SfInput
             v-e2e="'billing-zipcode'"
-            v-model="form.postalCode"
+            v-model="billingDetails.postalCode"
             label="Zip-code"
             name="zipCode"
             class="form__element form__element--half form__element--half-even"
@@ -155,7 +163,7 @@
         >
           <SfInput
             v-e2e="'billing-phone'"
-            v-model="form.phone"
+            v-model="billingDetails.phone"
             label="Phone number"
             name="phone"
             class="form__element form__element--half"
@@ -198,17 +206,10 @@ import {
 } from '@storefront-ui/vue';
 import { ref } from '@vue/composition-api';
 import { onSSR } from '@vue-storefront/core';
-import { useBilling } from '@vue-storefront/vendure';
+import { useBilling, useShipping } from '@vue-storefront/vendure';
 import { required, min, digits } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
-import { mapAddressFormToOrderAddress } from '~/helpers';
-
-const COUNTRIES = [
-  { key: 'US', label: 'United States' },
-  { key: 'UK', label: 'United Kingdom' },
-  { key: 'IT', label: 'Italy' },
-  { key: 'PL', label: 'Poland' }
-];
+import { mapAddressFormToOrderAddress, mapOrderAddressToAddressForm, COUNTRIES } from '~/helpers';
 
 extend('required', {
   ...required,
@@ -236,7 +237,27 @@ export default {
     ValidationObserver
   },
   setup(props, context) {
-    const { load, save } = useBilling();
+    const { load, save, billing } = useBilling();
+    const { shipping: shippingDetails, load: loadShipping } = useShipping();
+    const billingDetails = ref(billing.value || {});
+    let oldBilling = null;
+
+    const sameAsShipping = ref(false);
+
+    const handleCheckSameAddress = async () => {
+      sameAsShipping.value = !sameAsShipping.value;
+      if (sameAsShipping.value) {
+        if (!shippingDetails.value) {
+          await loadShipping();
+        }
+        oldBilling = {...billingDetails.value};
+        billingDetails.value = {...mapOrderAddressToAddressForm(shippingDetails.value)};
+        return;
+      }
+
+      billingDetails.value = mapOrderAddressToAddressForm(oldBilling);
+    };
+
 
     const form = ref({
       firstName: '',
@@ -251,9 +272,10 @@ export default {
     });
 
     const handleFormSubmit = async () => {
-      const orderAddress = mapAddressFormToOrderAddress(form.value);
+      const orderAddress = mapAddressFormToOrderAddress(billingDetails.value);
       await save({ billingDetails: orderAddress });
       context.root.$router.push('/checkout/payment');
+      sameAsShipping.value = false;
     };
 
     onSSR(async () => {
@@ -263,7 +285,10 @@ export default {
     return {
       form,
       countries: COUNTRIES,
-      handleFormSubmit
+      handleFormSubmit,
+      sameAsShipping,
+      handleCheckSameAddress,
+      billingDetails
     };
   }
 };

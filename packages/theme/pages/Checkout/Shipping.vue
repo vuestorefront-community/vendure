@@ -181,7 +181,20 @@
       <VsfShippingProvider
         v-if="isFormSubmitted"
         @submit="$router.push('/checkout/billing')"
+        @shippingMethodSelected="displayBillingButton"
       />
+      <div class="form__action">
+        <SfButton
+          v-if="shouldDisplayButton"
+          v-e2e="'continue-to-billing'"
+          class="form__action-button"
+          type="button"
+          @click="$router.push(localePath({ name: 'billing' }))"
+          :disabled="!shouldDisplayButton || loadingShippingProvider"
+        >
+          {{ $t('Continue to billing') }}
+        </SfButton>
+        </div>
     </form>
   </ValidationObserver>
 </template>
@@ -195,17 +208,10 @@ import {
 } from '@storefront-ui/vue';
 import { ref } from '@vue/composition-api';
 import { onSSR } from '@vue-storefront/core';
-import { useShipping } from '@vue-storefront/vendure';
+import { useShipping, useShippingProvider } from '@vue-storefront/vendure';
 import { required, min, digits } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
-import { mapAddressFormToOrderAddress } from '~/helpers';
-
-const COUNTRIES = [
-  { key: 'US', label: 'United States' },
-  { key: 'UK', label: 'United Kingdom' },
-  { key: 'IT', label: 'Italy' },
-  { key: 'PL', label: 'Poland' }
-];
+import { mapAddressFormToOrderAddress, COUNTRIES } from '~/helpers';
 
 extend('required', {
   ...required,
@@ -231,9 +237,11 @@ export default {
     ValidationObserver,
     VsfShippingProvider: () => import('~/components/Checkout/VsfShippingProvider')
   },
-  setup () {
+  setup (_, { emit }) {
     const isFormSubmitted = ref(false);
     const { load, save, loading } = useShipping();
+    const { loading: loadingShippingProvider } = useShippingProvider();
+    const shouldDisplayButton = ref(false);
 
     const form = ref({
       firstName: '',
@@ -253,6 +261,11 @@ export default {
       isFormSubmitted.value = true;
     };
 
+    const displayBillingButton = async () => {
+      shouldDisplayButton.value = true
+      emit('shippingMethodSelected');
+    }
+
     onSSR(async () => {
       await load();
     });
@@ -262,7 +275,10 @@ export default {
       isFormSubmitted,
       form,
       countries: COUNTRIES,
-      handleFormSubmit
+      handleFormSubmit,
+      loadingShippingProvider,
+      displayBillingButton,
+      shouldDisplayButton
     };
   }
 };

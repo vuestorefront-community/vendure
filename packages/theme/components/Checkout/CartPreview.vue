@@ -32,8 +32,7 @@
       />
       <SfProperty
         :name="$t('Shipping')"
-        v-if="selectedShippingMethod && selectedShippingMethod.zoneRates"
-        :value="$n(getShippingMethodPrice(selectedShippingMethod, totals.total), 'currency')"
+        :value="$n(shippingCost, 'currency')"
         class="sf-property--full-width sf-property--large property"
       />
       <SfProperty
@@ -74,9 +73,9 @@ import {
   SfInput,
   SfCircleIcon
 } from '@storefront-ui/vue';
-import { computed, ref } from '@vue/composition-api';
-import { useCart, useShippingProvider, cartGetters } from '@vue-storefront/vendure';
-import { getShippingMethodPrice } from '~/helpers';
+import { computed, ref, watch } from '@vue/composition-api';
+import { useCart, cartGetters } from '@vue-storefront/vendure';
+import { getCalculatedPrice } from '~/helpers';
 
 export default {
   name: 'CartPreview',
@@ -89,9 +88,14 @@ export default {
     SfInput,
     SfCircleIcon
   },
-  setup () {
-    const { cart, removeItem, updateItemQty, applyCoupon } = useCart();
-    const { state } = useShippingProvider();
+  props: {
+    selectedShippingMethod: {
+      type: Object,
+      required: false,
+    }
+  },
+  setup (props) {
+    const { cart, removeItem, updateItemQty, applyCoupon, load } = useCart();
 
     const listIsHidden = ref(false);
     const promoCode = ref('');
@@ -101,6 +105,11 @@ export default {
     const totalItems = computed(() => cartGetters.getTotalItems(cart.value));
     const totals = computed(() => cartGetters.getTotals(cart.value));
     const discounts = computed(() => cartGetters.getDiscounts(cart.value));
+    const shippingCost = computed(() => getCalculatedPrice(cart?.value?.shipping));
+
+    watch(() => props.selectedShippingMethod, async (newVal, oldVal) => {
+      await load();
+    });
 
     return {
       discounts,
@@ -133,9 +142,10 @@ export default {
         }
       ],
 
-      selectedShippingMethod: computed(() => state.value && state.value.response && state.value.response.shippingMethod),
+      shippingCost,
       hasSpecialPrice: computed(() => totals.value.special > 0 && totals.value.special < totals.value.subtotal),
-      getShippingMethodPrice
+      getCalculatedPrice,
+      cart
     };
   }
 };

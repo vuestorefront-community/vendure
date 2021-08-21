@@ -4,14 +4,19 @@ import type { ShippingProvider, ShippingMethod } from '@vue-storefront/vendure-a
 const params: UseShippingProviderParams<ShippingProvider, ShippingMethod> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
-    console.log('Mocked: loadShippingProvider');
-    return {};
+    const response = await context.$vendure.api.getShippingMethods(customQuery);
+
+    return response?.data?.eligibleShippingMethods;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   save: async (context: Context, { shippingMethod, customQuery }) => {
     console.log('Mocked: saveShippingProvider');
     return {};
+  }
+
+  set: async (context: Context) => {
+    // Set Cart value to a new returned from setShippingMethod
   }
 };
 
