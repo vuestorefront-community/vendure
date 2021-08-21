@@ -9,3 +9,4 @@ export { default as applyCartCoupon } from './applyCartCoupon';
 export { default as removeCartCoupon } from './removeCartCoupon';
 export { default as getMe } from './getMe';
 export { default as updateAddressDetails } from './updateAddressDetails';
+export { default as getShippingMethods } from './getShippingMethods';
