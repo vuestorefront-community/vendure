@@ -2,7 +2,7 @@ import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
 import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, Customer, Order, PaymentMethodQuote, Product, RemoveOrderItemsResult, SearchResponse, UpdateOrderItemsResult } from './GraphQL';
-import { AddToCartParams, CartCouponParams, CollectionParams, ProductParams, RemoveFromCartParams, SearchParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
+import { AddToCartParams, CartCouponParams, CollectionParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
 export type MutationResponse<K extends string, V> = FetchResult<Record<K, V>>;
@@ -20,6 +20,7 @@ export type UpdateCartQuantityResponse = MutationResponse<'adjustOrderLine', Upd
 export type ApplyCouponCodeResponse = MutationResponse<'applyCouponCode', ApplyCouponCodeResult>;
 export type RemoveCouponCodeResponse = MutationResponse<'removeCouponCode', Order>;
 export type UpdateAddressDetailsResponse = MutationResponse<'setOrderShippingAddress' | 'setOrderBillingAddress', ActiveOrderResult>;
+export type SetShippingMethodResponse = MutationResponse<'setOrderShippingMethod', Order>;
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
@@ -34,4 +35,5 @@ export interface VendureApiMethods {
   applyCouponCode(params: CartCouponParams, customQuery?: CustomQuery): Promise<ApplyCouponCodeResponse>;
   removeCouponCode(params: CartCouponParams, customQuery?: CustomQuery): Promise<RemoveCouponCodeResponse>;
   updateAddressDetails(params: UpdateAddressDetailsParams, customQuery?: CustomQuery): Promise<UpdateAddressDetailsResponse>;
+  setShippingMethod(params: SetShippingMethodParams, customQuery?: CustomQuery): Promise<SetShippingMethodResponse>;
 }

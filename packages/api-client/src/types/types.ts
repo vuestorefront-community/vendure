@@ -81,3 +81,7 @@ export type UpdateAddressDetailsParams = {
   input: CreateAddressInput;
   type?: string;
 };
+
+export type SetShippingMethodParams = {
+  shippingMethodId: string;
+}
