@@ -12,8 +12,23 @@ export const AssetFragment = `
     }
 `;
 
+export const OrderAddressFragment = `
+    fragment OrderAddress on OrderAddress {
+        fullName
+        company
+        streetLine1
+        streetLine2
+        city
+        province
+        postalCode
+        country
+        phoneNumber
+    }
+`;
+
 export const CartFragment = `
     ${AssetFragment}
+    ${OrderAddressFragment}
 
     fragment Cart on Order {
         id
@@ -57,6 +72,12 @@ export const CartFragment = `
         total
         totalWithTax
         shipping
+        shippingAddress {
+            ...OrderAddress
+        }
+        billingAddress {
+            ...OrderAddress
+        }
         shippingWithTax
         shippingLines {
             priceWithTax
