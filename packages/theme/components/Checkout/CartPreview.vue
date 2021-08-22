@@ -73,7 +73,7 @@ import {
   SfInput,
   SfCircleIcon
 } from '@storefront-ui/vue';
-import { computed, ref, watch } from '@vue/composition-api';
+import { computed, ref } from '@vue/composition-api';
 import { useCart, cartGetters } from '@vue-storefront/vendure';
 import { getCalculatedPrice } from '~/helpers';
 
@@ -88,14 +88,8 @@ export default {
     SfInput,
     SfCircleIcon
   },
-  props: {
-    selectedShippingMethod: {
-      type: Object,
-      required: false
-    }
-  },
-  setup (props) {
-    const { cart, removeItem, updateItemQty, applyCoupon, load } = useCart();
+  setup () {
+    const { cart, removeItem, updateItemQty, applyCoupon } = useCart();
 
     const listIsHidden = ref(false);
     const promoCode = ref('');
@@ -106,10 +100,6 @@ export default {
     const totals = computed(() => cartGetters.getTotals(cart.value));
     const discounts = computed(() => cartGetters.getDiscounts(cart.value));
     const shippingCost = computed(() => getCalculatedPrice(cart?.value?.shipping));
-
-    watch(() => props.selectedShippingMethod, async () => {
-      await load();
-    });
 
     return {
       discounts,
@@ -144,8 +134,7 @@ export default {
 
       shippingCost,
       hasSpecialPrice: computed(() => totals.value.special > 0 && totals.value.special < totals.value.subtotal),
-      getCalculatedPrice,
-      cart
+      getCalculatedPrice
     };
   }
 };

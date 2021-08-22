@@ -13,7 +13,7 @@
             :key="key"
             :name="step"
           >
-            <nuxt-child @shippingMethodSelected="updateShippingInCartPreview"/>
+            <nuxt-child />
           </SfStep>
         </SfSteps>
         <nuxt-child v-else />
@@ -23,7 +23,7 @@
         class="checkout__aside desktop-only"
       >
         <transition name="fade">
-          <CartPreview key="order-summary" :selectedShippingMethod="selectedShippingMethod" />
+          <CartPreview key="order-summary" />
         </transition>
       </div>
     </div>
@@ -33,7 +33,7 @@
 
 import { SfSteps, SfButton } from '@storefront-ui/vue';
 import CartPreview from '~/components/Checkout/CartPreview';
-import { computed, ref } from '@vue/composition-api';
+import { computed } from '@vue/composition-api';
 
 const STEPS = {
   shipping: 'Shipping',
@@ -52,15 +52,10 @@ export default {
     const currentStep = computed(() => context.root.$route.path.split('/').pop());
     const currentStepIndex = computed(() => Object.keys(STEPS).findIndex(s => s === currentStep.value));
     const isThankYou = computed(() => currentStep.value === 'thank-you');
-    const selectedShippingMethod = ref(null);
 
     const handleStepClick = (stepIndex) => {
       const key = Object.keys(STEPS)[stepIndex];
       context.root.$router.push(`/checkout/${key}`);
-    };
-
-    const updateShippingInCartPreview = (shippingMethod) => {
-      selectedShippingMethod.value = shippingMethod;
     };
 
     return {
@@ -68,9 +63,7 @@ export default {
       STEPS,
       currentStepIndex,
       isThankYou,
-      currentStep,
-      updateShippingInCartPreview,
-      selectedShippingMethod
+      currentStep
     };
   }
 };
