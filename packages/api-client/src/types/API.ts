@@ -1,7 +1,7 @@
 import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
-import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, Order, PaymentInput, Product, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, UpdateOrderItemsResult } from './GraphQL';
+import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, Order, PaymentInput, PaymentMethodQuote, Product, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, UpdateOrderItemsResult } from './GraphQL';
 import { AddToCartParams, CartCouponParams, CollectionParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
@@ -14,6 +14,7 @@ export type GetFacetResponse = QueryResponse<'search', SearchResponse>;
 export type GetCartResponse = QueryResponse<'activeOrder', Order>;
 export type GetMeResponse = QueryResponse<'activeCustomer', Customer>;
 export type GetShippingMethodsResponse = QueryResponse<'eligibleShippingMethods', ShippingMethodQuote[]>;
+export type GetPaymentMethodsResponse = QueryResponse<'eligiblePaymentMethods', PaymentMethodQuote[]>;
 export type AddToCartResponse = MutationResponse<'addItemToOrder', UpdateOrderItemsResult>;
 export type RemoveFromCartResponse = MutationResponse<'removeOrderLine', RemoveOrderItemsResult>;
 export type UpdateCartQuantityResponse = MutationResponse<'adjustOrderLine', UpdateOrderItemsResult>;
@@ -32,6 +33,7 @@ export interface VendureApiMethods {
   getCart(customQuery?: CustomQuery): Promise<GetCartResponse>;
   getsMe(customQuery?: CustomQuery): Promise<GetMeResponse>;
   getShippingMethods(customQuery?: CustomQuery): Promise<GetShippingMethodsResponse>;
+  getPaymentMethods(customQuery?: CustomQuery): Promise<GetPaymentMethodsResponse>;
   addToCart(params: AddToCartParams, customQuery?: CustomQuery): Promise<AddToCartResponse>;
   removeFromCart(params: RemoveFromCartParams, customQuery?: CustomQuery): Promise<RemoveFromCartResponse>;
   updateCartQuantity(params: UpdateCartParams, customQuery?: CustomQuery): Promise<UpdateCartQuantityResponse>;
