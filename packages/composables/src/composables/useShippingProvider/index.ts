@@ -14,10 +14,6 @@ const params: UseShippingProviderParams<ShippingProvider, ShippingMethod> = {
     console.log('Mocked: saveShippingProvider');
     return {};
   }
-
-  set: async (context: Context) => {
-    // Set Cart value to a new returned from setShippingMethod
-  }
 };
 
 export const useShippingProvider = useShippingProviderFactory<ShippingProvider, ShippingMethod>(params);

@@ -101,7 +101,7 @@ export default {
   setup (props, { emit }) {
     const shippingMethods = ref([]);
     const { $vendure } = useVSFContext();
-    const { cart } = useCart();
+    const { cart, setCart } = useCart();
     const {
       state,
       load,
@@ -116,7 +116,8 @@ export default {
     });
 
     const selectShippingMethod = async shippingMethod => {
-      await $vendure.api.setShippingMethod({ shippingMethodId: shippingMethod.id })
+      const newOrder = await $vendure.api.setShippingMethod({ shippingMethodId: shippingMethod.id })
+      setCart(newOrder.data.setOrderShippingMethod);
       selectedShippingMethod.value = shippingMethod;
       emit('shippingMethodSelected', shippingMethod);
     };

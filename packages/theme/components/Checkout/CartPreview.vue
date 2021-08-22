@@ -37,7 +37,7 @@
       />
       <SfProperty
         :name="$t('Total')"
-        :value="$n(totals.subtotal, 'currency')"
+        :value="$n(totals.total, 'currency')"
         class="sf-property--full-width sf-property--large property-total"
       />
     </div>
