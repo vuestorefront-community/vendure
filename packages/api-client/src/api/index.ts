@@ -11,3 +11,4 @@ export { default as getMe } from './getMe';
 export { default as updateAddressDetails } from './updateAddressDetails';
 export { default as getShippingMethods } from './getShippingMethods';
 export { default as setShippingMethod } from './setShippingMethod';
+export { default as setPaymentMethod } from './setPaymentMethod';
