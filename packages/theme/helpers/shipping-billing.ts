@@ -40,7 +40,5 @@ export const mapOrderAddressToAddressForm = (orderAddress: OrderAddress): Addres
 };
 
 export const getCalculatedPrice = (price: number): number => {
-  if (!price) return;
-
-  return price / 100;
+  return price ? price / 100 : 0;
 };
