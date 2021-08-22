@@ -258,7 +258,6 @@ export default {
       billingDetails.value = mapOrderAddressToAddressForm(oldBilling);
     };
 
-
     const form = ref({
       firstName: '',
       lastName: '',

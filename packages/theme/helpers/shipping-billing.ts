@@ -1,5 +1,5 @@
-import { OrderAddress } from "~/../api-client/lib";
-import { COUNTRIES } from "./constants";
+import { OrderAddress } from '~/../api-client/lib';
+import { COUNTRIES } from './constants';
 
 interface AddressForm {
   firstName: string,
@@ -19,7 +19,7 @@ export const mapAddressFormToOrderAddress = (addressForm: AddressForm): OrderAdd
   city: addressForm.city,
   postalCode: addressForm.postalCode,
   countryCode: addressForm.country,
-  phoneNumber: addressForm.phone,
+  phoneNumber: addressForm.phone
 });
 
 export const mapOrderAddressToAddressForm = (orderAddress: OrderAddress): AddressForm => {
@@ -36,11 +36,11 @@ export const mapOrderAddressToAddressForm = (orderAddress: OrderAddress): Addres
     country: country?.key,
     postalCode: orderAddress?.postalCode,
     phone: orderAddress?.phoneNumber
-  }
-}
+  };
+};
 
 export const getCalculatedPrice = (price: number): number => {
   if (!price) return;
 
   return price / 100;
-}
+};

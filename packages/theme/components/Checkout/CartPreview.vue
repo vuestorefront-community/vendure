@@ -91,7 +91,7 @@ export default {
   props: {
     selectedShippingMethod: {
       type: Object,
-      required: false,
+      required: false
     }
   },
   setup (props) {
@@ -107,7 +107,7 @@ export default {
     const discounts = computed(() => cartGetters.getDiscounts(cart.value));
     const shippingCost = computed(() => getCalculatedPrice(cart?.value?.shipping));
 
-    watch(() => props.selectedShippingMethod, async (newVal, oldVal) => {
+    watch(() => props.selectedShippingMethod, async () => {
       await load();
     });
 

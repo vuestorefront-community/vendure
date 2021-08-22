@@ -61,7 +61,7 @@ export default {
 
     const updateShippingInCartPreview = (shippingMethod) => {
       selectedShippingMethod.value = shippingMethod;
-    }
+    };
 
     return {
       handleStepClick,

@@ -109,14 +109,14 @@ export default {
       loading: loadingShippingProvider
     } = useShippingProvider();
     const totals = computed(() => cartGetters.getTotals(cart.value));
-    const selectedShippingMethod = ref(null)
+    const selectedShippingMethod = ref(null);
 
     const error = reactive({
       loadMethods: null
     });
 
     const selectShippingMethod = async shippingMethod => {
-      const newOrder = await $vendure.api.setShippingMethod({ shippingMethodId: shippingMethod.id })
+      const newOrder = await $vendure.api.setShippingMethod({ shippingMethodId: shippingMethod.id });
       setCart(newOrder.data.setOrderShippingMethod);
       selectedShippingMethod.value = shippingMethod;
       emit('shippingMethodSelected', shippingMethod);

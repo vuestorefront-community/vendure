@@ -8,7 +8,7 @@ jest.mock('@vue-storefront/core', () => ({
 const context = {
   $vendure: {
     api: {
-        getShippingMethods: jest.fn(() => Promise.resolve({ data: { eligibleShippingMethods: mockedShippingMethods }}))
+      getShippingMethods: jest.fn(() => Promise.resolve({ data: { eligibleShippingMethods: mockedShippingMethods }}))
     }
   }
 };
