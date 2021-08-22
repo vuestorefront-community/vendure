@@ -1,7 +1,7 @@
 import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
-import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, Customer, Order, PaymentInput, Product, RemoveOrderItemsResult, SearchResponse, ShippingMethodQuote, UpdateOrderItemsResult } from './GraphQL';
+import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, Order, PaymentInput, Product, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, UpdateOrderItemsResult } from './GraphQL';
 import { AddToCartParams, CartCouponParams, CollectionParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
@@ -23,6 +23,7 @@ export type UpdateAddressDetailsResponse = MutationResponse<'setOrderShippingAdd
 export type SetShippingMethodResponse = MutationResponse<'setOrderShippingMethod', Order>;
 export type SetPaymentMethodResponse = MutationResponse<'setPaymentShippingMethod', Order>;
 export type TransitionOrderToState = MutationResponse<'transitionOrderToState', Order>;
+export type SetCustomerForOrderResponse = MutationResponse<'setCustomerForOrder', SetCustomerForOrderResult>;
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
@@ -40,4 +41,5 @@ export interface VendureApiMethods {
   setShippingMethod(params: SetShippingMethodParams, customQuery?: CustomQuery): Promise<SetShippingMethodResponse>;
   setPaymentMethod(params: PaymentInput, customQuery?: CustomQuery): Promise<SetPaymentMethodResponse>;
   transitionOrderToState(params: TransitionOrderToStateParams, customQuery?: CustomQuery): Promise<TransitionOrderToState>;
+  setCustomerForOrder(params: CreateCustomerInput, customQuery?: CustomQuery): Promise<SetCustomerForOrderResponse>;
 }

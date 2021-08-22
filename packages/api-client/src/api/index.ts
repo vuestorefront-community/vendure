@@ -13,3 +13,4 @@ export { default as getShippingMethods } from './getShippingMethods';
 export { default as setShippingMethod } from './setShippingMethod';
 export { default as setPaymentMethod } from './setPaymentMethod';
 export { default as transitionOrderToState } from './transitionOrderToState';
+export { default as setCustomerForOrder } from './setCustomerForOrder';
