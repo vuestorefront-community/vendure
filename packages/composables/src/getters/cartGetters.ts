@@ -14,7 +14,7 @@ interface ExtendedCartGetters extends CartGetters<Order, OrderLine> {
 }
 
 const getItems = (cart: Order): OrderLine[] => {
-  if (!cart.lines) return [];
+  if (!cart?.lines) return [];
 
   return cart?.lines;
 };

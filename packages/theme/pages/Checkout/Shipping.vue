@@ -263,7 +263,6 @@ export default {
 
     const displayBillingButton = async () => {
       shouldDisplayButton.value = true;
-      emit('shippingMethodSelected');
     };
 
     onSSR(async () => {
