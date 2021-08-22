@@ -9,6 +9,7 @@ const params: UseShippingProviderParams<ShippingProvider, ShippingMethod> = {
     return response?.data?.eligibleShippingMethods;
   },
 
+  // Not used as Vendure provides a mutation that we are triggering from the theme via setShippingMethod API Client function
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   save: async (context: Context, { shippingMethod, customQuery }) => {
     console.log('Mocked: saveShippingProvider');
