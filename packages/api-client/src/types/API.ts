@@ -2,7 +2,7 @@ import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
 import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, Customer, Order, PaymentInput, Product, RemoveOrderItemsResult, SearchResponse, ShippingMethodQuote, UpdateOrderItemsResult } from './GraphQL';
-import { AddToCartParams, CartCouponParams, CollectionParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
+import { AddToCartParams, CartCouponParams, CollectionParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
 export type MutationResponse<K extends string, V> = FetchResult<Record<K, V>>;
@@ -22,6 +22,7 @@ export type RemoveCouponCodeResponse = MutationResponse<'removeCouponCode', Orde
 export type UpdateAddressDetailsResponse = MutationResponse<'setOrderShippingAddress' | 'setOrderBillingAddress', ActiveOrderResult>;
 export type SetShippingMethodResponse = MutationResponse<'setOrderShippingMethod', Order>;
 export type SetPaymentMethodResponse = MutationResponse<'setPaymentShippingMethod', Order>;
+export type TransitionOrderToState = MutationResponse<'transitionOrderToState', Order>;
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
@@ -38,4 +39,5 @@ export interface VendureApiMethods {
   updateAddressDetails(params: UpdateAddressDetailsParams, customQuery?: CustomQuery): Promise<UpdateAddressDetailsResponse>;
   setShippingMethod(params: SetShippingMethodParams, customQuery?: CustomQuery): Promise<SetShippingMethodResponse>;
   setPaymentMethod(params: PaymentInput, customQuery?: CustomQuery): Promise<SetPaymentMethodResponse>;
+  transitionOrderToState(params: TransitionOrderToStateParams, customQuery?: CustomQuery): Promise<TransitionOrderToState>;
 }

@@ -85,3 +85,7 @@ export type UpdateAddressDetailsParams = {
 export type SetShippingMethodParams = {
   shippingMethodId: string;
 }
+
+export type TransitionOrderToStateParams = {
+  state: string;
+}
