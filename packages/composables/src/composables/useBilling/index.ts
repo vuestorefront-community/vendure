@@ -29,7 +29,13 @@ const params: UseBillingParams<OrderAddress, AddParams> = {
     // OrderAddress has one property optional which is required in CreateAddressInput.
     const response = await context.$vendure.api.updateAddressDetails({ input: billingDetails as CreateAddressInput, type: BILLING_TYPE }, customQuery);
 
-    return (response?.data?.setOrderBillingAddress as Order)?.billingAddress;
+    const newOrder = (response?.data?.setOrderBillingAddress as Order)?.billingAddress
+
+    if (newOrder) {
+      await context.$vendure.api.transitionOrderToState({ state: 'ArrangingPayment' });
+    }
+
+    return newOrder;
   }
 };
 
