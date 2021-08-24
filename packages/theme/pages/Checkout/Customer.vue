@@ -15,7 +15,7 @@
           slim
         >
           <SfInput
-            v-e2e="'shipping-firstName'"
+            v-e2e="'customer-firstName'"
             v-model="form.firstName"
             label="First name"
             name="firstName"
@@ -32,7 +32,7 @@
           slim
         >
           <SfInput
-            v-e2e="'shipping-lastName'"
+            v-e2e="'customer-lastName'"
             v-model="form.lastName"
             label="Last name"
             name="lastName"
@@ -73,17 +73,6 @@
           </SfButton>
         </div>
       </div>
-      <!-- <div class="form__action">
-        <SfButton
-          v-e2e="'continue-to-shipping'"
-          class="form__action-button"
-          type="button"
-          @click=""
-          :disabled="!(form.firstName && form.lastName && form.emailAddress)"
-        >
-          {{ $t('Continue to shipping') }}
-        </SfButton>
-        </div> -->
     </form>
   </ValidationObserver>
 </template>
