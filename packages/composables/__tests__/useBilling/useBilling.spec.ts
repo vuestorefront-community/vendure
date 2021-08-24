@@ -64,7 +64,6 @@ describe('[vendure-composables] useBilling', () => {
     const response = await load(context, {});
 
     expect(response).toBe(loadedBillingAddress);
-    expect(context.cart.load).not.toHaveBeenCalled();
   });
 
   it('saves billing details, updates cart and returns billing details', async () => {
