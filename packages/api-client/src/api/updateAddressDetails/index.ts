@@ -25,7 +25,7 @@ const updateAddressDetails = async (context: Context, params: UpdateAddressDetai
   }) as UpdateAddressDetailsResponse;
 
   if (isBilling && isCustomerDataFilled(request?.data?.setOrderBillingAddress as Order)) {
-    await transitionOrderToState(context, { state: ARRANGING_PAYMENT_STATE })
+    await transitionOrderToState(context, { state: ARRANGING_PAYMENT_STATE });
   }
 
   return request;

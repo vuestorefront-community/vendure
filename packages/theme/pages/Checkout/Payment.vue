@@ -144,7 +144,7 @@ export default {
 
     const updatePaymentMethod = method => {
       paymentMethod.value = method;
-    }
+    };
 
     const processOrder = async () => {
       const response = await $vendure.api.setPaymentMethod({
@@ -152,7 +152,7 @@ export default {
         metadata: {
           // Here goes metadata from the payment provider. For security reasons it should be handled on the server!
         }
-      })
+      });
 
       const orderId = response?.data?.addPaymentToOrder?.id;
 
