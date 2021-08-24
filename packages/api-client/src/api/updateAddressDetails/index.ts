@@ -3,7 +3,7 @@ import setOrderShippingAddressMutation from './setOrderShippingAddressMutation';
 import { CustomQuery } from '@vue-storefront/core';
 import gql from 'graphql-tag';
 import { Context, UpdateAddressDetailsParams, UpdateAddressDetailsResponse } from '../../types';
-import { BILLING_TYPE } from '../../helpers/constants';
+import { BILLING_TYPE, NO_CACHE_FETCH_POLICY } from '../../helpers/constants';
 
 const updateAddressDetails = async (context: Context, params: UpdateAddressDetailsParams, customQuery?: CustomQuery): Promise<UpdateAddressDetailsResponse> => {
   const { type, input } = params;
@@ -18,7 +18,7 @@ const updateAddressDetails = async (context: Context, params: UpdateAddressDetai
   const request = await context.client.mutate({
     mutation: gql`${updateAddressDetails.query}`,
     variables: updateAddressDetails.variables,
-    fetchPolicy: 'no-cache'
+    fetchPolicy: NO_CACHE_FETCH_POLICY
   }) as UpdateAddressDetailsResponse;
 
   return request;
