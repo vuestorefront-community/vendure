@@ -1,4 +1,4 @@
-import { mockedAllProductVariants, mockedOptions, mockedProduct, mockedProductVariant } from '../mocks';
+import { mockedAllProductVariants, mockedOptions, mockedProduct, mockedProductVariant } from '../__mocks__';
 import { productGetters } from './../../src/getters/productGetters';
 import * as utils from './../../src/helpers/_utils';
 
