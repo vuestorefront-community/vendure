@@ -21,6 +21,8 @@ describe('[vendure-api-client] getMe', () => {
 
     const { data } = await getMe(context);
 
-    expect(data).toBe('get me response');
+    const expectedGetMe = 'get me response';
+
+    expect(data).toBe(expectedGetMe);
   });
 });

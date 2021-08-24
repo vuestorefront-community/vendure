@@ -21,6 +21,8 @@ describe('[vendure-api-client] updateCartQuantity', () => {
 
     const { data } = await updateCartQuantity(context, { orderLineId: '1', quantity: 1});
 
-    expect(data).toBe('update cart quantity response');
+    const expectedUpdateCartQuantity = 'update cart quantity response';
+
+    expect(data).toBe(expectedUpdateCartQuantity);
   });
 });
