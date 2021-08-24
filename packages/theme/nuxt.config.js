@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import { getRoutes } from './routes';
 
 export default {
   server: {
@@ -131,6 +132,12 @@ export default {
         paths: [process.cwd()]
       })
     ]
+  },
+  router: {
+    extendRoutes(routes) {
+      getRoutes(`${__dirname}/_theme`)
+        .forEach((route) => routes.unshift(route));
+    }
   },
   build: {
     babel: {
