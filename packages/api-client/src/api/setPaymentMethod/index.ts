@@ -2,6 +2,7 @@ import addPaymentToOrderMutation from './addPaymentToOrderMutation';
 import { CustomQuery } from '@vue-storefront/core';
 import gql from 'graphql-tag';
 import { AddPaymentToOrderParams, Context, PaymentInput, SetShippingMethodResponse } from '../../types';
+import { NO_CACHE_FETCH_POLICY } from '../../helpers';
 
 const setPaymentMethod = async (context: Context, params: AddPaymentToOrderParams, customQuery?: CustomQuery): Promise<SetShippingMethodResponse> => {
   const setPaymentMethodVariables = {
@@ -10,7 +11,7 @@ const setPaymentMethod = async (context: Context, params: AddPaymentToOrderParam
       metadata: {
         // Here you would pass data from an external Payment Provided after successful payment process like payment id.
       }
-    } as PaymentInput,
+    } as PaymentInput
   };
 
   const { addPaymentToOrder } = context.extendQuery(
@@ -20,7 +21,7 @@ const setPaymentMethod = async (context: Context, params: AddPaymentToOrderParam
   const request = await context.client.mutate({
     mutation: gql`${addPaymentToOrder.query}`,
     variables: addPaymentToOrder.variables,
-    fetchPolicy: 'no-cache'
+    fetchPolicy: NO_CACHE_FETCH_POLICY
   }) as SetShippingMethodResponse;
 
   return request;

@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 import eligiblePaymentMethodsQuery from './eligiblePaymentMethodsQuery';
 import { CustomQuery } from '@vue-storefront/core';
 import { Context, RequestDataStructure, PaymentMethodQuote, GetPaymentMethodsResponse } from '../../types';
+import { NO_CACHE_FETCH_POLICY } from '../../helpers';
 
 const getPaymentMethods = async (context: Context, customQuery?: CustomQuery): Promise<GetPaymentMethodsResponse> => {
   const getPaymentMethodsVariables = {};
@@ -13,7 +14,7 @@ const getPaymentMethods = async (context: Context, customQuery?: CustomQuery): P
   const request = await context.client.query<RequestDataStructure<'eligiblePaymentMethods', PaymentMethodQuote[]>>({
     query: gql`${eligiblePaymentMethods.query}`,
     variables: eligiblePaymentMethods.variables,
-    fetchPolicy: 'no-cache'
+    fetchPolicy: NO_CACHE_FETCH_POLICY
   });
   return request;
 
