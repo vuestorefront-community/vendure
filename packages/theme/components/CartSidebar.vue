@@ -85,7 +85,7 @@
                 />
               </template>
             </SfProperty>
-            <nuxt-link :to="localePath({ name: 'shipping' })">
+            <nuxt-link :to="localePath({ name: 'customer' })">
               <SfButton
                 v-e2e="'go-to-checkout-btn'"
                 class="sf-button--full-width color-secondary"

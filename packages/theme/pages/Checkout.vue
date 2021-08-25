@@ -36,6 +36,7 @@ import CartPreview from '~/components/Checkout/CartPreview';
 import { computed } from '@vue/composition-api';
 
 const STEPS = {
+  customer: 'Customer',
   shipping: 'Shipping',
   billing: 'Billing',
   payment: 'Payment'

@@ -63,7 +63,7 @@
           class="sf-property--full-width sf-property--large summary__property-total"
         />
 
-        <VsfPaymentProvider @status="isPaymentReady = true"/>
+        <VsfPaymentProvider @paymentMethodSelected="updatePaymentMethod"/>
 
         <SfCheckbox v-e2e="'terms'" v-model="terms" name="terms" class="summary__terms">
           <template #label>
@@ -83,7 +83,7 @@
           </SfButton>
           <SfButton
             v-e2e="'make-an-order'"
-            :disabled="loading || !isPaymentReady || !terms"
+            :disabled="!paymentMethod || !terms"
             class="summary__action-button"
             @click="processOrder"
           >
@@ -111,7 +111,8 @@ import {
 } from '@storefront-ui/vue';
 import { onSSR } from '@vue-storefront/core';
 import { ref, computed } from '@vue/composition-api';
-import { useMakeOrder, useCart, cartGetters, orderGetters } from '@vue-storefront/vendure';
+import { useMakeOrder, useCart, cartGetters } from '@vue-storefront/vendure';
+import { useVSFContext } from '@vue-storefront/core';
 
 export default {
   name: 'ReviewOrder',
@@ -131,31 +132,42 @@ export default {
   },
   setup(props, context) {
     const { cart, load, setCart } = useCart();
-    const { order, make, loading } = useMakeOrder();
+    const { $vendure } = useVSFContext();
+    const { loading } = useMakeOrder();
 
-    const isPaymentReady = ref(false);
     const terms = ref(false);
+    const paymentMethod = ref(null);
 
     onSSR(async () => {
       await load();
     });
 
+    const updatePaymentMethod = method => {
+      paymentMethod.value = method;
+    };
+
     const processOrder = async () => {
-      await make();
-      const thankYouPath = { name: 'thank-you', query: { order: orderGetters.getId(order.value) }};
+      const response = await $vendure.api.setPaymentMethod({
+        method: paymentMethod?.value?.code,
+      });
+
+      const orderId = response?.data?.addPaymentToOrder?.id;
+
+      const thankYouPath = { name: 'thank-you', query: { order: orderId }};
       context.root.$router.push(context.root.localePath(thankYouPath));
       setCart(null);
     };
 
     return {
-      isPaymentReady,
       terms,
       loading,
       products: computed(() => cartGetters.getItems(cart.value)),
       totals: computed(() => cartGetters.getTotals(cart.value)),
       tableHeaders: ['Description', 'Quantity', 'Amount'],
       cartGetters,
-      processOrder
+      processOrder,
+      updatePaymentMethod,
+      paymentMethod
     };
   }
 };

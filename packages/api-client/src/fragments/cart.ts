@@ -35,6 +35,11 @@ export const CartFragment = `
         code
         state
         active
+        customer {
+            firstName
+            lastName
+            emailAddress
+        }
         lines {
             id
             featuredAsset {
