@@ -4,7 +4,7 @@ import { Context } from '../../src/types';
 
 describe('[vendure-api-client] setPaymentMethod', () => {
   it('sets payment method for certain order', async () => {
-    const givenVariables = { metadata: { id: '1' }, method: 'test' };
+    const givenVariables = { metadata: {}, method: 'test' };
 
     const context = {
       config: {},
@@ -19,8 +19,10 @@ describe('[vendure-api-client] setPaymentMethod', () => {
       extendQuery: (customQuery, args) => args
     } as unknown as Context;
 
-    const { data } = await setPaymentMethod(context, { metadata: { id: '1' }, method: 'test' });
+    const { data } = await setPaymentMethod(context, { method: 'test' });
 
-    expect(data).toBe('set payment method response');
+    const expectedSetPaymentResponse = 'set payment method response';
+
+    expect(data).toBe(expectedSetPaymentResponse);
   });
 });
