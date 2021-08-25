@@ -3,8 +3,7 @@ import setOrderShippingAddressMutation from './setOrderShippingAddressMutation';
 import { CustomQuery } from '@vue-storefront/core';
 import gql from 'graphql-tag';
 import { Context, Order, UpdateAddressDetailsParams, UpdateAddressDetailsResponse } from '../../types';
-import { ARRANGING_PAYMENT_STATE, BILLING_TYPE } from '../../helpers';
-import { isCustomerDataFilled } from '../../helpers';
+import { ARRANGING_PAYMENT_STATE, BILLING_TYPE, NO_CACHE_FETCH_POLICY, isCustomerDataFilled } from '../../helpers';
 import transitionOrderToState from '../transitionOrderToState';
 
 const updateAddressDetails = async (context: Context, params: UpdateAddressDetailsParams, customQuery?: CustomQuery): Promise<UpdateAddressDetailsResponse> => {
@@ -21,7 +20,7 @@ const updateAddressDetails = async (context: Context, params: UpdateAddressDetai
   const request = await context.client.mutate({
     mutation: gql`${updateAddressDetails.query}`,
     variables: updateAddressDetails.variables,
-    fetchPolicy: 'no-cache'
+    fetchPolicy: NO_CACHE_FETCH_POLICY
   }) as UpdateAddressDetailsResponse;
 
   if (isBilling && isCustomerDataFilled(request?.data?.setOrderBillingAddress as Order)) {

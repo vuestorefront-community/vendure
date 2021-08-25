@@ -21,6 +21,8 @@ describe('[vendure-api-client] getShippingMethods', () => {
 
     const { data } = await getShippingMethods(context);
 
-    expect(data).toBe('get shipping methods response');
+    const expectedGetShippingMethods = 'get shipping methods response';
+
+    expect(data).toBe(expectedGetShippingMethods);
   });
 });

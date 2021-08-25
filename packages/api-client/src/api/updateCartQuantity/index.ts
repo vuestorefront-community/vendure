@@ -2,6 +2,7 @@ import adjustOrderLineMutation from './adjustOrderLineMutation';
 import { CustomQuery } from '@vue-storefront/core';
 import gql from 'graphql-tag';
 import { Context, UpdateCartParams, UpdateCartQuantityResponse } from '../../types';
+import { NO_CACHE_FETCH_POLICY } from '../../helpers/constants';
 
 const updateCartQuantity = async (context: Context, params: UpdateCartParams, customQuery?: CustomQuery): Promise<UpdateCartQuantityResponse> => {
   const updateCartQuantityVariables = {
@@ -15,7 +16,7 @@ const updateCartQuantity = async (context: Context, params: UpdateCartParams, cu
   const request = await context.client.mutate({
     mutation: gql`${adjustOrderLine.query}`,
     variables: adjustOrderLine.variables,
-    fetchPolicy: 'no-cache'
+    fetchPolicy: NO_CACHE_FETCH_POLICY
   }) as UpdateCartQuantityResponse;
 
   return request;

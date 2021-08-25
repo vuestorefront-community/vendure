@@ -37,7 +37,9 @@ describe('[vendure-api-client] updateAddressDetails', () => {
 
     const { data } = await updateAddressDetails(context, { input: givenVariables.input });
 
-    expect(data).toBe('update shipping details response');
+    const expectedShippingDetails = 'update shipping details response';
+
+    expect(data).toBe(expectedShippingDetails);
   });
 
   it('updates billing details', async () => {
@@ -72,6 +74,8 @@ describe('[vendure-api-client] updateAddressDetails', () => {
 
     const { data } = await updateAddressDetails(context, { input: givenVariables.input, type: BILLING_TYPE });
 
-    expect(data).toBe('update billing details response');
+    const expectedBillingDetails = 'update billing details response';
+
+    expect(data).toBe(expectedBillingDetails);
   });
 });

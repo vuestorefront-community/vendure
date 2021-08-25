@@ -1,4 +1,4 @@
-import { mockedCart } from '../mocks';
+import { mockedCart } from '../__mocks__';
 import { cartGetters } from './../../src/getters/cartGetters';
 import * as utils from './../../src/helpers/_utils';
 

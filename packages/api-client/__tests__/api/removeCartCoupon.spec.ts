@@ -21,6 +21,8 @@ describe('[vendure-api-client] removeCartCoupon', () => {
 
     const { data } = await removeCartCoupon(context, { couponCode: '1'});
 
-    expect(data).toBe('remove cart coupon response');
+    const expectedRemoveCartCoupon = 'remove cart coupon response';
+
+    expect(data).toBe(expectedRemoveCartCoupon);
   });
 });

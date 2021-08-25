@@ -1,5 +1,5 @@
 import { useShippingProvider } from '../../src/composables/useShippingProvider';
-import { mockedShippingMethods } from '../mocks';
+import { mockedShippingMethods } from '../__mocks__';
 
 jest.mock('@vue-storefront/core', () => ({
   useShippingProviderFactory: (params) => () => params

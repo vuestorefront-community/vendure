@@ -21,6 +21,8 @@ describe('[vendure-api-client] addToCart', () => {
 
     const { data } = await addToCart(context, { productVariantId: '1', quantity: 1});
 
-    expect(data).toBe('add to cart response');
+    const expectedAddToCart = 'add to cart response';
+
+    expect(data).toBe(expectedAddToCart);
   });
 });

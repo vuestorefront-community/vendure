@@ -23,6 +23,8 @@ describe('[vendure-api-client] getCategory', () => {
 
     const { data } = await getCategory(context, { options: {}});
 
-    expect(data).toBe('category response');
+    const expectedGetCategory = 'category response';
+
+    expect(data).toBe(expectedGetCategory);
   });
 });

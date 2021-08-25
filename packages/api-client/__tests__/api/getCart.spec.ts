@@ -21,6 +21,8 @@ describe('[vendure-api-client] getCart', () => {
 
     const { data } = await getCart(context, {});
 
-    expect(data).toBe('get cart response');
+    const expectedGetCartResponse = 'get cart response';
+
+    expect(data).toBe(expectedGetCartResponse);
   });
 });
