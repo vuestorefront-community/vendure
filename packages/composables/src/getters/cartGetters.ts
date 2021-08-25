@@ -44,7 +44,7 @@ const getItemSku = (item: OrderLine): string => {
 
 const getTotals = (cart: Order): AgnosticTotals => {
   return {
-    total: createPrice(cart?.subTotal),
+    total: createPrice(cart?.totalWithTax),
     subtotal: createPrice(cart?.subTotalWithTax)
   };
 };

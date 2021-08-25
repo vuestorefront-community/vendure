@@ -1,5 +1,5 @@
 import { useProduct } from '../../src//composables/useProduct';
-import { mockedProduct } from '../mocks';
+import { mockedProduct } from '../__mocks__';
 
 jest.mock('@vue-storefront/core', () => ({
   useProductFactory: (params) => () => params

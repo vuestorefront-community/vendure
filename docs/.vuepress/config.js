@@ -46,6 +46,9 @@ module.exports = {
           ['/composables/use-category', 'useCategory'],
           ['/composables/use-facet', 'useFacet'],
           ['/composables/use-cart', 'useCart'],
+          ['/composables/use-billing', 'useBilling'],
+          ['/composables/use-shipping', 'useShipping'],
+          ['/composables/use-shipping-provider', 'useShippingProvider'],
         ]
       },
     ]

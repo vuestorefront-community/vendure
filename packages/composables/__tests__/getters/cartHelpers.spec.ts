@@ -1,4 +1,4 @@
-import { mockedCart } from '../mocks';
+import { mockedCart } from '../__mocks__';
 import { cartGetters } from './../../src/getters/cartGetters';
 import * as utils from './../../src/helpers/_utils';
 
@@ -31,7 +31,7 @@ describe('[vendure-getters] cart getters', () => {
   });
 
   it('returns totals', () => {
-    expect(cartGetters.getTotals(mockedCart)).toEqual({ total: 231094, subtotal: 277312 });
+    expect(cartGetters.getTotals(mockedCart)).toEqual({ total: 277312, subtotal: 277312 });
   });
 
   it('returns total items', () => {

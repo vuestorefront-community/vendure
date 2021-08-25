@@ -1,4 +1,4 @@
-import { CollectionListOptions, SearchInput } from './GraphQL';
+import { CollectionListOptions, CreateAddressInput, SearchInput } from './GraphQL';
 
 export type TODO = unknown;
 
@@ -76,3 +76,12 @@ export type UpdateCartParams = {
 export type CartCouponParams = {
   couponCode: string;
 };
+
+export type UpdateAddressDetailsParams = {
+  input: CreateAddressInput;
+  type?: string;
+};
+
+export type SetShippingMethodParams = {
+  shippingMethodId: string;
+}

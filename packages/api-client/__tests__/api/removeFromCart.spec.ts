@@ -21,6 +21,8 @@ describe('[vendure-api-client] removeFromCart', () => {
 
     const { data } = await removeFromCart(context, { orderLineId: '1'});
 
-    expect(data).toBe('remove from cart response');
+    const expectedRemoveFromCart = 'remove from cart response';
+
+    expect(data).toBe(expectedRemoveFromCart);
   });
 });

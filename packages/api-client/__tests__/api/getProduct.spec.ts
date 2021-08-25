@@ -24,6 +24,8 @@ describe('[vendure-api-client] getProduct', () => {
 
     const { data } = await getProduct(context, { id: '1', slug: 'laptop' });
 
-    expect(data).toBe('product response');
+    const expectedGetProduct = 'product response';
+
+    expect(data).toBe(expectedGetProduct);
   });
 });

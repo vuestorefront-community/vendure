@@ -32,13 +32,12 @@
       />
       <SfProperty
         :name="$t('Shipping')"
-        v-if="selectedShippingMethod && selectedShippingMethod.zoneRates"
-        :value="$n(getShippingMethodPrice(selectedShippingMethod, totals.total), 'currency')"
+        :value="$n(shippingCost, 'currency')"
         class="sf-property--full-width sf-property--large property"
       />
       <SfProperty
         :name="$t('Total')"
-        :value="$n(totals.subtotal, 'currency')"
+        :value="$n(totals.total, 'currency')"
         class="sf-property--full-width sf-property--large property-total"
       />
     </div>
@@ -75,8 +74,8 @@ import {
   SfCircleIcon
 } from '@storefront-ui/vue';
 import { computed, ref } from '@vue/composition-api';
-import { useCart, useShippingProvider, cartGetters } from '@vue-storefront/vendure';
-import { getShippingMethodPrice } from '~/helpers';
+import { useCart, cartGetters } from '@vue-storefront/vendure';
+import { getCalculatedPrice } from '~/helpers';
 
 export default {
   name: 'CartPreview',
@@ -91,7 +90,6 @@ export default {
   },
   setup () {
     const { cart, removeItem, updateItemQty, applyCoupon } = useCart();
-    const { state } = useShippingProvider();
 
     const listIsHidden = ref(false);
     const promoCode = ref('');
@@ -101,6 +99,7 @@ export default {
     const totalItems = computed(() => cartGetters.getTotalItems(cart.value));
     const totals = computed(() => cartGetters.getTotals(cart.value));
     const discounts = computed(() => cartGetters.getDiscounts(cart.value));
+    const shippingCost = computed(() => getCalculatedPrice(cart?.value?.shipping));
 
     return {
       discounts,
@@ -133,9 +132,9 @@ export default {
         }
       ],
 
-      selectedShippingMethod: computed(() => state.value && state.value.response && state.value.response.shippingMethod),
+      shippingCost,
       hasSpecialPrice: computed(() => totals.value.special > 0 && totals.value.special < totals.value.subtotal),
-      getShippingMethodPrice
+      getCalculatedPrice
     };
   }
 };

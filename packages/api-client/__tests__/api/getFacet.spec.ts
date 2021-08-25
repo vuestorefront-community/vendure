@@ -21,6 +21,8 @@ describe('[vendure-api-client] getFacet', () => {
 
     const { data } = await getFacet(context, {});
 
-    expect(data).toBe('facet response');
+    const expectedGetFacet = 'facet response';
+
+    expect(data).toBe(expectedGetFacet);
   });
 });

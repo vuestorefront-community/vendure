@@ -21,6 +21,8 @@ describe('[vendure-api-client] applyCartCoupon', () => {
 
     const { data } = await applyCartCoupon(context, { couponCode: '1'});
 
-    expect(data).toBe('apply cart coupon response');
+    const expectedApplyCoupon = 'apply cart coupon response';
+
+    expect(data).toBe(expectedApplyCoupon);
   });
 });

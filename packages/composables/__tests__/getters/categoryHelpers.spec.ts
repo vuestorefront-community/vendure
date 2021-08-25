@@ -1,4 +1,4 @@
-import { mockedCollectionList } from '../mocks';
+import { mockedCollectionList } from '../__mocks__';
 import { categoryGetters } from './../../src/getters/categoryGetters';
 
 describe('[vendure-getters] category helpers', () => {
