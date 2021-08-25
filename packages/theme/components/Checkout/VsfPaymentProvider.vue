@@ -43,8 +43,9 @@ import {
   SfButton,
   SfRadio
 } from '@storefront-ui/vue';
-import { ref } from '@vue/composition-api';
+import { ref, onMounted } from '@vue/composition-api';
 import { usePaymentProviderMock } from '@/composables/usePaymentProviderMock';
+import { useVSFContext } from '@vue-storefront/core';
 
 export default {
   name: 'VsfPaymentProvider',
@@ -53,21 +54,23 @@ export default {
     SfButton,
     SfRadio
   },
-  setup () {
+  setup (_, { emit }) {
     const { status } = usePaymentProviderMock();
     const selectedPaymentMethod = ref({});
-    const paymentMethods = ref([
-      {
-        id: 'mocked-id',
-        name: 'Cash on delivery',
-        description: ''
-      }
-    ]);
+    const { $vendure } = useVSFContext();
+    const paymentMethods = ref([]);
 
-    const selectPaymentMethod = paymentMethod => {
+    const selectPaymentMethod = async (paymentMethod) => {
       selectedPaymentMethod.value = paymentMethod;
+      emit('paymentMethodSelected', paymentMethod);
       status.value = true;
     };
+
+    onMounted(async () => {
+      const response = await $vendure.api.getPaymentMethods();
+
+      paymentMethods.value = response?.data?.eligiblePaymentMethods;
+    });
 
     return {
       paymentMethods,

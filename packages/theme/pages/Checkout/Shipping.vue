@@ -237,7 +237,7 @@ export default {
     ValidationObserver,
     VsfShippingProvider: () => import('~/components/Checkout/VsfShippingProvider')
   },
-  setup (_, { emit }) {
+  setup () {
     const isFormSubmitted = ref(false);
     const { load, save, loading } = useShipping();
     const { loading: loadingShippingProvider } = useShippingProvider();
@@ -263,7 +263,6 @@ export default {
 
     const displayBillingButton = async () => {
       shouldDisplayButton.value = true;
-      emit('shippingMethodSelected');
     };
 
     onSSR(async () => {
