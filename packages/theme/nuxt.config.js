@@ -67,7 +67,8 @@ export default {
             apiClient: '@vue-storefront/vendure-api',
             composables: '@vue-storefront/vendure'
           }
-        }
+        },
+        routes: false
       }
     ],
     // @core-development-only-end
