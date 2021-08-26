@@ -1,6 +1,6 @@
 import { ApiClientExtension } from '@vue-storefront/core';
 import { VENDURE_AUTH_TOKEN_NAME } from '../helpers/constants';
-import { cookieOptions } from '../helpers/cookie';
+import { cookieOptions } from '../helpers';
 
 export const tokenExtension: ApiClientExtension = {
   name: 'tokenExtension',
