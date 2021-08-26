@@ -20,7 +20,7 @@ const params: UseUserFactoryParams<any, UpdateParams, RegisterParams> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   logOut: async (context: Context) => {
-    console.log('Mocked: useUser.logOut');
+    await context.$vendure.api.logout();
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
