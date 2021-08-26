@@ -16,3 +16,4 @@ export { default as setPaymentMethod } from './setPaymentMethod';
 export { default as transitionOrderToState } from './transitionOrderToState';
 export { default as setCustomerForOrder } from './setCustomerForOrder';
 export { default as registerCustomerAccount } from './registerCustomerAccount';
+export { default as login } from './login';

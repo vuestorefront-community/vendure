@@ -3,7 +3,7 @@ import registerCustomerAccountMutation from '../../src/api/registerCustomerAccou
 import { Context } from '../../src/types';
 
 describe('[vendure-api-client] registerCustomerAccount', () => {
-  it('apply coupon to current cart', async () => {
+  it('register customer account', async () => {
     const givenVariables = { input: { emailAddress: 'john.doe@gmail.com' }};
 
     const context = {

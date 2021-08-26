@@ -1,8 +1,8 @@
 import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
-import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, Order, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, UpdateOrderItemsResult } from './GraphQL';
-import { AddPaymentToOrderParams, AddToCartParams, CartCouponParams, CollectionParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
+import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, NativeAuthenticationResult, Order, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, UpdateOrderItemsResult } from './GraphQL';
+import { AddPaymentToOrderParams, AddToCartParams, CartCouponParams, CollectionParams, LoginParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
 export type MutationResponse<K extends string, V> = FetchResult<Record<K, V>>;
@@ -26,13 +26,14 @@ export type SetPaymentMethodResponse = MutationResponse<'setPaymentShippingMetho
 export type TransitionOrderToState = MutationResponse<'transitionOrderToState', Order>;
 export type SetCustomerForOrderResponse = MutationResponse<'setCustomerForOrder', SetCustomerForOrderResult>;
 export type RegisterCustomerAccountResponse = MutationResponse<'registerCustomerAccount', RegisterCustomerAccountResult>;
+export type LoginResponse = MutationResponse<'login', NativeAuthenticationResult>;
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
   getFacet(params: SearchParams, customQuery?: CustomQuery): Promise<GetFacetResponse>;
   getCategory(params: CollectionParams, customQuery?: CustomQuery): Promise<GetCategoryResponse>;
   getCart(customQuery?: CustomQuery): Promise<GetCartResponse>;
-  getsMe(customQuery?: CustomQuery): Promise<GetMeResponse>;
+  getMe(customQuery?: CustomQuery): Promise<GetMeResponse>;
   getShippingMethods(customQuery?: CustomQuery): Promise<GetShippingMethodsResponse>;
   getPaymentMethods(customQuery?: CustomQuery): Promise<GetPaymentMethodsResponse>;
   addToCart(params: AddToCartParams, customQuery?: CustomQuery): Promise<AddToCartResponse>;
@@ -46,4 +47,5 @@ export interface VendureApiMethods {
   transitionOrderToState(params: TransitionOrderToStateParams, customQuery?: CustomQuery): Promise<TransitionOrderToState>;
   setCustomerForOrder(params: CreateCustomerInput, customQuery?: CustomQuery): Promise<SetCustomerForOrderResponse>;
   registerCustomerAccount(params: RegisterCustomerInput, customQuery?: CustomQuery): Promise<RegisterCustomerAccountResponse>;
+  login(params: LoginParams, customQuery?: CustomQuery): Promise<LoginResponse>;
 }
