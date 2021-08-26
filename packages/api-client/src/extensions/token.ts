@@ -19,7 +19,8 @@ export const tokenExtension: ApiClientExtension = {
             res.cookie(VENDURE_AUTH_TOKEN_NAME, token, cookieOptions);
           },
           removeAuthCookie: () => {
-            delete req.cookies[VENDURE_AUTH_TOKEN_NAME];
+            // Remove cookie by expiring it immediately
+            res.cookie(VENDURE_AUTH_TOKEN_NAME, '', { expires: new Date(Date.now()) });
           }
         }
       })
