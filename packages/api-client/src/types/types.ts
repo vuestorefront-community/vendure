@@ -99,3 +99,5 @@ export type LoginParams = {
   password: string;
   rememberMe?: boolean;
 };
+
+export type CookieSameSite = boolean | 'strict' | 'lax' | 'none'
