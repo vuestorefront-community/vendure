@@ -1,7 +1,7 @@
 import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
-import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, NativeAuthenticationResult, Order, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, UpdateOrderItemsResult } from './GraphQL';
+import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, NativeAuthenticationResult, Order, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, Success, UpdateOrderItemsResult } from './GraphQL';
 import { AddPaymentToOrderParams, AddToCartParams, CartCouponParams, CollectionParams, LoginParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
@@ -27,6 +27,7 @@ export type TransitionOrderToState = MutationResponse<'transitionOrderToState', 
 export type SetCustomerForOrderResponse = MutationResponse<'setCustomerForOrder', SetCustomerForOrderResult>;
 export type RegisterCustomerAccountResponse = MutationResponse<'registerCustomerAccount', RegisterCustomerAccountResult>;
 export type LoginResponse = MutationResponse<'login', NativeAuthenticationResult>;
+export type LogoutResponse = MutationResponse<'logout', Success>;
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
@@ -48,4 +49,5 @@ export interface VendureApiMethods {
   setCustomerForOrder(params: CreateCustomerInput, customQuery?: CustomQuery): Promise<SetCustomerForOrderResponse>;
   registerCustomerAccount(params: RegisterCustomerInput, customQuery?: CustomQuery): Promise<RegisterCustomerAccountResponse>;
   login(params: LoginParams, customQuery?: CustomQuery): Promise<LoginResponse>;
+  logout(customQuery?: CustomQuery): Promise<LogoutResponse>;
 }
