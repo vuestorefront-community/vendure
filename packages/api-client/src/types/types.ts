@@ -93,3 +93,11 @@ export type TransitionOrderToStateParams = {
 export type AddPaymentToOrderParams = {
   method: string;
 };
+
+export type LoginParams = {
+  username: string;
+  password: string;
+  rememberMe?: boolean;
+};
+
+export type CookieSameSite = boolean | 'strict' | 'lax' | 'none'

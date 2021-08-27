@@ -1,6 +1,5 @@
 import {
   Context,
-  useUserFactory,
   UseUserFactoryParams
 } from '@vue-storefront/core';
 // TODO: ucomment later when working with use functionality
@@ -9,17 +8,19 @@ import type {
   UseUserUpdateParams as UpdateParams,
   UseUserRegisterParams as RegisterParams
 } from '../../types';
+import { useUserFactory } from '../../factories';
 
 const params: UseUserFactoryParams<any, UpdateParams, RegisterParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context) => {
-    console.log('Mocked: useUser.load');
-    return {};
+    const response = await context.$vendure.api.getMe();
+
+    return response?.data?.activeCustomer;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   logOut: async (context: Context) => {
-    console.log('Mocked: useUser.logOut');
+    await context.$vendure.api.logout();
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -30,14 +31,16 @@ const params: UseUserFactoryParams<any, UpdateParams, RegisterParams> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   register: async (context: Context, { email, password, firstName, lastName }) => {
-    console.log('Mocked: useUser.register');
-    return {};
+    const response = await context.$vendure.api.registerCustomerAccount({ emailAddress: email, password, firstName, lastName });
+
+    return response?.data?.registerCustomerAccount;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   logIn: async (context: Context, { username, password }) => {
-    console.log('Mocked: useUser.logIn');
-    return {};
+    const response = await context.$vendure.api.login({ username, password });
+
+    return response?.data?.login;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

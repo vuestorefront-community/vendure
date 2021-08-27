@@ -1,5 +1,6 @@
 import { ApiClientExtension } from '@vue-storefront/core';
 import { VENDURE_AUTH_TOKEN_NAME } from '../helpers/constants';
+import { cookieOptions } from '../helpers';
 
 export const tokenExtension: ApiClientExtension = {
   name: 'tokenExtension',
@@ -15,14 +16,11 @@ export const tokenExtension: ApiClientExtension = {
               delete req.cookies[VENDURE_AUTH_TOKEN_NAME];
               return;
             }
-            res.cookie(VENDURE_AUTH_TOKEN_NAME, token, {
-              httpOnly: true,
-              secure: true,
-              sameSite: 'strict'
-            });
+            res.cookie(VENDURE_AUTH_TOKEN_NAME, token, cookieOptions);
           },
           removeAuthCookie: () => {
-            delete req.cookies[VENDURE_AUTH_TOKEN_NAME];
+            // Remove cookie by expiring it immediately
+            res.cookie(VENDURE_AUTH_TOKEN_NAME, '', { expires: new Date(Date.now()) });
           }
         }
       })

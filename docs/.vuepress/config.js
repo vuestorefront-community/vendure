@@ -49,6 +49,7 @@ module.exports = {
           ['/composables/use-billing', 'useBilling'],
           ['/composables/use-shipping', 'useShipping'],
           ['/composables/use-shipping-provider', 'useShippingProvider'],
+          ['/composables/use-user', 'useUser']
         ]
       },
     ]

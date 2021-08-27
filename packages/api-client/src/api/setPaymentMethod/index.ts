@@ -1,10 +1,10 @@
 import addPaymentToOrderMutation from './addPaymentToOrderMutation';
 import { CustomQuery } from '@vue-storefront/core';
 import gql from 'graphql-tag';
-import { AddPaymentToOrderParams, Context, PaymentInput, SetShippingMethodResponse } from '../../types';
+import { AddPaymentToOrderParams, Context, PaymentInput, SetPaymentMethodResponse } from '../../types';
 import { NO_CACHE_FETCH_POLICY } from '../../helpers';
 
-const setPaymentMethod = async (context: Context, params: AddPaymentToOrderParams, customQuery?: CustomQuery): Promise<SetShippingMethodResponse> => {
+const setPaymentMethod = async (context: Context, params: AddPaymentToOrderParams, customQuery?: CustomQuery): Promise<SetPaymentMethodResponse> => {
   const setPaymentMethodVariables = {
     input: {
       method: params.method,
@@ -22,7 +22,7 @@ const setPaymentMethod = async (context: Context, params: AddPaymentToOrderParam
     mutation: gql`${addPaymentToOrder.query}`,
     variables: addPaymentToOrder.variables,
     fetchPolicy: NO_CACHE_FETCH_POLICY
-  }) as SetShippingMethodResponse;
+  }) as SetPaymentMethodResponse;
 
   return request;
 };

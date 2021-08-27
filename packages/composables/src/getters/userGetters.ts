@@ -1,27 +1,27 @@
 import { UserGetters } from '@vue-storefront/core';
-import type { User } from '@vue-storefront/vendure-api';
+import type { Customer } from '@vue-storefront/vendure-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getFirstName(user: User): string {
-  return '';
+function getFirstName(user: Customer): string {
+  return user?.firstName || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getLastName(user: User): string {
-  return '';
+function getLastName(user: Customer): string {
+  return user?.lastName || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getFullName(user: User): string {
-  return '';
+function getFullName(user: Customer): string {
+  return `${user?.firstName} ${user?.lastName}` || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getEmailAddress(user: User): string {
-  return '';
+function getEmailAddress(user: Customer): string {
+  return user?.emailAddress || '';
 }
 
-export const userGetters: UserGetters<User> = {
+export const userGetters: UserGetters<Customer> = {
   getFirstName,
   getLastName,
   getFullName,
