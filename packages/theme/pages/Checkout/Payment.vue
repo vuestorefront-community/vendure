@@ -151,9 +151,9 @@ export default {
         method: paymentMethod?.value?.code
       });
 
-      const orderId = response?.data?.addPaymentToOrder?.id;
+      const orderCode = response?.data?.addPaymentToOrder?.code;
 
-      const thankYouPath = { name: 'thank-you', query: { order: orderId }};
+      const thankYouPath = { name: 'thank-you', query: { order: orderCode }};
       context.root.$router.push(context.root.localePath(thankYouPath));
       setCart(null);
     };
