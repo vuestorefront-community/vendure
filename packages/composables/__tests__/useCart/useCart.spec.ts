@@ -1,3 +1,4 @@
+import { mockedCart } from '../__mocks__/mockedCart';
 import { useCart } from './../../src/composables/useCart';
 
 const context = {
@@ -103,5 +104,12 @@ describe('[vendure-composables] useCart', () => {
       { couponCode: '1' },
       customQuery
     );
+  });
+
+  it('checks if product is in cart', async () => {
+    const { isInCart } = useCart() as any;
+    const response = await isInCart(context, { currentCart: mockedCart, product: { _id: '4' } });
+
+    expect(response).toEqual(true);
   });
 });

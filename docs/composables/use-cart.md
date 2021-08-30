@@ -84,7 +84,7 @@ type CustomQuery = {
 
 <https://www.vendure.io/docs/graphql-api/shop/object-types/#orderline>
   
-* `isInCart` - function for checking if a product is currently in the cart (TBD).
+* `isInCart` - function for checking if a product is currently in the cart.
 
 * `clear` - function for removing all items currently stored in cart (TBD).
 

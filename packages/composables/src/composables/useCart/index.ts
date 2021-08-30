@@ -78,8 +78,7 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant, Cou
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isInCart: (context: Context, { currentCart, product }) => {
-    console.log('Mocked: useCart.isInCart');
-    return false;
+    return Boolean(currentCart?.lines?.find(orderLine => orderLine?.productVariant?.id === product._id || orderLine?.productVariant?.id === product._variantId));
   }
 };
 
