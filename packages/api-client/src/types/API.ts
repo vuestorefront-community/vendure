@@ -40,8 +40,8 @@ export interface VendureApiMethods {
   addToCart(params: AddToCartParams, customQuery?: CustomQuery): Promise<AddToCartResponse>;
   removeFromCart(params: RemoveFromCartParams, customQuery?: CustomQuery): Promise<RemoveFromCartResponse>;
   updateCartQuantity(params: UpdateCartParams, customQuery?: CustomQuery): Promise<UpdateCartQuantityResponse>;
-  applyCouponCode(params: CartCouponParams, customQuery?: CustomQuery): Promise<ApplyCouponCodeResponse>;
-  removeCouponCode(params: CartCouponParams, customQuery?: CustomQuery): Promise<RemoveCouponCodeResponse>;
+  applyCartCoupon(params: CartCouponParams, customQuery?: CustomQuery): Promise<ApplyCouponCodeResponse>;
+  removeCartCoupon(params: CartCouponParams, customQuery?: CustomQuery): Promise<RemoveCouponCodeResponse>;
   updateAddressDetails(params: UpdateAddressDetailsParams, customQuery?: CustomQuery): Promise<UpdateAddressDetailsResponse>;
   setShippingMethod(params: SetShippingMethodParams, customQuery?: CustomQuery): Promise<SetShippingMethodResponse>;
   setPaymentMethod(params: PaymentInput, customQuery?: CustomQuery): Promise<SetPaymentMethodResponse>;

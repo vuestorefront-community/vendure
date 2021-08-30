@@ -21,7 +21,7 @@
       <SfProperty
         v-for="discount in discounts"
         :key="discount.id"
-        :name="discount.name + (discount.code && ` (${discount.code})`)"
+        :name="`${discount.name} ${discount.description}`"
         :value="'-' + $n(discount.value, 'currency')"
         class="sf-property--full-width sf-property--small"
       />

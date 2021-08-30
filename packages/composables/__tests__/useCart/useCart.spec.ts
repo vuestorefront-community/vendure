@@ -12,10 +12,10 @@ const context = {
       updateCartQuantity: jest.fn(() => ({
         data: { adjustOrderLine: 'update cart quantity' }
       })),
-      applyCouponCode: jest.fn(() => ({
+      applyCartCoupon: jest.fn(() => ({
         data: { applyCouponCode: 'apply coupon code' }
       })),
-      removeCouponCode: jest.fn(() => ({
+      removeCartCoupon: jest.fn(() => ({
         data: { removeCouponCode: 'remove coupon code' }
       }))
     }
@@ -87,7 +87,7 @@ describe('[vendure-composables] useCart', () => {
       updatedCart: 'apply coupon code',
       updatedCoupon: '1'
     });
-    expect(context.$vendure.api.applyCouponCode).toBeCalledWith(
+    expect(context.$vendure.api.applyCartCoupon).toBeCalledWith(
       { couponCode: '1' },
       customQuery
     );
@@ -100,7 +100,7 @@ describe('[vendure-composables] useCart', () => {
     expect(response).toEqual({
       updatedCart: 'remove coupon code'
     });
-    expect(context.$vendure.api.removeCouponCode).toBeCalledWith(
+    expect(context.$vendure.api.removeCartCoupon).toBeCalledWith(
       { couponCode: '1' },
       customQuery
     );
