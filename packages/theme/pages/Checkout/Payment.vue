@@ -148,7 +148,10 @@ export default {
 
     const processOrder = async () => {
       const response = await $vendure.api.setPaymentMethod({
-        method: paymentMethod?.value?.code
+        method: paymentMethod?.value?.code,
+        metadata: {
+          // Here you would pass data from an external Payment Provided after successful payment process like payment id.
+        }
       });
 
       const orderCode = response?.data?.addPaymentToOrder?.code;

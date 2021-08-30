@@ -90,10 +90,6 @@ export type TransitionOrderToStateParams = {
   state: string;
 };
 
-export type AddPaymentToOrderParams = {
-  method: string;
-};
-
 export type LoginParams = {
   username: string;
   password: string;

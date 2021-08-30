@@ -19,7 +19,7 @@ describe('[vendure-api-client] setPaymentMethod', () => {
       extendQuery: (customQuery, args) => args
     } as unknown as Context;
 
-    const { data } = await setPaymentMethod(context, { method: 'test' });
+    const { data } = await setPaymentMethod(context, { metadata: {}, method: 'test' });
 
     const expectedSetPaymentResponse = 'set payment method response';
 
