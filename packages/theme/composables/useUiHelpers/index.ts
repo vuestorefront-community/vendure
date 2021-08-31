@@ -37,7 +37,8 @@ const useUiHelpers = () => {
       collectionSlug: categorySlug,
       take: parseInt(query.itemsPerPage, 10) || 20,
       groupByProduct: true,
-      sort: { price: query.sort || 'ASC'}
+      sort: { price: query.sort || 'ASC'},
+      facetValueIds: query.attributes || []
     };
   };
 

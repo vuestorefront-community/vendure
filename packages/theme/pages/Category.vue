@@ -271,8 +271,8 @@
               <div>
                 <SfFilter
                   v-for="option in facet.options"
-                  :key="`${facet.id}-${option.value}`"
-                  :label="option.id + `${option.count ? ` (${option.count})` : ''}`"
+                  :key="`${facet.attrName}-${option.value}`"
+                  :label="option.attrName + `${option.count ? ` (${option.count})` : ''}`"
                   :selected="isFilterSelected(facet, option)"
                   class="filters__item"
                   @change="() => selectFilter(facet, option)"
@@ -414,11 +414,11 @@ export default {
       setSelectedFilters();
     });
 
-    const isFilterSelected = (facet, option) => (selectedFilters.value[facet.id] || []).includes(option.id);
+    const isFilterSelected = (facet, option) => (selectedFilters.value['attributes'] || []).includes(option.id);
 
     const selectFilter = (facet, option) => {
-      if (!selectedFilters.value[facet.id]) {
-        Vue.set(selectedFilters.value, facet.id, []);
+      if (!selectedFilters.value['attributes']) {
+        Vue.set(selectedFilters.value, 'attributes', []);
       }
 
       if (selectedFilters.value[facet.id].find(f => f === option.id)) {
@@ -426,7 +426,7 @@ export default {
         return;
       }
 
-      selectedFilters.value[facet.id].push(option.id);
+      selectedFilters.value['attributes'].push(option.id);
     };
 
     const clearFilters = () => {
