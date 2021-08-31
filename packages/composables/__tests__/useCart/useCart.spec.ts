@@ -1,4 +1,4 @@
-import { mockedCart } from '../__mocks__/mockedCart';
+import { mockedCart, mockedCartWithoutProducts } from '../__mocks__/mockedCart';
 import { useCart } from './../../src/composables/useCart';
 
 const context = {
@@ -116,6 +116,13 @@ describe('[vendure-composables] useCart', () => {
   it('returns false when product is not in cart', async () => {
     const { isInCart } = useCart() as any;
     const response = await isInCart(context, { currentCart: mockedCart, product: { _id: '173' } });
+
+    expect(response).toEqual(false);
+  });
+
+  it('returns false when there are no products in cart', async () => {
+    const { isInCart } = useCart() as any;
+    const response = await isInCart(context, { currentCart: mockedCartWithoutProducts, product: { _id: '173' } });
 
     expect(response).toEqual(false);
   });
