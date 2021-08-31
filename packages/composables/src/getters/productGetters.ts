@@ -109,6 +109,10 @@ const getByFilters = (product: Product, filters?: ProductFilter): AgnosticProduc
     return productVariants[0];
   }
 
+  if (filters?.id) {
+    return productVariants.find(variant => variant._id === filters?.id);
+  }
+
   return productVariants;
 };
 

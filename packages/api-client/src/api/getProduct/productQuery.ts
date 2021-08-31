@@ -12,6 +12,11 @@ export default gql`
         price
         priceWithTax
         currencyCode
+        options {
+          id
+          name
+          code
+        }
       }
       featuredAsset {
         preview
