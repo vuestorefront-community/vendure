@@ -6,7 +6,7 @@ describe('[vendure-getters] facet getters', () => {
       input: {},
       data: {
         facets: [
-          { facetValue: { name: '1', code: '123' }, count: 1 }
+          { facetValue: { name: '1', code: '123', id: '1' }, count: 1 }
         ]
       }
     } as any;
