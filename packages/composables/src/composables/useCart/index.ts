@@ -58,7 +58,7 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant, Cou
   // TODO: update to use currentCart
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   applyCoupon: async (context: Context, { currentCart, couponCode, customQuery }) => {
-    const response = await context.$vendure.api.applyCouponCode({ couponCode }, customQuery);
+    const response = await context.$vendure.api.applyCartCoupon({ couponCode }, customQuery);
 
     return {
       updatedCart: response?.data?.applyCouponCode as Order,
@@ -69,7 +69,7 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant, Cou
   // FIXME: later change the coupon property to couponCode to work similarly to applyCoupon method
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   removeCoupon: async (context: Context, { coupon, customQuery }) => {
-    const response = await context.$vendure.api.removeCouponCode({ couponCode: coupon }, customQuery);
+    const response = await context.$vendure.api.removeCartCoupon({ couponCode: coupon }, customQuery);
 
     return {
       updatedCart: response?.data?.removeCouponCode
@@ -78,8 +78,7 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant, Cou
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isInCart: (context: Context, { currentCart, product }) => {
-    console.log('Mocked: useCart.isInCart');
-    return false;
+    return Boolean(currentCart?.lines?.find(orderLine => orderLine?.productVariant?.id === product._id || orderLine?.productVariant?.id === product._variantId));
   }
 };
 

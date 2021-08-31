@@ -72,6 +72,7 @@
             {{ $t('Continue to shipping') }}
           </SfButton>
         </div>
+        <p v-if="errorMessage">{{ errorMessage }}</p>
       </div>
     </form>
   </ValidationObserver>
@@ -88,6 +89,7 @@ import { ref } from '@vue/composition-api';
 import { required, min, digits, email } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { useVSFContext } from '@vue-storefront/core';
+import { EMAIL_ADDRESS_CONFLICT_ERROR } from '~/helpers';
 
 extend('required', {
   ...required,
@@ -120,6 +122,7 @@ export default {
   setup (_, { root }) {
     const isFormSubmitted = ref(false);
     const { $vendure } = useVSFContext();
+    const errorMessage = ref('');
 
     const form = ref({
       firstName: '',
@@ -128,7 +131,11 @@ export default {
     });
 
     const handleFormSubmit = async () => {
-      await $vendure.api.setCustomerForOrder(form.value);
+      const response = await $vendure.api.setCustomerForOrder(form.value);
+      if (response?.data?.setCustomerForOrder?.errorCode === EMAIL_ADDRESS_CONFLICT_ERROR) {
+        errorMessage.value = response?.data?.setCustomerForOrder?.message;
+        return;
+      }
       root.$router.push(root.localePath({ name: 'shipping' }));
       isFormSubmitted.value = true;
     };
@@ -136,7 +143,8 @@ export default {
     return {
       isFormSubmitted,
       form,
-      handleFormSubmit
+      handleFormSubmit,
+      errorMessage
     };
   }
 };

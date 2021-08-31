@@ -57,7 +57,7 @@ const getDiscounts = (cart: Order): AgnosticDiscount[] => {
   return cart?.discounts?.map(discount => ({
     id: discount.type,
     name: discount.adjustmentSource,
-    value: discount.amountWithTax,
+    value: createPrice(discount.amountWithTax),
     description: discount.description
   }));
 };

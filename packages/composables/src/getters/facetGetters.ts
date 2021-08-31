@@ -29,7 +29,7 @@ const getGrouped = (searchResult: FacetSearchResult<AgnosticSearchResult>, crite
     count: null,
     options: facets?.map(facet => ({
       type: 'attribute',
-      id: facet.facetValue.name,
+      id: facet.facetValue.id,
       attrName: facet.facetValue.name,
       value: facet.facetValue.code,
       selected: false,

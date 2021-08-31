@@ -56,7 +56,8 @@ export type ProductParams = {
 };
 
 export type ProductFilter = {
-  master: boolean;
+  master?: boolean;
+  id?: string;
 };
 
 export type AddToCartParams = {
@@ -88,10 +89,6 @@ export type SetShippingMethodParams = {
 
 export type TransitionOrderToStateParams = {
   state: string;
-};
-
-export type AddPaymentToOrderParams = {
-  method: string;
 };
 
 export type LoginParams = {

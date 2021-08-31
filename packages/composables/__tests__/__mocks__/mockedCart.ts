@@ -93,3 +93,21 @@ export const mockedCart: Order = {
   discounts: [],
   __typename: 'Order'
 } as any;
+
+export const mockedCartWithoutProducts: Order = {
+  id: '33',
+  code: 'SWZ6N7VFCPN11LTQ',
+  state: 'AddingItems',
+  active: true,
+  lines: [],
+  totalQuantity: 3,
+  subTotal: 231094,
+  subTotalWithTax: 277312,
+  total: 231094,
+  totalWithTax: 277312,
+  shipping: 0,
+  shippingWithTax: 0,
+  shippingLines: [],
+  discounts: [],
+  __typename: 'Order'
+} as any;

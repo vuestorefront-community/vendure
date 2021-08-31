@@ -70,7 +70,7 @@
             :disabled="loading"
             :canAddToCart="stock > 0"
             class="product__add-to-cart"
-            @click="addItem({ product, quantity: parseInt(qty) })"
+            @click="addToCart"
           />
         </div>
 
@@ -174,6 +174,7 @@ import { useProduct, useCart, productGetters, useReview, reviewGetters } from '@
 import { onSSR } from '@vue-storefront/core';
 import MobileStoreBanner from '~/components/MobileStoreBanner.vue';
 import LazyHydrate from 'vue-lazy-hydration';
+import { getProductVariantByConfiguration } from '~/helpers';
 
 export default {
   name: 'Product',
@@ -234,6 +235,18 @@ export default {
       window.history.pushState({}, '', url);
     };
 
+    const addToCart = () => {
+      const isConfigurationSelected = Object.values(configuration.value).length;
+      if (isConfigurationSelected) {
+        const productVariant = getProductVariantByConfiguration(products.value, configuration.value);
+        const agnosticProductVariant = computed(() => productGetters.getByFilters(products.value, { id: productVariant.id }));
+
+        addItem({ product: agnosticProductVariant.value, quantity: parseInt(qty.value)});
+      } else {
+        addItem({ product: product.value, quantity: parseInt(qty.value) });
+      }
+    };
+
     return {
       updateFilter,
       configuration,
@@ -250,7 +263,9 @@ export default {
       loading,
       productGetters,
       productGallery,
-      properties
+      properties,
+      addToCart,
+      products
     };
   },
   components: {

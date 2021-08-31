@@ -1,3 +1,4 @@
+import { mockedCart, mockedCartWithoutProducts } from '../__mocks__/mockedCart';
 import { useCart } from './../../src/composables/useCart';
 
 const context = {
@@ -11,10 +12,10 @@ const context = {
       updateCartQuantity: jest.fn(() => ({
         data: { adjustOrderLine: 'update cart quantity' }
       })),
-      applyCouponCode: jest.fn(() => ({
+      applyCartCoupon: jest.fn(() => ({
         data: { applyCouponCode: 'apply coupon code' }
       })),
-      removeCouponCode: jest.fn(() => ({
+      removeCartCoupon: jest.fn(() => ({
         data: { removeCouponCode: 'remove coupon code' }
       }))
     }
@@ -86,7 +87,7 @@ describe('[vendure-composables] useCart', () => {
       updatedCart: 'apply coupon code',
       updatedCoupon: '1'
     });
-    expect(context.$vendure.api.applyCouponCode).toBeCalledWith(
+    expect(context.$vendure.api.applyCartCoupon).toBeCalledWith(
       { couponCode: '1' },
       customQuery
     );
@@ -99,9 +100,30 @@ describe('[vendure-composables] useCart', () => {
     expect(response).toEqual({
       updatedCart: 'remove coupon code'
     });
-    expect(context.$vendure.api.removeCouponCode).toBeCalledWith(
+    expect(context.$vendure.api.removeCartCoupon).toBeCalledWith(
       { couponCode: '1' },
       customQuery
     );
+  });
+
+  it('checks if product is in cart', async () => {
+    const { isInCart } = useCart() as any;
+    const response = await isInCart(context, { currentCart: mockedCart, product: { _id: '4' } });
+
+    expect(response).toEqual(true);
+  });
+
+  it('returns false when product is not in cart', async () => {
+    const { isInCart } = useCart() as any;
+    const response = await isInCart(context, { currentCart: mockedCart, product: { _id: '173' } });
+
+    expect(response).toEqual(false);
+  });
+
+  it('returns false when there are no products in cart', async () => {
+    const { isInCart } = useCart() as any;
+    const response = await isInCart(context, { currentCart: mockedCartWithoutProducts, product: { _id: '173' } });
+
+    expect(response).toEqual(false);
   });
 });
