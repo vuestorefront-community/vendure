@@ -94,7 +94,6 @@ export const mockedCart: Order = {
   __typename: 'Order'
 } as any;
 
-
 export const mockedCartWithoutProducts: Order = {
   id: '33',
   code: 'SWZ6N7VFCPN11LTQ',
