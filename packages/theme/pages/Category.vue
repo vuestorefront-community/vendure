@@ -414,10 +414,10 @@ export default {
       setSelectedFilters();
     });
 
-    const isFilterSelected = (facet, option) => (selectedFilters.value['attributes'] || []).includes(option.id);
+    const isFilterSelected = (facet, option) => (selectedFilters.value.attributes || []).includes(option.id);
 
     const selectFilter = (facet, option) => {
-      if (!selectedFilters.value['attributes']) {
+      if (!selectedFilters.value.attributes) {
         Vue.set(selectedFilters.value, 'attributes', []);
       }
 
@@ -426,7 +426,7 @@ export default {
         return;
       }
 
-      selectedFilters.value['attributes'].push(option.id);
+      selectedFilters.value.attributes.push(option.id);
     };
 
     const clearFilters = () => {
