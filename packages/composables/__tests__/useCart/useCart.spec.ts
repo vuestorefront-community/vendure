@@ -112,4 +112,11 @@ describe('[vendure-composables] useCart', () => {
 
     expect(response).toEqual(true);
   });
+
+  it('returns false when product is not in cart', async () => {
+    const { isInCart } = useCart() as any;
+    const response = await isInCart(context, { currentCart: mockedCart, product: { _id: '173' } });
+
+    expect(response).toEqual(false);
+  });
 });
