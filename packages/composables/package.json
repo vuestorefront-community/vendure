@@ -16,7 +16,7 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/vendure-api": "0.1.0",
+    "@vue-storefront/vendure-api": "1.0.0-beta",
     "@vue-storefront/core": "~2.3.4"
   },
   "peerDependencies": {
