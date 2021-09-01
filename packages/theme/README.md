@@ -1,49 +1,124 @@
-# theme
+<div align="center">
+  <img src="https://blog.vuestorefront.io/wp-content/uploads/2020/01/1QU9F6hQlFyHsJIbsdmt6FA.png" height="100px" />
+  <img src="https://www.vendure.io/logo.png" height="100px" style="margin-left: 30px;">
+</div>
 
-> Vendure - Vue Storefront theme
+## Vue Storefront 2 integration with Vendure (WIP)
 
-## Build Setup
+> This integration is under development
 
-```bash
-# install dependencies
-$ yarn install
+This project is a Vendure integration for [Vue Storefront 2](https://github.com/vuestorefront/vue-storefront/).
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+## How to start if you want to try out the integration
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+Right now it's not possible.
+
+## How to start if you want to contribute?
+
+Want to contribute? Ping us on `vendure` channel on [our Discord](https://discord.vuestorefront.io)!
+
+### Requirements
+
+- NodeJS v14 or later
+- Vendure server running in localhost for GraphQL API or <https://demo.vendure.io/shop-api>
+- Set up auth options in Vendure server
+
+```ts
+// vendure-config.ts
+...
+  authOptions: {
+    tokenMethod: 'bearer', // authorization header method
+    requireVerification: false, // disable register by email verification
+  },
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://docs.vuestorefront.io/v2/).
+### Setting up Vendure Server
 
-## Special Directories
+<https://www.vendure.io/docs/getting-started/>
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+### Steps
 
-### `assets`
+1. Fork the repo
+2. Clone your fork of the repo
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+    ```bash
+    git clone https://github.com/vuestorefront/vendure.git
+    cd vendure
+    ```
 
-### `components`
+3. Run `yarn` to install dependencies
+4. Add your Vendure server GraphQL API uri to env file in `packages/api-client` and `packages/theme`
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+    ```bash
+    cd packages/theme
+    cp .env.example .env
+    ```
 
-### `layouts`
+    ```js
+    // packages/theme/.env.example
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
+    GRAPHQL_API=http://localhost:3000/shop-api
+    TOKEN_METHOD=bearer
+    CURRENCY=USD
+    LANG=en
+    ```
 
-### `pages`
+    These environment variables will be then used in:
 
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
+    ```js
+    // packages/theme/middleware.config.js
 
-### `plugins`
+    module.exports = {
+      integrations: {
+        vendure: {
+          location: '@vue-storefront/vendure-api/server',
+          configuration: {
+            api: {
+              uri: process.env.GRAPHQL_API,
+              tokenMethod: process.env.TOKEN_METHOD
+            },
+            currency: process.env.CURRENCY,
+            lang: process.env.LANG
+          }
+        }
+      }
+    };
+    ```
 
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
+5. Build dependencies `yarn build`
+6. Run `yarn dev` to run theme. You can find other commands in `package.json`
 
-### `static`
+Your project will be running on `http://localhost:3001` (As Vendure server is running on port `3000`)
 
-This directory contains your static files. Each file inside this directory is mapped to `/`.
+## Resources
 
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
+- [Vue Storefront Documentation](https://docs.vuestorefront.io/v2/)
+- [Vendure integration Documentation](https://docs.vuestorefront.io/vendure)
+- [Vendure Documentation](https://www.vendure.io/docs/)
+- [Community Chat](https://discord.vuestorefront.io)
+
+## Support
+
+If you have any questions about this integration we will be happy to answer them on  `vendure` channel on [our Discord](discord.vuestorefront.io).
+
+## Contributors ✨
+
+Thanks go to these wonderful people 🙌:
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Baroshem"><img src="https://avatars.githubusercontent.com/u/37120330?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Jakub Andrzejewski</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=Baroshem" title="Code">💻</a> <a href="#maintenance-Baroshem" title="Maintenance">🚧</a> <a href="#projectManagement-Baroshem" title="Project Management">📆</a> <a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=Baroshem" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://rafagarcialepper.com/"><img src="https://avatars.githubusercontent.com/u/73605?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Rafael Garcia Lepper</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=rglepper" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.michaelbromley.co.uk/"><img src="https://avatars.githubusercontent.com/u/6275952?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Michael Bromley</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/pulls?q=is%3Apr+reviewed-by%3Amichaelbromley" title="Reviewed Pull Requests">👀</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
