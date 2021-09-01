@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/vendure-api",
-  "version": "1.0.0-beta",
+  "version": "1.0.0-beta.1",
   "sideEffects": false,
   "server": "server/index.js",
   "main": "lib/index.cjs.js",
@@ -30,7 +30,9 @@
     "isomorphic-fetch": "^3.0.0"
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "server/**/*",
+    "types/**/*"
   ],
   "publishConfig": {
     "access": "public"

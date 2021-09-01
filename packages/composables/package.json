@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/vendure",
-  "version": "1.0.0-beta",
+  "version": "1.0.0-beta.1",
   "sideEffects": false,
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
@@ -15,14 +15,15 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/vendure-api": "1.0.0-beta",
+    "@vue-storefront/vendure-api": "1.0.0-beta.1",
     "@vue-storefront/core": "~2.3.4"
   },
   "peerDependencies": {
     "@vue/composition-api": "1.0.0-beta.21"
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "nuxt/**/*"
   ],
   "publishConfig": {
     "access": "public"
