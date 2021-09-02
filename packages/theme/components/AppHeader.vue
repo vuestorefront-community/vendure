@@ -7,7 +7,7 @@
       <!-- TODO: add mobile view buttons after SFUI team PR -->
       <template #logo>
         <nuxt-link :to="localePath('/')" class="sf-header__logo">
-          <SfImage src="/icons/logo.svg" alt="Vue Storefront Next" class="sf-header__logo-image"/>
+          <SfImage src="/icons/logo.svg" :alt="$t('Vue Storefront Next')" class="sf-header__logo-image"/>
         </nuxt-link>
       </template>
       <template #navigation>
@@ -63,7 +63,7 @@
         <SfSearchBar
           ref="searchBarRef"
           :placeholder="$t('Search for items')"
-          aria-label="Search"
+          :aria-label="$t('Search')"
           class="sf-header__search"
           :value="term"
           @input="handleSearch"

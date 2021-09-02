@@ -17,7 +17,7 @@
           <SfInput
             v-e2e="'customer-firstName'"
             v-model="form.firstName"
-            label="First name"
+            :label="$t('First name')"
             name="firstName"
             class="form__element form__element--half"
             required
@@ -34,7 +34,7 @@
           <SfInput
             v-e2e="'customer-lastName'"
             v-model="form.lastName"
-            label="Last name"
+            :label="$t('Last name')"
             name="lastName"
             class="form__element form__element--half form__element--half-even"
             required
@@ -51,7 +51,7 @@
           <SfInput
             v-e2e="'customer-emailAddress'"
             v-model="form.emailAddress"
-            label="Email Address"
+            :label="$t('Email Address')"
             name="emailAddress"
             class="form__element form__element--half"
             required
