@@ -53,6 +53,7 @@ function getFormattedPrice(price: number): string {
   return '';
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getOrdersTotal(orders: Orders): number {
   return 0;
 }
