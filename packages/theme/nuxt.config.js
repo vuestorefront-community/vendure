@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import { getRoutes } from './routes';
+import theme from './themeConfig';
 
 export default {
   server: {
@@ -129,6 +130,9 @@ export default {
       getRoutes(`${__dirname}/_theme`)
         .forEach((route) => routes.unshift(route));
     }
+  },
+  publicRuntimeConfig: {
+    theme
   },
   build: {
     babel: {

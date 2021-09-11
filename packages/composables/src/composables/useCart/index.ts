@@ -4,7 +4,6 @@ import {
   UseCartFactoryParams
 } from '@vue-storefront/core';
 import type {
-  Coupon,
   Order,
   OrderLine
 } from '@vue-storefront/vendure-api';
@@ -15,7 +14,7 @@ import { AgnosticProductVariant } from '../../types';
 // So, in all mutations we have a return type of Promise<Order> and we are also casting the output i.e:
 // return response?.data?.X as Order
 
-const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant, Coupon> = {
+const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }): Promise<Order> => {
     const response = await context.$vendure.api.getCart(customQuery);
@@ -66,10 +65,9 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant, Cou
     };
   },
 
-  // FIXME: later change the coupon property to couponCode to work similarly to applyCoupon method
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  removeCoupon: async (context: Context, { coupon, customQuery }) => {
-    const response = await context.$vendure.api.removeCartCoupon({ couponCode: coupon }, customQuery);
+  removeCoupon: async (context: Context, { couponCode, customQuery }) => {
+    const response = await context.$vendure.api.removeCartCoupon({ couponCode }, customQuery);
 
     return {
       updatedCart: response?.data?.removeCouponCode
@@ -82,4 +80,4 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant, Cou
   }
 };
 
-export const useCart = useCartFactory<Order, OrderLine, AgnosticProductVariant, Coupon>(params);
+export const useCart = useCartFactory<Order, OrderLine, AgnosticProductVariant>(params);

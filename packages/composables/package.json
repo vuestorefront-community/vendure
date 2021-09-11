@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@vue-storefront/vendure-api": "1.0.0-beta.1",
-    "@vue-storefront/core": "~2.3.4"
+    "@vue-storefront/core": "~2.4.1"
   },
   "peerDependencies": {
     "@vue/composition-api": "1.0.0-beta.21"
