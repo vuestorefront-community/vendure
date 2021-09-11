@@ -40,7 +40,7 @@ module.exports = {
       },
       {
         title: 'Composables',
-        collapsable: false,
+        collapsable: true,
         children: [
           ['/composables/use-product', 'useProduct'],
           ['/composables/use-category', 'useCategory'],
@@ -54,7 +54,7 @@ module.exports = {
       },
       {
         title: 'API Reference',
-        collapsable: false,
+        collapsable: true,
         children: [
           ['/api-reference/api-client/vendure-api', 'Api Client'],
           ['/api-reference/composables/vendure', 'Composables']
@@ -62,7 +62,7 @@ module.exports = {
       },
       {
         title: 'Changelog',
-        collapsable: false,
+        collapsable: true,
         children: [
           ['/changelog/1.0.0-beta.2', '1.0.0-beta.2'],
           ['/changelog/1.0.0-beta.1', '1.0.0-beta.1'],
