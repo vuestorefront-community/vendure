@@ -9,7 +9,7 @@
     "dev": "yarn build:docs-api-client && vuepress dev",
     "build": "yarn build:docs-api-client && vuepress build",
     "build:docs-api-client": "yarn docs-gen && yarn docs-md",
-    "docs-compo":  "cd ../packages/composables && api-extractor run --local",
+    "docs-compo": "cd ../packages/composables && api-extractor run --local",
     "docs-gen": "cd ../packages/api-client && api-extractor run --local && cd ../composables && api-extractor run --local",
     "docs-md": "api-documenter markdown --i api-reference/api-client --o api-reference/api-client/ && api-documenter markdown --i api-reference/composables --o api-reference/composables"
   },
