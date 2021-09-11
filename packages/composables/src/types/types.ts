@@ -66,3 +66,5 @@ export type SearchResultValue<SEARCH_DATA, SEARCH_INPUT> = {
   data?: SEARCH_DATA;
   input?: SEARCH_INPUT;
 }
+
+export { OrderAddress } from '@vue-storefront/vendure-api';
