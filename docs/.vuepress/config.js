@@ -53,6 +53,15 @@ module.exports = {
         ]
       },
       {
+        title: 'Theme',
+        collapsable: true,
+        children: [
+          ['/theme/customer-checkout', 'Customer step in checkout'],
+          ['/theme/composables', 'Composables'],
+          ['/theme/helpers', 'Helpers'],
+        ]
+      },
+      {
         title: 'API Reference',
         collapsable: true,
         children: [
