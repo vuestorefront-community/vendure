@@ -14,6 +14,7 @@ export { useUserBilling } from './composables/useUserBilling';
 export { useUserOrder } from './composables/useUserOrder';
 export { useUserShipping } from './composables/useUserShipping';
 export { useWishlist } from './composables/useWishlist';
+export { useForgotPassword } from './composables/useForgotPassword';
 
 // Getters
 export { cartGetters } from './getters/cartGetters';
@@ -27,6 +28,7 @@ export { userBillingGetters } from './getters/userBillingGetters';
 export { userGetters } from './getters/userGetters';
 export { userShippingGetters } from './getters/userShippingGetters';
 export { wishlistGetters } from './getters/wishlistGetters';
+export { default as forgotPasswordGetters } from './getters/forgotPasswordGetters'
 
 // Types
 export * from './types/types';
