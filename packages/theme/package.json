@@ -20,7 +20,7 @@
   "dependencies": {
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/style-resources": "^1.2.1",
-    "@storefront-ui/vue": "^0.10.8",
+    "@storefront-ui/vue": "0.10.8",
     "@vue-storefront/middleware": "~2.4.1",
     "@vue-storefront/nuxt": "~2.4.1",
     "@vue-storefront/nuxt-theme": "~2.4.1",
