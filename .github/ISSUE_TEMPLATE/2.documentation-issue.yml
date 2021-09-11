@@ -4,6 +4,7 @@ description: |
 labels:
   - documentation
   - triage-needed
+title: '[Docs]: '
 body:
   - type: textarea
     attributes:
