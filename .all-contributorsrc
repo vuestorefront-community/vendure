@@ -39,6 +39,42 @@
       "contributions": [
         "review"
       ]
+    },
+    {
+      "login": "Fifciu",
+      "name": "Filip Jędrasik",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30155292?v=4",
+      "profile": "https://fifciuu.com/",
+      "contributions": [
+        "review"
+      ]
+    },
+    {
+      "login": "Mateuszpietrusinski",
+      "name": "Mateusz Pietrusiński",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24594740?v=4",
+      "profile": "https://github.com/Mateuszpietrusinski",
+      "contributions": [
+        "review"
+      ]
+    },
+    {
+      "login": "igorwojciechowski",
+      "name": "igorwojciechowski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26794636?v=4",
+      "profile": "https://github.com/igorwojciechowski",
+      "contributions": [
+        "test"
+      ]
+    },
+    {
+      "login": "bloodf",
+      "name": "Heitor Ramon Ribeiro",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1626923?v=4",
+      "profile": "https://heitor.co/",
+      "contributions": [
+        "mentoring"
+      ]
     }
   ],
   "contributorsPerLine": 5
