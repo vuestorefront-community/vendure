@@ -118,6 +118,7 @@ Thanks go to these wonderful people 🙌:
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/igorwojciechowski"><img src="https://avatars.githubusercontent.com/u/26794636?v=4?s=80" width="80px;" alt=""/><br /><sub><b>igorwojciechowski</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=igorwojciechowski" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://heitor.co/"><img src="https://avatars.githubusercontent.com/u/1626923?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Heitor Ramon Ribeiro</b></sub></a><br /><a href="#mentoring-bloodf" title="Mentoring">🧑‍🏫</a></td>
   </tr>
 </table>
 
