@@ -53,6 +53,14 @@ module.exports = {
         ]
       },
       {
+        title: 'API Reference',
+        collapsable: false,
+        children: [
+          ['/api-reference/api-client/vendure-api', 'Api Client'],
+          ['/api-reference/composables/vendure', 'Composables']
+        ]
+      },
+      {
         title: 'Changelog',
         collapsable: false,
         children: [

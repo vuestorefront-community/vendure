@@ -1,15 +1,35 @@
 {
   "name": "vsf-vendure-integration-docs",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.1",
   "description": "Documentation for Vendure integration for Vue Storefront",
   "main": "index.js",
   "license": "MIT",
   "repository": "https://github.com/vuestorefront/vendure/docs",
   "scripts": {
-    "dev": "vuepress dev",
-    "build": "vuepress build"
+    "dev": "yarn build:docs-api-client && vuepress dev",
+    "build": "yarn build:docs-api-client && vuepress build",
+    "build:docs-api-client": "yarn docs-gen && yarn docs-md",
+    "docs-compo":  "cd ../packages/composables && api-extractor run --local",
+    "docs-gen": "cd ../packages/api-client && api-extractor run --local && cd ../composables && api-extractor run --local",
+    "docs-md": "api-documenter markdown --i api-reference/api-client --o api-reference/api-client/ && api-documenter markdown --i api-reference/composables --o api-reference/composables"
   },
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.13.30",
+    "@microsoft/api-extractor": "7.18.0",
+    "concat-md": "^0.3.5",
+    "handlebars": "^4.7.7",
+    "typedoc": "^0.20.20",
+    "typedoc-plugin-markdown": "^3.4.5",
+    "typescript": "^3.6.4",
     "vuepress": "^1.5.3"
+  },
+  "dependencies": {
+    "sass-loader": "^8.0.2",
+    "vue-multiselect": "^2.1.6"
+  },
+  "workspaces": {
+    "nohoist": [
+      "typedoc-plugin-markdown"
+    ]
   }
 }
