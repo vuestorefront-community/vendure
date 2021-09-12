@@ -85,10 +85,11 @@ import {
   SfButton,
   SfSelect
 } from '@storefront-ui/vue';
-import { ref } from '@vue/composition-api';
+import { ref, onMounted } from '@vue/composition-api';
 import { required, min, digits, email } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { useVSFContext } from '@vue-storefront/core';
+import { useCart } from '@vue-storefront/vendure';
 import { EMAIL_ADDRESS_CONFLICT_ERROR } from '~/helpers';
 
 extend('required', {
@@ -122,6 +123,7 @@ export default {
   setup (_, { root }) {
     const isFormSubmitted = ref(false);
     const { $vendure } = useVSFContext();
+    const { cart, load } = useCart();
     const errorMessage = ref('');
 
     const form = ref({
@@ -139,6 +141,18 @@ export default {
       root.$router.push(root.localePath({ name: 'shipping' }));
       isFormSubmitted.value = true;
     };
+
+    onMounted(async () => {
+      await load();
+      const customer = cart?.value.customer;
+      if (customer) {
+        form.value = {
+          firstName: customer?.firstName,
+          lastName: customer?.lastName,
+          emailAddress: customer?.emailAddress,
+        }
+      }
+    });
 
     return {
       isFormSubmitted,

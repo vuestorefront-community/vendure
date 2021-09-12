@@ -129,7 +129,8 @@ export default {
     extendRoutes(routes) {
       getRoutes(`${__dirname}/_theme`)
         .forEach((route) => routes.unshift(route));
-    }
+    },
+    middleware: ['checkout'],
   },
   publicRuntimeConfig: {
     theme
