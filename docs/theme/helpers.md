@@ -16,6 +16,8 @@ const getTreeWithoutEmptyCategories = (categoryTree: AgnosticCategoryTree[]): Ag
 
 * `EMAIL_ADDRESS_CONFLICT_ERROR` - Vendure error when a customer email was already used
 
+* `ARRANGING_PAYMENT` - state in checkout that needs to be transitioned in order to correctly process checkout.
+
 ## Product
 
 * `getProductVariantByConfiguration` - returns a product variant that was configures from options (i.e. `screen-size`, `ram`)
@@ -37,3 +39,13 @@ const mapOrderAddressToAddressForm = (orderAddress: OrderAddress): AddressForm
 
 const getCalculatedPrice = (price: number): number
 ```
+
+## Checkout
+
+* `canEnterPayment` - verifies if customer can enter this state
+
+* `canEnterThankYou` - verifies if customer can enter this state
+
+* `canEnterShipping` - verifies if customer can enter this state
+
+* `canEnterBilling` - verifies if customer can enter this state

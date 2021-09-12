@@ -59,6 +59,7 @@ module.exports = {
           ['/theme/customer-checkout', 'Customer step in checkout'],
           ['/theme/composables', 'Composables'],
           ['/theme/helpers', 'Helpers'],
+          ['/theme/checkout-middleware', 'Checkout middleware'],
         ]
       },
       {
