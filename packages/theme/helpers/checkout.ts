@@ -1,9 +1,11 @@
-import { ARRANGING_PAYMENT } from './constants'
+import { Context } from '@nuxt/types';
+import { Order } from '@vue-storefront/vendure';
+import { ARRANGING_PAYMENT } from './constants';
 
-export const canEnterPayment = cart => canEnterShipping(cart) && canEnterBilling(cart) && cart?.shipping && cart?.state === ARRANGING_PAYMENT;
+export const canEnterThankYou = (context: Context): boolean => Boolean(context.route.query?.order);
 
-export const canEnterThankYou = query => Boolean(query?.order);
+export const canEnterShipping = (cart: Order): boolean => Boolean(cart?.customer);
 
-export const canEnterShipping = cart => Boolean(cart?.customer);
+export const canEnterBilling = (cart: Order): boolean => Boolean(cart?.shippingAddress?.streetLine1 && cart?.shippingAddress?.country);
 
-export const canEnterBilling = cart => cart?.shippingAddress?.streetLine1 && cart?.shippingAddress?.country
+export const canEnterPayment = (cart: Order): boolean => canEnterShipping(cart) && canEnterBilling(cart) && cart?.shipping && cart?.state === ARRANGING_PAYMENT;

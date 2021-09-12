@@ -2,7 +2,6 @@ import { canEnterShipping, canEnterBilling, canEnterPayment, canEnterThankYou } 
 
 export default async ({ app, $vsf }) => {
   const currentPath = app.context.route.fullPath.split('/checkout/')[1];
-  const currentQuery = app.context.route.query;
 
   if (!currentPath) return;
 
@@ -28,7 +27,7 @@ export default async ({ app, $vsf }) => {
       }
       break;
     case 'thank-you':
-      if (!canEnterThankYou(currentQuery)) {
+      if (!canEnterThankYou(app.context)) {
         app.context.redirect('/');
       }
       break;

@@ -149,8 +149,8 @@ export default {
         form.value = {
           firstName: customer?.firstName,
           lastName: customer?.lastName,
-          emailAddress: customer?.emailAddress,
-        }
+          emailAddress: customer?.emailAddress
+        };
       }
     });
 
