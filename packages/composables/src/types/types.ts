@@ -67,7 +67,7 @@ export type SearchResultValue<SEARCH_DATA, SEARCH_INPUT> = {
   input?: SEARCH_INPUT;
 }
 
-export { OrderAddress } from '@vue-storefront/vendure-api';
+export { OrderAddress, Order } from '@vue-storefront/vendure-api';
 
 // TODO: Replace later with types from vendure-api after implementing api-client functions
 export interface ForgotPasswordResult {
