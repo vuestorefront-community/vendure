@@ -1,4 +1,4 @@
-import { canEnterShipping, canEnterBilling, canEnterPayment, canEnterThankYou } from '../helpers';
+import { canEnterShipping, canEnterBilling, canEnterPayment, canEnterThankYou, CheckoutSteps } from '../helpers';
 
 export default async ({ app, $vsf }) => {
   const currentPath = app.context.route.fullPath.split('/checkout/')[1];
@@ -10,26 +10,17 @@ export default async ({ app, $vsf }) => {
 
   if (!cart?.data || !activeCart) return;
 
-  switch (currentPath) {
-    case 'shipping':
-      if (!canEnterShipping(activeCart)) {
-        app.context.redirect('/');
-      }
-      break;
-    case 'billing':
-      if (!canEnterBilling(activeCart)) {
-        app.context.redirect('/');
-      }
-      break;
-    case 'payment':
-      if (!canEnterPayment(activeCart)) {
-        app.context.redirect('/');
-      }
-      break;
-    case 'thank-you':
-      if (!canEnterThankYou(app.context)) {
-        app.context.redirect('/');
-      }
-      break;
+  if (currentPath === CheckoutSteps.Shipping && !canEnterShipping(activeCart)) {
+    app.context.redirect('/');
+
+  } else if (currentPath === CheckoutSteps.Billing && !canEnterBilling(activeCart)) {
+    app.context.redirect('/');
+
+  } else if (currentPath === CheckoutSteps.Payment && !canEnterPayment(activeCart)) {
+    app.context.redirect('/');
+
+  } else if (currentPath === CheckoutSteps.ThankYou && !canEnterThankYou(app.context)) {
+    app.context.redirect('/');
+
   }
 };
