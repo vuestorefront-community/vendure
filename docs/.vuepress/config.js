@@ -71,6 +71,13 @@ module.exports = {
         ]
       },
       {
+        title: 'Integrations',
+        collapsable: true,
+        children: [
+          ['/integrations/storyblok', 'Storyblok'],
+        ]
+      },
+      {
         title: 'Changelog',
         collapsable: true,
         children: [
