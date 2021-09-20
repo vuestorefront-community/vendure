@@ -4,7 +4,7 @@ WORKDIR /var/www
 
 COPY . .
 
-RUN npm install \
+RUN cd docs && npm install \
   && sed -i "s/base: '\/',/base: '\/vendure\/',/g" ./.vuepress/config.js \
   && cat ./.vuepress/config.js \
   && npm run build
