@@ -4,7 +4,11 @@ WORKDIR /var/www
 
 COPY . .
 
-RUN cd docs && npm install \
+RUN cd packages/api-client && yarn build && yarn cache clean --all
+RUN cd packages/composables && yarn build && yarn cache clean --all
+
+RUN cd ./docs \ 
+  && npm install \
   && sed -i "s/base: '\/',/base: '\/vendure\/',/g" ./.vuepress/config.js \
   && cat ./.vuepress/config.js \
   && npm run build
