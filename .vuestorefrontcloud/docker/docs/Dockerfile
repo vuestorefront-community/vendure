@@ -16,4 +16,4 @@ RUN cd ./docs \
 
 FROM nginx
 
-COPY --from=build /var/www/.vuepress/dist /usr/share/nginx/html/vendure
+COPY --from=build /var/www/docs/.vuepress/dist /usr/share/nginx/html/vendure
