@@ -40,7 +40,7 @@ module.exports = {
       },
       {
         title: 'Composables',
-        collapsable: false,
+        collapsable: true,
         children: [
           ['/composables/use-product', 'useProduct'],
           ['/composables/use-category', 'useCategory'],
@@ -53,8 +53,33 @@ module.exports = {
         ]
       },
       {
+        title: 'Theme',
+        collapsable: true,
+        children: [
+          ['/theme/customer-checkout', 'Customer step in checkout'],
+          ['/theme/composables', 'Composables'],
+          ['/theme/helpers', 'Helpers'],
+          ['/theme/checkout-middleware', 'Checkout middleware'],
+        ]
+      },
+      {
+        title: 'API Reference',
+        collapsable: true,
+        children: [
+          ['/api-reference/api-client/vendure-api', 'Api Client'],
+          ['/api-reference/composables/vendure', 'Composables']
+        ]
+      },
+      {
+        title: 'Integrations',
+        collapsable: true,
+        children: [
+          ['/integrations/storyblok', 'Storyblok'],
+        ]
+      },
+      {
         title: 'Changelog',
-        collapsable: false,
+        collapsable: true,
         children: [
           ['/changelog/1.0.0-beta.2', '1.0.0-beta.2'],
           ['/changelog/1.0.0-beta.1', '1.0.0-beta.1'],

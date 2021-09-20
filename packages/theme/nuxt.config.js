@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import { getRoutes } from './routes';
+import theme from './themeConfig';
 
 export default {
   server: {
@@ -19,25 +20,6 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'preconnect',
-        href: 'https://fonts.gstatic.com',
-        crossorigin: 'crossorigin'
-      },
-      {
-        rel: 'preload',
-        href:
-          'https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,600,700|Roboto:300,300i,400,400i,500,700&display=swap',
-        as: 'style'
-      },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,600,700|Roboto:300,300i,400,400i,500,700&display=swap',
-        media: 'print',
-        onload: 'this.media=\'all\'',
-        once: true
-      }
     ]
   },
   loading: { color: '#fff' },
@@ -45,6 +27,8 @@ export default {
   buildModules: [
     // to core
     '@nuxt/typescript-build',
+    '@nuxtjs/google-fonts',
+    '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     [
       '@vue-storefront/nuxt',
@@ -80,7 +64,9 @@ export default {
     }]
   ],
   modules: [
-    'nuxt-i18n',
+    ['nuxt-i18n', {
+      baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+    }],
     'cookie-universal-nuxt',
     'vue-scrollto/nuxt',
     '@vue-storefront/middleware/nuxt'
@@ -138,7 +124,11 @@ export default {
     extendRoutes(routes) {
       getRoutes(`${__dirname}/_theme`)
         .forEach((route) => routes.unshift(route));
-    }
+    },
+    middleware: ['checkout'],
+  },
+  publicRuntimeConfig: {
+    theme
   },
   build: {
     babel: {
@@ -157,36 +147,24 @@ export default {
           lastCommit: process.env.LAST_COMMIT || ''
         })
       })
-    ],
-    extend(config, ctx) {
-      // eslint-disable-next-line no-param-reassign
-      config.devtool = ctx.isClient ? 'eval-source-map' : 'inline-source-map';
-
-      if (ctx && ctx.isClient) {
-        // eslint-disable-next-line no-param-reassign
-        config.optimization = {
-          ...config.optimization,
-          mergeDuplicateChunks: true,
-          splitChunks: {
-            ...config.optimization.splitChunks,
-            chunks: 'all',
-            automaticNameDelimiter: '.',
-            maxSize: 128_000,
-            maxInitialRequests: Number.POSITIVE_INFINITY,
-            minSize: 0,
-            maxAsyncRequests: 10,
-            cacheGroups: {
-              vendor: {
-                test: /[/\\]node_modules[/\\]/,
-                name: (module) => `${module
-                  .context
-                  .match(/[/\\]node_modules[/\\](.*?)([/\\]|$)/)[1]
-                  .replace(/[.@_]/gm, '')}`
-              }
-            }
-          }
-        };
-      }
+    ]
+  },
+  pwa: {
+    meta: {
+      theme_color: '#5ECE7B'
     }
+  },
+  googleFonts: {
+    families: {
+      Raleway: {
+        wght: [300, 400, 500, 600, 700],
+        ital: [400]
+      },
+      Roboto: {
+        wght: [300, 400, 500, 700],
+        ital: [300, 400]
+      }
+    },
+    display: 'swap'
   }
 };

@@ -1,4 +1,4 @@
-import { OrderAddress } from '~/../api-client/lib';
+import { OrderAddress } from '@vue-storefront/vendure';
 import { COUNTRIES } from './constants';
 
 interface AddressForm {

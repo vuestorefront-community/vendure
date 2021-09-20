@@ -95,7 +95,7 @@ describe('[vendure-composables] useCart', () => {
 
   it('removes cart coupon', async () => {
     const { removeCoupon } = useCart() as any;
-    const response = await removeCoupon(context, { coupon: '1' });
+    const response = await removeCoupon(context, { couponCode: '1' });
 
     expect(response).toEqual({
       updatedCart: 'remove coupon code'

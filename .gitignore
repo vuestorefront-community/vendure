@@ -27,3 +27,6 @@ coverage
 .DS_STORE
 
 !scripts/lib
+
+# API reference
+docs/api-reference
