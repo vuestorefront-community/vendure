@@ -2,6 +2,8 @@
 
 ## How to start if you want to try out the integration
 
+<iframe width="100%" height="669" src="https://www.youtube.com/embed/RJ1QqojaGwA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ```bash
 yarn global add @vue-storefront/cli
 ```
