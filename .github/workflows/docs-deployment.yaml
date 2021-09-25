@@ -26,8 +26,8 @@ jobs:
           registry: registry.storefrontcloud.io
           username: ${{ secrets.DOCS_CLOUD_USERNAME }}
           password: ${{ secrets.DOCS_CLOUD_PASSWORD }}
-          workdir: docs
-          dockerfile: ../.vuestorefrontcloud/docker/docs/Dockerfile
+          workdir: .
+          dockerfile: ./.vuestorefrontcloud/docker/docs/Dockerfile
           buildoptions: "--compress"
 
   deploy:

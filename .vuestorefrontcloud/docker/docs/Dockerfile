@@ -4,11 +4,16 @@ WORKDIR /var/www
 
 COPY . .
 
-RUN npm install \
+RUN yarn install --network-concurrency 1
+RUN cd packages/api-client && yarn build && yarn cache clean --all
+RUN cd packages/composables && yarn build && yarn cache clean --all
+
+RUN cd ./docs \ 
+  && npm install \
   && sed -i "s/base: '\/',/base: '\/vendure\/',/g" ./.vuepress/config.js \
   && cat ./.vuepress/config.js \
   && npm run build
 
 FROM nginx
 
-COPY --from=build /var/www/.vuepress/dist /usr/share/nginx/html/vendure
+COPY --from=build /var/www/docs/.vuepress/dist /usr/share/nginx/html/vendure
