@@ -118,8 +118,8 @@ REGISTER_USER_PARAMS extends { email: string; password: string },
         loading.value = true;
         user.value = await _factoryParams.changePassword({
           currentUser: user.value,
-          currentPassword: params.current,
-          newPassword: params.new,
+          currentPassword: params.currentPassword,
+          newPassword: params.newPassword,
           customQuery: params.customQuery
         });
         error.value.changePassword = null;

@@ -3,7 +3,7 @@ import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
 import { CurrentUser } from '.';
 import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, NativeAuthenticationResult, Order, PaymentInput, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, Success, UpdateOrderItemsResult } from './GraphQL';
-import { AddToCartParams, CartCouponParams, CollectionParams, LoginParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
+import { AddToCartParams, CartCouponParams, CollectionParams, LoginParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams, UpdateCustomerPasswordParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
 export type MutationResponse<K extends string, V> = FetchResult<Record<K, V>>;
@@ -30,6 +30,7 @@ export type SetCustomerForOrderResponse = MutationResponse<'setCustomerForOrder'
 export type RegisterCustomerAccountResponse = MutationResponse<'registerCustomerAccount', RegisterCustomerAccountResult>;
 export type LoginResponse = MutationResponse<'login', NativeAuthenticationResult>;
 export type LogoutResponse = MutationResponse<'logout', Success>;
+export type UpdateCustomerPasswordResponse = MutationResponse<'updateCustomerPassword', Success>
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
@@ -53,4 +54,5 @@ export interface VendureApiMethods {
   registerCustomerAccount(params: RegisterCustomerInput, customQuery?: CustomQuery): Promise<RegisterCustomerAccountResponse>;
   login(params: LoginParams, customQuery?: CustomQuery): Promise<LoginResponse>;
   logout(customQuery?: CustomQuery): Promise<LogoutResponse>;
+  updateCustomerPassword(params: UpdateCustomerPasswordParams, customQuery?: CustomQuery): Promise<UpdateCustomerPasswordResponse>
 }

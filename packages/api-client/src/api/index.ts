@@ -19,3 +19,4 @@ export { default as registerCustomerAccount } from './registerCustomerAccount';
 export { default as login } from './login';
 export { default as logout } from './logout';
 export { default as getMe } from './getMe';
+export { default as updateCustomerPassword } from './updateCustomerPassword';

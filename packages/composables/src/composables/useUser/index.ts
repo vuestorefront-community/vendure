@@ -45,8 +45,9 @@ const params: UseUserFactoryParams<any, UpdateParams, RegisterParams> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   changePassword: async (context: Context, { currentUser, currentPassword, newPassword }) => {
-    console.log('Mocked: useUser.changePassword');
-    return {};
+    const response = await context.$vendure.api.updateCustomerPassword({ currentPassword, newPassword });
+    
+    return response?.data?.updateCustomerPassword;
   }
 };
 
