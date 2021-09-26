@@ -1,6 +1,7 @@
 import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
+import { CurrentUser } from '.';
 import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, NativeAuthenticationResult, Order, PaymentInput, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, Success, UpdateOrderItemsResult } from './GraphQL';
 import { AddToCartParams, CartCouponParams, CollectionParams, LoginParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
 
@@ -12,9 +13,10 @@ export type GetProductResponse = QueryResponse<'product', Product>;
 export type GetCategoryResponse = QueryResponse<'collections', CollectionList>;
 export type GetFacetResponse = QueryResponse<'search', SearchResponse>;
 export type GetCartResponse = QueryResponse<'activeOrder', Order>;
-export type GetMeResponse = QueryResponse<'activeCustomer', Customer>;
+export type GetActiveCustomerResponse = QueryResponse<'activeCustomer', Customer>;
 export type GetShippingMethodsResponse = QueryResponse<'eligibleShippingMethods', ShippingMethodQuote[]>;
 export type GetPaymentMethodsResponse = QueryResponse<'eligiblePaymentMethods', PaymentMethodQuote[]>;
+export type GetMeResponse = QueryResponse<'me', CurrentUser>;
 export type AddToCartResponse = MutationResponse<'addItemToOrder', UpdateOrderItemsResult>;
 export type RemoveFromCartResponse = MutationResponse<'removeOrderLine', RemoveOrderItemsResult>;
 export type UpdateCartQuantityResponse = MutationResponse<'adjustOrderLine', UpdateOrderItemsResult>;
@@ -35,6 +37,7 @@ export interface VendureApiMethods {
   getCategory(params: CollectionParams, customQuery?: CustomQuery): Promise<GetCategoryResponse>;
   getCart(customQuery?: CustomQuery): Promise<GetCartResponse>;
   getMe(customQuery?: CustomQuery): Promise<GetMeResponse>;
+  getActiveCustomer(customQuery?: CustomQuery): Promise<GetActiveCustomerResponse>;
   getShippingMethods(customQuery?: CustomQuery): Promise<GetShippingMethodsResponse>;
   getPaymentMethods(customQuery?: CustomQuery): Promise<GetPaymentMethodsResponse>;
   addToCart(params: AddToCartParams, customQuery?: CustomQuery): Promise<AddToCartResponse>;

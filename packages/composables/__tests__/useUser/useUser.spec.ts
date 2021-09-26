@@ -3,7 +3,7 @@ import { useUser } from './../../src/composables/useUser';
 const context = {
   $vendure: {
     api: {
-      getMe: jest.fn(() => ({ data: { activeCustomer: 'customer data' } })),
+      getActiveCustomer: jest.fn(() => ({ data: { activeCustomer: 'customer data' } })),
       login: jest.fn(() => ({ data: { login: 'login data' } })),
       registerCustomerAccount: jest.fn(() => ({
         data: { registerCustomerAccount: 'register customer account data' }
@@ -29,7 +29,7 @@ describe('[vendure-composables] useUser', () => {
     const response = await load(context);
 
     expect(response).toEqual('customer data');
-    expect(context.$vendure.api.getMe).toBeCalled();
+    expect(context.$vendure.api.getActiveCustomer).toBeCalled();
   });
 
   it('login', async () => {

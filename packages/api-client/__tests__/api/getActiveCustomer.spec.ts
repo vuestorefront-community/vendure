@@ -1,5 +1,5 @@
-import getMe from '../../src/api/getMe';
-import meQuery from '../../src/api/getMe/meQuery';
+import getActiveCustomer from '../../src/api/getActiveCustomer';
+import activeCustomerQuery from '../../src/api/getActiveCustomer/activeCustomerQuery';
 import { Context } from '../../src/types';
 
 describe('[vendure-api-client] getActiveCustomer', () => {
@@ -11,7 +11,7 @@ describe('[vendure-api-client] getActiveCustomer', () => {
       client: {
         query: ({ variables, query }) => {
           expect(variables).toEqual(givenVariables);
-          expect(query).toEqual(meQuery);
+          expect(query).toEqual(activeCustomerQuery);
 
           return { data: 'get me response' };
         }
@@ -19,7 +19,7 @@ describe('[vendure-api-client] getActiveCustomer', () => {
       extendQuery: (customQuery, args) => args
     } as unknown as Context;
 
-    const { data } = await getMe(context);
+    const { data } = await getActiveCustomer(context);
 
     const expectedGetMe = 'get me response';
 

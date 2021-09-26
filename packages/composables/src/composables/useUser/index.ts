@@ -13,7 +13,7 @@ import { useUserFactory } from '../../factories';
 const params: UseUserFactoryParams<any, UpdateParams, RegisterParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context) => {
-    const response = await context.$vendure.api.getMe();
+    const response = await context.$vendure.api.getActiveCustomer();
 
     return response?.data?.activeCustomer;
   },
