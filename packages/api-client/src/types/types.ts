@@ -97,4 +97,14 @@ export type LoginParams = {
   rememberMe?: boolean;
 };
 
-export type CookieSameSite = boolean | 'strict' | 'lax' | 'none'
+export type CookieSameSite = boolean | 'strict' | 'lax' | 'none';
+
+export type UpdateCustomerPasswordParams = {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export type UpdateCustomerParams = {
+  firstName: string;
+  lastName: string;
+};

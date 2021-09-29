@@ -69,8 +69,8 @@ export const apolloLinkFactory = (
   const afterwareLink = new ApolloLink((operation, forward) => {
     return forward(operation).map((response) => {
       const context = operation.getContext();
-      if (!settings.auth.getAuthCookie()) {
-        const authCookie = context.response.headers.get(VENDURE_AUTH_TOKEN_NAME);
+      const authCookie = context.response.headers.get(VENDURE_AUTH_TOKEN_NAME);
+      if (settings.auth.getAuthCookie() !== authCookie || !settings.auth.getAuthCookie()) {
         settings.auth.setAuthCookie(authCookie);
       }
 

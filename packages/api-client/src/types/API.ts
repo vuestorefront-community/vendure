@@ -1,8 +1,9 @@
 import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
+import { CurrentUser, UpdateCustomerInput } from '.';
 import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, NativeAuthenticationResult, Order, PaymentInput, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, Success, UpdateOrderItemsResult } from './GraphQL';
-import { AddToCartParams, CartCouponParams, CollectionParams, LoginParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams } from './types';
+import { AddToCartParams, CartCouponParams, CollectionParams, LoginParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams, UpdateCustomerPasswordParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
 export type MutationResponse<K extends string, V> = FetchResult<Record<K, V>>;
@@ -12,9 +13,10 @@ export type GetProductResponse = QueryResponse<'product', Product>;
 export type GetCategoryResponse = QueryResponse<'collections', CollectionList>;
 export type GetFacetResponse = QueryResponse<'search', SearchResponse>;
 export type GetCartResponse = QueryResponse<'activeOrder', Order>;
-export type GetMeResponse = QueryResponse<'activeCustomer', Customer>;
+export type GetActiveCustomerResponse = QueryResponse<'activeCustomer', Customer>;
 export type GetShippingMethodsResponse = QueryResponse<'eligibleShippingMethods', ShippingMethodQuote[]>;
 export type GetPaymentMethodsResponse = QueryResponse<'eligiblePaymentMethods', PaymentMethodQuote[]>;
+export type GetMeResponse = QueryResponse<'me', CurrentUser>;
 export type AddToCartResponse = MutationResponse<'addItemToOrder', UpdateOrderItemsResult>;
 export type RemoveFromCartResponse = MutationResponse<'removeOrderLine', RemoveOrderItemsResult>;
 export type UpdateCartQuantityResponse = MutationResponse<'adjustOrderLine', UpdateOrderItemsResult>;
@@ -28,6 +30,8 @@ export type SetCustomerForOrderResponse = MutationResponse<'setCustomerForOrder'
 export type RegisterCustomerAccountResponse = MutationResponse<'registerCustomerAccount', RegisterCustomerAccountResult>;
 export type LoginResponse = MutationResponse<'login', NativeAuthenticationResult>;
 export type LogoutResponse = MutationResponse<'logout', Success>;
+export type UpdateCustomerPasswordResponse = MutationResponse<'updateCustomerPassword', Success>;
+export type UpdateCustomerResponse = MutationResponse<'updateCustomer', Customer>;
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
@@ -35,6 +39,7 @@ export interface VendureApiMethods {
   getCategory(params: CollectionParams, customQuery?: CustomQuery): Promise<GetCategoryResponse>;
   getCart(customQuery?: CustomQuery): Promise<GetCartResponse>;
   getMe(customQuery?: CustomQuery): Promise<GetMeResponse>;
+  getActiveCustomer(customQuery?: CustomQuery): Promise<GetActiveCustomerResponse>;
   getShippingMethods(customQuery?: CustomQuery): Promise<GetShippingMethodsResponse>;
   getPaymentMethods(customQuery?: CustomQuery): Promise<GetPaymentMethodsResponse>;
   addToCart(params: AddToCartParams, customQuery?: CustomQuery): Promise<AddToCartResponse>;
@@ -50,4 +55,6 @@ export interface VendureApiMethods {
   registerCustomerAccount(params: RegisterCustomerInput, customQuery?: CustomQuery): Promise<RegisterCustomerAccountResponse>;
   login(params: LoginParams, customQuery?: CustomQuery): Promise<LoginResponse>;
   logout(customQuery?: CustomQuery): Promise<LogoutResponse>;
+  updateCustomerPassword(params: UpdateCustomerPasswordParams, customQuery?: CustomQuery): Promise<UpdateCustomerPasswordResponse>;
+  updateCustomer(params: UpdateCustomerInput, customQuery?: CustomQuery): Promise<UpdateCustomerResponse>;
 }

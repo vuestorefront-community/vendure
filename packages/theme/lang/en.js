@@ -169,5 +169,6 @@ export default {
   'Your Purchase': 'Your Purchase',
   'Primary contacts for any questions': 'Primary contacts for any questions',
   'Your Account': 'Your Account',
-  'What can we improve': 'What can we improve'
+  'What can we improve': 'What can we improve',
+  'Update email': 'Update email'
 };
