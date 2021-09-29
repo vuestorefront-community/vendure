@@ -111,8 +111,7 @@ import {
 } from '@storefront-ui/vue';
 import { onSSR } from '@vue-storefront/core';
 import { ref, computed } from '@vue/composition-api';
-import { useMakeOrder, useCart, cartGetters } from '@vue-storefront/vendure';
-import { useVSFContext } from '@vue-storefront/core';
+import { useMakeOrder, useCart, cartGetters, usePayment } from '@vue-storefront/vendure';
 
 export default {
   name: 'ReviewOrder',
@@ -132,8 +131,8 @@ export default {
   },
   setup(props, context) {
     const { cart, load, setCart } = useCart();
-    const { $vendure } = useVSFContext();
     const { loading } = useMakeOrder();
+    const { set } = usePayment();
 
     const terms = ref(false);
     const paymentMethod = ref(null);
@@ -147,16 +146,14 @@ export default {
     };
 
     const processOrder = async () => {
-      const response = await $vendure.api.setPaymentMethod({
+      const response = await set({
         method: paymentMethod?.value?.code,
         metadata: {
           // Here you would pass data from an external Payment Provided after successful payment process like payment id.
         }
       });
 
-      const orderCode = response?.data?.addPaymentToOrder?.code;
-
-      const thankYouPath = { name: 'thank-you', query: { order: orderCode }};
+      const thankYouPath = { name: 'thank-you', query: { order: response?.code }};
       context.root.$router.push(context.root.localePath(thankYouPath));
       setCart(null);
     };

@@ -1,4 +1,4 @@
-import { useFacet } from '../../src//composables/useFacet';
+import { useFacet } from '../../src/composables/useFacet';
 
 const context = {
   $vendure: {

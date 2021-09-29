@@ -1,6 +1,8 @@
 import { UserOrderGetters } from '@vue-storefront/core';
 import type { Order, OrderItem } from '@vue-storefront/vendure-api';
 
+type Orders = { offset: number; count: number; total: number; results: Order[]; }
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getDate(order: Order): string {
   return '';
@@ -51,6 +53,11 @@ function getFormattedPrice(price: number): string {
   return '';
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getOrdersTotal(orders: Orders): number {
+  return 0;
+}
+
 export const orderGetters: UserOrderGetters<Order, OrderItem> = {
   getDate,
   getId,
@@ -61,5 +68,6 @@ export const orderGetters: UserOrderGetters<Order, OrderItem> = {
   getItemName,
   getItemQty,
   getItemPrice,
-  getFormattedPrice
+  getFormattedPrice,
+  getOrdersTotal
 };
