@@ -13,7 +13,7 @@ export interface UseUserFactoryParams<
   logIn: (context: Context, params: { username: string; password: string; customQuery?: CustomQuery }) => Promise<USER>;
   changePassword: (context: Context, params: {currentUser: USER; currentPassword: string; newPassword: string; customQuery?: CustomQuery}) => Promise<USER>;
   updateEmail: (context: Context, params: {currentUser: USER; updatedUserData: UPDATE_USER_PARAMS; customQuery?: CustomQuery}) => Promise<void>;
-};
+}
 
 export type CustomUseUser<USER, UPDATE_USER_PARAMS> = UseUser<USER, UPDATE_USER_PARAMS> & { updateEmail }
 
@@ -34,7 +34,7 @@ REGISTER_USER_PARAMS extends { email: string; password: string },
       logout: null,
       changePassword: null,
       load: null,
-      updateEmail: null,
+      updateEmail: null
     });
 
     const user: Ref<USER> = sharedRef(null, 'useUser-user');
@@ -167,7 +167,7 @@ REGISTER_USER_PARAMS extends { email: string; password: string },
       } finally {
         loading.value = false;
       }
-    };  
+    };
 
     return {
       setUser,

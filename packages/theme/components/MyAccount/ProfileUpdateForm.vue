@@ -56,7 +56,7 @@ export default {
 
     const resetForm = () => ({
       firstName: userGetters.getFirstName(user.value),
-      lastName: userGetters.getLastName(user.value),
+      lastName: userGetters.getLastName(user.value)
     });
 
     const form = ref(resetForm());

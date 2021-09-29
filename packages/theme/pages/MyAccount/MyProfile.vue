@@ -90,7 +90,7 @@ export default {
     SfButton,
     ProfileUpdateForm,
     PasswordResetForm,
-    EmailUpdateForm,
+    EmailUpdateForm
   },
 
   setup() {
@@ -113,7 +113,7 @@ export default {
 
     onMounted(async () => {
       await load();
-    })
+    });
 
     return {
       currentEmail,
