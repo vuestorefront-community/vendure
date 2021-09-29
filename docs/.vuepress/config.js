@@ -61,6 +61,8 @@ module.exports = {
           ['/theme/composables', 'Composables'],
           ['/theme/helpers', 'Helpers'],
           ['/theme/checkout-middleware', 'Checkout middleware'],
+          ['/theme/update-email', 'Update user email'],
+          ['/theme/is-authenticated-middleware', 'Is-Authenticated middleware'],
         ]
       },
       {
