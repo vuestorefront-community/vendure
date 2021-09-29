@@ -103,3 +103,8 @@ export type UpdateCustomerPasswordParams = {
   currentPassword: string;
   newPassword: string;
 }
+
+export type UpdateCustomerParams = {
+  firstName: string;
+  lastName: string;
+};

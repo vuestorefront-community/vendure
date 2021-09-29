@@ -1,6 +1,5 @@
 import {
   Context,
-  UseUserFactoryParams
 } from '@vue-storefront/core';
 // TODO: ucomment later when working with use functionality
 // import type { User } from '@vue-storefront/vendure-api';
@@ -8,7 +7,7 @@ import type {
   UseUserUpdateParams as UpdateParams,
   UseUserRegisterParams as RegisterParams
 } from '../../types';
-import { useUserFactory } from '../../factories';
+import { useUserFactory, UseUserFactoryParams } from '../../factories';
 
 const params: UseUserFactoryParams<any, UpdateParams, RegisterParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -25,8 +24,9 @@ const params: UseUserFactoryParams<any, UpdateParams, RegisterParams> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updateUser: async (context: Context, { currentUser, updatedUserData }) => {
-    console.log('Mocked: useUser.updateUser');
-    return {};
+    const response = await context.$vendure.api.updateCustomer({ firstName: updatedUserData.firstName, lastName: updatedUserData.lastName })
+
+    return response?.data?.updateCustomer;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -48,6 +48,11 @@ const params: UseUserFactoryParams<any, UpdateParams, RegisterParams> = {
     const response = await context.$vendure.api.updateCustomerPassword({ currentPassword, newPassword });
     
     return response?.data?.updateCustomerPassword;
+  },
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  updateEmail: async (context: Context, { currentUser, updatedUserData }) => {
+    console.log('mock.useUser.updateEmail');
   }
 };
 

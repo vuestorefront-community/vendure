@@ -14,6 +14,20 @@
       </p>
     </SfTab>
 
+    <!-- Email update -->
+    <SfTab title="Email data">
+      <p class="message">
+        {{ $t('Feel free to edit') }}
+      </p>
+
+      <EmailUpdateForm @submit="updateEmailData" />
+
+      <p class="notice">
+        {{ $t('Use your personal data') }}
+        <a href="">{{ $t('Privacy Policy') }}</a>
+      </p>
+    </SfTab>
+
     <!-- Password reset -->
     <SfTab title="Password change">
       <p class="message">
@@ -37,6 +51,7 @@ import { extend } from 'vee-validate';
 import { email, required, min, confirmed } from 'vee-validate/dist/rules';
 import ProfileUpdateForm from '~/components/MyAccount/ProfileUpdateForm';
 import PasswordResetForm from '~/components/MyAccount/PasswordResetForm';
+import EmailUpdateForm from '~/components/MyAccount/EmailUpdateForm';
 import { SfTabs, SfInput, SfButton } from '@storefront-ui/vue';
 import { useUser, userGetters } from '@vue-storefront/vendure';
 import { onMounted } from '@vue/composition-api';
@@ -74,11 +89,12 @@ export default {
     SfInput,
     SfButton,
     ProfileUpdateForm,
-    PasswordResetForm
+    PasswordResetForm,
+    EmailUpdateForm,
   },
 
   setup() {
-    const { updateUser, changePassword, user, load } = useUser();
+    const { updateUser, changePassword, user, load, updateEmail } = useUser();
 
     const currentEmail = userGetters.getEmailAddress(user.value);
 
@@ -92,6 +108,7 @@ export default {
     };
 
     const updatePersonalData = ({ form, onComplete, onError }) => formHandler(() => updateUser({ user: form.value }), onComplete, onError);
+    const updateEmailData = ({ form, onComplete, onError }) => formHandler(() => updateEmail({ user: form.value }), onComplete, onError);
     const updatePassword = ({ form, onComplete, onError }) => formHandler(() => changePassword({ currentPassword: form.value.currentPassword, newPassword: form.value.newPassword }), onComplete, onError);
 
     onMounted(async () => {
@@ -102,6 +119,7 @@ export default {
       currentEmail,
       updatePersonalData,
       updatePassword,
+      updateEmailData,
       user
     };
   }

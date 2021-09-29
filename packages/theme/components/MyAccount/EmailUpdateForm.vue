@@ -1,35 +1,24 @@
 <template>
   <ValidationObserver v-slot="{ handleSubmit, reset }">
     <form class="form" @submit.prevent="handleSubmit(submitForm(reset))">
-      <div class="form__horizontal">
-        <ValidationProvider rules="required|min:2" v-slot="{ errors }" class="form__element">
-          <SfInput
-            v-e2e="'myaccount-firstName'"
-            v-model="form.firstName"
-            name="firstName"
-            label="First Name"
-            required
-            :valid="!errors[0]"
-            :errorMessage="errors[0]"
-          />
-        </ValidationProvider>
-        <ValidationProvider rules="required|min:2" v-slot="{ errors }" class="form__element">
-          <SfInput
-            v-e2e="'myaccount-lastName'"
-            v-model="form.lastName"
-            name="lastName"
-            label="Last Name"
-            required
-            :valid="!errors[0]"
-            :errorMessage="errors[0]"
-          />
-        </ValidationProvider>
-      </div>
+      <ValidationProvider rules="required|email" v-slot="{ errors }" class="form__element">
+        <SfInput
+          v-e2e="'myaccount-email'"
+          v-model="form.email"
+          type="email"
+          name="email"
+          label="Your e-mail"
+          required
+          :valid="!errors[0]"
+          :errorMessage="errors[0]"
+        />
+      </ValidationProvider>
+
       <SfButton
         v-e2e="'myaccount-update-personal-data-btn'"
         class="form__button"
       >
-        {{ $t('Update personal data') }}
+        {{ $t('Update email') }}
       </SfButton>
     </form>
   </ValidationObserver>
@@ -55,8 +44,7 @@ export default {
     const { user } = useUser();
 
     const resetForm = () => ({
-      firstName: userGetters.getFirstName(user.value),
-      lastName: userGetters.getLastName(user.value),
+      email: userGetters.getEmailAddress(user.value)
     });
 
     const form = ref(resetForm());
