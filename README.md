@@ -11,7 +11,27 @@ This project is a Vendure integration for [Vue Storefront 2](https://github.com/
 
 ## How to start if you want to try out the integration
 
-Right now it's not possible.
+```bash
+yarn global add @vue-storefront/cli
+```
+
+```bash
+vsf init <project_name>
+```
+
+Choose `Vendure (beta)` or use `Custom template from Github` option and type: `https://github.com/vuestorefront/template-vendure.git`.
+
+```bash
+cd <project_name> 
+```
+
+```bash
+yarn
+```
+
+```bash
+yarn dev
+```
 
 ## How to start if you want to contribute?
 
