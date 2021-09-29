@@ -18,7 +18,7 @@
         <LazyHydrate on-interaction>
           <SfButton
             class="sf-button--text navbar__filters-button"
-            aria-label="Filters"
+            :aria-label="$t('Filters')"
             @click="toggleFilterSidebar"
           >
             <SfIcon
@@ -36,7 +36,7 @@
           <LazyHydrate on-interaction>
             <SfSelect
               :value="sortBy.selected"
-              placeholder="Select sorting"
+              :placeholder="$t('Select sorting')"
               class="navbar__select"
               @input="th.changeSorting"
             >
@@ -66,7 +66,7 @@
             icon="tiles"
             size="12px"
             role="button"
-            aria-label="Change to grid view"
+            :aria-label="$t('Change to grid view')"
             :aria-pressed="isCategoryGridView"
             @click="changeToCategoryGridView"
           />
@@ -77,7 +77,7 @@
             icon="list"
             size="12px"
             role="button"
-            aria-label="Change to list view"
+            :aria-label="$t('Change to list view')"
             :aria-pressed="!isCategoryGridView"
             @click="changeToCategoryListView"
           />
@@ -256,7 +256,7 @@
     <LazyHydrate when-idle>
       <SfSidebar
         :visible="isFilterSidebarOpen"
-        title="Filters"
+        :title="$t('Filters')"
         class="sidebar-filters"
         @close="toggleFilterSidebar"
       >
