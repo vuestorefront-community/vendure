@@ -6,7 +6,7 @@ import { NO_CACHE_FETCH_POLICY } from '../../helpers';
 
 const updateCustomer = async (context: Context, params: UpdateCustomerInput, customQuery?: CustomQuery): Promise<UpdateCustomerResponse> => {
   const updateCustomerVariables = {
-    input: params,
+    input: params
   };
 
   const { updateCustomer } = context.extendQuery(
