@@ -1,5 +1,5 @@
 import {
-  Context,
+  Context
 } from '@vue-storefront/core';
 // TODO: ucomment later when working with use functionality
 // import type { User } from '@vue-storefront/vendure-api';
@@ -24,7 +24,7 @@ const params: UseUserFactoryParams<any, UpdateParams, RegisterParams> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updateUser: async (context: Context, { currentUser, updatedUserData }) => {
-    const response = await context.$vendure.api.updateCustomer({ firstName: updatedUserData.firstName, lastName: updatedUserData.lastName })
+    const response = await context.$vendure.api.updateCustomer({ firstName: updatedUserData.firstName, lastName: updatedUserData.lastName });
 
     return response?.data?.updateCustomer;
   },
@@ -40,13 +40,15 @@ const params: UseUserFactoryParams<any, UpdateParams, RegisterParams> = {
   logIn: async (context: Context, { username, password }) => {
     const response = await context.$vendure.api.login({ username, password });
 
+    if ((response?.data?.login as any).errorCode) throw response?.data?.login;
+
     return response?.data?.login;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   changePassword: async (context: Context, { currentUser, currentPassword, newPassword }) => {
     const response = await context.$vendure.api.updateCustomerPassword({ currentPassword, newPassword });
-    
+
     return response?.data?.updateCustomerPassword;
   },
 
