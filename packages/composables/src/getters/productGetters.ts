@@ -2,11 +2,13 @@ import {
   AgnosticMediaGalleryItem,
   AgnosticAttribute,
   AgnosticPrice,
-  ProductGetters
+  ProductGetters,
+  AgnosticBreadcrumb
 } from '@vue-storefront/core';
 import { ProductFilter, Product } from '@vue-storefront/vendure-api';
 import { AgnosticProductOptions, AgnosticProductVariant } from '../types';
 import { createPrice } from '../helpers/_utils';
+import { ROOT_COLLECTION } from '../helpers';
 
 interface ExtendedProductGetters extends ProductGetters<AgnosticProductVariant, ProductFilter> {
   getByFilters: (product: Product, filters?: ProductFilter) => AgnosticProductVariant[] | AgnosticProductVariant;
@@ -98,6 +100,7 @@ const getByFilters = (product: Product, filters?: ProductFilter): AgnosticProduc
     name: variant?.name,
     sku: variant?.sku,
     slug: masterVariant?.slug,
+    collections,
     images: [featuredAsset?.preview],
     price: {
       original: variant?.price,
@@ -147,6 +150,18 @@ const getTotalReviews = (product: AgnosticProductVariant): number => {
 const getAverageRating = (product: AgnosticProductVariant): number => {
   return 0;
 };
+const getBreadcrumbs = (
+  product: AgnosticProductVariant
+): AgnosticBreadcrumb[] => {
+  if (!product.collections?.length) return [];
+  const collection = product?.collections?.slice(-1);
+
+  // TODO: Find a better solution for category path than hardcoding '/c/'
+  return collection[0]?.breadcrumbs?.map((breadcrumb) => ({
+    text: breadcrumb?.name === ROOT_COLLECTION ? 'Home' : breadcrumb?.name,
+    link: breadcrumb?.slug === ROOT_COLLECTION ? '/' : `/c/${breadcrumb?.slug}`
+  }));
+};
 
 export const productGetters: ExtendedProductGetters = {
   getName,
@@ -165,5 +180,6 @@ export const productGetters: ExtendedProductGetters = {
   getSku,
   getCategoryNames,
   getByFilters,
-  getOptions
+  getOptions,
+  getBreadcrumbs
 };

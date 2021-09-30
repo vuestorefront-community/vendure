@@ -1,5 +1,5 @@
 import { AgnosticAttribute } from '@vue-storefront/core';
-import { CollectionResult, FacetValueResult, SearchResult } from '@vue-storefront/vendure-api';
+import { Collection, CollectionResult, FacetValueResult, SearchResult } from '@vue-storefront/vendure-api';
 
 export type TODO = any;
 
@@ -32,6 +32,7 @@ export type AgnosticProductVariant = {
   sku: string,
   slug: string,
   images: string [],
+  collections?: Collection[],
   price: {
     original: number,
     current: number

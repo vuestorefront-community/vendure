@@ -27,6 +27,11 @@ export default gql`
       collections {
         id
         name
+        breadcrumbs {
+          id
+          name
+          slug
+        }
       }
       optionGroups {
         id
