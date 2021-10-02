@@ -157,10 +157,15 @@ const getBreadcrumbs = (
   const collection = product?.collections?.slice(-1);
 
   // TODO: Find a better solution for category path than hardcoding '/c/'
-  return collection[0]?.breadcrumbs?.map((breadcrumb) => ({
+  const breadcrumbs = collection[0]?.breadcrumbs?.map((breadcrumb) => ({
     text: breadcrumb?.name === ROOT_COLLECTION ? 'Home' : breadcrumb?.name,
     link: breadcrumb?.slug === ROOT_COLLECTION ? '/' : `/c/${breadcrumb?.slug}`
   }));
+  breadcrumbs.push({
+    text: product?.name,
+    link: product?.slug
+  });
+  return breadcrumbs;
 };
 
 export const productGetters: ExtendedProductGetters = {
