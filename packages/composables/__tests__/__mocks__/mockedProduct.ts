@@ -1,5 +1,6 @@
 import { Product } from '@vue-storefront/vendure-api';
 import { AgnosticProductOptions, AgnosticProductVariant } from '../../src/types';
+import { AgnosticBreadcrumb } from '@vue-storefront/core';
 
 export const mockedProduct: Product = {
   slug: 'laptop',
@@ -437,5 +438,24 @@ export const mockedOptions: AgnosticProductOptions[] = [
         value: '8gb'
       }
     ]
+  }
+];
+
+export const mockedProductBreadcrumbs: AgnosticBreadcrumb[] = [
+  {
+    text: 'Home',
+    link: '/'
+  },
+  {
+    text: 'Electronics',
+    link: '/c/electronics'
+  },
+  {
+    text: 'Computers',
+    link: '/c/computers'
+  },
+  {
+    text: 'Laptop 13 inch 8GB',
+    link: 'laptop'
   }
 ];
