@@ -59,12 +59,39 @@ export const mockedProduct: Product = {
     {
       id: '2',
       name: 'Electronics',
-      __typename: 'Collection'
+      breadcrumbs: [
+        {
+          id: '1',
+          name: '__root_collection__',
+          slug: '__root_collection__'
+        },
+        {
+          id: '2',
+          name: 'Electronics',
+          slug: 'electronics'
+        }
+      ]
     },
     {
       id: '3',
       name: 'Computers',
-      __typename: 'Collection'
+      breadcrumbs: [
+        {
+          id: '1',
+          name: '__root_collection__',
+          slug: '__root_collection__'
+        },
+        {
+          id: '2',
+          name: 'Electronics',
+          slug: 'electronics'
+        },
+        {
+          id: '3',
+          name: 'Computers',
+          slug: 'computers'
+        }
+      ]
     }
   ],
   optionGroups: [
@@ -119,6 +146,45 @@ export const mockedProductVariant: AgnosticProductVariant = {
   name: 'Laptop 13 inch 8GB',
   sku: 'L2201308',
   slug: 'laptop',
+  collections: [
+    {
+      id: '2',
+      name: 'Electronics',
+      breadcrumbs: [
+        {
+          id: '1',
+          name: '__root_collection__',
+          slug: '__root_collection__'
+        },
+        {
+          id: '2',
+          name: 'Electronics',
+          slug: 'electronics'
+        }
+      ]
+    },
+    {
+      id: '3',
+      name: 'Computers',
+      breadcrumbs: [
+        {
+          id: '1',
+          name: '__root_collection__',
+          slug: '__root_collection__'
+        },
+        {
+          id: '2',
+          name: 'Electronics',
+          slug: 'electronics'
+        },
+        {
+          id: '3',
+          name: 'Computers',
+          slug: 'computers'
+        }
+      ]
+    }
+  ],
   images: ['http://localhost:3000/assets/preview/71/derick-david-409858-unsplash__preview.jpg'],
   price: {
     original: 129900,
@@ -134,6 +200,45 @@ export const mockedAllProductVariants: AgnosticProductVariant[] = [
     name: 'Laptop 13 inch 8GB',
     sku: 'L2201308',
     slug: 'laptop',
+    collections: [
+      {
+        id: '2',
+        name: 'Electronics',
+        breadcrumbs: [
+          {
+            id: '1',
+            name: '__root_collection__',
+            slug: '__root_collection__'
+          },
+          {
+            id: '2',
+            name: 'Electronics',
+            slug: 'electronics'
+          }
+        ]
+      },
+      {
+        id: '3',
+        name: 'Computers',
+        breadcrumbs: [
+          {
+            id: '1',
+            name: '__root_collection__',
+            slug: '__root_collection__'
+          },
+          {
+            id: '2',
+            name: 'Electronics',
+            slug: 'electronics'
+          },
+          {
+            id: '3',
+            name: 'Computers',
+            slug: 'computers'
+          }
+        ]
+      }
+    ],
     images: ['http://localhost:3000/assets/preview/71/derick-david-409858-unsplash__preview.jpg'],
     price: {
       original: 129900,
@@ -147,6 +252,45 @@ export const mockedAllProductVariants: AgnosticProductVariant[] = [
     name: 'Laptop 15 inch 8GB',
     sku: 'L2201508',
     slug: 'laptop',
+    collections: [
+      {
+        id: '2',
+        name: 'Electronics',
+        breadcrumbs: [
+          {
+            id: '1',
+            name: '__root_collection__',
+            slug: '__root_collection__'
+          },
+          {
+            id: '2',
+            name: 'Electronics',
+            slug: 'electronics'
+          }
+        ]
+      },
+      {
+        id: '3',
+        name: 'Computers',
+        breadcrumbs: [
+          {
+            id: '1',
+            name: '__root_collection__',
+            slug: '__root_collection__'
+          },
+          {
+            id: '2',
+            name: 'Electronics',
+            slug: 'electronics'
+          },
+          {
+            id: '3',
+            name: 'Computers',
+            slug: 'computers'
+          }
+        ]
+      }
+    ],
     images: ['http://localhost:3000/assets/preview/71/derick-david-409858-unsplash__preview.jpg'],
     price: {
       original: 139900,
@@ -160,6 +304,45 @@ export const mockedAllProductVariants: AgnosticProductVariant[] = [
     name: 'Laptop 13 inch 16GB',
     sku: 'L2201316',
     slug: 'laptop',
+    collections: [
+      {
+        id: '2',
+        name: 'Electronics',
+        breadcrumbs: [
+          {
+            id: '1',
+            name: '__root_collection__',
+            slug: '__root_collection__'
+          },
+          {
+            id: '2',
+            name: 'Electronics',
+            slug: 'electronics'
+          }
+        ]
+      },
+      {
+        id: '3',
+        name: 'Computers',
+        breadcrumbs: [
+          {
+            id: '1',
+            name: '__root_collection__',
+            slug: '__root_collection__'
+          },
+          {
+            id: '2',
+            name: 'Electronics',
+            slug: 'electronics'
+          },
+          {
+            id: '3',
+            name: 'Computers',
+            slug: 'computers'
+          }
+        ]
+      }
+    ],
     images: ['http://localhost:3000/assets/preview/71/derick-david-409858-unsplash__preview.jpg'],
     price: {
       original: 219900,
@@ -173,6 +356,45 @@ export const mockedAllProductVariants: AgnosticProductVariant[] = [
     name: 'Laptop 15 inch 16GB',
     sku: 'L2201516',
     slug: 'laptop',
+    collections: [
+      {
+        id: '2',
+        name: 'Electronics',
+        breadcrumbs: [
+          {
+            id: '1',
+            name: '__root_collection__',
+            slug: '__root_collection__'
+          },
+          {
+            id: '2',
+            name: 'Electronics',
+            slug: 'electronics'
+          }
+        ]
+      },
+      {
+        id: '3',
+        name: 'Computers',
+        breadcrumbs: [
+          {
+            id: '1',
+            name: '__root_collection__',
+            slug: '__root_collection__'
+          },
+          {
+            id: '2',
+            name: 'Electronics',
+            slug: 'electronics'
+          },
+          {
+            id: '3',
+            name: 'Computers',
+            slug: 'computers'
+          }
+        ]
+      }
+    ],
     images: ['http://localhost:3000/assets/preview/71/derick-david-409858-unsplash__preview.jpg'],
     price: {
       original: 229900,

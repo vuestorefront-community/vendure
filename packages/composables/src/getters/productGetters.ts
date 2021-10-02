@@ -100,7 +100,7 @@ const getByFilters = (product: Product, filters?: ProductFilter): AgnosticProduc
     name: variant?.name,
     sku: variant?.sku,
     slug: masterVariant?.slug,
-    collections,
+    collections: collections?.map(collection => ({id: collection.id, name: collection.name, breadcrumbs: collection.breadcrumbs})),
     images: [featuredAsset?.preview],
     price: {
       original: variant?.price,

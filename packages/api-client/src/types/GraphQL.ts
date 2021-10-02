@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -158,6 +160,13 @@ export type Collection = Node & {
   translations: Array<CollectionTranslation>;
   productVariants: ProductVariantList;
   customFields?: Maybe<Scalars['JSON']>;
+};
+
+export type ProductCollection = {
+  __typename?: 'ProductCollection';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  breadcrumbs: Array<CollectionBreadcrumb>;
 };
 
 export type CollectionProductVariantsArgs = {
