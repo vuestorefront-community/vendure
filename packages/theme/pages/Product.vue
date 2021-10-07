@@ -214,11 +214,7 @@ export default {
       }
     ]);
 
-    const breadcrumbs = computed(() =>
-      productGetters.getBreadcrumbs
-        ? productGetters.getBreadcrumbs(product.value)
-        : props.fallbackBreadcrumbs
-    );
+    const breadcrumbs = computed(() => productGetters.getBreadcrumbs(product.value));
     const productGallery = computed(() => productGetters.getGallery(product.value).map(img => ({
       mobile: { url: img.small },
       desktop: { url: img.normal },
