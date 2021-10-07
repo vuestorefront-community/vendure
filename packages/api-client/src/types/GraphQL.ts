@@ -162,13 +162,6 @@ export type Collection = Node & {
   customFields?: Maybe<Scalars['JSON']>;
 };
 
-export type ProductCollection = {
-  __typename?: 'ProductCollection';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  breadcrumbs: Array<CollectionBreadcrumb>;
-};
-
 export type CollectionProductVariantsArgs = {
   options?: Maybe<ProductVariantListOptions>;
 };
