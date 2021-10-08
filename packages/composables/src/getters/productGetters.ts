@@ -5,6 +5,7 @@ import {
   ProductGetters,
   AgnosticBreadcrumb
 } from '@vue-storefront/core';
+import { getCurrentInstance } from '@vue/composition-api';
 import { ProductFilter, Product } from '@vue-storefront/vendure-api';
 import { AgnosticProductOptions, AgnosticProductVariant } from '../types';
 import { createPrice } from '../helpers/_utils';
@@ -15,7 +16,10 @@ interface ExtendedProductGetters extends ProductGetters<AgnosticProductVariant, 
   getOptions: (product: Product, filters?: string[]) => AgnosticProductOptions[]
   getCategoryNames: (product: Product) => string[];
 }
-
+const getInstance = () => {
+  const vm = getCurrentInstance();
+  return vm.$root as any;
+};
 const getName = (product: AgnosticProductVariant): string => {
   return product?.name || '';
 };
@@ -150,16 +154,22 @@ const getTotalReviews = (product: AgnosticProductVariant): number => {
 const getAverageRating = (product: AgnosticProductVariant): number => {
   return 0;
 };
-const getBreadcrumbs = (
-  product: AgnosticProductVariant
-): AgnosticBreadcrumb[] => {
+const getBreadcrumbs = (product: AgnosticProductVariant): AgnosticBreadcrumb[] => {
   if (!product.collections?.length) return [];
   const collection = product?.collections?.slice(-1);
+  const instance = getInstance();
+  // get the route configuration for home
+  const homeRouteConfig = instance.$router.options.routes.find(route => route.name === 'home');
 
-  // TODO: Find a better solution for category path than hardcoding '/c/'
+  // get the route configuration for the category
+  const categoryRouteConfig = instance.$router.options.routes.find(route => route.name === 'category');
+
+  // separate the path by slugs to use the segment before the first slug
+  const categorySegments = categoryRouteConfig.path.split(':');
+
   const breadcrumbs = collection[0]?.breadcrumbs?.map((breadcrumb) => ({
     text: breadcrumb?.name === ROOT_COLLECTION ? 'Home' : breadcrumb?.name,
-    link: breadcrumb?.slug === ROOT_COLLECTION ? '/' : `/c/${breadcrumb?.slug}`
+    link: breadcrumb?.slug === ROOT_COLLECTION ? homeRouteConfig?.path || '/' : categorySegments[0] + breadcrumb?.slug
   }));
   breadcrumbs.push({
     text: product?.name,
