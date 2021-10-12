@@ -12,7 +12,12 @@ export interface UseUserFactoryParams<
   register: (context: Context, params: REGISTER_USER_PARAMS & {customQuery?: CustomQuery}) => Promise<USER>;
   logIn: (context: Context, params: { username: string; password: string; customQuery?: CustomQuery }) => Promise<USER>;
   changePassword: (context: Context, params: {currentUser: USER; currentPassword: string; newPassword: string; customQuery?: CustomQuery}) => Promise<USER>;
+  updateEmail: (context: Context, params: {currentUser: USER; updatedUserData: UPDATE_USER_PARAMS; customQuery?: CustomQuery}) => Promise<void>;
 }
+
+export type CustomUseUser<USER, UPDATE_USER_PARAMS> = UseUser<USER, UPDATE_USER_PARAMS> & { updateEmail }
+
+export type CustomUseUserErrors = UseUserErrors & { updateEmail: null }
 
 export const useUserFactory = <
 USER,
@@ -21,20 +26,21 @@ REGISTER_USER_PARAMS extends { email: string; password: string },
 >(
     factoryParams: UseUserFactoryParams<USER, UPDATE_USER_PARAMS, REGISTER_USER_PARAMS>
   ) => {
-  return function useUser (): UseUser<USER, UPDATE_USER_PARAMS> {
-    const errorsFactory = (): UseUserErrors => ({
+  return function useUser (): CustomUseUser<USER, UPDATE_USER_PARAMS> {
+    const errorsFactory = (): CustomUseUserErrors => ({
       updateUser: null,
       register: null,
       login: null,
       logout: null,
       changePassword: null,
-      load: null
+      load: null,
+      updateEmail: null
     });
 
     const user: Ref<USER> = sharedRef(null, 'useUser-user');
     const loading: Ref<boolean> = sharedRef(false, 'useUser-loading');
     const isAuthenticated = computed(() => Boolean(user.value));
-    const error: Ref<UseUserErrors> = sharedRef(errorsFactory(), 'useUser-error');
+    const error: Ref<CustomUseUserErrors> = sharedRef(errorsFactory(), 'useUser-error');
 
     const _factoryParams = configureFactoryParams(factoryParams);
 
@@ -118,8 +124,8 @@ REGISTER_USER_PARAMS extends { email: string; password: string },
         loading.value = true;
         user.value = await _factoryParams.changePassword({
           currentUser: user.value,
-          currentPassword: params.current,
-          newPassword: params.new,
+          currentPassword: params.currentPassword,
+          newPassword: params.newPassword,
           customQuery: params.customQuery
         });
         error.value.changePassword = null;
@@ -147,6 +153,22 @@ REGISTER_USER_PARAMS extends { email: string; password: string },
       }
     };
 
+    const updateEmail = async ({ user: providedUser, customQuery }) => {
+      Logger.debug('useUserFactory.updateEmail', providedUser);
+      resetErrorValue();
+
+      try {
+        loading.value = true;
+        await _factoryParams.updateEmail({currentUser: user.value, updatedUserData: providedUser, customQuery});
+        error.value.updateEmail = null;
+      } catch (err) {
+        error.value.updateEmail = err;
+        Logger.error('useUser/updateEmail', err);
+      } finally {
+        loading.value = false;
+      }
+    };
+
     return {
       setUser,
       user: computed(() => user.value),
@@ -156,6 +178,7 @@ REGISTER_USER_PARAMS extends { email: string; password: string },
       logout,
       isAuthenticated,
       changePassword,
+      updateEmail,
       load,
       loading: computed(() => loading.value),
       error: computed(() => error.value)

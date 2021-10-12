@@ -49,7 +49,8 @@ module.exports = {
           ['/composables/use-billing', 'useBilling'],
           ['/composables/use-shipping', 'useShipping'],
           ['/composables/use-shipping-provider', 'useShippingProvider'],
-          ['/composables/use-user', 'useUser']
+          ['/composables/use-user', 'useUser'],
+          ['/composables/use-payment', 'usePayment'],
         ]
       },
       {
@@ -60,6 +61,8 @@ module.exports = {
           ['/theme/composables', 'Composables'],
           ['/theme/helpers', 'Helpers'],
           ['/theme/checkout-middleware', 'Checkout middleware'],
+          ['/theme/update-email', 'Update user email'],
+          ['/theme/is-authenticated-middleware', 'Is-Authenticated middleware'],
         ]
       },
       {

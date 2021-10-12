@@ -25,7 +25,7 @@
           <SfInput
             v-e2e="'billing-firstName'"
             v-model="billingDetails.firstName"
-            label="First name"
+            :label="$t('First name')"
             name="firstName"
             class="form__element form__element--half"
             required
@@ -42,7 +42,7 @@
           <SfInput
             v-e2e="'billing-lastName'"
             v-model="billingDetails.lastName"
-            label="Last name"
+            :label="$t('Last name')"
             name="lastName"
             class="form__element form__element--half form__element--half-even"
             required
@@ -59,7 +59,7 @@
           <SfInput
             v-e2e="'billing-streetName'"
             v-model="billingDetails.streetName"
-            label="Street name"
+            :label="$t('Street name')"
             name="streetName"
             class="form__element form__element--half"
             required
@@ -76,7 +76,7 @@
           <SfInput
             v-e2e="'billing-apartment'"
             v-model="billingDetails.apartment"
-            label="House/Apartment number"
+            :label="$t('House_OR_Apartment_number')"
             name="apartment"
             class="form__element form__element--half form__element--half-even"
             required
@@ -93,7 +93,7 @@
           <SfInput
             v-e2e="'billing-city'"
             v-model="billingDetails.city"
-            label="City"
+            :label="$t('City')"
             name="city"
             class="form__element form__element--half"
             required
@@ -108,7 +108,7 @@
           <SfInput
             v-e2e="'billing-state'"
             v-model="billingDetails.state"
-            label="State/Province"
+            :label="$t('State_OR_Province')"
             name="state"
             class="form__element form__element--half form__element--half-even"
           />
@@ -122,7 +122,7 @@
           <SfSelect
             v-e2e="'billing-country'"
             :value="billingDetails.country"
-            label="Country"
+            :label="$t('Country')"
             name="country"
             class="form__element form__element--half form__select sf-select--underlined"
             required
@@ -147,7 +147,7 @@
           <SfInput
             v-e2e="'billing-zipcode'"
             v-model="billingDetails.postalCode"
-            label="Zip-code"
+            :label="$t('Zip-code')"
             name="zipCode"
             class="form__element form__element--half form__element--half-even"
             required
@@ -164,7 +164,7 @@
           <SfInput
             v-e2e="'billing-phone'"
             v-model="billingDetails.phone"
-            label="Phone number"
+            :label="$t('Phone number')"
             name="phone"
             class="form__element form__element--half"
             required

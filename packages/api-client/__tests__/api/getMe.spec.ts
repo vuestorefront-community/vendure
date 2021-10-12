@@ -1,8 +1,8 @@
 import getMe from '../../src/api/getMe';
-import activeCustomerQuery from '../../src/api/getMe/activeCustomerQuery';
+import meQuery from '../../src/api/getMe/meQuery';
 import { Context } from '../../src/types';
 
-describe('[vendure-api-client] getMe', () => {
+describe('[vendure-api-client] getActiveCustomer', () => {
   it('returns current customer', async () => {
     const givenVariables = {};
 
@@ -11,7 +11,7 @@ describe('[vendure-api-client] getMe', () => {
       client: {
         query: ({ variables, query }) => {
           expect(variables).toEqual(givenVariables);
-          expect(query).toEqual(activeCustomerQuery);
+          expect(query).toEqual(meQuery);
 
           return { data: 'get me response' };
         }
