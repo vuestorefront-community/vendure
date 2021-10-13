@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://blog.vuestorefront.io/wp-content/uploads/2020/01/1QU9F6hQlFyHsJIbsdmt6FA.png" height="100px" />
+  <img src="https://user-images.githubusercontent.com/1626923/137092657-fb398d20-b592-4661-a1f9-4135db0b61d5.png" height="100px" />
   <img src="https://www.vendure.io/logo.png" height="100px" style="margin-left: 30px;">
 </div>
 
