@@ -19,8 +19,6 @@ const transitionOrderToState = async (context: Context, params: TransitionOrderT
     fetchPolicy: NO_CACHE_FETCH_POLICY
   }) as TransitionOrderToState;
 
-  console.log(request);
-
   return request;
 };
 

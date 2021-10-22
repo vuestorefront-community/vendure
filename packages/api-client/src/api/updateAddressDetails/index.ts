@@ -23,8 +23,6 @@ const updateAddressDetails = async (context: Context, params: UpdateAddressDetai
     fetchPolicy: NO_CACHE_FETCH_POLICY
   }) as UpdateAddressDetailsResponse;
 
-  console.log('updateAddressDetails', request)
-
   if (isBilling && isCustomerDataFilled(request?.data?.setOrderBillingAddress as Order)) {
     await transitionOrderToState(context, { state: ARRANGING_PAYMENT_STATE });
   }
