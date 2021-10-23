@@ -11,7 +11,7 @@ import { AgnosticProductOptions, AgnosticProductVariant } from '../types';
 import { createPrice } from '../helpers/_utils';
 import { ROOT_COLLECTION } from '../helpers';
 
-interface ExtendedProductGetters extends ProductGetters<AgnosticProductVariant, ProductFilter> {
+interface ExtendedProductGetters extends ProductGetters<AgnosticProductVariant | Product, ProductFilter> {
   getByFilters: (product: Product, filters?: ProductFilter) => AgnosticProductVariant[] | AgnosticProductVariant;
   getOptions: (product: Product, filters?: string[]) => AgnosticProductOptions[]
   getCategoryNames: (product: Product) => string[];
@@ -154,13 +154,13 @@ const getTotalReviews = (product: AgnosticProductVariant): number => {
 const getAverageRating = (product: AgnosticProductVariant): number => {
   return 0;
 };
-const getBreadcrumbs = (product): AgnosticBreadcrumb[] => {
+const getBreadcrumbs = (product: Product): AgnosticBreadcrumb[] => {
   if (!product.collections?.length) return [];
   const collection = product?.collections?.slice(-1);
   const instance = getInstance();
 
   const getRouteByName = (name: string) => instance?.$router?.options?.routes?.find(route => route?.name === name);
-  
+
   const homeRouteConfig = getRouteByName('home');
   const categoryRouteConfig = getRouteByName('category');
 
@@ -169,7 +169,7 @@ const getBreadcrumbs = (product): AgnosticBreadcrumb[] => {
 
   const breadcrumbs = collection[0]?.breadcrumbs?.map((breadcrumb) => ({
     text: breadcrumb?.name === ROOT_COLLECTION ? 'Home' : breadcrumb?.name,
-    link: breadcrumb?.slug === ROOT_COLLECTION ? homeRouteConfig?.path || '/' : (categorySegments && categorySegments[0] || '/c/') + breadcrumb?.slug
+    link: breadcrumb?.slug === ROOT_COLLECTION ? homeRouteConfig?.path || '/' : ((categorySegments && categorySegments[0]) || '/c/') + breadcrumb?.slug
   }));
   breadcrumbs.push({
     text: product?.name,
