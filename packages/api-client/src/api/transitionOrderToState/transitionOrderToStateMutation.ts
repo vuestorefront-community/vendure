@@ -1,19 +1,14 @@
 import gql from 'graphql-tag';
-import { CartFragment } from '../../fragments';
+import { CartFragment, ErrorResultFragment } from '../../fragments';
 
 export default gql`
   ${CartFragment}
+  ${ErrorResultFragment}
 
   mutation transitionOrderToState($state: String!) {
     transitionOrderToState(state: $state) {
       ...Cart
-      ... on OrderStateTransitionError {
-        errorCode
-        message
-        transitionError
-        fromState
-        toState
-      }
+      ...ErrorResult
     }
   }
 `;

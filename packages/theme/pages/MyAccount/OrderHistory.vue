@@ -58,7 +58,7 @@
             >{{ tableHeader }}</SfTableHeader>
             <SfTableHeader class="orders__element--right" />
           </SfTableHeading>
-          <SfTableRow v-for="order in orders" :key="orderGetters.getId(order)">
+          <SfTableRow v-for="order in orders.items" :key="orderGetters.getId(order)">
             <SfTableData v-e2e="'order-number'">{{ orderGetters.getId(order) }}</SfTableData>
             <SfTableData>{{ orderGetters.getDate(order) }}</SfTableData>
             <SfTableData>{{ $n(orderGetters.getPrice(order), 'currency') }}</SfTableData>
@@ -92,14 +92,6 @@
         </div>
       </div>
     </SfTab>
-    <SfTab title="Returns">
-      <p class="message">
-        This feature is not implemented yet! Please take a look at
-        <br />
-        <SfLink class="message__link" href="#">https://github.com/DivanteLtd/vue-storefront/issues</SfLink>
-        for our Roadmap!
-      </p>
-    </SfTab>
   </SfTabs>
 </template>
 
@@ -114,8 +106,7 @@ import {
 } from '@storefront-ui/vue';
 import { computed, ref } from '@vue/composition-api';
 import { useUserOrder, orderGetters } from '@vue-storefront/vendure';
-import { AgnosticOrderStatus } from '@vue-storefront/core';
-import { onSSR } from '@vue-storefront/core';
+import { AgnosticOrderStatus, onSSR } from '@vue-storefront/core';
 
 export default {
   name: 'PersonalDetails',
@@ -165,9 +156,9 @@ export default {
 
     return {
       tableHeaders,
-      orders: computed(() => orders.value?.results ?? []),
+      orders: computed(() => orders.value ?? []),
       offset: computed(() => orders.value?.offset ?? 0),
-      totalOrders: computed(() => orderGetters.getOrdersTotal(orders.value)),
+      totalOrders: computed(() => orderGetters.getTotalItems(orders.value)),
       getStatusTextClass,
       goNext,
       goPrev,
