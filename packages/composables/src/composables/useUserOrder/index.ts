@@ -8,12 +8,17 @@ import {
 import type {
   useUserOrderSearchParams as SearchParams
 } from '../../types';
+import { useUser } from '../useUser';
 
 const params: UseUserOrderFactoryParams<any, SearchParams> = {
+  provide() {
+    return {
+      user: useUser()
+    };
+  },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   searchOrders: async (context: Context, params) => {
-    console.log('Mocked: searchOrders');
-    return {};
+    return context.user?.user?.value?.orders;
   }
 };
 

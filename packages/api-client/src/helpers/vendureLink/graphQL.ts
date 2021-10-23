@@ -70,7 +70,8 @@ export const apolloLinkFactory = (
     return forward(operation).map((response) => {
       const context = operation.getContext();
       const authCookie = context.response.headers.get(VENDURE_AUTH_TOKEN_NAME);
-      if (settings.auth.getAuthCookie() !== authCookie || !settings.auth.getAuthCookie()) {
+      const hasNewCookie = authCookie && (settings.auth.getAuthCookie() !== authCookie);
+      if (hasNewCookie || !settings.auth.getAuthCookie()) {
         settings.auth.setAuthCookie(authCookie);
       }
 
