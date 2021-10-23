@@ -18,7 +18,7 @@ interface ExtendedProductGetters extends ProductGetters<AgnosticProductVariant, 
 }
 const getInstance = () => {
   const vm = getCurrentInstance();
-  return vm.$root as any;
+  return vm?.$root as any;
 };
 const getName = (product: AgnosticProductVariant): string => {
   return product?.name || '';
@@ -154,22 +154,22 @@ const getTotalReviews = (product: AgnosticProductVariant): number => {
 const getAverageRating = (product: AgnosticProductVariant): number => {
   return 0;
 };
-const getBreadcrumbs = (product: AgnosticProductVariant): AgnosticBreadcrumb[] => {
+const getBreadcrumbs = (product): AgnosticBreadcrumb[] => {
   if (!product.collections?.length) return [];
   const collection = product?.collections?.slice(-1);
   const instance = getInstance();
-  // get the route configuration for home
-  const homeRouteConfig = instance.$router.options.routes.find(route => route.name === 'home');
 
-  // get the route configuration for the category
-  const categoryRouteConfig = instance.$router.options.routes.find(route => route.name === 'category');
+  const getRouteByName = (name: string) => instance?.$router?.options?.routes?.find(route => route?.name === name);
+  
+  const homeRouteConfig = getRouteByName('home');
+  const categoryRouteConfig = getRouteByName('category');
 
   // separate the path by slugs to use the segment before the first slug
-  const categorySegments = categoryRouteConfig.path.split(':');
+  const categorySegments = categoryRouteConfig?.path?.split(':');
 
   const breadcrumbs = collection[0]?.breadcrumbs?.map((breadcrumb) => ({
     text: breadcrumb?.name === ROOT_COLLECTION ? 'Home' : breadcrumb?.name,
-    link: breadcrumb?.slug === ROOT_COLLECTION ? homeRouteConfig?.path || '/' : categorySegments[0] + breadcrumb?.slug
+    link: breadcrumb?.slug === ROOT_COLLECTION ? homeRouteConfig?.path || '/' : (categorySegments && categorySegments[0] || '/c/') + breadcrumb?.slug
   }));
   breadcrumbs.push({
     text: product?.name,
