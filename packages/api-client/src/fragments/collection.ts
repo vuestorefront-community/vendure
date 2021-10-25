@@ -4,6 +4,7 @@ export const CategoryCollection = `
 		name
 		slug
 		breadcrumbs {
+			id
 			name
 			slug
 		}

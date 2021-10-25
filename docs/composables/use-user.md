@@ -45,24 +45,24 @@ interface UseUserLoginParams {
 
 - `logout` - function for logout a user.
 
-- [TBD] `changePassword` - function for changing user password. This method accepts a single `params` object. The `params` has the following options:
+- `changePassword` - function for changing user password. This method accepts a single `params` object. The `params` has the following options:
 
   - `currentPassword: string`
 
   - `newPassword: string`
 
-- [TBD] `updateUser` - function for updating user data. When invoked, it submits data to the API and populates user property with updated information.  This method accepts a single `params` object. The `params` has the following option:
+- `updateUser` - function for updating user data. When invoked, it submits data to the API and populates user property with updated information.  This method accepts a single `params` object. The `params` has the following option:
 
   - `user: UPDATE_USER_PARAMS`
 
 ```ts
 interface UPDATE_USER_PARAMS {
-  email: string;
-  password: string;
   firstName?: string;
   lastName?: string;
 }
 ```
+
+- [TBD] `updateEmail` - method used to update user email.
 
 - `loading: boolean` - reactive object containing information about loading state of `user`.
 
@@ -78,6 +78,7 @@ interface UseUserErrors {
   logout: Error;
   changePassword: Error;
   load: Error;
+  updateEmail: Error;
 }
 ```
 

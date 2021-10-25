@@ -2,18 +2,24 @@ import {
   AgnosticMediaGalleryItem,
   AgnosticAttribute,
   AgnosticPrice,
-  ProductGetters
+  ProductGetters,
+  AgnosticBreadcrumb
 } from '@vue-storefront/core';
+import { getCurrentInstance } from '@vue/composition-api';
 import { ProductFilter, Product } from '@vue-storefront/vendure-api';
 import { AgnosticProductOptions, AgnosticProductVariant } from '../types';
 import { createPrice } from '../helpers/_utils';
+import { ROOT_COLLECTION } from '../helpers';
 
-interface ExtendedProductGetters extends ProductGetters<AgnosticProductVariant, ProductFilter> {
+interface ExtendedProductGetters extends ProductGetters<AgnosticProductVariant | Product, ProductFilter> {
   getByFilters: (product: Product, filters?: ProductFilter) => AgnosticProductVariant[] | AgnosticProductVariant;
   getOptions: (product: Product, filters?: string[]) => AgnosticProductOptions[]
   getCategoryNames: (product: Product) => string[];
 }
-
+const getInstance = () => {
+  const vm = getCurrentInstance();
+  return vm?.$root as any;
+};
 const getName = (product: AgnosticProductVariant): string => {
   return product?.name || '';
 };
@@ -98,6 +104,7 @@ const getByFilters = (product: Product, filters?: ProductFilter): AgnosticProduc
     name: variant?.name,
     sku: variant?.sku,
     slug: masterVariant?.slug,
+    collections: collections?.map(collection => ({id: collection.id, name: collection.name, breadcrumbs: collection.breadcrumbs})),
     images: [featuredAsset?.preview],
     price: {
       original: variant?.price,
@@ -147,6 +154,29 @@ const getTotalReviews = (product: AgnosticProductVariant): number => {
 const getAverageRating = (product: AgnosticProductVariant): number => {
   return 0;
 };
+const getBreadcrumbs = (product: Product): AgnosticBreadcrumb[] => {
+  if (!product.collections?.length) return [];
+  const collection = product?.collections?.slice(-1);
+  const instance = getInstance();
+
+  const getRouteByName = (name: string) => instance?.$router?.options?.routes?.find(route => route?.name === name);
+
+  const homeRouteConfig = getRouteByName('home');
+  const categoryRouteConfig = getRouteByName('category');
+
+  // separate the path by slugs to use the segment before the first slug
+  const categorySegments = categoryRouteConfig?.path?.split(':');
+
+  const breadcrumbs = collection[0]?.breadcrumbs?.map((breadcrumb) => ({
+    text: breadcrumb?.name === ROOT_COLLECTION ? 'Home' : breadcrumb?.name,
+    link: breadcrumb?.slug === ROOT_COLLECTION ? homeRouteConfig?.path || '/' : ((categorySegments && categorySegments[0]) || '/c/') + breadcrumb?.slug
+  }));
+  breadcrumbs.push({
+    text: product?.name,
+    link: product?.slug
+  });
+  return breadcrumbs;
+};
 
 export const productGetters: ExtendedProductGetters = {
   getName,
@@ -165,5 +195,6 @@ export const productGetters: ExtendedProductGetters = {
   getSku,
   getCategoryNames,
   getByFilters,
-  getOptions
+  getOptions,
+  getBreadcrumbs
 };

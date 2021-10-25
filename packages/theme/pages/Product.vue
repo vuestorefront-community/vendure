@@ -76,7 +76,7 @@
 
         <LazyHydrate when-idle>
           <SfTabs :open-tab="1" class="product__tabs">
-            <SfTab title="Description">
+            <SfTab :title="$t('Description')">
               <SfProperty
                 v-for="(property, i) in properties"
                 :key="i"
@@ -91,7 +91,7 @@
                 </template>
               </SfProperty>
             </SfTab>
-            <SfTab title="Read reviews">
+            <SfTab :title="$t('Read reviews')">
               <SfReview
                 v-for="review in reviews"
                 :key="reviewGetters.getReviewId(review)"
@@ -101,13 +101,13 @@
                 :max-rating="5"
                 :rating="reviewGetters.getReviewRating(review)"
                 :char-limit="250"
-                read-more-text="Read more"
-                hide-full-text="Read less"
+                :read-more-text="$t('Read more')"
+                :hide-full-text="$t('Read less')"
                 class="product__review"
               />
             </SfTab>
             <SfTab
-              title="Additional Information"
+              :title="$t('Additional Information')"
               class="product__additional-info"
             >
             <div class="product__additional-info">
@@ -214,8 +214,7 @@ export default {
       }
     ]);
 
-    // TODO: Implement breadcrumbs
-    // const breadcrumbs = computed(() => productGetters.getBreadcrumbs ? productGetters.getBreadcrumbs(product.value) : props.fallbackBreadcrumbs);
+    const breadcrumbs = computed(() => productGetters.getBreadcrumbs(product.value));
     const productGallery = computed(() => productGetters.getGallery(product.value).map(img => ({
       mobile: { url: img.small },
       desktop: { url: img.normal },
@@ -265,7 +264,8 @@ export default {
       productGallery,
       properties,
       addToCart,
-      products
+      products,
+      breadcrumbs
     };
   },
   components: {
@@ -296,27 +296,7 @@ export default {
       stock: 5,
       brand:
           'Brand name is the perfect pairing of quality and design. This label creates major everyday vibes with its collection of modern brooches, silver and gold jewellery, or clips it back with hair accessories in geo styles.',
-      careInstructions: 'Do not wash!',
-      breadcrumbs: [
-        {
-          text: 'Home',
-          route: {
-            link: '#'
-          }
-        },
-        {
-          text: 'Category',
-          route: {
-            link: '#'
-          }
-        },
-        {
-          text: 'Pants',
-          route: {
-            link: '#'
-          }
-        }
-      ]
+      careInstructions: 'Do not wash!'
     };
   }
 };

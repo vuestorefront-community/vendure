@@ -1,4 +1,4 @@
-import { mockedAllProductVariants, mockedOptions, mockedProduct, mockedProductVariant } from '../__mocks__';
+import { mockedAllProductVariants, mockedOptions, mockedProduct, mockedProductVariant, mockedProductBreadcrumbs } from '../__mocks__';
 import { productGetters } from './../../src/getters/productGetters';
 import * as utils from './../../src/helpers/_utils';
 
@@ -61,5 +61,9 @@ describe('[vendure-getters] product getters', () => {
 
   it('returns a product description', () => {
     expect(productGetters.getDescription(mockedProductVariant)).toEqual('Now equipped with seventh-generation Intel Core processors, Laptop is snappier than ever. From daily tasks like launching apps and opening files to more advanced computing, you can power through your day thanks to faster SSDs and Turbo Boost processing up to 3.6GHz.');
+  });
+
+  it('returns product breadcrumbs', () => {
+    expect(productGetters.getBreadcrumbs(mockedProductVariant)).toEqual(mockedProductBreadcrumbs);
   });
 });

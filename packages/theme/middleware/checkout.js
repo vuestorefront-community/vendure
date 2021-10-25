@@ -8,8 +8,6 @@ export default async ({ app, $vsf }) => {
   const cart = await $vsf.$vendure.api.getCart();
   const activeCart = cart?.data?.activeOrder;
 
-  if (!cart?.data || !activeCart) return;
-
   if (currentPath === CheckoutSteps.Shipping && !canEnterShipping(activeCart)) {
     app.context.redirect('/');
 
@@ -21,6 +19,5 @@ export default async ({ app, $vsf }) => {
 
   } else if (currentPath === CheckoutSteps.ThankYou && !canEnterThankYou(app.context)) {
     app.context.redirect('/');
-
   }
 };

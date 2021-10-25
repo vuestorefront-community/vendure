@@ -1,31 +1,33 @@
 import { UserOrderGetters } from '@vue-storefront/core';
-import type { Order, OrderItem } from '@vue-storefront/vendure-api';
+import type { OrderList, Order, OrderItem } from '@vue-storefront/vendure-api';
+import { createPrice } from '../helpers';
 
+// TODO: to be used later
 type Orders = { offset: number; count: number; total: number; results: Order[]; }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getDate(order: Order): string {
-  return '';
+  return order?.updatedAt || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getId(order: Order): string {
-  return '1';
+  return order?.id || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getStatus(order: Order): string {
-  return '';
+  return order?.state || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getPrice(order: Order): number | null {
-  return 0;
+  return createPrice(order?.total);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItems(order: Order): OrderItem[] {
-  return [];
+function getItems(order: OrderList): Order[] {
+  return order?.items || [];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -58,7 +60,11 @@ function getOrdersTotal(orders: Orders): number {
   return 0;
 }
 
-export const orderGetters: UserOrderGetters<Order, OrderItem> = {
+function getTotalItems(order: OrderList): number {
+  return order?.totalItems || 0;
+}
+
+export const orderGetters: UserOrderGetters<any, any> = {
   getDate,
   getId,
   getStatus,
@@ -69,5 +75,6 @@ export const orderGetters: UserOrderGetters<Order, OrderItem> = {
   getItemQty,
   getItemPrice,
   getFormattedPrice,
-  getOrdersTotal
+  getOrdersTotal,
+  getTotalItems
 };

@@ -1,4 +1,4 @@
-import { CollectionListOptions, CreateAddressInput, SearchInput } from './GraphQL';
+import { CollectionListOptions, CreateAddressInput, SearchInput, CollectionBreadcrumb } from './GraphQL';
 
 export type TODO = unknown;
 
@@ -97,4 +97,21 @@ export type LoginParams = {
   rememberMe?: boolean;
 };
 
-export type CookieSameSite = boolean | 'strict' | 'lax' | 'none'
+export type ProductCollection = {
+  id: string;
+  name: string;
+  breadcrumbs: Array<CollectionBreadcrumb>;
+};
+
+export type CookieSameSite = boolean | 'strict' | 'lax' | 'none';
+
+export type UpdateCustomerPasswordParams = {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export type UpdateCustomerParams = {
+  firstName: string;
+  lastName: string;
+};
+
