@@ -1,4 +1,4 @@
-<img src="/vsf.svg" height="100px" />
+<img src="vsf.svg" height="100px" />
 <img src="https://www.vendure.io/logo.png" height="100px" style="margin-left: 30px;">
 
 # Vue Storefront 2 integration with Vendure
