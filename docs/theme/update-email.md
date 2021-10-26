@@ -6,4 +6,4 @@ This tab does not occur in default Vue Storefront template and it was added spec
 
 This functionality is currently mocked and will be developed later.
 
-<img src="/update-email.png" alt="Update Email tab in My Account"/>
+<img src="/vendure/update-email.png" alt="Update Email tab in My Account"/>
