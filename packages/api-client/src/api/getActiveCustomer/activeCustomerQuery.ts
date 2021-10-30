@@ -1,6 +1,9 @@
 import gql from 'graphql-tag';
+import { AddressFragment } from '../../fragments';
 
 export default gql`
+  ${AddressFragment}
+
   query GetActiveCustomer {
     activeCustomer {
       id
@@ -18,6 +21,9 @@ export default gql`
           total
         }
         totalItems
+      }
+      addresses {
+        ...CustomerAddress
       }
     }
   }
