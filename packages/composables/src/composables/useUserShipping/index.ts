@@ -21,7 +21,6 @@ const params: UseUserShippingFactoryParams<Address, AddressItem> = {
     console.log('Mocked: useUserShipping.addAddress', params);
     const shippingAddress: CreateAddressInput = {
       ...params?.address,
-      defaultShippingAddress: (params?.address as any).isDefault
     } as CreateAddressInput
     
     const result = await context.$vendure.api.createCustomerAddress(shippingAddress, params?.customQuery);
@@ -43,7 +42,6 @@ const params: UseUserShippingFactoryParams<Address, AddressItem> = {
 
     const shippingAddress: UpdateAddressInput = {
       ...params?.address,
-      defaultShippingAddress: (params?.address as any).isDefault
     } as UpdateAddressInput
 
     const result = await context.$vendure.api.updateCustomerAddress(shippingAddress, params?.customQuery);

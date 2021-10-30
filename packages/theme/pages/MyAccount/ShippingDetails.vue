@@ -13,7 +13,7 @@
         </p>
 
         <ShippingAddressForm
-          :address="activeAddress"
+          :address="mapAddressToAddressForm(activeAddress)"
           :isNew="isNewAddress"
           @submit="saveAddress" />
       </SfTab>
@@ -80,7 +80,7 @@ import ShippingAddressForm from '~/components/MyAccount/ShippingAddressForm';
 import { useUserShipping, userShippingGetters } from '@vue-storefront/vendure';
 import { ref, computed } from '@vue/composition-api';
 import { onSSR } from '@vue-storefront/core';
-import { mapAddressFormToOrderAddress } from '~/helpers';
+import { mapAddressFormToAddress, mapAddressToAddressForm } from '~/helpers';
 
 export default {
   name: 'ShippingDetails',
@@ -108,7 +108,7 @@ export default {
     const saveAddress = async ({ form, onComplete, onError }) => {
       try {
         const actionMethod = isNewAddress.value ? addAddress : updateAddress;
-        const data = await actionMethod({ address: mapAddressFormToOrderAddress(form) });
+        const data = await actionMethod({ address: mapAddressFormToAddress(form, 'shipping') });
         edittingAddress.value = false;
         activeAddress.value = undefined;
         await onComplete(data);
@@ -130,7 +130,8 @@ export default {
       addresses,
       edittingAddress,
       activeAddress,
-      isNewAddress
+      isNewAddress,
+      mapAddressToAddressForm,
     };
   }
 };
