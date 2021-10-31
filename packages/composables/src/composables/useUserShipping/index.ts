@@ -18,7 +18,6 @@ const params: UseUserShippingFactoryParams<Address, AddressItem> = {
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addAddress: async (context: Context, params): Promise<Address> => {
-    console.log('Mocked: useUserShipping.addAddress', params);
     const shippingAddress: CreateAddressInput = {
       ...params?.address,
     } as CreateAddressInput
@@ -32,8 +31,6 @@ const params: UseUserShippingFactoryParams<Address, AddressItem> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   deleteAddress: async (context: Context, params): Promise<Address> => {
-    console.log('Mocked: useUserShipping.deleteAddress', params);
-
     await context.$vendure.api.deleteCustomerAddress(params?.address, params?.customQuery);
     const user = await context.$vendure.api.getActiveCustomer();
 
@@ -42,8 +39,6 @@ const params: UseUserShippingFactoryParams<Address, AddressItem> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updateAddress: async (context: Context, params): Promise<Address> => {
-    console.log('Mocked: useUserShipping.updateAddress', params);
-
     const shippingAddress: UpdateAddressInput = {
       ...params?.address,
     } as UpdateAddressInput

@@ -13,7 +13,7 @@
         </p>
 
         <ShippingAddressForm
-          :address="mapAddressToAddressForm(activeAddress)"
+          :address="mapAddressToAddressForm(activeAddress, 'shipping')"
           :isNew="isNewAddress"
           @submit="saveAddress" />
       </SfTab>

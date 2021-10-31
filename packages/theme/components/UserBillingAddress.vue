@@ -1,22 +1,21 @@
 <template>
   <div>
-    <p>{{ address.firstName }} {{ address.lastName }}</p>
-    <p>{{ street }}</p>
+    <p>{{ userBillingGetters.getFirstName(address) }} {{ userBillingGetters.getLastName(address) }}</p>
+    <p>{{ userBillingGetters.getStreetName(address) }} {{ userBillingGetters.getStreetNumber(address) }}</p>
 
     <p>
-      {{ address.city }}
-      {{ address.state }}
-      {{ address.postalCode }}
+      {{ userBillingGetters.getCity(address) }}
+      {{ userBillingGetters.getProvince(address) }}
+      {{ userBillingGetters.getPostCode(address) }}
     </p>
 
-    <p>{{ country }}</p>
-    <p v-if="address.phone" class="phone">{{ address.phone }}</p>
+    <p>{{ userBillingGetters.getCountry(address) }}</p>
+    <p class="phone"> {{ userBillingGetters.getPhone(address) }}</p>
   </div>
 </template>
 
 <script>
-import { toRef, computed } from '@vue/composition-api';
-import { COUNTRIES } from '~/helpers'
+import { userBillingGetters } from '@vue-storefront/vendure';
 
 export default {
   props: {
@@ -25,28 +24,10 @@ export default {
       required: true
     }
   },
-  setup(props) {
-    const address = toRef(props, 'address');
 
-    const street = computed(() => {
-      const { streetName, streetNumber, apartment } = address.value;
-      const parts = [
-        streetName,
-        streetNumber && ` ${ streetNumber }`,
-        apartment && `, Apartment ${ apartment }`
-      ];
-
-      return parts.filter(Boolean).join('');
-    });
-
-    const country = computed(() => {
-      const { country } = address.value;
-      return COUNTRIES.find(c => c.label === country)?.label || country;
-    });
-
+  setup(_) {
     return {
-      street,
-      country
+      userBillingGetters
     };
   }
 };
