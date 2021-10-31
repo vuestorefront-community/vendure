@@ -20,9 +20,9 @@ const params: UseUserBillingFactoryParams<Address, AddressItem> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addAddress: async (context: Context, params) => {
     const billingAddress: CreateAddressInput = {
-      ...params?.address,
-    } as CreateAddressInput
-    
+      ...params?.address
+    } as CreateAddressInput;
+
     await context.$vendure.api.createCustomerAddress(billingAddress, params?.customQuery);
 
     const user = await context.$vendure.api.getActiveCustomer();
@@ -41,8 +41,8 @@ const params: UseUserBillingFactoryParams<Address, AddressItem> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updateAddress: async (context: Context, params) => {
     const billingAddress: UpdateAddressInput = {
-      ...params?.address,
-    } as UpdateAddressInput
+      ...params?.address
+    } as UpdateAddressInput;
 
     await context.$vendure.api.updateCustomerAddress(billingAddress, params?.customQuery);
     const user = await context.$vendure.api.getActiveCustomer();

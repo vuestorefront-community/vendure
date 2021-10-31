@@ -1,5 +1,4 @@
-import { OrderAddress, Address,  } from '@vue-storefront/vendure';
-import { CreateAddressInput, UpdateAddressInput } from '~/../api-client/lib';
+import { OrderAddress, Address } from '@vue-storefront/vendure';
 import { COUNTRIES } from './constants';
 
 interface AddressForm {
@@ -47,21 +46,22 @@ export const mapOrderAddressToAddressForm = (orderAddress: OrderAddress): Addres
   };
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const mapAddressFormToAddress = (addressForm: AddressForm, type: AddressType) => {
   if (type === AddressType.Billing) {
     return {
       id: addressForm?.id,
       defaultBillingAddress: Boolean(addressForm?.isDefault),
-      ...mapAddressFormToOrderAddress(addressForm),
-    }
+      ...mapAddressFormToOrderAddress(addressForm)
+    };
   } else {
     return {
       id: addressForm?.id,
       defaultShippingAddress: Boolean(addressForm?.isDefault),
-      ...mapAddressFormToOrderAddress(addressForm),
-    }
+      ...mapAddressFormToOrderAddress(addressForm)
+    };
   }
-}
+};
 
 export const mapAddressToAddressForm = (address: Address, type: AddressType): AddressForm => ({
   id: address?.id,
@@ -76,7 +76,7 @@ export const mapAddressToAddressForm = (address: Address, type: AddressType): Ad
   country: address?.country?.code,
   phone: address?.phoneNumber,
   isDefault: type === AddressType.Billing ? address?.defaultBillingAddress : address?.defaultShippingAddress
-})
+});
 
 export const getCalculatedPrice = (price: number): number => {
   return price ? price / 100 : 0;
@@ -88,4 +88,4 @@ export const getDefaultAddress = (addresses: Address[], type: AddressType): Addr
   } else {
     return addresses.find(address => address.defaultShippingAddress);
   }
-}
+};

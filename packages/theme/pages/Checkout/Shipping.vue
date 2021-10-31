@@ -285,8 +285,8 @@ export default {
         country: formAddress.country,
         postalCode: formAddress.postalCode,
         phone: formAddress.phone
-      }
-    })
+      };
+    });
 
     return {
       loading,

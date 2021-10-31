@@ -131,7 +131,7 @@ export default {
       edittingAddress,
       activeAddress,
       isNewAddress,
-      mapAddressToAddressForm,
+      mapAddressToAddressForm
     };
   }
 };

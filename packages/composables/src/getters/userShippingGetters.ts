@@ -5,7 +5,6 @@ import type {
   UserShippingAddressSearchCriteria
 } from '@vue-storefront/vendure-api';
 
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getAddresses(shipping: Address[], criteria?: UserShippingAddressSearchCriteria): AddressItem[] {
   return shipping;

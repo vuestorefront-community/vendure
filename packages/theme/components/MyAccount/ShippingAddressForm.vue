@@ -167,7 +167,7 @@ import {
 import { required, min, oneOf } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { reactive, computed, watch } from '@vue/composition-api';
-import { COUNTRIES } from '~/helpers'
+import { COUNTRIES } from '~/helpers';
 import '@/helpers';
 
 extend('required', {

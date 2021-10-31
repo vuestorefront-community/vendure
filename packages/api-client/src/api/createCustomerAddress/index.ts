@@ -1,7 +1,7 @@
 import createCustomerAddressMutation from './createCustomerAddressMutation';
 import { CustomQuery } from '@vue-storefront/core';
 import gql from 'graphql-tag';
-import { Context, CreateAddressInput, UpdateCustomerInput, UpdateCustomerResponse } from '../../types';
+import { Context, CreateAddressInput, UpdateCustomerResponse } from '../../types';
 import { NO_CACHE_FETCH_POLICY } from '../../helpers';
 
 const createCustomerAddress = async (context: Context, params: CreateAddressInput, customQuery?: CustomQuery): Promise<UpdateCustomerResponse> => {

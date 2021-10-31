@@ -3,7 +3,7 @@ import {
   useUserShippingFactory,
   UseUserShippingFactoryParams
 } from '@vue-storefront/core';
-import type { CreateAddressInput, DeleteCustomerAddress, Success, UpdateAddressInput } from '@vue-storefront/vendure-api';
+import type { CreateAddressInput, UpdateAddressInput } from '@vue-storefront/vendure-api';
 import { useUser } from '../useUser';
 import type {
   UserBillingAddress as Address,
@@ -19,9 +19,9 @@ const params: UseUserShippingFactoryParams<Address, AddressItem> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addAddress: async (context: Context, params): Promise<Address> => {
     const shippingAddress: CreateAddressInput = {
-      ...params?.address,
-    } as CreateAddressInput
-    
+      ...params?.address
+    } as CreateAddressInput;
+
     await context.$vendure.api.createCustomerAddress(shippingAddress, params?.customQuery);
 
     const user = await context.$vendure.api.getActiveCustomer();
@@ -40,8 +40,8 @@ const params: UseUserShippingFactoryParams<Address, AddressItem> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updateAddress: async (context: Context, params): Promise<Address> => {
     const shippingAddress: UpdateAddressInput = {
-      ...params?.address,
-    } as UpdateAddressInput
+      ...params?.address
+    } as UpdateAddressInput;
 
     await context.$vendure.api.updateCustomerAddress(shippingAddress, params?.customQuery);
     const user = await context.$vendure.api.getActiveCustomer();

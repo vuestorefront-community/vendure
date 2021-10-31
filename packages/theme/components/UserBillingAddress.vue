@@ -25,7 +25,7 @@ export default {
     }
   },
 
-  setup(_) {
+  setup() {
     return {
       userBillingGetters
     };
