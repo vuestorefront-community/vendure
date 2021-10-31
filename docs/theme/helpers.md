@@ -31,6 +31,9 @@ const getProductVariantByConfiguration = (product: Product, configuration: unkno
 * `mapAddressFormToOrderAddress` - transforms address provided by the customer in form into Vendure order
 * `mapOrderAddressToAddressForm` - transforms Vendure order into address to be put in form for billing step
 * `getCalculatedPrice` - converts price from cents to dolars.
+* `getDefaultAddress` - finds the address that is currently set as default (shipping or billing)
+* `mapAddressFormToAddress` - transforms address provided by the customer in form into Vendure customer address
+* `mapAddressToAddressForm` - transforms Vendure customer address into address to be put in form
 
 ```ts
 const mapAddressFormToOrderAddress = (addressForm: AddressForm): OrderAddress
@@ -38,6 +41,12 @@ const mapAddressFormToOrderAddress = (addressForm: AddressForm): OrderAddress
 const mapOrderAddressToAddressForm = (orderAddress: OrderAddress): AddressForm
 
 const getCalculatedPrice = (price: number): number
+
+const getDefaultAddress = (addresses: Address[], type: AddressType): Address
+
+const mapAddressFormToAddress = (addressForm: AddressForm, type: AddressType): Address
+
+const mapAddressToAddressForm = (address: Address, type: AddressType): AddressForm
 ```
 
 ## Checkout
@@ -49,3 +58,7 @@ const getCalculatedPrice = (price: number): number
 * `canEnterShipping` - verifies if customer can enter this state
 
 * `canEnterBilling` - verifies if customer can enter this state
+
+## Phone
+
+Helper used for input validation regarding phone numbers.
