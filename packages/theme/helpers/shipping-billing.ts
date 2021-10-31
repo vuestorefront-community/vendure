@@ -81,3 +81,11 @@ export const mapAddressToAddressForm = (address: Address, type: AddressType): Ad
 export const getCalculatedPrice = (price: number): number => {
   return price ? price / 100 : 0;
 };
+
+export const getDefaultAddress = (addresses: Address[], type: AddressType): Address => {
+  if (type === AddressType.Billing) {
+    return addresses.find(address => address.defaultBillingAddress);
+  } else {
+    return addresses.find(address => address.defaultShippingAddress);
+  }
+}
