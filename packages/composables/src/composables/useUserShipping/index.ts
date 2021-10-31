@@ -23,17 +23,21 @@ const params: UseUserShippingFactoryParams<Address, AddressItem> = {
       ...params?.address,
     } as CreateAddressInput
     
-    const result = await context.$vendure.api.createCustomerAddress(shippingAddress, params?.customQuery);
+    await context.$vendure.api.createCustomerAddress(shippingAddress, params?.customQuery);
 
-    return result?.data?.createCustomerAddress;
+    const user = await context.$vendure.api.getActiveCustomer();
+
+    return user?.data?.activeCustomer?.addresses;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  deleteAddress: async (context: Context, params): Promise<Success> => {
+  deleteAddress: async (context: Context, params): Promise<Address> => {
     console.log('Mocked: useUserShipping.deleteAddress', params);
 
-    const result = await context.$vendure.api.deleteCustomerAddress(params?.address, params?.customQuery);
-    return result?.data?.deleteCustomerAddress;
+    await context.$vendure.api.deleteCustomerAddress(params?.address, params?.customQuery);
+    const user = await context.$vendure.api.getActiveCustomer();
+
+    return user?.data?.activeCustomer?.addresses;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -44,9 +48,10 @@ const params: UseUserShippingFactoryParams<Address, AddressItem> = {
       ...params?.address,
     } as UpdateAddressInput
 
-    const result = await context.$vendure.api.updateCustomerAddress(shippingAddress, params?.customQuery);
+    await context.$vendure.api.updateCustomerAddress(shippingAddress, params?.customQuery);
+    const user = await context.$vendure.api.getActiveCustomer();
 
-    return result?.data?.updateCustomerAddress;
+    return user?.data?.activeCustomer?.addresses;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
