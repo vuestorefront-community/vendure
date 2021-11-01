@@ -1,101 +1,101 @@
 import { UserBillingGetters } from '@vue-storefront/core';
 import type {
-  UserBillingAddress as Address,
+  Address,
   UserBillingAddressItem as AddressItem,
   UserBillingAddressSearchCriteria
 } from '@vue-storefront/vendure-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getAddresses(billing: Address, criteria?: UserBillingAddressSearchCriteria): AddressItem[] {
-  return [];
+function getAddresses(billing: Address[], criteria?: UserBillingAddressSearchCriteria): AddressItem[] {
+  return billing;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getDefault(billing: Address): Address {
-  return {};
+function getDefault(billing: Address[]): Address {
+  return billing?.find(address => address?.defaultBillingAddress);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getTotal(billing: Address): number {
-  return 0;
+function getTotal(billing: Address[]): number {
+  return billing?.length;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getPostCode(address: AddressItem): string {
+function getPostCode(address: Address): string {
+  return address?.postalCode;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getStreetName(address: Address): string {
+  return address?.streetLine1?.split(' ')[0];
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getStreetNumber(address: Address): string | number {
+  return address?.streetLine1?.split(' ')[1];
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getCity(address: Address): string {
+  return address?.city;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getFirstName(address: Address): string {
+  return address?.fullName?.split(' ')[0];
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getLastName(address: Address): string {
+  return address?.fullName?.split(' ')[1];
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getCountry(address: Address): string {
+  return address?.country?.name;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getPhone(address: Address): string {
+  return address?.phoneNumber;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getEmail(address: Address): string {
   return '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getStreetName(address: AddressItem): string {
+function getProvince(address: Address): string {
+  return address?.province;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getCompanyName(address: Address): string {
+  return address?.company;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTaxNumber(address: Address): string {
   return '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getStreetNumber(address: AddressItem): string | number {
+function getId(address: Address): string {
+  return address?.id;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getApartmentNumber(address: Address): string | number {
   return '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getCity(address: AddressItem): string {
-  return '';
+function isDefault(address: Address): boolean {
+  return address?.defaultShippingAddress;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getFirstName(address: AddressItem): string {
-  return '';
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getLastName(address: AddressItem): string {
-  return '';
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getCountry(address: AddressItem): string {
-  return '';
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getPhone(address: AddressItem): string {
-  return '';
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getEmail(address: AddressItem): string {
-  return '';
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getProvince(address: AddressItem): string {
-  return '';
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getCompanyName(address: AddressItem): string {
-  return '';
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getTaxNumber(address: AddressItem): string {
-  return '';
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getId(address: AddressItem): string {
-  return '';
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getApartmentNumber(address: AddressItem): string | number {
-  return '';
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function isDefault(address: AddressItem): boolean {
-  return false;
-}
-
-export const userBillingGetters: UserBillingGetters<Address, AddressItem> = {
+export const userBillingGetters: UserBillingGetters<Address[], AddressItem> = {
   getAddresses,
   getDefault,
   getTotal,
