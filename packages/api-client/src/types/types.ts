@@ -120,5 +120,10 @@ export type DeleteCustomerAddress = {
 };
 
 export type RequestPasswordResetParams = {
-  emailAddress?: string;
+  emailAddress: string;
+};
+
+export type ResetPasswordParams = {
+  token: string,
+  password: string,
 };
