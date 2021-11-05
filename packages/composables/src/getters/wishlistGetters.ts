@@ -8,32 +8,40 @@ import type { Wishlist, WishlistItem } from '@vue-storefront/vendure-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItems(wishlist: Wishlist): WishlistItem[] {
-  return [];
+  if (process.client) {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist'));
+    return wishlist;
+  }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTotals(wishlist: Wishlist): AgnosticTotals {
-  return {
-    total: 10,
-    subtotal: 10
-  };
+  return process.client
+    ? wishlist?.reduce((acc, curr) => ({
+      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+      total: acc?.total + getItemPrice(curr)?.special,
+      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+      subtotal: acc?.subtotal + getItemPrice(curr)?.regular
+    }), ({ total: 0, subtotal: 0 }))
+    : { total: 0, subtotal: 0 };
+
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemName(item: WishlistItem): string {
-  return '';
+  return item?.name || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemImage(item: WishlistItem): string {
-  return '';
+  return item?.images[0] || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemPrice(item: WishlistItem): AgnosticPrice {
   return {
-    regular: 12,
-    special: 10
+    regular: item?.price?.original,
+    special: item?.price?.current
   };
 }
 
@@ -44,14 +52,12 @@ function getItemQty(item: WishlistItem): number {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemAttributes(item: WishlistItem, filters?: string[]): Record<string, AgnosticAttribute | string> {
-  return {
-    color: 'red'
-  };
+  return {'': ''};
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemSku(item: WishlistItem): string {
-  return '';
+  return item?.sku || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -61,7 +67,7 @@ function getShippingPrice(wishlist: Wishlist): number {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTotalItems(wishlist: Wishlist): number {
-  return 1;
+  return wishlist?.length;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
