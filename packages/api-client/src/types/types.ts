@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { CollectionListOptions, CreateAddressInput, SearchInput, CollectionBreadcrumb } from './GraphQL';
 
 export type TODO = unknown;
@@ -38,9 +40,23 @@ export type ShippingAddress = TODO;
 
 export type ShippingProvider = TODO;
 
-export type Wishlist = TODO;
+export type Wishlist = Array<WishlistItem>;
 
-export type WishlistItem = TODO;
+export type WishlistItem = {
+  _id: string,
+  _variantId?: string,
+  _description: string,
+  _categoriesRef: string[],
+  name: string,
+  sku: string,
+  slug: string,
+  images: string [],
+  collections?: ProductCollection[],
+  price: {
+    original: number,
+    current: number
+  },
+};;
 
 export type CollectionParams = {
   options?: CollectionListOptions;
