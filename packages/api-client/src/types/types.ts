@@ -118,3 +118,7 @@ export type UpdateCustomerParams = {
 export type DeleteCustomerAddress = {
   id?: string;
 };
+
+export type RequestPasswordResetParams = {
+  emailAddress?: string;
+};
