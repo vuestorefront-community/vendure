@@ -1,40 +1,34 @@
 /* eslint-disable */
 
 import { useWishlist } from './../../src/composables/useWishlist';
-import { mockedAllProductVariants, mockedProductVariant, mockedLocalStorage, mockedWishlist } from '../__mocks__';
+import { mockedProductVariant, LocalStorageMock, mockedWishlist } from '../__mocks__';
+
+const context = {};
 
 jest.mock('@vue-storefront/core', () => ({
   useWishlistFactory: (params) => () => params
 }));
 
-// const { addItem: addItemToWishlist, isInWishlist, removeItem: removeItemFromWishlist } = useWishlist();
 describe('[vendure-composables] useWishlist', () => {
   beforeAll(() => {
-    Object.defineProperty(global, 'localStorage', {
-      value: mockedLocalStorage,
-    });
+    global.localStorage = new LocalStorageMock();
   });
-  it('loads wishlist', () => {
-    // expect(useWishlist.load(context))
-  });
-  it('adds product to wishlist', () => {
-    const { addItem: addItemToWishlist } = useWishlist();
-    // expect(addItemToWishlist({product: mockedProductVariant})).toEqual(mockedWishlist);
-  });
-  it('removes product to wishlist', () => {
-    const { removeItem: removeItemFromWishlist } = useWishlist();
-    // expect(removeItemFromWishlist({product: mockedProductVariant})).toEqual([]);
-  });
-  it('it checks that product is in wishlist', () => {
-    const {isInWishlist } = useWishlist();
-    global.localStorage.setItem('wishlist', JSON.stringify(mockedWishlist))
+  it('loads wishlist', async () => {
+    const { load } = useWishlist() as any;
 
-    // expect(isInWishlist({product: mockedProductVariant})).toBeTruthy()
+    const response = await load(context);
+    expect(response).toEqual(undefined);
   });
-  it('it checks that product is not in wishlist', () => {
-    const { isInWishlist } = useWishlist();
-    global.localStorage.setItem('wishlist', JSON.stringify([]))
+  it('adds product to wishlist', async () => {
+    const { addItem } = useWishlist() as any;
 
-    // expect(isInWishlist({product: mockedProductVariant})).toBeFalsy()
+    const response = await addItem(context, {product: mockedProductVariant});
+    expect(response).toEqual(mockedWishlist);
+  });
+  it('removes product to wishlist', async () => {
+    const { removeItem } = useWishlist() as any;
+
+    const response = await removeItem(context, {product: mockedProductVariant});
+    expect(response).toEqual([]);
   });
 });

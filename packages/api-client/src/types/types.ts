@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { CollectionListOptions, CreateAddressInput, SearchInput, CollectionBreadcrumb } from './GraphQL';
 
 export type TODO = unknown;
