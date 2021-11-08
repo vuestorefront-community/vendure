@@ -149,7 +149,7 @@
         </ValidationProvider>
         <ValidationProvider
           name="phone"
-          rules="required|digits:9"
+          rules="required|phone"
           v-slot="{ errors }"
           slim
         >
@@ -206,12 +206,13 @@ import {
   SfButton,
   SfSelect
 } from '@storefront-ui/vue';
-import { ref } from '@vue/composition-api';
+import { ref, onMounted } from '@vue/composition-api';
 import { onSSR } from '@vue-storefront/core';
-import { useShipping, useShippingProvider } from '@vue-storefront/vendure';
+import { useShipping, useShippingProvider, useUserShipping } from '@vue-storefront/vendure';
 import { required, min, digits } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
-import { mapAddressFormToOrderAddress, COUNTRIES } from '~/helpers';
+import { mapAddressFormToOrderAddress, COUNTRIES, getDefaultAddress, mapAddressToAddressForm } from '~/helpers';
+import '@/helpers';
 
 extend('required', {
   ...required,
@@ -241,6 +242,7 @@ export default {
     const isFormSubmitted = ref(false);
     const { load, save, loading } = useShipping();
     const { loading: loadingShippingProvider } = useShippingProvider();
+    const { shipping: userShipping, load: loadUserShipping } = useUserShipping();
     const shouldDisplayButton = ref(false);
 
     const form = ref({
@@ -267,6 +269,23 @@ export default {
 
     onSSR(async () => {
       await load();
+    });
+
+    onMounted(async () => {
+      await loadUserShipping();
+      const defaultAddress = getDefaultAddress(userShipping.value, 'shipping');
+      const formAddress = mapAddressToAddressForm(defaultAddress);
+      form.value = {
+        firstName: formAddress.firstName,
+        lastName: formAddress.lastName,
+        streetName: formAddress.streetName,
+        apartment: formAddress.streetNumber,
+        city: formAddress.city,
+        state: formAddress.state,
+        country: formAddress.country,
+        postalCode: formAddress.postalCode,
+        phone: formAddress.phone
+      };
     });
 
     return {

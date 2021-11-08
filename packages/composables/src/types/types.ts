@@ -80,4 +80,4 @@ export interface Error {
   stack?: string;
 }
 
-export { OrderAddress, Order } from '@vue-storefront/vendure-api';
+export { OrderAddress, Order, Address } from '@vue-storefront/vendure-api';

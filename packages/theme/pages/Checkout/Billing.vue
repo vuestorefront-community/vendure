@@ -157,7 +157,7 @@
         </ValidationProvider>
         <ValidationProvider
           name="phone"
-          rules="required|digits:9"
+          rules="required|phone"
           v-slot="{ errors }"
           slim
         >
@@ -204,12 +204,13 @@ import {
   SfRadio,
   SfCheckbox
 } from '@storefront-ui/vue';
-import { ref } from '@vue/composition-api';
+import { ref, onMounted } from '@vue/composition-api';
 import { onSSR } from '@vue-storefront/core';
-import { useBilling, useShipping } from '@vue-storefront/vendure';
+import { useBilling, useShipping, useUserBilling } from '@vue-storefront/vendure';
 import { required, min, digits } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
-import { mapAddressFormToOrderAddress, mapOrderAddressToAddressForm, COUNTRIES } from '~/helpers';
+import { mapAddressFormToOrderAddress, mapOrderAddressToAddressForm, COUNTRIES, getDefaultAddress, mapAddressToAddressForm } from '~/helpers';
+import '@/helpers';
 
 extend('required', {
   ...required,
@@ -239,6 +240,7 @@ export default {
   setup(props, context) {
     const { load, save, billing } = useBilling();
     const { shipping: shippingDetails, load: loadShipping } = useShipping();
+    const { billing: userBilling, load: loadUserBilling } = useUserBilling();
     const billingDetails = ref(billing.value || {});
     let oldBilling = null;
 
@@ -279,6 +281,23 @@ export default {
 
     onSSR(async () => {
       await load();
+    });
+
+    onMounted(async () => {
+      await loadUserBilling();
+      const defaultAddress = getDefaultAddress(userBilling.value, 'billing');
+      const formAddress = mapAddressToAddressForm(defaultAddress);
+      form.value = {
+        firstName: formAddress.firstName,
+        lastName: formAddress.lastName,
+        streetName: formAddress.streetName,
+        apartment: formAddress.streetNumber,
+        city: formAddress.city,
+        state: formAddress.state,
+        country: formAddress.country,
+        postalCode: formAddress.postalCode,
+        phone: formAddress.phone
+      };
     });
 
     return {

@@ -131,3 +131,6 @@ export type UpdateCustomerParams = {
   lastName: string;
 };
 
+export type DeleteCustomerAddress = {
+  id?: string;
+};

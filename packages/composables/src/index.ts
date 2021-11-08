@@ -16,6 +16,7 @@ export { useUserShipping } from './composables/useUserShipping';
 export { useWishlist } from './composables/useWishlist';
 export { useForgotPassword } from './composables/useForgotPassword';
 export { usePayment } from './composables/usePayment';
+export { useRelatedProducts } from './composables/useRelatedProducts';
 
 // Getters
 export { cartGetters } from './getters/cartGetters';
