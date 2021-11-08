@@ -21,3 +21,7 @@ export { default as logout } from './logout';
 export { default as getMe } from './getMe';
 export { default as updateCustomerPassword } from './updateCustomerPassword';
 export { default as updateCustomer } from './updateCustomer';
+export { default as createCustomerAddress } from './createCustomerAddress';
+export { default as deleteCustomerAddress } from './deleteCustomerAddress';
+export { default as updateCustomerAddress } from './updateCustomerAddress';
+export { default as getRelatedProducts } from './getRelatedProducts';
