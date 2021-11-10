@@ -62,7 +62,11 @@ interface UPDATE_USER_PARAMS {
 }
 ```
 
-- [TBD] `updateEmail` - method used to update user email.
+- `updateEmail` - method used to update user email. Accepts a `params` object: 
+
+  - `newEmail: string`
+
+  - `password: string`
 
 - `loading: boolean` - reactive object containing information about loading state of `user`.
 
