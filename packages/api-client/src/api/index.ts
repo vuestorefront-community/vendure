@@ -25,3 +25,4 @@ export { default as createCustomerAddress } from './createCustomerAddress';
 export { default as deleteCustomerAddress } from './deleteCustomerAddress';
 export { default as updateCustomerAddress } from './updateCustomerAddress';
 export { default as updateCustomerEmailAddress } from './updateCustomerEmailAddress';
+export { default as getRelatedProducts } from './getRelatedProducts';

@@ -65,4 +65,5 @@ export interface VendureApiMethods {
   updateCustomerAddress(params: UpdateAddressInput, customQuery?: CustomQuery): Promise<UpdateCustomerAddressResponse>;
   deleteCustomerAddress(params: DeleteCustomerAddress, customQuery?: CustomQuery): Promise<DeleteCustomerAddressResponse>;
   updateCustomerEmailAddress(params: UpdateCustomerEmailAddressParams, customQuery?: CustomQuery): Promise<UpdateCustomerEmailAddressResponse>;
+  getRelatedProducts(params: SearchParams, customQuery?: CustomQuery): Promise<GetFacetResponse>;
 }
