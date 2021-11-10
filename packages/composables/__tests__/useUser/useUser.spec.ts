@@ -10,6 +10,9 @@ const context = {
       })),
       logout: jest.fn(() => ({
         data: { logout: 'logout data' }
+      })),
+      updateCustomerEmailAddress: jest.fn(() => ({
+        data: { updateCustomerEmailAddress: 'updated email data'}
       }))
     }
   }
@@ -54,4 +57,13 @@ describe('[vendure-composables] useUser', () => {
 
     expect(context.$vendure.api.logout).toBeCalled();
   });
+
+  it('update email address', async () => {
+    const { updateEmail } = useUser() as any;
+    const response = await updateEmail(context, { newEmail: 'test@mail.com', password: 'test' });
+
+    expect(response).toEqual('updated email data');
+    expect(context.$vendure.api.updateCustomerEmailAddress).toBeCalledWith({ newEmail: 'test@mail.com', password: 'test' });
+  });
+
 });

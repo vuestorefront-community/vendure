@@ -53,8 +53,10 @@ const params: UseUserFactoryParams<any, UpdateParams, RegisterParams> = {
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  updateEmail: async (context: Context, { currentUser, updatedUserData }) => {
-    console.log('mock.useUser.updateEmail');
+  updateEmail: async (context: Context, { currentUser, updatedUserData, newEmail, password }) => {
+    const response = await context.$vendure.api.updateCustomerEmailAddress({ newEmail: newEmail, password: password });
+
+    return response?.data?.updateCustomerEmailAddress;
   }
 };
 

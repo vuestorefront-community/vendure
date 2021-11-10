@@ -1,7 +1,7 @@
 import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
-import { Address, CreateAddressInput, CurrentUser, DeleteCustomerAddress, UpdateCustomerInput } from '.';
+import { Address, CreateAddressInput, CurrentUser, DeleteCustomerAddress, UpdateCustomerEmailAddressParams, UpdateCustomerInput } from '.';
 import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, NativeAuthenticationResult, Order, PaymentInput, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, Success, UpdateAddressInput, UpdateOrderItemsResult } from './GraphQL';
 import { AddToCartParams, CartCouponParams, CollectionParams, LoginParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams, UpdateCustomerPasswordParams } from './types';
 
@@ -35,6 +35,7 @@ export type UpdateCustomerResponse = MutationResponse<'updateCustomer', Customer
 export type CreateCustomerAddressResponse = MutationResponse<'createCustomerAddress', Address>;
 export type UpdateCustomerAddressResponse = MutationResponse<'updateCustomerAddress', Address>;
 export type DeleteCustomerAddressResponse = MutationResponse<'deleteCustomerAddress', Success>;
+export type UpdateCustomerEmailAddressResponse = MutationResponse<'updateCustomerEmailAddress', Success>;
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
@@ -63,4 +64,5 @@ export interface VendureApiMethods {
   createCustomerAddress(params: CreateAddressInput, customQuery?: CustomQuery): Promise<CreateCustomerAddressResponse>;
   updateCustomerAddress(params: UpdateAddressInput, customQuery?: CustomQuery): Promise<UpdateCustomerAddressResponse>;
   deleteCustomerAddress(params: DeleteCustomerAddress, customQuery?: CustomQuery): Promise<DeleteCustomerAddressResponse>;
+  updateCustomerEmailAddress(params: UpdateCustomerEmailAddressParams, customQuery?: CustomQuery): Promise<UpdateCustomerEmailAddressResponse>;
 }

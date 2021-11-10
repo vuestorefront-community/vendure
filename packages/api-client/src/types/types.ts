@@ -118,3 +118,8 @@ export type UpdateCustomerParams = {
 export type DeleteCustomerAddress = {
   id?: string;
 };
+
+export type UpdateCustomerEmailAddressParams = {
+  newEmail: string;
+  password: string;
+}
