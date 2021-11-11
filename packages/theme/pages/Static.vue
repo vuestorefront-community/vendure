@@ -48,29 +48,29 @@
   </div>
 </template>
 <script>
-import { SfContentPages, SfTabs, SfBreadcrumbs, SfHeading } from "@storefront-ui/vue";
+import { SfContentPages, SfTabs, SfBreadcrumbs, SfHeading } from '@storefront-ui/vue';
 import { computed } from '@vue/composition-api';
 
 export default {
-  name: "Static",
+  name: 'Static',
   components: {
     SfContentPages,
     SfTabs,
     SfBreadcrumbs,
-    SfHeading,
+    SfHeading
   },
 
   head () {
     return {
       title: this.activePage,
       meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Home page description'
-      }
-      ], 
-    }
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Home page description'
+        }
+      ]
+    };
   },
 
   setup(props, context) {
@@ -95,7 +95,7 @@ export default {
     return {
       breadcrumbs: [
         { text: 'Home', route: { link: '#' } },
-        { text: this.activePage, route: { link: "#" } },
+        { text: this.activePage, route: { link: '#' } }
       ],
       pages: [
         {
@@ -105,83 +105,83 @@ export default {
             'With more than 230 stores spanning 43 states and growing, Luma is a nationally recognized active wear manufacturer and retailer. We’re passionate about active lifestyles – and it goes way beyond apparel.',
             'At Luma, wellness is a way of life. We don’t believe age, gender or past actions define you, only your ambition and desire for wholeness... today.',
             'We differentiate ourselves through a combination of unique designs and styles merged with unequaled standards of quality and authenticity. Our founders have deep roots in yoga and health communities and our selections serve amateur practitioners and professional athletes alike.'
-          ],
+          ]
         },
         {
           title: 'Quality',
           content: [
             {
-              tabName: "Size guide",
+              tabName: 'Size guide',
               tabContent: [
-                "Size guide / Personal information provided on the website and online credit card transactions are transmitted through a secure server. We are committed to handling your personal information with high standards of information security. We take appropriate physical, electronic, and administrative steps to maintain the security and accuracy of personally identifiable information we collect, including limiting the number of people who have physical access to our database servers, as well as employing electronic security systems and password protections that guard against unauthorized access.",
-              ],
+                'Size guide / Personal information provided on the website and online credit card transactions are transmitted through a secure server. We are committed to handling your personal information with high standards of information security. We take appropriate physical, electronic, and administrative steps to maintain the security and accuracy of personally identifiable information we collect, including limiting the number of people who have physical access to our database servers, as well as employing electronic security systems and password protections that guard against unauthorized access.'
+              ]
             },
             {
-              tabName: "Where's my order?",
+              tabName: 'Where\'s my order?',
               tabContent: [
-                'Where\'s my order? / This website ("website") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.',
-              ],
-            },
-          ],
+                'Where\'s my order? / This website ("website") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.'
+              ]
+            }
+          ]
         },
         {
-          title: "Reviews",
-          subtitle: "Customer reviews",
+          title: 'Reviews',
+          subtitle: 'Customer reviews',
           content: [
             'Store locator / This website ("website") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.',
             'We take appropriate physical, electronic, and administrative steps to maintain the security and accuracy of personally identifiable information we collect, including limiting the number of people who have physical access to our database servers, as well as employing electronic security systems and password protections that guard against unauthorized access.'
-          ],
+          ]
         },
         {
-          title: "Customer",
-          subtitle: "Customer services",
+          title: 'Customer',
+          subtitle: 'Customer services',
           content: [
-            'Delivery / This website ("website") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.',
-          ],
+            'Delivery / This website ("website") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.'
+          ]
         },
         {
-          title: "Size",
-          subtitle: "Termos de serviço",
+          title: 'Size',
+          subtitle: 'Termos de serviço',
           content: [
             {
-              tabName: "Size guide",
+              tabName: 'Size guide',
               tabContent: [
-                "Size guide / Personal information provided on the website and online credit card transactions are transmitted through a secure server. We are committed to handling your personal information with high standards of information security. We take appropriate physical, electronic, and administrative steps to maintain the security and accuracy of personally identifiable information we collect, including limiting the number of people who have physical access to our database servers, as well as employing electronic security systems and password protections that guard against unauthorized access.",
-              ],
+                'Size guide / Personal information provided on the website and online credit card transactions are transmitted through a secure server. We are committed to handling your personal information with high standards of information security. We take appropriate physical, electronic, and administrative steps to maintain the security and accuracy of personally identifiable information we collect, including limiting the number of people who have physical access to our database servers, as well as employing electronic security systems and password protections that guard against unauthorized access.'
+              ]
             },
             {
-              tabName: "Where's my order?",
+              tabName: 'Where\'s my order?',
               tabContent: [
-                'Where\'s my order? / This website ("website") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.',
-              ],
-            },
-          ],
+                'Where\'s my order? / This website ("website") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.'
+              ]
+            }
+          ]
         },
         {
-          title: "Contact",
-          subtitle: "Contact us",
+          title: 'Contact',
+          subtitle: 'Contact us',
           content: [
-            'Contact us / This website ("website") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.',
-          ],
+            'Contact us / This website ("website") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.'
+          ]
         },
         {
-          title: "Terms",
-          subtitle: "Purchase terms",
+          title: 'Terms',
+          subtitle: 'Purchase terms',
           content: [
             'Store locator / This website ("website") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.',
             'We take appropriate physical, electronic, and administrative steps to maintain the security and accuracy of personally identifiable information we collect, including limiting the number of people who have physical access to our database servers, as well as employing electronic security systems and password protections that guard against unauthorized access.'
-          ],
+          ]
         },
         {
-          title: "Guarantee",
-          subtitle: "Guarantee",
+          title: 'Guarantee',
+          subtitle: 'Guarantee',
           content: [
-            'Contact us / This website ("website") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.',
-          ],
-        },
-      ],
+            'Contact us / This website ("website") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.'
+          ]
+        }
+      ]
     };
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
