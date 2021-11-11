@@ -38,24 +38,6 @@ export type ShippingAddress = TODO;
 
 export type ShippingProvider = TODO;
 
-export type Wishlist = Array<WishlistItem>;
-
-export type WishlistItem = {
-  _id: string,
-  _variantId?: string,
-  _description: string,
-  _categoriesRef: string[],
-  name: string,
-  sku: string,
-  slug: string,
-  images: string [],
-  collections?: ProductCollection[],
-  price: {
-    original: number,
-    current: number
-  },
-};;
-
 export type CollectionParams = {
   options?: CollectionListOptions;
 };
@@ -116,6 +98,24 @@ export type ProductCollection = {
   name: string;
   breadcrumbs: Array<CollectionBreadcrumb>;
 };
+
+export type WishlistItem = {
+  _id: string,
+  _variantId?: string,
+  _description: string,
+  _categoriesRef: string[],
+  name: string,
+  sku: string,
+  slug: string,
+  images: string [],
+  collections?: ProductCollection[],
+  price: {
+    original: number,
+    current: number
+  },
+};
+
+export type Wishlist = Array<WishlistItem>;
 
 export type CookieSameSite = boolean | 'strict' | 'lax' | 'none';
 

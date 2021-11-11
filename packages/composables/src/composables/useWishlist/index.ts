@@ -6,7 +6,7 @@ import {
 } from '@vue-storefront/core';
 import type { Wishlist, WishlistItem } from '@vue-storefront/vendure-api';
 import type { AgnosticProductVariant } from '../../types';
-import { getWishlist, setWishlist } from "../../helpers";
+import { getWishlist, setWishlist } from '../../helpers';
 
 const params: UseWishlistFactoryParams<Wishlist, WishlistItem, AgnosticProductVariant> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
