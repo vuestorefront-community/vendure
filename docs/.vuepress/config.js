@@ -53,7 +53,8 @@ module.exports = {
           ['/composables/use-payment', 'usePayment'],
           ['/composables/use-user-order', 'useUserOrder'],
           ['/composables/use-user-shipping', 'useUserShipping'],
-          ['/composables/use-user-billing', 'useUserBilling']
+          ['/composables/use-user-billing', 'useUserBilling'],
+          ['/composables/use-related-products', 'useRelatedProducts']
         ]
       },
       {
