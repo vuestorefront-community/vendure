@@ -6,45 +6,43 @@ import {
 } from '@vue-storefront/core';
 import type { Wishlist, WishlistItem } from '@vue-storefront/vendure-api';
 import type { AgnosticProductVariant } from '../../types';
+import { getWishlist, setWishlist } from "../../helpers";
 
 const params: UseWishlistFactoryParams<Wishlist, WishlistItem, AgnosticProductVariant> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context) => {
     if (process.client) {
-      return JSON.parse(localStorage.getItem('wishlist')) || [];
+      return getWishlist() || [];
     }
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addItem: async (context: Context, { product }) => {
-    if (!localStorage.getItem('wishlist') || localStorage.getItem('wishlist') === '1') {
-      localStorage.setItem('wishlist', JSON.stringify([]));
-    }
-    const wishlist = JSON.parse(localStorage.getItem('wishlist'));
+    const wishlist = getWishlist();
     wishlist?.push(product);
-    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    setWishlist(wishlist);
     return wishlist;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   removeItem: async (context: Context, { product }) => {
-    const wishlist = JSON.parse(localStorage.getItem('wishlist'));
+    const wishlist = getWishlist();
     const updatedWishlist = wishlist.filter(wishlistItem => wishlistItem.sku !== product.sku);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+    setWishlist(updatedWishlist);
     return updatedWishlist;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   clear: async (context: Context, { currentWishlist }) => {
     if (process.client) {
-      localStorage.setItem('wishlist', '[]');
+      setWishlist([]);
     }
     return [];
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isInWishlist: (context: Context, { product }) => {
-    const wishlist = process.client ? JSON.parse(localStorage.getItem('wishlist')) : [];
+    const wishlist = process.client ? getWishlist() : [];
     return Boolean(wishlist?.find((wishlistItem): boolean => {
 
       const equalSku = wishlistItem?.sku === product?.sku;
