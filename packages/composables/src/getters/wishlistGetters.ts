@@ -5,6 +5,7 @@ import {
   AgnosticTotals
 } from '@vue-storefront/core';
 import type { Wishlist, WishlistItem } from '@vue-storefront/vendure-api';
+import { createPrice } from '../helpers';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItems(wishlist: Wishlist): WishlistItem[] {
@@ -40,8 +41,8 @@ function getItemImage(item: WishlistItem): string {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemPrice(item: WishlistItem): AgnosticPrice {
   return {
-    regular: item?.price?.original,
-    special: item?.price?.current
+    regular: createPrice(item?.price?.current),
+    special: createPrice(item?.price?.original)
   };
 }
 
