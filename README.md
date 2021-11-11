@@ -141,6 +141,7 @@ Thanks go to these wonderful people 🙌:
     <td align="center"><a href="https://heitor.co/"><img src="https://avatars.githubusercontent.com/u/1626923?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Heitor Ramon Ribeiro</b></sub></a><br /><a href="#mentoring-bloodf" title="Mentoring">🧑‍🏫</a></td>
     <td align="center"><a href="https://www.malimlin.si/"><img src="https://avatars.githubusercontent.com/u/302135?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Milan Zivkovic</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=zmilan" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Michaeldrm"><img src="https://avatars.githubusercontent.com/u/4975044?v=4?s=80" width="80px;" alt=""/><br /><sub><b>michael.douglas@outlook.com</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=Michaeldrm" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/justyna-13"><img src="https://avatars.githubusercontent.com/u/46591755?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Justyna</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=justyna-13" title="Code">💻</a></td>
   </tr>
 </table>
 
