@@ -32,6 +32,7 @@ Thanks go to these wonderful people 🙌:
     <td align="center"><a href="https://fifciuu.com/"><img src="https://avatars.githubusercontent.com/u/30155292?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Filip Jędrasik</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/pulls?q=is%3Apr+reviewed-by%3AFifciu" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/igorwojciechowski"><img src="https://avatars.githubusercontent.com/u/26794636?v=4?s=80" width="80px;" alt=""/><br /><sub><b>igorwojciechowski</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=igorwojciechowski" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://heitor.co/"><img src="https://avatars.githubusercontent.com/u/1626923?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Heitor Ramon Ribeiro</b></sub></a><br /><a href="#mentoring-bloodf" title="Mentoring">🧑‍🏫</a></td>
+    <td align="center"><a href="https://github.com/Michaeldrm"><img src="https://avatars.githubusercontent.com/u/4975044?v=4?s=80" width="80px;" alt=""/><br /><sub><b>michael.douglas@outlook.com</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=Michaeldrm" title="Code">💻</a></td>
   </tr>
 </table>
 
