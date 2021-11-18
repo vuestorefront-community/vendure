@@ -1,5 +1,5 @@
 import { UserOrderGetters } from '@vue-storefront/core';
-import type { OrderList, Order, OrderItem } from '@vue-storefront/vendure-api';
+import type { OrderList, Order, OrderItem, OrderLine } from '@vue-storefront/vendure-api';
 import { createPrice } from '../helpers';
 
 // TODO: to be used later
@@ -26,28 +26,28 @@ function getPrice(order: Order): number | null {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItems(order: OrderList): Order[] {
-  return order?.items || [];
+function getItems(order: Order): OrderLine[] {
+  return order?.lines || [];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemSku(item: OrderItem): string {
-  return '';
+function getItemSku(item: OrderLine): string {
+  return item?.productVariant?.sku || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemName(item: OrderItem): string {
-  return '';
+function getItemName(item: OrderLine): string {
+  return item?.productVariant?.name || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemQty(item: OrderItem): number {
-  return 0;
+function getItemQty(item: OrderLine): number {
+  return item?.quantity || 0;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemPrice(item: OrderItem): number {
-  return 0;
+  return createPrice(item?.unitPriceWithTax) || 0;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
