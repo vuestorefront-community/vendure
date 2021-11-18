@@ -2,8 +2,8 @@ import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
 import { Address, CreateAddressInput, CurrentUser, DeleteCustomerAddress, UpdateCustomerInput } from '.';
-import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, NativeAuthenticationResult, Order, PaymentInput, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, Success, UpdateAddressInput, UpdateOrderItemsResult, RequestPasswordResetResult } from './GraphQL';
-import { AddToCartParams, CartCouponParams, CollectionParams, LoginParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams, UpdateCustomerPasswordParams, RequestPasswordResetParams} from './types';
+import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, NativeAuthenticationResult, Order, PaymentInput, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, Success, UpdateAddressInput, UpdateOrderItemsResult, RequestPasswordResetResult, ResetPasswordResult } from './GraphQL';
+import { AddToCartParams, CartCouponParams, CollectionParams, LoginParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams, UpdateCustomerPasswordParams, RequestPasswordResetParams, ResetPasswordParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
 export type MutationResponse<K extends string, V> = FetchResult<Record<K, V>>;
@@ -36,6 +36,7 @@ export type CreateCustomerAddressResponse = MutationResponse<'createCustomerAddr
 export type UpdateCustomerAddressResponse = MutationResponse<'updateCustomerAddress', Address>;
 export type DeleteCustomerAddressResponse = MutationResponse<'deleteCustomerAddress', Success>;
 export type RequestPasswordResetResponse = MutationResponse<'requestPasswordReset', RequestPasswordResetResult>;
+export type ResetPasswordResponse = MutationResponse<'resetPassword', ResetPasswordResult>;
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
@@ -64,5 +65,6 @@ export interface VendureApiMethods {
   createCustomerAddress(params: CreateAddressInput, customQuery?: CustomQuery): Promise<CreateCustomerAddressResponse>;
   updateCustomerAddress(params: UpdateAddressInput, customQuery?: CustomQuery): Promise<UpdateCustomerAddressResponse>;
   deleteCustomerAddress(params: DeleteCustomerAddress, customQuery?: CustomQuery): Promise<DeleteCustomerAddressResponse>;
-  RequestPasswordReset(params: RequestPasswordResetParams, customQuery?: CustomQuery): Promise<RequestPasswordResetResponse>;
+  requestPasswordReset(params: RequestPasswordResetParams, customQuery?: CustomQuery): Promise<RequestPasswordResetResponse>;
+  resetPassword(params: ResetPasswordParams, customQuery?: CustomQuery): Promise<ResetPasswordResponse>;
 }
