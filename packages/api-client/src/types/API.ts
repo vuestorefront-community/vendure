@@ -1,7 +1,8 @@
 import { CustomQuery } from '@vue-storefront/core';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
-import { Address, CreateAddressInput, CurrentUser, DeleteCustomerAddress, UpdateCustomerInput } from '.';
+
+import { Address, CreateAddressInput, CurrentUser, DeleteCustomerAddress, UpdateCustomerEmailAddressParams, UpdateCustomerInput } from '.';
 import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, NativeAuthenticationResult, Order, PaymentInput, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, Success, UpdateAddressInput, UpdateOrderItemsResult, RequestPasswordResetResult, ResetPasswordResult } from './GraphQL';
 import { AddToCartParams, CartCouponParams, CollectionParams, LoginParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams, UpdateCustomerPasswordParams, RequestPasswordResetParams, ResetPasswordParams } from './types';
 
@@ -37,6 +38,7 @@ export type UpdateCustomerAddressResponse = MutationResponse<'updateCustomerAddr
 export type DeleteCustomerAddressResponse = MutationResponse<'deleteCustomerAddress', Success>;
 export type RequestPasswordResetResponse = MutationResponse<'requestPasswordReset', RequestPasswordResetResult>;
 export type ResetPasswordResponse = MutationResponse<'resetPassword', ResetPasswordResult>;
+export type UpdateCustomerEmailAddressResponse = MutationResponse<'updateCustomerEmailAddress', Success>;
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
@@ -67,4 +69,6 @@ export interface VendureApiMethods {
   deleteCustomerAddress(params: DeleteCustomerAddress, customQuery?: CustomQuery): Promise<DeleteCustomerAddressResponse>;
   requestPasswordReset(params: RequestPasswordResetParams, customQuery?: CustomQuery): Promise<RequestPasswordResetResponse>;
   resetPassword(params: ResetPasswordParams, customQuery?: CustomQuery): Promise<ResetPasswordResponse>;
+  updateCustomerEmailAddress(params: UpdateCustomerEmailAddressParams, customQuery?: CustomQuery): Promise<UpdateCustomerEmailAddressResponse>;
+  getRelatedProducts(params: SearchParams, customQuery?: CustomQuery): Promise<GetFacetResponse>;
 }

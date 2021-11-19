@@ -12,7 +12,7 @@ export interface UseUserFactoryParams<
   register: (context: Context, params: REGISTER_USER_PARAMS & {customQuery?: CustomQuery}) => Promise<USER>;
   logIn: (context: Context, params: { username: string; password: string; customQuery?: CustomQuery }) => Promise<USER>;
   changePassword: (context: Context, params: {currentUser: USER; currentPassword: string; newPassword: string; customQuery?: CustomQuery}) => Promise<USER>;
-  updateEmail: (context: Context, params: {currentUser: USER; updatedUserData: UPDATE_USER_PARAMS; customQuery?: CustomQuery}) => Promise<void>;
+  updateEmail: (context: Context, params: {currentUser: USER; updatedUserData: UPDATE_USER_PARAMS; newEmail: string; password: string; customQuery?: CustomQuery}) => Promise<USER>;
 }
 
 export type CustomUseUser<USER, UPDATE_USER_PARAMS> = UseUser<USER, UPDATE_USER_PARAMS> & { updateEmail }
@@ -153,13 +153,13 @@ REGISTER_USER_PARAMS extends { email: string; password: string },
       }
     };
 
-    const updateEmail = async ({ user: providedUser, customQuery }) => {
+    const updateEmail = async ({ user: providedUser, customQuery, password, newEmail }) => {
       Logger.debug('useUserFactory.updateEmail', providedUser);
       resetErrorValue();
 
       try {
         loading.value = true;
-        await _factoryParams.updateEmail({currentUser: user.value, updatedUserData: providedUser, customQuery});
+        await _factoryParams.updateEmail({currentUser: user.value, updatedUserData: providedUser, password: password, newEmail: newEmail, customQuery});
         error.value.updateEmail = null;
       } catch (err) {
         error.value.updateEmail = err;
