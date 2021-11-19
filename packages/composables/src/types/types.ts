@@ -1,5 +1,5 @@
 import { AgnosticAttribute } from '@vue-storefront/core';
-import { ProductCollection, CollectionResult, FacetValueResult, SearchResult, RequestPasswordResetResponse, ResetPasswordResponse } from '@vue-storefront/vendure-api';
+import { ProductCollection, CollectionResult, FacetValueResult, SearchResult, ResetPasswordResponse, RequestPasswordResetResponse } from '@vue-storefront/vendure-api';
 
 export type TODO = any;
 
