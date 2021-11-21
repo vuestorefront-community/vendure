@@ -108,7 +108,7 @@ export default {
     };
 
     const updatePersonalData = ({ form, onComplete, onError }) => formHandler(() => updateUser({ user: form.value }), onComplete, onError);
-    const updateEmailData = ({ form, onComplete, onError }) => formHandler(() => updateEmail({ user: form.value }), onComplete, onError);
+    const updateEmailData = ({ form, onComplete, onError }) => formHandler(() => updateEmail({ password: form.value.password, newEmail: form.value.email }), onComplete, onError);
     const updatePassword = ({ form, onComplete, onError }) => formHandler(() => changePassword({ currentPassword: form.value.currentPassword, newPassword: form.value.newPassword }), onComplete, onError);
 
     onMounted(async () => {
