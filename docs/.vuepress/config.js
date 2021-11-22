@@ -55,7 +55,8 @@ module.exports = {
           ['/composables/use-user-shipping', 'useUserShipping'],
           ['/composables/use-user-billing', 'useUserBilling'],
           ['/composables/use-related-products', 'useRelatedProducts'],
-          ['/composables/use-wishlist', 'useWishlist']
+          ['/composables/use-wishlist', 'useWishlist'],
+          ['/composables/use-forgot-password', 'useForgotPassword']
         ]
       },
       {
