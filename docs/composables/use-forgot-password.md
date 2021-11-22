@@ -2,12 +2,13 @@
 
 ## Features
 
-`useForgotPassword` composable is responsible for sending request for sending reset email, generate token and than set new password. 
+`useForgotPassword` composable is responsible for sending request for sending reset email, generate token and than set new password.
 
 ## API
 
 - `resetPassword` - function for request to send an email containing link to reset the password site
   - params: `{ email, currentResult, customQuery }`
+
 ```ts
 type RequestPasswordResetParams = {
   emailAddress: string;
@@ -16,10 +17,11 @@ type RequestPasswordResetParams = {
 
 - `setNewPassword` - sends token and new password to set it
   - params: `{ tokenValue, newPassword, currentResult, customQuery }`
+
 ```ts
 type ResetPasswordParams = {
-  token: string,
-  password: string,
+  tokenValue: string,
+  newPassword: string,
 };
 ```
 
@@ -31,8 +33,8 @@ type ResetPasswordParams = {
 
 ```ts
 interface ForgotPasswordGetters<FORGOT_PASSWORD_RESULT> {
-    getResetPasswordToken: (result: FORGOT_PASSWORD_RESULT) => string;
-    isPasswordChanged: (result: FORGOT_PASSWORD_RESULT) => boolean;
+  getResetPasswordToken: (result: FORGOT_PASSWORD_RESULT) => string;
+  isPasswordChanged: (result: FORGOT_PASSWORD_RESULT) => boolean;
 }
 ```
 
