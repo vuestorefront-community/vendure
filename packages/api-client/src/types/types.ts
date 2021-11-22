@@ -133,6 +133,14 @@ export type DeleteCustomerAddress = {
   id?: string;
 };
 
+export type RequestPasswordResetParams = {
+  emailAddress: string;
+};
+
+export type ResetPasswordParams = {
+  tokenValue: string,
+  newPassword: string,
+};
 export type UpdateCustomerEmailAddressParams = {
   newEmail: string;
   password: string;

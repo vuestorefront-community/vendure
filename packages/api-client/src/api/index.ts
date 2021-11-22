@@ -26,3 +26,5 @@ export { default as deleteCustomerAddress } from './deleteCustomerAddress';
 export { default as updateCustomerAddress } from './updateCustomerAddress';
 export { default as updateCustomerEmailAddress } from './updateCustomerEmailAddress';
 export { default as getRelatedProducts } from './getRelatedProducts';
+export { default as requestPasswordReset } from './requestPasswordReset';
+export { default as resetPassword } from './resetPassword';
