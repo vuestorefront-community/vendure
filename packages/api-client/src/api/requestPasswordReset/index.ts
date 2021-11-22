@@ -5,12 +5,12 @@ import { Context, RequestPasswordResetResponse, RequestPasswordResetParams} from
 import { NO_CACHE_FETCH_POLICY } from '../../helpers';
 
 const requestPasswordReset = async (context: Context, params: RequestPasswordResetParams, customQuery?: CustomQuery): Promise<RequestPasswordResetResponse> => {
-  const RequestPasswordResetVariables = {
-    email: params.emailAddress
+  const requestPasswordResetVariables = {
+    ...params
   };
 
   const { requestPasswordReset } = context.extendQuery(
-    customQuery, { requestPasswordReset: { query: requestPasswordResetMutation, variables: RequestPasswordResetVariables } }
+    customQuery, { requestPasswordReset: { query: requestPasswordResetMutation, variables: requestPasswordResetVariables } }
   );
 
   const request = await context.client.mutate({

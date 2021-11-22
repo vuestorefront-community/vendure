@@ -138,8 +138,8 @@ export type RequestPasswordResetParams = {
 };
 
 export type ResetPasswordParams = {
-  token: string,
-  password: string,
+  tokenValue: string,
+  newPassword: string,
 };
 export type UpdateCustomerEmailAddressParams = {
   newEmail: string;

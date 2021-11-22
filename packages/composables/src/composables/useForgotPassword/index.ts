@@ -18,7 +18,7 @@ const useForgotPasswordFactoryParams: UseForgotPasswordFactoryParams<ForgotPassw
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setNewPassword: async (context: Context, { tokenValue, newPassword, currentResult, customQuery }) => {
     try {
-      const setNewPasswordResult = await context.$vendure.api.resetPassword({ token: tokenValue, password: newPassword}, customQuery);
+      const setNewPasswordResult = await context.$vendure.api.resetPassword({ tokenValue, newPassword }, customQuery);
       return {
         ...currentResult,
         setNewPasswordResult
