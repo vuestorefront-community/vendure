@@ -1,8 +1,8 @@
 <template>
   <div>
     <SfHeader
-      class="sf-header--has-mobile-search"
-      :class="{'header-on-top': isSearchOpen}"
+      :class="{'header-on-top': isSearchOpen, 'sf-header--has-mobile-search': isMobileMenuOpen}"
+      :is-nav-visible="isMobileMenuOpen"
     >
       <!-- TODO: add mobile view buttons after SFUI team PR -->
       <template #logo>
@@ -137,7 +137,7 @@ export default {
   },
   directives: { clickOutside },
   setup(props, { root }) {
-    const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal } = useUiState();
+    const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal, isMobileMenuOpen } = useUiState();
     const { setTermForUrl, getFacetsFromURL } = useUiHelpers();
     const { isAuthenticated, load: loadUser } = useUser();
     const { cart, load: loadCart } = useCart();
@@ -238,6 +238,7 @@ export default {
       isMobile,
       removeSearchResults,
       headerNavigation,
+      isMobileMenuOpen,
       wishlistTotalItems
     };
   }
@@ -250,6 +251,9 @@ export default {
   @include for-desktop {
     --header-padding: 0;
   }
+  &__navigation.is-visible {
+    --header-navigation-display: block;
+  }
   &__logo-image {
       height: 100%;
   }
@@ -259,9 +263,6 @@ export default {
 }
 .nav-item {
   --header-navigation-item-margin: 0 var(--spacer-base);
-  .sf-header-navigation-item__item--mobile {
-    display: none;
-  }
 }
 
 .cart-badge {
