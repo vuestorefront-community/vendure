@@ -182,6 +182,7 @@
               v-e2e="'category-product-card'"
               v-for="(product, i) in products"
               :key="productGetters.getSlug(product)"
+              :qty="1"
               :style="{ '--index': i }"
               :title="productGetters.getName(product)"
               :description="productGetters.getDescription(product)"
@@ -191,8 +192,9 @@
               :score-rating="3"
               :isOnWishlist="isInWishlist({ product })"
               class="products__product-card-horizontal"
+              @input="productQuantity[product._id] = $event"
               @click:wishlist="!isInWishlist({ product }) ? addItemToWishlist({ product }) : removeItemFromWishlist({ product })"
-              @click:add-to-cart="addItemToCart({ product, quantity: 1 })"
+              @click:add-to-cart="addToCart({ product, quantity: productQuantity[product._id] })"
               :link="localePath(`/p/${productGetters.getId(product)}/${productGetters.getSlug(product)}`)"
             >
               <template #configuration>
@@ -349,6 +351,7 @@ export default {
   name: 'Category',
   transition: 'fade',
   setup(props, context) {
+    const productQuantity = ref({});
     const th = useUiHelpers();
     const uiState = useUiState();
     const { addItem: addItemToCart, isInCart, cart } = useCart();
@@ -404,6 +407,16 @@ export default {
       }), {});
     };
 
+    const addToCart = ({ product, quantity }) => {
+      const { _id, sku } = product;
+      console.log(productQuantity.value[product._id]);
+      console.log(product, parseInt(quantity));
+      addItemToCart({
+        product: { _id, sku },
+        quantity: Number(quantity)
+      });
+    };
+
     onSSR(async () => {
       await search({ ...th.getFacetsFromURL() });
       setSelectedFilters();
@@ -442,6 +455,7 @@ export default {
 
     return {
       ...uiState,
+      productQuantity,
       th,
       products,
       categoryTree,
@@ -455,7 +469,7 @@ export default {
       addItemToWishlist,
       removeItemFromWishlist,
       isInWishlist,
-      addItemToCart,
+      addToCart,
       isInCart,
       isFacetColor,
       selectFilter,
