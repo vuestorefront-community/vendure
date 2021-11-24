@@ -273,19 +273,21 @@ export default {
 
     onMounted(async () => {
       await loadUserShipping();
-      const defaultAddress = getDefaultAddress(userShipping.value, 'shipping');
-      const formAddress = mapAddressToAddressForm(defaultAddress);
-      form.value = {
-        firstName: formAddress.firstName,
-        lastName: formAddress.lastName,
-        streetName: formAddress.streetName,
-        apartment: formAddress.streetNumber,
-        city: formAddress.city,
-        state: formAddress.state,
-        country: formAddress.country,
-        postalCode: formAddress.postalCode,
-        phone: formAddress.phone
-      };
+      if (userShipping.value) {
+        const defaultAddress = getDefaultAddress(userShipping.value, 'shipping');
+        const formAddress = mapAddressToAddressForm(defaultAddress);
+        form.value = {
+          firstName: formAddress.firstName,
+          lastName: formAddress.lastName,
+          streetName: formAddress.streetName,
+          apartment: formAddress.streetNumber,
+          city: formAddress.city,
+          state: formAddress.state,
+          country: formAddress.country,
+          postalCode: formAddress.postalCode,
+          phone: formAddress.phone
+        };
+      }
     });
 
     return {

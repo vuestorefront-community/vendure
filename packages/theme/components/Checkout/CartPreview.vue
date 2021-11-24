@@ -48,7 +48,7 @@
         :label="$t('Enter promo code')"
         class="sf-input--filled promo-code__input"
       />
-      <SfButton class="promo-code__button" @click="() => applyCoupon({ couponCode: promoCode })">{{ $t('Apply') }}</SfButton>
+      <SfButton class="promo-code__button" @click="() => applyCoupon({ couponCode: promoCode, currentCart: cart })">{{ $t('Apply') }}</SfButton>
     </div>
     <div class="highlighted">
       <SfCharacteristic
@@ -108,6 +108,7 @@ export default {
       products,
       totals,
       promoCode,
+      cart,
       showPromoCode,
       removeItem,
       updateItemQty,
