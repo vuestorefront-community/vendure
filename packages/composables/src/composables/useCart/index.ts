@@ -4,6 +4,7 @@ import {
   UseCartFactoryParams
 } from '@vue-storefront/core';
 import type {
+  CouponCodeInvalidError,
   Order,
   OrderLine
 } from '@vue-storefront/vendure-api';
@@ -58,6 +59,12 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   applyCoupon: async (context: Context, { currentCart, couponCode, customQuery }) => {
     const response = await context.$vendure.api.applyCartCoupon({ couponCode }, customQuery);
+
+    if ((response?.data?.applyCouponCode as CouponCodeInvalidError)?.errorCode) {
+      return {
+        updatedCart: currentCart
+      };
+    }
 
     return {
       updatedCart: response?.data?.applyCouponCode as Order,
