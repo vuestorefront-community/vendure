@@ -13,6 +13,18 @@
           :errorMessage="errors[0]"
         />
       </ValidationProvider>
+      <ValidationProvider rules="required|password" v-slot="{ errors }" vid="password" class="form__element">
+        <SfInput
+          v-e2e="'myaccount-password'"
+          v-model="form.password"
+          type="password"
+          name="password"
+          label="Password"
+          required
+          :valid="!errors[0]"
+          :errorMessage="errors[0]"
+        />
+      </ValidationProvider>
 
       <SfButton
         v-e2e="'myaccount-update-personal-data-btn'"
@@ -32,26 +44,26 @@ import { SfInput, SfButton } from '@storefront-ui/vue';
 
 export default {
   name: 'ProfileUpdateForm',
-
   components: {
     SfInput,
     SfButton,
     ValidationProvider,
     ValidationObserver
   },
-
   setup(_, { emit }) {
-    const { user } = useUser();
+    const { user, load } = useUser();
 
     const resetForm = () => ({
-      email: userGetters.getEmailAddress(user.value)
+      email: userGetters.getEmailAddress(user.value),
+      password: ''
     });
 
     const form = ref(resetForm());
 
     const submitForm = (resetValidationFn) => {
       return () => {
-        const onComplete = () => {
+        const onComplete = async () => {
+          await load();
           form.value = resetForm();
           resetValidationFn();
         };
@@ -59,7 +71,6 @@ export default {
         const onError = () => {
           // TODO: Handle error
         };
-
         emit('submit', { form, onComplete, onError });
       };
     };
