@@ -194,7 +194,7 @@
               class="products__product-card-horizontal"
               @input="productQuantity[product._id] = $event"
               @click:wishlist="!isInWishlist({ product }) ? addItemToWishlist({ product }) : removeItemFromWishlist({ product })"
-              @click:add-to-cart="addToCart({ product, quantity: productQuantity[product._id] })"
+              @click:add-to-cart="addItemToCart({ product, quantity: Number(productQuantity[product._id]) })"
               :link="localePath(`/p/${productGetters.getId(product)}/${productGetters.getSlug(product)}`)"
             >
               <template #configuration>
@@ -407,16 +407,6 @@ export default {
       }), {});
     };
 
-    const addToCart = ({ product, quantity }) => {
-      const { _id, sku } = product;
-      console.log(productQuantity.value[product._id]);
-      console.log(product, parseInt(quantity));
-      addItemToCart({
-        product: { _id, sku },
-        quantity: Number(quantity)
-      });
-    };
-
     onSSR(async () => {
       await search({ ...th.getFacetsFromURL() });
       setSelectedFilters();
@@ -469,7 +459,7 @@ export default {
       addItemToWishlist,
       removeItemFromWishlist,
       isInWishlist,
-      addToCart,
+      addItemToCart,
       isInCart,
       isFacetColor,
       selectFilter,
