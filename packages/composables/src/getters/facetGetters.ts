@@ -40,14 +40,15 @@ const getGrouped = (searchResult: FacetSearchResult<AgnosticSearchResult>, crite
 
 const getSortOptions = (searchResult: FacetSearchResult<AgnosticSearchResult>): AgnosticSort => {
   // TODO: Fix this with custom type/interface. In Vendure `sort: SearchResultSortParameter` while in VSF Core `sort: string`
-  const sortName = (searchResult.input.sort as SearchResultSortParameter).name;
+  const sortName = (searchResult.input.sort as SearchResultSortParameter).price;
   const options = [
-    { type: 'sort', id: 'latest', value: 'Latest', count: null },
-    { type: 'sort', id: 'ASC', value: 'Price from low to high', count: null },
-    { type: 'sort', id: 'DESC', value: 'Price from high to low', count: null }
+    { type: 'sort', id: 'NAME_ASC', value: 'Name from A to Z', count: null },
+    { type: 'sort', id: 'NAME_DESC', value: 'Name from Z to A', count: null },
+    { type: 'sort', id: 'PRICE_ASC', value: 'Price from low to high', count: null },
+    { type: 'sort', id: 'PRICE_DESC', value: 'Price from high to low', count: null }
   ].map(o => ({ ...o, selected: o.id === sortName }));
 
-  const selected = options.find(o => o.id === sortName)?.id || 'latest';
+  const selected = options.find(o => o.id === sortName)?.id;
   return {
     options,
     selected
