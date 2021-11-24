@@ -62,8 +62,8 @@ const params: UseCartFactoryParams<Order, OrderLine, AgnosticProductVariant> = {
 
     if ((response?.data?.applyCouponCode as CouponCodeInvalidError)?.errorCode) {
       return {
-        updatedCart: currentCart,
-      }
+        updatedCart: currentCart
+      };
     }
 
     return {
