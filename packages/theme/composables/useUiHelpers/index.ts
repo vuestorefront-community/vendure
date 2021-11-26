@@ -34,10 +34,10 @@ const useUiHelpers = () => {
     const categorySlug = Object.keys(params).reduce((prev, curr) => params[curr] || prev, params.slug_1);
 
     const sortOptions: any = {};
-    if (query.sort.split('_')[0] === 'PRICE') {
-      sortOptions.price = query.sort.split('_')[1];
+    if (query.sort?.split('_')[0] === 'PRICE') {
+      sortOptions.price = query.sort?.split('_')[1];
     } else {
-      sortOptions.name = query.sort.split('_')[1];
+      sortOptions.name = query.sort?.split('_')[1];
     }
 
     return {
