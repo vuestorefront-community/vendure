@@ -423,8 +423,11 @@ export default {
         Vue.set(selectedFilters.value, 'attributes', []);
       }
 
-      if (selectedFilters.value[facet.id].find(f => f === option.id)) {
-        selectedFilters.value[facet.id] = selectedFilters.value[facet.id].filter(f => f !== option.id);
+      if (selectedFilters.value?.attributes.find(f => f === option.id)) {
+        const filterIndex = selectedFilters.value?.attributes.indexOf(option.id);
+        if (filterIndex > -1) {
+          selectedFilters.value?.attributes?.splice(filterIndex, 1);
+        }
         return;
       }
 

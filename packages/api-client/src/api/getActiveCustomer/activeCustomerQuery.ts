@@ -19,6 +19,19 @@ export default gql`
           state
           currencyCode
           total
+          lines {
+            id
+            unitPriceWithTax
+            quantity
+            featuredAsset {
+              preview
+            }
+            productVariant {
+              id
+              name
+              sku
+            }
+          }
         }
         totalItems
       }

@@ -1,8 +1,8 @@
 <template>
   <div>
     <SfHeader
-      class="sf-header--has-mobile-search"
-      :class="{'header-on-top': isSearchOpen}"
+      :class="{'header-on-top': isSearchOpen, 'sf-header--has-mobile-search': isMobileMenuOpen}"
+      :is-nav-visible="isMobileMenuOpen"
     >
       <!-- TODO: add mobile view buttons after SFUI team PR -->
       <template #logo>
@@ -46,6 +46,7 @@
               icon="heart"
               size="1.25rem"
             />
+            <SfBadge v-if="wishlistTotalItems" class="sf-badge--number cart-badge">{{wishlistTotalItems}}</SfBadge>
           </SfButton>
           <SfButton
             v-e2e="'app-header-cart'"
@@ -108,7 +109,7 @@
 <script>
 import { SfHeader, SfImage, SfIcon, SfButton, SfBadge, SfSearchBar, SfOverlay, SfMenuItem, SfLink } from '@storefront-ui/vue';
 import { useUiState, useUiHelpers } from '~/composables';
-import { useCart, useWishlist, useUser, cartGetters, useCategory, categoryGetters } from '@vue-storefront/vendure';
+import { useCart, useWishlist, useUser, cartGetters, wishlistGetters, useCategory, categoryGetters } from '@vue-storefront/vendure';
 import { computed, ref, onBeforeUnmount, watch } from '@vue/composition-api';
 import { onSSR } from '@vue-storefront/core';
 import LocaleSelector from '~/components/LocaleSelector';
@@ -136,11 +137,11 @@ export default {
   },
   directives: { clickOutside },
   setup(props, { root }) {
-    const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal } = useUiState();
+    const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal, isMobileMenuOpen } = useUiState();
     const { setTermForUrl, getFacetsFromURL } = useUiHelpers();
     const { isAuthenticated, load: loadUser } = useUser();
     const { cart, load: loadCart } = useCart();
-    const { load: loadWishlist } = useWishlist();
+    const { wishlist, load: loadWishlist } = useWishlist();
     const { search, categories } = useCategory();
     const term = ref(getFacetsFromURL().phrase);
     const isSearchOpen = ref(false);
@@ -149,6 +150,11 @@ export default {
 
     const cartTotalItems = computed(() => {
       const count = cartGetters.getTotalItems(cart.value);
+      return count ? count.toString() : null;
+    });
+
+    const wishlistTotalItems = computed(() => {
+      const count = wishlistGetters.getTotalItems(wishlist.value);
       return count ? count.toString() : null;
     });
 
@@ -231,7 +237,9 @@ export default {
       searchBarRef,
       isMobile,
       removeSearchResults,
-      headerNavigation
+      headerNavigation,
+      isMobileMenuOpen,
+      wishlistTotalItems
     };
   }
 };
@@ -243,6 +251,9 @@ export default {
   @include for-desktop {
     --header-padding: 0;
   }
+  &__navigation.is-visible {
+    --header-navigation-display: block;
+  }
   &__logo-image {
       height: 100%;
   }
@@ -252,9 +263,6 @@ export default {
 }
 .nav-item {
   --header-navigation-item-margin: 0 var(--spacer-base);
-  .sf-header-navigation-item__item--mobile {
-    display: none;
-  }
 }
 
 .cart-badge {

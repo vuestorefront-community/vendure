@@ -33,11 +33,18 @@ const useUiHelpers = () => {
     const { query, params } = instance.$router.history.current;
     const categorySlug = Object.keys(params).reduce((prev, curr) => params[curr] || prev, params.slug_1);
 
+    const sortOptions: any = {};
+    if (query.sort?.split('_')[0] === 'PRICE') {
+      sortOptions.price = query.sort?.split('_')[1];
+    } else {
+      sortOptions.name = query.sort?.split('_')[1];
+    }
+
     return {
       collectionSlug: categorySlug,
       take: parseInt(query.itemsPerPage, 10) || 20,
       groupByProduct: true,
-      sort: { price: query.sort || 'ASC'},
+      sort: sortOptions,
       facetValueIds: query.attributes || []
     };
   };

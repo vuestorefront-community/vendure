@@ -7,6 +7,18 @@ export const mockedOrders = {
       state: 'PaymentAuthorized',
       currencyCode: 'USD',
       total: 2595,
+      lines: {
+        id: '6',
+        unitPriceWithTax: 716,
+        quantity: 1,
+        productVariant: {
+          id: '24',
+          name: 'Ethernet Cable',
+          sku: 'A23334x30',
+          __typename: 'ProductVariant'
+        },
+        __typename: 'OrderLine'
+      },
       __typename: 'Order'
     },
     {
@@ -16,6 +28,18 @@ export const mockedOrders = {
       state: 'AddingItems',
       currencyCode: 'USD',
       total: 2498,
+      lines: {
+        id: '7',
+        unitPriceWithTax: 716,
+        quantity: 1,
+        productVariant: {
+          id: '25',
+          name: 'Ethernet Cable',
+          sku: 'A23334x30',
+          __typename: 'ProductVariant'
+        },
+        __typename: 'OrderLine'
+      },
       __typename: 'Order'
     },
     {
@@ -25,6 +49,18 @@ export const mockedOrders = {
       state: 'PaymentAuthorized',
       currencyCode: 'USD',
       total: 2498,
+      lines: {
+        id: '8',
+        unitPriceWithTax: 716,
+        quantity: 1,
+        productVariant: {
+          id: '27',
+          name: 'Ethernet Cable',
+          sku: 'A23334x30',
+          __typename: 'ProductVariant'
+        },
+        __typename: 'OrderLine'
+      },
       __typename: 'Order'
     },
     {
@@ -34,6 +70,18 @@ export const mockedOrders = {
       state: 'PaymentAuthorized',
       currencyCode: 'USD',
       total: 1597,
+      lines: {
+        id: '9',
+        unitPriceWithTax: 716,
+        quantity: 1,
+        productVariant: {
+          id: '04',
+          name: 'Ethernet Cable',
+          sku: 'A23334x30',
+          __typename: 'ProductVariant'
+        },
+        __typename: 'OrderLine'
+      },
       __typename: 'Order'
     }
   ],
