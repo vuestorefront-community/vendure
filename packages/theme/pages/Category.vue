@@ -159,6 +159,8 @@
               :style="{ '--index': i }"
               :title="productGetters.getName(product)"
               :image="productGetters.getCoverImage(product)"
+              imageHeight="20.25rem"
+              imageWidth="100%"
               :regular-price="$n(productGetters.getPrice(product).regular, 'currency')"
               :max-rating="5"
               :score-rating="productGetters.getAverageRating(product)"
@@ -690,9 +692,6 @@ export default {
     --product-card-title-margin: var(--spacer-base) 0 0 0;
     --product-card-title-font-weight: var(--font-weight--medium);
     --product-card-title-margin: var(--spacer-xs) 0 0 0;
-    ::v-deep .sf-image {
-      --image-height: unset;
-    }
     flex: 1 1 50%;
     @include for-desktop {
       --product-card-title-font-weight: var(--font-weight--normal);
