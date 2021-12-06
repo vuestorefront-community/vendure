@@ -41,9 +41,7 @@
           </div>
         </div>
         <div>
-          <p class="product__description desktop-only">
-            {{ productGetters.getDescription(product) }}
-          </p>
+          <div class="product__description desktop-only" v-html="productGetters.getDescription(product)"></div>
           <div v-if="options && options.length">
             <SfSelect
               v-for="optionGroup in options"
