@@ -1,6 +1,6 @@
 {
   "name": "vsf-vendure-integration-docs",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0",
   "description": "Documentation for Vendure integration for Vue Storefront",
   "main": "index.js",
   "license": "MIT",

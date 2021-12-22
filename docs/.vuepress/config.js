@@ -83,13 +83,14 @@ module.exports = {
         collapsable: true,
         children: [
           ['/integrations/storyblok', 'Storyblok'],
+          ['/integrations/stripe', 'Stripe [Coming soon]'],
         ]
       },
       {
         title: 'Changelog',
         collapsable: true,
         children: [
-          ['/changelog/1.0.0-beta.4', '1.0.0-beta.4'],
+          ['/changelog/1.0.0', '1.0.0'],
           ['/changelog/1.0.0-beta.3', '1.0.0-beta.3'],
           ['/changelog/1.0.0-beta.2', '1.0.0-beta.2'],
           ['/changelog/1.0.0-beta.1', '1.0.0-beta.1'],

@@ -83,6 +83,7 @@ export const getCalculatedPrice = (price: number): number => {
 };
 
 export const getDefaultAddress = (addresses: Address[], type: AddressType): Address => {
+  if (!addresses) return;
   if (type === AddressType.Billing) {
     return addresses.find(address => address.defaultBillingAddress);
   } else {

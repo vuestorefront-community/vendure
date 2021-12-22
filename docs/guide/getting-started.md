@@ -12,7 +12,7 @@ yarn global add @vue-storefront/cli
 vsf init <project_name>
 ```
 
-Choose `Vendure (beta)` or use `Custom template from Github` option and type: `https://github.com/vuestorefront/template-vendure.git`.
+Choose `Vendure` or use `Custom template from Github` option and type: `https://github.com/vuestorefront/template-vendure.git`.
 
 ```bash
 cd <project_name> 

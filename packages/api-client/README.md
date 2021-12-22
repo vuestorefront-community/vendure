@@ -3,9 +3,7 @@
   <img src="https://www.vendure.io/logo.png" height="100px" style="margin-left: 30px;">
 </div>
 
-## Vue Storefront 2 integration with Vendure (WIP)
-
-> This integration is under development
+## Vue Storefront 2 integration with Vendure
 
 This project is a Vendure integration for [Vue Storefront 2](https://github.com/vuestorefront/vue-storefront/).
 
@@ -79,8 +77,6 @@ Want to contribute? Ping us on `vendure` channel on [our Discord](https://discor
 
     GRAPHQL_API=http://localhost:3000/shop-api
     TOKEN_METHOD=bearer
-    CURRENCY=USD
-    LANG=en
     ```
 
     These environment variables will be then used in:
@@ -97,8 +93,6 @@ Want to contribute? Ping us on `vendure` channel on [our Discord](https://discor
               uri: process.env.GRAPHQL_API,
               tokenMethod: process.env.TOKEN_METHOD
             },
-            currency: process.env.CURRENCY,
-            lang: process.env.LANG
           }
         }
       }

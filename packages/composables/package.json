@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/vendure",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0",
   "sideEffects": false,
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
@@ -15,7 +15,7 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/vendure-api": "1.0.0-beta.3",
+    "@vue-storefront/vendure-api": "1.0.0",
     "@vue-storefront/core": "~2.4.1"
   },
   "peerDependencies": {
