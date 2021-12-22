@@ -44,8 +44,6 @@ Instructions on how to start Vendure integration in development mode.
 
     GRAPHQL_API=http://localhost:3000/shop-api
     TOKEN_METHOD=bearer
-    CURRENCY=USD
-    LANG=en
     ```
 
     These environment variables will be then used in:
@@ -62,8 +60,6 @@ Instructions on how to start Vendure integration in development mode.
               uri: process.env.GRAPHQL_API,
               tokenMethod: process.env.TOKEN_METHOD
             },
-            currency: process.env.CURRENCY,
-            lang: process.env.LANG
           }
         }
       }

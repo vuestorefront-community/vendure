@@ -5,8 +5,6 @@
 
 This project is a Vendure integration for Vue Storefront 2.
 
-This integration is currently a **Beta** and not ready for production usage. You can help us to make the integration production-ready faster by reporting bugs and contributing to the code at the [repository issues page](https://github.com/vuestorefront/vendure/issues).
-
 ## What is Vendure?
 
 Vendure is a modern, headless GraphQL-based e-commerce framework built with TypeScript & Nodejs.
