@@ -3,9 +3,7 @@
   <img src="https://www.vendure.io/logo.png" height="100px" style="margin-left: 30px;">
 </div>
 
-## Vue Storefront 2 integration with Vendure (WIP)
-
-> This integration is under development
+## Vue Storefront 2 integration with Vendure
 
 This project is a Vendure integration for [Vue Storefront 2](https://github.com/vuestorefront/vue-storefront/).
 
@@ -19,7 +17,7 @@ yarn global add @vue-storefront/cli
 vsf init <project_name>
 ```
 
-Choose `Vendure (beta)` or use `Custom template from Github` option and type: `https://github.com/vuestorefront/template-vendure.git`.
+Choose `Vendure` or use `Custom template from Github` option and type: `https://github.com/vuestorefront/template-vendure.git`.
 
 ```bash
 cd <project_name> 
@@ -79,8 +77,6 @@ Want to contribute? Ping us on `vendure` channel on [our Discord](https://discor
 
     GRAPHQL_API=http://localhost:3000/shop-api
     TOKEN_METHOD=bearer
-    CURRENCY=USD
-    LANG=en
     ```
 
     These environment variables will be then used in:
@@ -97,8 +93,6 @@ Want to contribute? Ping us on `vendure` channel on [our Discord](https://discor
               uri: process.env.GRAPHQL_API,
               tokenMethod: process.env.TOKEN_METHOD
             },
-            currency: process.env.CURRENCY,
-            lang: process.env.LANG
           }
         }
       }
@@ -132,14 +126,16 @@ Thanks go to these wonderful people 🙌:
   <tr>
     <td align="center"><a href="https://github.com/Baroshem"><img src="https://avatars.githubusercontent.com/u/37120330?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Jakub Andrzejewski</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=Baroshem" title="Code">💻</a> <a href="#maintenance-Baroshem" title="Maintenance">🚧</a> <a href="#projectManagement-Baroshem" title="Project Management">📆</a> <a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=Baroshem" title="Documentation">📖</a></td>
     <td align="center"><a href="https://rafagarcialepper.com/"><img src="https://avatars.githubusercontent.com/u/73605?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Rafael Garcia Lepper</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=rglepper" title="Code">💻</a></td>
-    <td align="center"><a href="https://www.malimlin.si/"><img src="https://avatars.githubusercontent.com/u/302135?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Milan Zivkovic</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=zmilan" title="Code">💻</a></td>
     <td align="center"><a href="http://www.michaelbromley.co.uk/"><img src="https://avatars.githubusercontent.com/u/6275952?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Michael Bromley</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/pulls?q=is%3Apr+reviewed-by%3Amichaelbromley" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://fifciuu.com/"><img src="https://avatars.githubusercontent.com/u/30155292?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Filip Jędrasik</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/pulls?q=is%3Apr+reviewed-by%3AFifciu" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/Mateuszpietrusinski"><img src="https://avatars.githubusercontent.com/u/24594740?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Mateusz Pietrusiński</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/pulls?q=is%3Apr+reviewed-by%3AMateuszpietrusinski" title="Reviewed Pull Requests">👀</a></td>
   </tr>
   <tr>
-    <td align="center"><a href="https://fifciuu.com/"><img src="https://avatars.githubusercontent.com/u/30155292?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Filip Jędrasik</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/pulls?q=is%3Apr+reviewed-by%3AFifciu" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/igorwojciechowski"><img src="https://avatars.githubusercontent.com/u/26794636?v=4?s=80" width="80px;" alt=""/><br /><sub><b>igorwojciechowski</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=igorwojciechowski" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://heitor.co/"><img src="https://avatars.githubusercontent.com/u/1626923?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Heitor Ramon Ribeiro</b></sub></a><br /><a href="#mentoring-bloodf" title="Mentoring">🧑‍🏫</a></td>
+    <td align="center"><a href="https://www.malimlin.si/"><img src="https://avatars.githubusercontent.com/u/302135?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Milan Zivkovic</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=zmilan" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Michaeldrm"><img src="https://avatars.githubusercontent.com/u/4975044?v=4?s=80" width="80px;" alt=""/><br /><sub><b>michael.douglas@outlook.com</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=Michaeldrm" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/justyna-13"><img src="https://avatars.githubusercontent.com/u/46591755?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Justyna</b></sub></a><br /><a href="https://github.com/vuestorefront/@vuestorefront/vendure/commits?author=justyna-13" title="Code">💻</a></td>
   </tr>
 </table>
 

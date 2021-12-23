@@ -1,11 +1,9 @@
-<img src="/vsf.svg" height="100px" />
+<img src="vsf.svg" height="100px" />
 <img src="https://www.vendure.io/logo.png" height="100px" style="margin-left: 30px;">
 
 # Vue Storefront 2 integration with Vendure
 
 This project is a Vendure integration for Vue Storefront 2.
-
-This integration is currently a **Beta** and not ready for production usage. You can help us to make the integration production-ready faster by reporting bugs and contributing to the code at the [repository issues page](https://github.com/vuestorefront/vendure/issues).
 
 ## What is Vendure?
 

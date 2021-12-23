@@ -17,6 +17,11 @@ export function getRoutes(themeDir = __dirname) {
     component: path.resolve(themeDir, 'pages/Category.vue')
   },
   {
+    name: 'static',
+    path: '/page/:pageName?',
+    component: path.resolve(themeDir, 'pages/Static.vue')
+  },
+  {
     name: 'my-account',
     path: '/my-account/:pageName?',
     component: path.resolve(themeDir, 'pages/MyAccount.vue')

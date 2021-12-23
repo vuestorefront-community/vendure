@@ -41,9 +41,7 @@
           </div>
         </div>
         <div>
-          <p class="product__description desktop-only">
-            {{ productGetters.getDescription(product) }}
-          </p>
+          <div class="product__description desktop-only" v-html="productGetters.getDescription(product)"></div>
           <div v-if="options && options.length">
             <SfSelect
               v-for="optionGroup in options"
@@ -128,13 +126,13 @@
       </div>
     </div>
 
-    <!-- <LazyHydrate when-visible>
+    <LazyHydrate when-visible>
       <RelatedProducts
         :products="relatedProducts"
         :loading="relatedLoading"
-        title="Match it with"
+        title="Related Products"
       />
-    </LazyHydrate> -->
+    </LazyHydrate>
 
     <LazyHydrate when-visible>
       <InstagramFeed />
@@ -168,9 +166,9 @@ import {
 } from '@storefront-ui/vue';
 
 import InstagramFeed from '~/components/InstagramFeed.vue';
-// import RelatedProducts from '~/components/RelatedProducts.vue';
+import RelatedProducts from '~/components/RelatedProducts.vue';
 import { ref, computed } from '@vue/composition-api';
-import { useProduct, useCart, productGetters, useReview, reviewGetters } from '@vue-storefront/vendure';
+import { useProduct, useCart, productGetters, useReview, reviewGetters, useRelatedProducts } from '@vue-storefront/vendure';
 import { onSSR } from '@vue-storefront/core';
 import MobileStoreBanner from '~/components/MobileStoreBanner.vue';
 import LazyHydrate from 'vue-lazy-hydration';
@@ -183,14 +181,12 @@ export default {
     const qty = ref(1);
     const { id } = context.root.$route.params;
     const { products, search } = useProduct('products');
-    // TODO: Implement related products
-    // const { products: relatedProducts, search: searchRelatedProducts, loading: relatedLoading } = useProduct('relatedProducts');
     const { addItem, loading } = useCart();
     const { reviews: productReviews, search: searchReviews } = useReview('productReviews');
+    const { relatedProducts, load: searchRelatedProducts, loading: relatedLoading } = useRelatedProducts();
 
     const product = computed(() => productGetters.getByFilters(products.value, { master: true, attributes: context.root.$route.query }));
     const options = computed(() => productGetters.getOptions(products.value, ['color', 'size']));
-    // const categories = computed(() => productGetters.getCategoryIds(product.value));
     // TODO: Implement reviews
     const reviews = computed(() => reviewGetters.getItems(productReviews.value));
     const configuration = ref({});
@@ -224,8 +220,9 @@ export default {
 
     onSSR(async () => {
       await search({ id });
-      // await searchRelatedProducts({ catId: [categories.value[0]], limit: 8 });
       await searchReviews({ productId: id });
+      const currentCollectionId = product.value._categoriesRef[product.value._categoriesRef.length - 1];
+      await searchRelatedProducts({ input: { collectionId: currentCollectionId, take: 8, groupByProduct: true }});
     });
 
     const updateFilter = (filter) => {
@@ -254,17 +251,15 @@ export default {
       reviewGetters,
       averageRating: computed(() => productGetters.getAverageRating(product.value)),
       totalReviews: computed(() => productGetters.getTotalReviews(product.value)),
-      // relatedProducts: computed(() => productGetters.getFiltered(relatedProducts.value, { master: true })),
-      // relatedLoading,
+      relatedProducts: computed(() => relatedProducts.value.items),
+      relatedLoading,
       options,
       qty,
-      addItem,
       loading,
       productGetters,
       productGallery,
       properties,
       addToCart,
-      products,
       breadcrumbs
     };
   },
@@ -287,7 +282,7 @@ export default {
     SfBreadcrumbs,
     SfButton,
     InstagramFeed,
-    // RelatedProducts,
+    RelatedProducts,
     MobileStoreBanner,
     LazyHydrate
   },

@@ -52,6 +52,11 @@ module.exports = {
           ['/composables/use-user', 'useUser'],
           ['/composables/use-payment', 'usePayment'],
           ['/composables/use-user-order', 'useUserOrder'],
+          ['/composables/use-user-shipping', 'useUserShipping'],
+          ['/composables/use-user-billing', 'useUserBilling'],
+          ['/composables/use-related-products', 'useRelatedProducts'],
+          ['/composables/use-wishlist', 'useWishlist'],
+          ['/composables/use-forgot-password', 'useForgotPassword']
         ]
       },
       {
@@ -61,9 +66,8 @@ module.exports = {
           ['/theme/customer-checkout', 'Customer step in checkout'],
           ['/theme/composables', 'Composables'],
           ['/theme/helpers', 'Helpers'],
-          ['/theme/checkout-middleware', 'Checkout middleware'],
           ['/theme/update-email', 'Update user email'],
-          ['/theme/is-authenticated-middleware', 'Is-Authenticated middleware'],
+          ['/theme/middleware', 'Middleware'],
         ]
       },
       {
@@ -79,12 +83,14 @@ module.exports = {
         collapsable: true,
         children: [
           ['/integrations/storyblok', 'Storyblok'],
+          ['/integrations/stripe', 'Stripe [Coming soon]'],
         ]
       },
       {
         title: 'Changelog',
         collapsable: true,
         children: [
+          ['/changelog/1.0.0', '1.0.0'],
           ['/changelog/1.0.0-beta.3', '1.0.0-beta.3'],
           ['/changelog/1.0.0-beta.2', '1.0.0-beta.2'],
           ['/changelog/1.0.0-beta.1', '1.0.0-beta.1'],

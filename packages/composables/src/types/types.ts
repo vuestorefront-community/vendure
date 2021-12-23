@@ -1,5 +1,5 @@
 import { AgnosticAttribute } from '@vue-storefront/core';
-import { ProductCollection, CollectionResult, FacetValueResult, SearchResult } from '@vue-storefront/vendure-api';
+import { ProductCollection, CollectionResult, FacetValueResult, SearchResult, ResetPasswordResponse, RequestPasswordResetResponse } from '@vue-storefront/vendure-api';
 
 export type TODO = any;
 
@@ -70,8 +70,8 @@ export type SearchResultValue<SEARCH_DATA, SEARCH_INPUT> = {
 
 // TODO: Replace later with types from vendure-api after implementing api-client functions
 export interface ForgotPasswordResult {
-  resetPasswordResult: any;
-  setNewPasswordResult: any;
+  resetPasswordResult: RequestPasswordResetResponse;
+  setNewPasswordResult: ResetPasswordResponse;
 }
 
 export interface Error {
@@ -80,4 +80,4 @@ export interface Error {
   stack?: string;
 }
 
-export { OrderAddress, Order } from '@vue-storefront/vendure-api';
+export { OrderAddress, Order, Address } from '@vue-storefront/vendure-api';

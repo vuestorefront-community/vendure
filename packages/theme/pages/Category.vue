@@ -159,6 +159,8 @@
               :style="{ '--index': i }"
               :title="productGetters.getName(product)"
               :image="productGetters.getCoverImage(product)"
+              imageHeight="20.25rem"
+              imageWidth="100%"
               :regular-price="$n(productGetters.getPrice(product).regular, 'currency')"
               :max-rating="5"
               :score-rating="productGetters.getAverageRating(product)"
@@ -182,6 +184,7 @@
               v-e2e="'category-product-card'"
               v-for="(product, i) in products"
               :key="productGetters.getSlug(product)"
+              :qty="itemQuantity"
               :style="{ '--index': i }"
               :title="productGetters.getName(product)"
               :description="productGetters.getDescription(product)"
@@ -191,8 +194,9 @@
               :score-rating="3"
               :isOnWishlist="isInWishlist({ product })"
               class="products__product-card-horizontal"
+              @input="productQuantity[product._id] = $event"
               @click:wishlist="!isInWishlist({ product }) ? addItemToWishlist({ product }) : removeItemFromWishlist({ product })"
-              @click:add-to-cart="addItemToCart({ product, quantity: 1 })"
+              @click:add-to-cart="addItemToCart({ product, quantity:  Number(productQuantity[product._id]) || itemQuantity })"
               :link="localePath(`/p/${productGetters.getId(product)}/${productGetters.getSlug(product)}`)"
             >
               <template #configuration>
@@ -349,6 +353,8 @@ export default {
   name: 'Category',
   transition: 'fade',
   setup(props, context) {
+    const productQuantity = ref({});
+    const itemQuantity = ref(1);
     const th = useUiHelpers();
     const uiState = useUiState();
     const { addItem: addItemToCart, isInCart, cart } = useCart();
@@ -421,8 +427,11 @@ export default {
         Vue.set(selectedFilters.value, 'attributes', []);
       }
 
-      if (selectedFilters.value[facet.id].find(f => f === option.id)) {
-        selectedFilters.value[facet.id] = selectedFilters.value[facet.id].filter(f => f !== option.id);
+      if (selectedFilters.value?.attributes.find(f => f === option.id)) {
+        const filterIndex = selectedFilters.value?.attributes.indexOf(option.id);
+        if (filterIndex > -1) {
+          selectedFilters.value?.attributes?.splice(filterIndex, 1);
+        }
         return;
       }
 
@@ -442,6 +451,7 @@ export default {
 
     return {
       ...uiState,
+      productQuantity,
       th,
       products,
       categoryTree,
@@ -463,7 +473,8 @@ export default {
       selectedFilters,
       clearFilters,
       applyFilters,
-      cart
+      cart,
+      itemQuantity
     };
   },
   components: {
@@ -690,9 +701,6 @@ export default {
     --product-card-title-margin: var(--spacer-base) 0 0 0;
     --product-card-title-font-weight: var(--font-weight--medium);
     --product-card-title-margin: var(--spacer-xs) 0 0 0;
-    ::v-deep .sf-image {
-      --image-height: unset;
-    }
     flex: 1 1 50%;
     @include for-desktop {
       --product-card-title-font-weight: var(--font-weight--normal);

@@ -38,10 +38,6 @@ export type ShippingAddress = TODO;
 
 export type ShippingProvider = TODO;
 
-export type Wishlist = TODO;
-
-export type WishlistItem = TODO;
-
 export type CollectionParams = {
   options?: CollectionListOptions;
 };
@@ -103,6 +99,24 @@ export type ProductCollection = {
   breadcrumbs: Array<CollectionBreadcrumb>;
 };
 
+export type WishlistItem = {
+  _id: string,
+  _variantId?: string,
+  _description: string,
+  _categoriesRef: string[],
+  name: string,
+  sku: string,
+  slug: string,
+  images: string [],
+  collections?: ProductCollection[],
+  price: {
+    original: number,
+    current: number
+  },
+};
+
+export type Wishlist = Array<WishlistItem>;
+
 export type CookieSameSite = boolean | 'strict' | 'lax' | 'none';
 
 export type UpdateCustomerPasswordParams = {
@@ -115,3 +129,19 @@ export type UpdateCustomerParams = {
   lastName: string;
 };
 
+export type DeleteCustomerAddress = {
+  id?: string;
+};
+
+export type RequestPasswordResetParams = {
+  emailAddress: string;
+};
+
+export type ResetPasswordParams = {
+  tokenValue: string,
+  newPassword: string,
+};
+export type UpdateCustomerEmailAddressParams = {
+  newEmail: string;
+  password: string;
+}

@@ -33,9 +33,7 @@
           </SfTableHeading>
           <SfTableRow v-for="(item, i) in orderGetters.getItems(currentOrder)" :key="i">
             <SfTableData class="products__name">
-              <nuxt-link :to="'/p/'+orderGetters.getItemSku(item)+'/'+orderGetters.getItemSku(item)">
-                {{ orderGetters.getItemName(item) }}
-              </nuxt-link>
+              {{ orderGetters.getItemName(item) }}
             </SfTableData>
             <SfTableData>{{ orderGetters.getItemQty(item) }}</SfTableData>
             <SfTableData>{{ $n(orderGetters.getItemPrice(item), 'currency') }}</SfTableData>
