@@ -294,7 +294,7 @@
             <SfFilter
               v-for="option in facet.options"
               :key="`${facet.id}-${option.id}`"
-              :label="option.id"
+              :label="option.attrName"
               :selected="isFilterSelected(facet, option)"
               class="filters__item"
               @change="() => selectFilter(facet, option)"
