@@ -79,14 +79,14 @@ export default {
       const { pageName } = $route.params;
 
       if (pageName) {
-        return (pageName.charAt(0).toUpperCase() + pageName.slice(1)).replace('-', ' ');
+        return (pageName.charAt(0).toUpperCase() + pageName.slice(1)).replaceAll('-', ' ');
       }
 
       return 'About';
     });
 
     const changeActivePage = async (title) => {
-      $router.push(`/page/${(title || '').toLowerCase().replace(' ', '-')}`);
+      $router.push(`/page/${(title || '').toLowerCase().replaceAll(' ', '-')}`);
     };
 
     return { changeActivePage, activePage };
