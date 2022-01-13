@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { ref } from '@vue/composition-api';
+import { ref, onMounted } from '@vue/composition-api';
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import { useUser, userGetters } from '@vue-storefront/vendure';
 import { SfInput, SfButton } from '@storefront-ui/vue';
@@ -52,7 +52,7 @@ export default {
   },
 
   setup(_, { emit }) {
-    const { user } = useUser();
+    const { user, load } = useUser();
 
     const resetForm = () => ({
       firstName: userGetters.getFirstName(user.value),
@@ -75,6 +75,11 @@ export default {
         emit('submit', { form, onComplete, onError });
       };
     };
+
+    onMounted(async () => {
+      await load();
+      form.value = resetForm();
+    });
 
     return {
       form,
