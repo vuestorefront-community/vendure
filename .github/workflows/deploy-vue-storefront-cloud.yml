@@ -21,15 +21,15 @@ jobs:
         with:
           name: demo-vendure-storefrontcloud-io/vue-storefront:${{ github.sha }}
           registry: registry.storefrontcloud.io
-          username: ${{ secrets.DOCS_CLOUD_USERNAME }}
-          password: ${{ secrets.DOCS_CLOUD_PASSWORD }}
+          username: ${{ secrets.CLOUD_USERNAME }}
+          password: ${{ secrets.CLOUD_PASSWORD }}
           dockerfile: .vuestorefrontcloud/docker/Dockerfile
           buildoptions: "--compress"
           buildargs: NPM_EMAIL,NPM_PASS,NPM_USER,NPM_REGISTRY,GRAPHQL_API
         env:
           NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
-          NPM_PASS: ${{ secrets.DOCS_CLOUD_PASSWORD }}
-          NPM_USER: ${{ secrets.DOCS_CLOUD_USERNAME }}
+          NPM_PASS: ${{ secrets.CLOUD_PASSWORD }}
+          NPM_USER: ${{ secrets.CLOUD_USERNAME }}
           NPM_REGISTRY: "https://registrynpm.storefrontcloud.io"
           GRAPHQL_API: ${{ secrets.GRAPHQL_API }}
   deploy:
@@ -46,7 +46,7 @@ jobs:
           initial_status: in_progress
       - name: Deploy on demo-vendure.europe-west1.gcp.storefrontcloud.io
         run: |
-          if curl -s -H 'X-User-Id: ${{ secrets.DOCS_CLOUD_USERNAME }}' -H 'X-Api-Key: ${{ secrets.DOCS_CLOUD_PASSWORD }}' -H 'Content-Type: application/json' -X POST -d '{"code":"demo-vendure","region":"europe-west1.gcp","frontContainerVersion":"${{ github.sha }}"}' https://farmer.storefrontcloud.io/instances | grep -q '{"code":200,"result":"Instance updated!"}'; then
+          if curl -s -H 'X-User-Id: ${{ secrets.CLOUD_USERNAME }}' -H 'X-Api-Key: ${{ secrets.CLOUD_PASSWORD }}' -H 'Content-Type: application/json' -X POST -d '{"code":"demo-vendure","region":"europe-west1.gcp","frontContainerVersion":"${{ github.sha }}"}' https://farmer.storefrontcloud.io/instances | grep -q '{"code":200,"result":"Instance updated!"}'; then
             echo "Instance updated"
           else
             echo "Something went wrong during the update process..."
