@@ -4,7 +4,7 @@ import theme from './themeConfig';
 
 export default {
   server: {
-    port: 3001,
+    port: process.env.APP_PORT || 3001,
     host: '0.0.0.0'
   },
   head: {
@@ -19,7 +19,7 @@ export default {
       }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
   loading: { color: '#fff' },
@@ -125,7 +125,7 @@ export default {
       getRoutes(`${__dirname}/_theme`)
         .forEach((route) => routes.unshift(route));
     },
-    middleware: ['checkout'],
+    middleware: ['checkout']
   },
   publicRuntimeConfig: {
     theme
@@ -151,6 +151,7 @@ export default {
   },
   pwa: {
     meta: {
+      // eslint-disable-next-line camelcase
       theme_color: '#5ECE7B'
     }
   },

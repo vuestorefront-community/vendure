@@ -10,6 +10,7 @@ ARG GRAPHQL_API
 ENV LAST_COMMIT=${COMMIT}
 ENV GRAPHQL_API=${GRAPHQL_API}
 ENV TOKEN_METHOD=bearer
+ENV APP_PORT=3000
  
 RUN npm install -g npm-cli-login \
   && npm-cli-login
