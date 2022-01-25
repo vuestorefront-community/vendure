@@ -92,7 +92,7 @@ export default {
     lazy: true,
     seo: true,
     langDir: 'lang/',
-    strategy: 'no_prefix',
+    strategy: 'prefix',
     vueI18n: {
       fallbackLocale: 'en',
       numberFormats: {
