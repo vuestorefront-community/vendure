@@ -21,7 +21,7 @@ const getInstance = () => {
   return vm?.$root as any;
 };
 const getName = (product: AgnosticProductVariant): string => {
-  return product?.name || product.productName || '';
+  return product?.name || product?.productName || '';
 };
 
 const getSlug = (product: AgnosticProductVariant): string => {
@@ -30,7 +30,7 @@ const getSlug = (product: AgnosticProductVariant): string => {
 
 const getPrice = (product: AgnosticProductVariant): AgnosticPrice => {
   return {
-    regular: createPrice(product?.price?.current),
+    regular: createPrice(product?.price?.current || product?.priceWithTax?.value),
     special: createPrice(product?.price?.original)
   };
 };

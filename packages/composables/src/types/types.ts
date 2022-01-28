@@ -39,6 +39,9 @@ export type AgnosticProductVariant = {
     original: number,
     current: number
   },
+  priceWithTax?: {
+    value?: number,
+  }
   productAsset?: {
     preview?: string,
   }
