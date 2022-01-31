@@ -1,7 +1,7 @@
 <template>
   <div>
     <SfHeader
-      :class="{'header-on-top': isSearchOpen, 'sf-header--has-mobile-search': isMobileMenuOpen}"
+      :class="{'header-on-top': isSearchOpen, 'sf-header--has-mobile-search': !isMobileMenuOpen}"
       :is-nav-visible="isMobileMenuOpen"
     >
       <!-- TODO: add mobile view buttons after SFUI team PR -->
@@ -109,7 +109,7 @@
 <script>
 import { SfHeader, SfImage, SfIcon, SfButton, SfBadge, SfSearchBar, SfOverlay, SfMenuItem, SfLink } from '@storefront-ui/vue';
 import { useUiState, useUiHelpers } from '~/composables';
-import { useCart, useWishlist, useUser, cartGetters, wishlistGetters, useCategory, categoryGetters } from '@vue-storefront/vendure';
+import { useCart, useWishlist, useUser, cartGetters, wishlistGetters, useCategory, categoryGetters, useFacet } from '@vue-storefront/vendure';
 import { computed, ref, onBeforeUnmount, watch } from '@vue/composition-api';
 import { onSSR } from '@vue-storefront/core';
 import LocaleSelector from '~/components/LocaleSelector';
@@ -144,6 +144,7 @@ export default {
     const { wishlist, load: loadWishlist } = useWishlist();
     const { search, categories } = useCategory();
     const term = ref(getFacetsFromURL().phrase);
+    const { search: searchTerm, result: searchResult } = useFacet();
     const isSearchOpen = ref(false);
     const searchBarRef = ref(null);
     const result = ref(null);
@@ -191,7 +192,8 @@ export default {
       } else {
         term.value = paramValue.target.value;
       }
-      result.value = { };
+      await searchTerm({ term: term.value});
+      result.value = searchResult;
 
     }, 1000);
 
