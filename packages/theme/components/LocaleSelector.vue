@@ -50,7 +50,6 @@ export default {
     const isLangModalOpen = ref(false);
     const availableLocales = computed(() => locales.filter(i => i.code !== locale));
     const languageSwitcher = (lang) => {
-      console.log(lang)
       context.root.$i18n.setLocale(lang)
       context.root.switchLocalePath(lang)
       window.location.reload();
