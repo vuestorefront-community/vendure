@@ -8,7 +8,7 @@ export default {
   'About us': 'About us',
   'Who we are': 'Who we are',
   'Quality in the details': 'Quality in the details',
-  'Customer Reviews': 'Customer Reviews',
+  'Customer reviews': 'Customer Reviews',
   'Departments': 'Departments',
   'Women fashion': 'Women fashion',
   'Men fashion': 'Men fashion',
