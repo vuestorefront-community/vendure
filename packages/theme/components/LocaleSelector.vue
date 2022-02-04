@@ -6,9 +6,9 @@
     >
       <SfImage :src="`/icons/langs/${locale}.webp`" width="20" alt="Flag" />
     </SfButton>
-    <SfBottomModal :is-open="isLangModalOpen" title="Choose language" @click:close="isLangModalOpen = !isLangModalOpen"> 
+    <SfBottomModal :is-open="isLangModalOpen" title="Choose language" @click:close="isLangModalOpen = !isLangModalOpen">
       <SfList>
-        <SfListItem v-for="lang in availableLocales" :key="lang.code">          
+        <SfListItem v-for="lang in availableLocales" :key="lang.code">
            <a @click="languageSwitcher(lang.code)" href="#">
             <SfCharacteristic class="language">
               <template #title>
@@ -50,20 +50,19 @@ export default {
     const isLangModalOpen = ref(false);
     const availableLocales = computed(() => locales.filter(i => i.code !== locale));
     const languageSwitcher = (lang) => {
-      console.log(lang)
-      context.root.$i18n.setLocale(lang)
-      context.root.switchLocalePath(lang)
+      context.root.$i18n.setLocale(lang);
+      context.root.switchLocalePath(lang);
       window.location.reload();
-      isLangModalOpen.value = !isLangModalOpen     
+      isLangModalOpen.value = !isLangModalOpen;
 
-    }
-    
+    };
+
     return {
       availableLocales,
       locale,
       isLangModalOpen,
       languageSwitcher
-      
+
     };
   }
 };
