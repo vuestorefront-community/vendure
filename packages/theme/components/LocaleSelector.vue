@@ -54,7 +54,6 @@ export default {
       context.root.switchLocalePath(lang);
       window.location.reload();
       isLangModalOpen.value = !isLangModalOpen;
-
     };
 
     return {
@@ -62,7 +61,6 @@ export default {
       locale,
       isLangModalOpen,
       languageSwitcher
-
     };
   }
 };
