@@ -25,10 +25,12 @@ export type useUserOrderSearchParams = TODO;
 
 export type AgnosticProductVariant = {
   _id: string,
+  productId?: string,
   _variantId?: string,
   _description: string,
   _categoriesRef: string[],
   name: string,
+  productName?: string,
   sku: string,
   slug: string,
   images: string [],
@@ -37,6 +39,12 @@ export type AgnosticProductVariant = {
     original: number,
     current: number
   },
+  priceWithTax?: {
+    value?: number,
+  }
+  productAsset?: {
+    preview?: string,
+  }
 };
 
 export type AgnosticProductOptions = {

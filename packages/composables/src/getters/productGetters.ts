@@ -21,7 +21,7 @@ const getInstance = () => {
   return vm?.$root as any;
 };
 const getName = (product: AgnosticProductVariant): string => {
-  return product?.name || '';
+  return product?.name || product?.productName || '';
 };
 
 const getSlug = (product: AgnosticProductVariant): string => {
@@ -30,7 +30,7 @@ const getSlug = (product: AgnosticProductVariant): string => {
 
 const getPrice = (product: AgnosticProductVariant): AgnosticPrice => {
   return {
-    regular: createPrice(product?.price?.current),
+    regular: createPrice(product?.price?.current || product?.priceWithTax?.value),
     special: createPrice(product?.price?.original)
   };
 };
@@ -48,7 +48,7 @@ const getGallery = (product: AgnosticProductVariant): AgnosticMediaGalleryItem[]
 };
 
 const getCoverImage = (product: AgnosticProductVariant): string => {
-  return product?.images[0] || '';
+  return product?.images?.[0] || product?.productAsset?.preview || '';
 };
 
 // TODO: Implement filter by attribute functionality
@@ -80,7 +80,7 @@ const getCategoryIds = (product: AgnosticProductVariant): string[] => {
 };
 
 const getId = (product: AgnosticProductVariant): string => {
-  return product?._id || '';
+  return product?._id || product?.productId || '';
 };
 
 const getSku = (product: AgnosticProductVariant): string => {
