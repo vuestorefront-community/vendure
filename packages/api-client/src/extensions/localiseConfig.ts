@@ -1,9 +1,8 @@
-
 import { ApiClientExtension } from '@vue-storefront/core';
 
 function getLocalisedUri(request, configuration) {
   const originalUri = configuration.api.uri;
-  const api = {uri: originalUri + '?languageCode=' + request.cookies.i18n_redirected};
+  const api = { uri: originalUri + '?languageCode=' + request.cookies.i18n_redirected + '&currencyCode=' + request.cookies['vsf-currency']};
   return { api };
 }
 
