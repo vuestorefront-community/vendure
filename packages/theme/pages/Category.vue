@@ -165,7 +165,7 @@
               :max-rating="5"
               :score-rating="productGetters.getAverageRating(product)"
               :show-add-to-cart-button="true"
-              :isOnWishlist="isInWishlist({ product })"
+              :isInWishlist="isInWishlist({ product })"
               :isAddedToCart="isInCart({ product })"
               :link="localePath(`/p/${productGetters.getId(product)}/${productGetters.getSlug(product)}`)"
               class="products__product-card"
@@ -192,7 +192,7 @@
               :regular-price="$n(productGetters.getPrice(product).regular, 'currency')"
               :max-rating="5"
               :score-rating="3"
-              :isOnWishlist="isInWishlist({ product })"
+              :isInWishlist="isInWishlist({ product })"
               class="products__product-card-horizontal"
               @input="productQuantity[product._id] = $event"
               @click:wishlist="!isInWishlist({ product }) ? addItemToWishlist({ product }) : removeItemFromWishlist({ product })"
@@ -210,11 +210,20 @@
               </template>
               <template #actions>
                 <SfButton
+                  v-if="!isInWishlist({ product })"
                   class="sf-button--text desktop-only"
                   style="margin: 0 0 1rem auto; display: block;"
-                  @click="() => {}"
+                  @click="addItemToWishlist({ product })"
                 >
                   {{ $t('Save for later') }}
+                </SfButton>
+                <SfButton
+                  v-else
+                  class="sf-button--text desktop-only"
+                  style="margin: 0 0 1rem auto; display: block;"
+                  @click="removeItemFromWishlist({ product })"
+                >
+                  {{ $t('Remove from wishlist') }}
                 </SfButton>
               </template>
             </SfProductCardHorizontal>
@@ -294,7 +303,7 @@
             <SfFilter
               v-for="option in facet.options"
               :key="`${facet.id}-${option.id}`"
-              :label="option.id"
+              :label="option.attrName"
               :selected="isFilterSelected(facet, option)"
               class="filters__item"
               @change="() => selectFilter(facet, option)"

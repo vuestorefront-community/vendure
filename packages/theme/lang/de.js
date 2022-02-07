@@ -8,7 +8,7 @@ export default {
   'About us': 'Über uns',
   'Who we are': 'Wer wir sind',
   'Quality in the details': 'Qualität im Detail',
-  'Customer Reviews': 'Kundenbewertungen',
+  'Customer reviews': 'Kundenbewertungen',
   'Departments': 'Abteilungen',
   'Women fashion': 'Damenmode',
   'Men fashion': 'Herrenmode',
