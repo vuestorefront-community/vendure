@@ -3,6 +3,9 @@ import { getRoutes } from './routes';
 import theme from './themeConfig';
 
 export default {
+  env: {
+    STRIPE_PK: process.env.STRIPE_PK
+  },
   server: {
     port: process.env.APP_PORT || 3001,
     host: '0.0.0.0'
@@ -23,7 +26,7 @@ export default {
     ]
   },
   loading: { color: '#fff' },
-  plugins: [],
+  plugins: [{ src: '~/plugins/stripe.js', ssr: false }],
   buildModules: [
     // to core
     '@nuxt/typescript-build',
