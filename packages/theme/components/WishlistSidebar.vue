@@ -27,8 +27,8 @@
                 :title="wishlistGetters.getItemName(product)"
                 :regular-price="$n(wishlistGetters.getItemPrice(product).regular, 'currency')"
                 :stock="99999"
-                image-width="180"
-                image-height="200"
+                :image-width=180
+                :image-height=200
                 @click:remove="removeItem({ product })"
                 class="collected-product"
               >

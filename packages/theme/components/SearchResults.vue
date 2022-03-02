@@ -54,8 +54,8 @@
                  :style="{ '--index': i }"
                  :title="productGetters.getName(product)"
                  :image="productGetters.getCoverImage(product)"
-                 :imageHeight="288"
-                 :imageWidth="216"
+                 :imageHeight=288
+                 :imageWidth=216
                  :alt="productGetters.getName(product)"
                  :regular-price="$n(productGetters.getPrice(product).regular, 'currency')"
                  :max-rating="5"
@@ -77,8 +77,8 @@
                :alt="productGetters.getName(product)"
                :title="productGetters.getName(product)"
                :max-rating="5"
-               :imageHeight="198"
-               :imageWidth="128"
+               :imageHeight=198
+               :imageWidth=128
                :link="localePath(`/p/${productGetters.getId(product)}/${productGetters.getSlug(product)}`)"
              />
            </div>
