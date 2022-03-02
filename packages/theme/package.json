@@ -26,6 +26,7 @@
     "@vue-storefront/nuxt": "~2.4.1",
     "@vue-storefront/nuxt-theme": "~2.4.1",
     "@vue-storefront/vendure": "1.1.0",
+    "@vue-stripe/vue-stripe": "^4.4.1",
     "awesome-phonenumber": "^2.51.2",
     "cookie-universal-nuxt": "^2.1.5",
     "core-js": "^3.16.1",
