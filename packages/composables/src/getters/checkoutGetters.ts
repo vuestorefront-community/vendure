@@ -1,4 +1,3 @@
-import { CheckoutGetters } from '@vue-storefront/core';
 import type { ShippingMethod } from '@vue-storefront/vendure-api/src/types';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -26,7 +25,7 @@ function getFormattedPrice(price: number): string {
   return '';
 }
 
-export const checkoutGetters: CheckoutGetters<ShippingMethod> = {
+export const checkoutGetters = {
   getShippingMethodId,
   getShippingMethodName,
   getShippingMethodDescription,
