@@ -39,7 +39,7 @@ Want to contribute? Ping us on `vendure` channel on [our Discord](https://discor
 
 - NodeJS v14 or later
 - Vendure server running in localhost for GraphQL API or <https://demo.vendure.io/shop-api>
-- Set up auth options in Vendure server
+- Set up auth options in Vendure server (This functionality is available for those who scaffold a local instance of Vendure)
 
 ```ts
 // vendure-config.ts
