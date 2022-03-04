@@ -11,6 +11,7 @@
             :image="product.productAsset.preview"
             :regular-price="$n(getCalculatedPrice(product.price.max), 'currency')"
             :link="localePath(`/p/${product.productId}/${product.slug}`)"
+            class="carousel__item-image"
           />
         </SfCarouselItem>
       </SfCarousel>
@@ -61,9 +62,14 @@ export default {
   &__item {
     margin: 1.9375rem 0 2.4375rem 0;
   }
-
   ::v-deep .sf-product-card__image .sf-image {
-    --image-height: unset;
+    --image-height: 230px;
+    --image-width: 150px;
+    object-fit: cover;
+    @include for-desktop {
+      --image-width: 210px;
+      --image-height: 340px;
+    }
   }
 }
 
