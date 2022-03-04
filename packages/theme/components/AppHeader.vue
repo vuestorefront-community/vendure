@@ -11,14 +11,33 @@
         </nuxt-link>
       </template>
       <template #navigation>
-        <SfHeaderNavigationItem
-          v-for="category in headerNavigation"
-          :key="category.name"
-          class="nav-item"
-          v-e2e="`app-header-${category.name}`"
-          :label="category.name"
-          :link="localePath(`/c/${category.link}`)"
-        />
+        <div class="sf-header__navigation desktop" v-if="!isMobile">
+          <SfHeaderNavigationItem
+            v-for="category in headerNavigation"
+            :key="category.name"
+            class="nav-item"
+            v-e2e="`app-header-${category.name}`"
+            :label="category.name"
+            :link="localePath(`/c/${category.link}`)"
+          />
+        </div>
+        <SfModal v-else :visible="isMobileMenuOpen" title="Menu" @close="toggleMobileMenu">
+          <SfList>
+            <SfListItem
+              v-for="category in headerNavigation"
+              :key="category.name"
+              class="nav-item sf-header-navigation-item"
+              v-e2e="`app-header-url_${category.link}`"
+            >
+              <SfMenuItem
+                :label="category.name"
+                class="sf-header-navigation-item__menu-item"
+                :link="localePath(`/c/${category.link}`)"
+                @click.native="toggleMobileMenu"
+              />
+            </SfListItem>
+          </SfList>
+        </SfModal>
       </template>
       <template #aside>
         <LocaleSelector class="smartphone-only" />
@@ -107,7 +126,7 @@
 </template>
 
 <script>
-import { SfHeader, SfImage, SfIcon, SfButton, SfBadge, SfSearchBar, SfOverlay, SfMenuItem, SfLink } from '@storefront-ui/vue';
+import { SfHeader, SfImage, SfIcon, SfButton, SfBadge, SfSearchBar, SfOverlay, SfMenuItem, SfLink, SfModal, SfList } from '@storefront-ui/vue';
 import { useUiState, useUiHelpers } from '~/composables';
 import { useCart, useWishlist, useUser, cartGetters, wishlistGetters, useCategory, categoryGetters, useFacet } from '@vue-storefront/vendure';
 import { computed, ref, onBeforeUnmount, watch } from '@vue/composition-api';
@@ -133,11 +152,13 @@ export default {
     SearchResults,
     SfOverlay,
     SfMenuItem,
-    SfLink
+    SfLink,
+    SfModal,
+    SfList
   },
   directives: { clickOutside },
   setup(props, { root }) {
-    const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal, isMobileMenuOpen } = useUiState();
+    const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal, isMobileMenuOpen, toggleMobileMenu } = useUiState();
     const { setTermForUrl, getFacetsFromURL } = useUiHelpers();
     const { isAuthenticated, load: loadUser } = useUser();
     const { cart, load: loadCart } = useCart();
@@ -241,7 +262,8 @@ export default {
       removeSearchResults,
       headerNavigation,
       isMobileMenuOpen,
-      wishlistTotalItems
+      wishlistTotalItems,
+      toggleMobileMenu
     };
   }
 };
