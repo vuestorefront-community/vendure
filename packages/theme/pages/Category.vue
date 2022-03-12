@@ -834,4 +834,8 @@ export default {
     margin: var(--spacer-xs) 0 0 0;
   }
 }
+
+::v-deep .sf-image--placeholder {
+  height: 20.25rem;
+}
 </style>
