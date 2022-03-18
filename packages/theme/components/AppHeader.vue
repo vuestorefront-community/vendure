@@ -21,7 +21,7 @@
             :link="localePath(`/c/${category.link}`)"
           />
         </div>
-        <SfModal v-else :visible="isMobileMenuOpen" title="Menu" @close="toggleMobileMenu">
+        <SfModal v-else :visible="isMobileMenuOpen" :title="$t('Menu')" @close="toggleMobileMenu">
           <SfList>
             <SfListItem
               v-for="category in headerNavigation"
