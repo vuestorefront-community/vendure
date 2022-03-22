@@ -170,5 +170,9 @@ export default {
   'Primary contacts for any questions': 'Primary contacts for any questions',
   'Your Account': 'Your Account',
   'What can we improve': 'What can we improve',
-  'Update email': 'Update email'
+  'Update email': 'Update email',
+  'Menu': "Menu",
+  'Wishlist': 'Wishlist',
+  'Account': 'Account',
+  'Basket': 'Basket'
 };
