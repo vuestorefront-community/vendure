@@ -3696,9 +3696,9 @@
   integrity sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==
 
 "@types/json-stable-stringify@^1.0.32":
-  version "1.0.33"
-  resolved "https://registry.yarnpkg.com/@types/json-stable-stringify/-/json-stable-stringify-1.0.33.tgz#099b0712d824d15e2660c20e1c16e6a8381f308c"
-  integrity sha512-qEWiQff6q2tA5gcJGWwzplQcXdJtm+0oy6IHGHzlOf3eFAkGE/FIPXZK9ofWgNSHVp8AFFI33PJJshS0ei3Gvw==
+  version "1.0.34"
+  resolved "https://registry.yarnpkg.com/@types/json-stable-stringify/-/json-stable-stringify-1.0.34.tgz#c0fb25e4d957e0ee2e497c1f553d7f8bb668fd75"
+  integrity sha512-s2cfwagOQAS8o06TcwKfr9Wx11dNGbH2E9vJz1cqV+a/LOyhWNLUNd6JSRYNzvB4d29UuJX2M0Dj9vE1T8fRXw==
 
 "@types/json5@^0.0.29":
   version "0.0.29"
@@ -3977,9 +3977,9 @@
     "@types/node" "*"
 
 "@types/yargs-parser@*":
-  version "20.2.1"
-  resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-20.2.1.tgz#3b9ce2489919d9e4fea439b76916abc34b2df129"
-  integrity sha512-7tFImggNeNBVMsn0vLrpn1H1uPrUBdnARPTpZoitY37ZrdJREzf7I16tMrlK3hen349gr1NYh8CmZQa7CTG6Aw==
+  version "21.0.0"
+  resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-21.0.0.tgz#0c60e537fa790f5f9472ed2776c2b71ec117351b"
+  integrity sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==
 
 "@types/yargs@^16.0.0":
   version "16.0.4"
@@ -4075,10 +4075,10 @@
     "@typescript-eslint/types" "4.33.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vue-storefront/core@~2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/core/-/core-2.4.1.tgz#dcf90b690673823606d8e82387ef9fe74bfd8475"
-  integrity sha512-s30PPMW1oYujZ226tKMkpGYv+s9wOSzozsrzEkFm2r3m2/f5oBh5kcb0mGGVovLucmeSdoGiRmFIvB4FQ+0xXg==
+"@vue-storefront/core@~2.4.6":
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/@vue-storefront/core/-/core-2.4.6.tgz#24d6f0d41b4d00715ebd44bbb08e7d5949534038"
+  integrity sha512-Iml0/uKMZFyMk6SiEcMxRnyndncNflAvKFC9sbfoN1hHUWDv3qLUk0+uCgkvIn6+0srx29zH3RH6+LjXHlC7nQ==
   dependencies:
     "@vue/composition-api" "1.0.0-beta.21"
     axios "0.21.1"
@@ -4088,9 +4088,9 @@
     vue "^2.6.11"
 
 "@vue-storefront/middleware@~2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/middleware/-/middleware-2.4.1.tgz#9f24ffc7e3aff62f2666de72ae2b105ebf459e80"
-  integrity sha512-DWfvHsj47D5seOqGFjPV7IbKlrsErYhyHAw9ff6Z00YdOXGWq8KOLR5Gdv1QNAdbcBKEhydB0mHKUVwzcUTmCw==
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/@vue-storefront/middleware/-/middleware-2.4.6.tgz#79261364e529c179b5512604d7a09b510c03561a"
+  integrity sha512-okxZhX7YYkUt3JjlDMMLY5F/YM+EXX+r98fDLtnfzbgPnQ3NnTFf9vye75HHhnon+PA7AwBnA5CIu8p4RtHq4Q==
   dependencies:
     consola "2.15.3"
     cookie-parser "^1.4.5"
@@ -4098,9 +4098,9 @@
     express "^4.17.1"
 
 "@vue-storefront/nuxt-theme@~2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/nuxt-theme/-/nuxt-theme-2.4.1.tgz#57d104b96e95f455b4f7e200acc8da3c5ef3509d"
-  integrity sha512-ChiuzqDWh2VbSaDZEenzWSbeSSjeTSbSLI7rLaSDKxcQIacOaSQahSeSHbMr9M6miS1guNtrAm8Clv1A6rWoqA==
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/@vue-storefront/nuxt-theme/-/nuxt-theme-2.4.6.tgz#24b6b418de2f8555466c36906e6bb4c0ae3cd67b"
+  integrity sha512-QavBrc5RddH8JlG/WrUgAxNGGC6MVQqE47UDfUXPi+reLdBQfQjaffCmQbs/l+aekq071kTZHpXHgumUXm4eRQ==
   dependencies:
     ejs "^3.0.2"
     lodash.debounce "^4.0.8"
@@ -4108,9 +4108,9 @@
     vue-lazy-hydration "^2.0.0-beta.4"
 
 "@vue-storefront/nuxt@~2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/nuxt/-/nuxt-2.4.1.tgz#cc86aec37a7078252a3981f3a984f4648a1c9602"
-  integrity sha512-dEttzOwshR4QxzhvHGRh1uLuNhodhUiNQnDKpTq88ftYkWHf6hwVgXwc/mwx63mySME6E+aM9Unz7un5j6bFDA==
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/@vue-storefront/nuxt/-/nuxt-2.4.6.tgz#ab031bce71a222db04e1e23f5b44feedb2fa5529"
+  integrity sha512-fiLRoEQZOw9ASL2WdTpFqfNJLhaQHrO6GJzIIdBSduXtSeKRMR0MbpSfs6ppR+D+qfsI4J4KSZvNS00kSMKxCw==
   dependencies:
     "@nuxt/typescript-build" "^2.0.0"
     "@nuxtjs/composition-api" "0.17.0"
@@ -15216,9 +15216,9 @@ rollup-plugin-typescript2@^0.30.0:
     tslib "2.1.0"
 
 rollup@^2.56.2:
-  version "2.68.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.68.0.tgz#6ccabfd649447f8f21d62bf41662e5caece3bd66"
-  integrity sha512-XrMKOYK7oQcTio4wyTz466mucnd8LzkiZLozZ4Rz0zQD+HeX4nUK4B8GrTX/2EvN2/vBF/i2WnaXboPxo0JylA==
+  version "2.69.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.69.0.tgz#82aa86682a45e9760146b736c1643bf435506156"
+  integrity sha512-kjER91tHyek8gAkuz7+558vSnTQ+pITEok1P0aNOS45ZXyngaqPsXJmSel4QPQnJo7EJMjXUU1/GErWkWiKORg==
   optionalDependencies:
     fsevents "~2.3.2"
 
