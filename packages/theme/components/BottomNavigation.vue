@@ -3,14 +3,15 @@
   <SfBottomNavigation class="navigation-bottom smartphone-only">
       <SfBottomNavigationItem
         :class="$route.path == '/' ? 'sf-bottom-navigation__item--active' : ''"
+        :isActive="itemActive === 'home'"
         icon="home"
         size="20px"
         label="Home"
-        @click="handleHomeClick"
+        @click="handleClick('home')"
       />
     <SfBottomNavigationItem icon="menu" size="20px" :label="$t('Menu')" @click="toggleMobileMenu"/>
     <SfBottomNavigationItem icon="heart" size="20px" :label="$t('Wishlist')" @click="toggleWishlistSidebar"/>
-    <SfBottomNavigationItem icon="profile" size="20px" :label="$t('Account')" @click="handleAccountClick"/>
+    <SfBottomNavigationItem icon="profile" size="20px" :label="$t('Account')" :isActive="itemActive === 'account'" @click="handleClick('account')"/>
     <!-- TODO: add logic for label - if on Home then Basket, if on PDC then AddToCart etc. -->
     <SfBottomNavigationItem
       :label="$t('Basket')"
@@ -35,6 +36,8 @@
 import { SfBottomNavigation, SfIcon, SfCircleIcon } from '@storefront-ui/vue';
 import { useUiState } from '~/composables';
 import { useUser } from '@vue-storefront/vendure';
+import { ref, computed } from '@vue/composition-api';
+
 export default {
   components: {
     SfBottomNavigation,
@@ -44,23 +47,30 @@ export default {
   setup(props, { root }) {
     const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal, toggleMobileMenu, isMobileMenuOpen } = useUiState();
     const { isAuthenticated } = useUser();
-    const handleAccountClick = async () => {
-      if (isAuthenticated.value) {
-        return root.$router.push('/my-account');
+
+    const handleClick = (item) => {  
+      const itemActive = computed(() => item);
+      console.log(itemActive)
+      if (item === 'account') {        
+        async () => {
+          if (isAuthenticated.value) {
+            return root.$router.push('/my-account');
+          }
+          toggleLoginModal();
+        };
+      } else if (item === 'home') { 
+          () => {          
+          isMobileMenuOpen.value ? toggleMobileMenu() : false;
+          root.$router.push('/');
+        };
       }
-      toggleLoginModal();
-    };
-    const handleHomeClick = () => {
-      isMobileMenuOpen.value ? toggleMobileMenu() : false;
-      root.$router.push('/');
-    };
+    }
     return {
       isMobileMenuOpen,
       toggleWishlistSidebar,
       toggleCartSidebar,
       toggleMobileMenu,
-      handleAccountClick,
-      handleHomeClick
+      handleClick
     };
   }
 };
