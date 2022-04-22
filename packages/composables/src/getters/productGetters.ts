@@ -38,13 +38,13 @@ const getPrice = (product: AgnosticProductVariant): AgnosticPrice => {
 const getGallery = (product: AgnosticProductVariant): AgnosticMediaGalleryItem[] => {
   if (!product?.images?.length) return [];
 
-  return [
+  return product?.images.map(image => (
     {
-      small: product?.images[0],
-      normal: product?.images[0],
-      big: product?.images[0]
+      small: image,
+      normal: image,
+      big: image
     }
-  ];
+  ));
 };
 
 const getCoverImage = (product: AgnosticProductVariant): string => {
@@ -93,7 +93,7 @@ const getCategoryNames = (product: Product): string[] => {
 };
 
 const getByFilters = (product: Product, filters?: ProductFilter): AgnosticProductVariant[] | AgnosticProductVariant => {
-  const { variants, collections, featuredAsset, ...masterVariant } = product;
+  const { variants, collections, assets, ...masterVariant } = product;
 
   if (!variants?.length) return [];
 
@@ -104,8 +104,12 @@ const getByFilters = (product: Product, filters?: ProductFilter): AgnosticProduc
     name: variant?.name,
     sku: variant?.sku,
     slug: masterVariant?.slug,
-    collections: collections?.map(collection => ({id: collection.id, name: collection.name, breadcrumbs: collection.breadcrumbs})),
-    images: [featuredAsset?.preview],
+    collections: collections?.map(collection => ({
+      id: collection.id,
+      name: collection.name,
+      breadcrumbs: collection.breadcrumbs
+    })),
+    images: [...assets.map(value => value.preview)],
     price: {
       original: variant?.price,
       current: variant?.priceWithTax
