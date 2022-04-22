@@ -94,7 +94,6 @@ const getCategoryNames = (product: Product): string[] => {
 
 const getByFilters = (product: Product, filters?: ProductFilter): AgnosticProductVariant[] | AgnosticProductVariant => {
   const { variants, collections, featuredAsset, ...masterVariant } = product;
-
   if (!variants?.length) return [];
 
   const productVariants = variants.map(variant => ({
@@ -109,17 +108,34 @@ const getByFilters = (product: Product, filters?: ProductFilter): AgnosticProduc
     price: {
       original: variant?.price,
       current: variant?.priceWithTax
-    }
+    },
+    options: variant?.options
   }));
 
-  if (filters?.master) {
-    return productVariants[0];
+  if (filters?.attributes) {
+    if (Object.keys(filters.attributes).length) {
+      const attributes = Object.values(filters.attributes);
+      return productVariants.find(
+        variant => {
+          const variantOptions = [];
+          for (const option of variant.options) {
+            variantOptions.push(option.code);
+          }
+          attributes.every(
+            attr => variantOptions.includes(attr)
+          );
+        }
+      );
+    }
   }
 
   if (filters?.id) {
     return productVariants.find(variant => variant._id === filters?.id);
   }
 
+  if (filters?.master) {
+    return productVariants[0];
+  }
   return productVariants;
 };
 

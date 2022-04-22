@@ -54,6 +54,7 @@ export type ProductParams = {
 export type ProductFilter = {
   master?: boolean;
   id?: string;
+  attributes: any;
 };
 
 export type AddToCartParams = {

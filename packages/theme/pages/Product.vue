@@ -180,6 +180,7 @@ export default {
   setup(props, context) {
     const qty = ref(1);
     const { id } = context.root.$route.params;
+    const { $router, $route } = context.root;
     const { products, search } = useProduct('products');
     const { addItem, loading } = useCart();
     const { reviews: productReviews, search: searchReviews } = useReview('productReviews');
@@ -218,6 +219,8 @@ export default {
       alt: product.value._name || product.value.name
     })));
 
+    console.log(product);
+
     onSSR(async () => {
       await search({ id });
       await searchReviews({ productId: id });
@@ -226,9 +229,11 @@ export default {
     });
 
     const updateFilter = (filter) => {
-      const url = new URL(window.location);
-      url.searchParams.set(Object.keys(filter)[0], Object.values(filter)[0]);
-      window.history.pushState({}, '', url);
+      const url = {...$route.query, ...filter};
+      $router.push({
+        path: $route.fullPath,
+        query: url
+      });
     };
 
     const addToCart = () => {
