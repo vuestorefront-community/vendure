@@ -93,9 +93,16 @@ const getCategoryNames = (product: Product): string[] => {
 };
 
 const getByFilters = (product: Product, filters?: ProductFilter): AgnosticProductVariant[] | AgnosticProductVariant => {
-  const { variants, collections, assets, ...masterVariant } = product;
+  const { variants, collections, featuredAsset, assets, ...masterVariant } = product;
 
   if (!variants?.length) return [];
+
+  const imagesSet = new Set<string>();
+
+  if (featuredAsset) {
+    imagesSet.add(featuredAsset.preview);
+  }
+  assets.forEach(asset => imagesSet.add(asset.preview));
 
   const productVariants = variants.map(variant => ({
     _id: variant?.id,
@@ -109,7 +116,7 @@ const getByFilters = (product: Product, filters?: ProductFilter): AgnosticProduc
       name: collection.name,
       breadcrumbs: collection.breadcrumbs
     })),
-    images: [...assets.map(value => value.preview)],
+    images: [...Array.from(imagesSet)],
     price: {
       original: variant?.price,
       current: variant?.priceWithTax
