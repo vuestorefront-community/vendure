@@ -39,10 +39,12 @@ const useUiHelpers = () => {
     } else {
       sortOptions.name = query.sort?.split('_')[1];
     }
+    const take = parseInt(query.itemsPerPage, 10) || 20;
 
     return {
       collectionSlug: categorySlug,
-      take: parseInt(query.itemsPerPage, 10) || 20,
+      take,
+      skip: ((query?.page || 1) * take) - take,
       groupByProduct: true,
       sort: sortOptions,
       facetValueIds: query.attributes || []
