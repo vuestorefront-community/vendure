@@ -5,8 +5,8 @@
         <SfButton class="sf-button--text all-orders" @click="currentOrder = null">All Orders</SfButton>
         <div class="highlighted highlighted--total">
           <SfProperty
-            name="Order ID"
-            :value="orderGetters.getId(currentOrder)"
+            name="Order Code"
+            :value="orderGetters.getCode(currentOrder)"
             class="sf-property--full-width property"
           />
           <SfProperty
@@ -57,7 +57,7 @@
             <SfTableHeader class="orders__element--right" />
           </SfTableHeading>
           <SfTableRow v-for="order in orders.items" :key="orderGetters.getId(order)">
-            <SfTableData v-e2e="'order-number'">{{ orderGetters.getId(order) }}</SfTableData>
+            <SfTableData v-e2e="'order-number'">{{ orderGetters.getCode(order) }}</SfTableData>
             <SfTableData>{{ orderGetters.getDate(order) }}</SfTableData>
             <SfTableData>{{ $n(orderGetters.getPrice(order), 'currency') }}</SfTableData>
             <SfTableData>
