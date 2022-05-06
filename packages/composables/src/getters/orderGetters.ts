@@ -16,6 +16,11 @@ function getId(order: Order): string {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getCode(order: Order): string {
+  return order?.code || '';
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getStatus(order: Order): string {
   return order?.state || '';
 }
@@ -67,6 +72,7 @@ function getTotalItems(order: OrderList): number {
 export const orderGetters: UserOrderGetters<any, any> = {
   getDate,
   getId,
+  getCode,
   getStatus,
   getPrice,
   getItems,

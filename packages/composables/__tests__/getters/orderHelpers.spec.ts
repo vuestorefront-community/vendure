@@ -15,6 +15,10 @@ describe('[vendure-getters] order getters', () => {
     expect(orderGetters.getId(mockedOrder)).toEqual('54');
   });
 
+  it('returns order code', () => {
+    expect(orderGetters.getCode(mockedOrder)).toEqual('9661TLN1RURBX24B');
+  });
+
   it('returns order status', () => {
     expect(orderGetters.getStatus(mockedOrder)).toEqual('PaymentAuthorized');
   });
