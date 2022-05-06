@@ -6,7 +6,8 @@ import { NO_CACHE_FETCH_POLICY } from '../../helpers';
 
 const resetPassword = async (context: Context, params: ResetPasswordParams, customQuery?: CustomQuery): Promise<ResetPasswordResponse> => {
   const ResetPasswordVariables = {
-    ...params
+    token: params.tokenValue,
+    password: params.newPassword
   };
 
   const { resetPassword } = context.extendQuery(
