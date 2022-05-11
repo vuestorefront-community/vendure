@@ -26,8 +26,7 @@
             </template>
             <template #description="{ description }">
               <div class="sf-radio__description payment__description">
-                <div class="payment__info">
-                  {{ description }}
+                <div class="payment__info" v-html='description'>
                 </div>
               </div>
             </template>
