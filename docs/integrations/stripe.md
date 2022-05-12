@@ -1,9 +1,14 @@
-# Stripe [Coming soon]
+# Stripe
 
-There is an implementation of Stripe module for Nuxt ongoing for VSF&Vendure.
+Integration with payment gateways is much more difficult than with Content Management System because it requires you to integrate it on both frontend and backend of your store. You have to handle payments via form (ideally a drop in component or redirect) and then configure your e-commerce platform to trust external provider that the payment was successful.
 
-A package [nuxt-stripe-module](https://www.npmjs.com/package/nuxt-stripe-module) will be used for that.
+## Vue Storefront
 
-:::warning
-This integration is only between Vue Storefront and Stripe. In order to correctly handle the payment you would also need to develop a Stripe plugin for Vendure [like this one](https://github.com/gaiusmathew/stripe-payment-plugin).
-:::
+As Vue Storefront uses Nuxt.js under the hood and is built using Vue.js, you can use Vue.js plugin or Nuxt.js module to integrate with Stripe:
+
+- <https://vuestripe.com/> especially -> <https://vuestripe.com/nuxt/>
+- <https://www.npmjs.com/package/nuxt-stripe-module>
+
+## Vendure
+
+To integrate Vendure with Stripe to accept and handle payments you can use official plugin that is described [here](https://www.vendure.io/docs/typescript-api/payments-plugin/stripe-plugin/)
