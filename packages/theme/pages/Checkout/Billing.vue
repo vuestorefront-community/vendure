@@ -121,7 +121,7 @@
         >
           <SfSelect
             v-e2e="'billing-country'"
-            :value="billingDetails.country"
+            v-model="billingDetails.country"
             :label="$t('Country')"
             name="country"
             class="form__element form__element--half form__select sf-select--underlined"

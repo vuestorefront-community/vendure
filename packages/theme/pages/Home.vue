@@ -56,16 +56,11 @@
           </template>
           <SfCarouselItem class="carousel__item" v-for="(product, i) in products" :key="i">
             <SfProductCard
-              :title="product.title"
-              :image="product.image"
-              :regular-price="product.price.regular"
-              :max-rating="product.rating.max"
-              :score-rating="product.rating.score"
-              :show-add-to-cart-button="true"
-              :is-on-wishlist="product.isInWishlist"
-              :link="localePath({ name: 'home' })"
+              :title="product.productName"
+              :image="product.productAsset.preview"
+              :regular-price="$n(getCalculatedPrice(product.price.value), 'currency')"
+              :link="localePath(`/p/${product.productId}/${product.slug}`)"
               class="carousel__item__product"
-              @click:wishlist="toggleWishlist(i)"
             />
           </SfCarouselItem>
         </SfCarousel>
@@ -103,6 +98,10 @@ import {
 import InstagramFeed from '~/components/InstagramFeed.vue';
 import LazyHydrate from 'vue-lazy-hydration';
 import cacheControl from './../helpers/cacheControl';
+import { useContext, computed } from '@nuxtjs/composition-api';
+import { useFacet } from '@vue-storefront/vendure';
+import { onSSR } from '@vue-storefront/core';
+import { getCalculatedPrice } from '~/helpers';
 
 export default {
   name: 'Home',
@@ -125,137 +124,89 @@ export default {
     SfButton,
     LazyHydrate
   },
-  data() {
-    return {
-      heroes: [
-        {
-          title: 'Colorful summer dresses are already in store',
-          subtitle: 'SUMMER COLLECTION 2019',
-          background: '#eceff1',
-          image: '/homepage/bannerH.webp'
-        },
-        {
-          title: 'Colorful summer dresses are already in store',
-          subtitle: 'SUMMER COLLECTION 2019',
-          background: '#efebe9',
-          image: '/homepage/bannerA.webp',
-          className:
+  setup() {
+
+    const { $config } = useContext();
+    const heroes = [
+      {
+        title: 'Colorful summer dresses are already in store',
+        subtitle: 'SUMMER COLLECTION 2019',
+        background: '#eceff1',
+        image: '/homepage/bannerH.webp'
+      },
+      {
+        title: 'Colorful summer dresses are already in store',
+        subtitle: 'SUMMER COLLECTION 2019',
+        background: '#efebe9',
+        image: '/homepage/bannerA.webp',
+        className:
             'sf-hero-item--position-bg-top-left sf-hero-item--align-right'
-        },
-        {
-          title: 'Colorful summer dresses are already in store',
-          subtitle: 'SUMMER COLLECTION 2019',
-          background: '#fce4ec',
-          image: '/homepage/bannerB.webp'
-        }
-      ],
-      banners: [
-        {
-          slot: 'banner-A',
-          subtitle: 'Dresses',
-          title: 'Cocktail & Party',
-          description:
+      },
+      {
+        title: 'Colorful summer dresses are already in store',
+        subtitle: 'SUMMER COLLECTION 2019',
+        background: '#fce4ec',
+        image: '/homepage/bannerB.webp'
+      }
+    ];
+    const banners = [
+      {
+        slot: 'banner-A',
+        subtitle: 'Dresses',
+        title: 'Cocktail & Party',
+        description:
             'Find stunning women\'s cocktail dresses and party dresses. Stand out in lace and metallic cocktail dresses from all your favorite brands.',
-          buttonText: 'Shop now',
-          image: {
-            mobile: this.$config.theme.home.bannerA.image.mobile,
-            desktop: this.$config.theme.home.bannerA.image.desktop
-          },
-          class: 'sf-banner--slim desktop-only',
-          link: this.$config.theme.home.bannerA.link
+        buttonText: 'Shop now',
+        image: {
+          mobile: $config.theme.home.bannerA.image.mobile,
+          desktop: $config.theme.home.bannerA.image.desktop
         },
-        {
-          slot: 'banner-B',
-          subtitle: 'Dresses',
-          title: 'Linen Dresses',
-          description:
+        class: 'sf-banner--slim desktop-only',
+        link: $config.theme.home.bannerA.link
+      },
+      {
+        slot: 'banner-B',
+        subtitle: 'Dresses',
+        title: 'Linen Dresses',
+        description:
             'Find stunning women\'s cocktail dresses and party dresses. Stand out in lace and metallic cocktail dresses from all your favorite brands.',
-          buttonText: 'Shop now',
-          image: this.$config.theme.home.bannerB.image,
-          class: 'sf-banner--slim banner-central desktop-only',
-          link: this.$config.theme.home.bannerB.link
-        },
-        {
-          slot: 'banner-C',
-          subtitle: 'T-Shirts',
-          title: 'The Office Life',
-          image: this.$config.theme.home.bannerC.image,
-          class: 'sf-banner--slim banner__tshirt',
-          link: this.$config.theme.home.bannerC.link
-        },
-        {
-          slot: 'banner-D',
-          subtitle: 'Summer Sandals',
-          title: 'Eco Sandals',
-          image: this.$config.theme.home.bannerD.image,
-          class: 'sf-banner--slim',
-          link: this.$config.theme.home.bannerD.link
-        }
-      ],
-      products: [
-        {
-          title: 'Cream Beach Bag',
-          image: '/homepage/productA.webp',
-          price: { regular: '50.00 $' },
-          rating: { max: 5, score: 4 },
-          isInWishlist: true
-        },
-        {
-          title: 'Cream Beach Bag',
-          image: '/homepage/productB.webp',
-          price: { regular: '50.00 $' },
-          rating: { max: 5, score: 4 },
-          isInWishlist: false
-        },
-        {
-          title: 'Cream Beach Bag',
-          image: '/homepage/productC.webp',
-          price: { regular: '50.00 $' },
-          rating: { max: 5, score: 4 },
-          isInWishlist: false
-        },
-        {
-          title: 'Cream Beach Bag',
-          image: '/homepage/productA.webp',
-          price: { regular: '50.00 $' },
-          rating: { max: 5, score: 4 },
-          isInWishlist: false
-        },
-        {
-          title: 'Cream Beach Bag',
-          image: '/homepage/productB.webp',
-          price: { regular: '50.00 $' },
-          rating: { max: 5, score: 4 },
-          isInWishlist: false
-        },
-        {
-          title: 'Cream Beach Bag',
-          image: '/homepage/productC.webp',
-          price: { regular: '50.00 $' },
-          rating: { max: 5, score: 4 },
-          isInWishlist: false
-        },
-        {
-          title: 'Cream Beach Bag',
-          image: '/homepage/productA.webp',
-          price: { regular: '50.00 $' },
-          rating: { max: 5, score: 4 },
-          isInWishlist: false
-        },
-        {
-          title: 'Cream Beach Bag',
-          image: '/homepage/productB.webp',
-          price: { regular: '50.00 $' },
-          rating: { max: 5, score: 4 },
-          isInWishlist: false
-        }
-      ]
+        buttonText: 'Shop now',
+        image: $config.theme.home.bannerB.image,
+        class: 'sf-banner--slim banner-central desktop-only',
+        link: $config.theme.home.bannerB.link
+      },
+      {
+        slot: 'banner-C',
+        subtitle: 'T-Shirts',
+        title: 'The Office Life',
+        image: $config.theme.home.bannerC.image,
+        class: 'sf-banner--slim banner__tshirt',
+        link: $config.theme.home.bannerC.link
+      },
+      {
+        slot: 'banner-D',
+        subtitle: 'Summer Sandals',
+        title: 'Eco Sandals',
+        image: $config.theme.home.bannerD.image,
+        class: 'sf-banner--slim',
+        link: $config.theme.home.bannerD.link
+      }
+    ];
+    const { search, result } = useFacet();
+
+    onSSR(async () => {
+      await search({ sort: { name: 'DESC' }, take: 8});
+    });
+
+    const products = computed(() => result.value.data.items);
+
+    return {
+      heroes,
+      banners,
+      products,
+      getCalculatedPrice
     };
-  },
-  methods: {
-    toggleWishlist(index) {
-      this.products[index].isInWishlist = !this.products[index].isInWishlist;
-    }
+
   }
 };
 </script>
@@ -337,6 +288,15 @@ export default {
     padding-bottom: 0;
   }
 }
+ ::v-deep .sf-product-card__image .sf-image {
+    --image-height: 14.375rem;
+    --image-width: 9.375rem;
+    object-fit: cover;
+    @include for-desktop {
+      --image-width: 13.125rem;
+      --image-height: 18.75rem;
+    }
+  }
 
 .call-to-action {
   background-position: right;

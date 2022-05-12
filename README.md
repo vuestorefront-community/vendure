@@ -3,6 +3,13 @@
   <img src="https://www.vendure.io/logo.png" height="100px" style="margin-left: 30px;">
 </div>
 
+### Stay connected
+
+[![GitHub Repo stars](https://img.shields.io/github/stars/vuestorefront/vue-storefront?style=social)](https://github.com/vuestorefront/vue-storefront)
+[![Twitter Follow](https://img.shields.io/twitter/follow/vuestorefront?style=social)](https://twitter.com/vuestorefront)
+[![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCkm1F3Cglty3CE1QwKQUhhg?style=social)](https://www.youtube.com/c/VueStorefront)
+[![Discord](https://img.shields.io/discord/770285988244750366?label=join%20discord&logo=Discord&logoColor=white)](https://discord.vuestorefront.io)
+
 ## Vue Storefront 2 integration with Vendure
 
 This project is a Vendure integration for [Vue Storefront 2](https://github.com/vuestorefront/vue-storefront/).
@@ -39,7 +46,7 @@ Want to contribute? Ping us on `vendure` channel on [our Discord](https://discor
 
 - NodeJS v14 or later
 - Vendure server running in localhost for GraphQL API or <https://demo.vendure.io/shop-api>
-- Set up auth options in Vendure server
+- Set up auth options in Vendure server (This functionality is available for those who scaffold a local instance of Vendure)
 
 ```ts
 // vendure-config.ts
