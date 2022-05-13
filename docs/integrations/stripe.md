@@ -21,7 +21,7 @@ The high-level workflow is:
 
 ## Example of an integration using the nuxt-stripe-module <https://www.npmjs.com/package/nuxt-stripe-module>
 
-Befor moving forward, be sure that both plugins (Vendure and vue-stripe or nuxt-stripe-module are correctly installed)
+Before moving forward, be sure that both plugins (Vendure and vue-stripe or nuxt-stripe-module are correctly installed)
 
 ### Step I: Extend the VSF API with a 'setStripePayment' method
 
