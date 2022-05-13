@@ -132,7 +132,7 @@ The following example uses the nuxt-stripe-plugin <https://www.npmjs.com/package
 
     ```
 
-## Step IV: Finaly, add the stripe payment form in your payment page template part as described in the stripe doumentation <https://stripe.com/docs/payments/elements>
+## Step IV: Finaly, add the stripe payment form in your payment page template part as described in the stripe documentation <https://stripe.com/docs/payments/elements>
 
 Stripe elements is an already designed payment form delivered by Stripe, when using it, you don't need to design your own payment caption interface.
 You just need to call the payment_element form in your HTML code as seen in the example bellow.
