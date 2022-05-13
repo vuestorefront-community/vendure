@@ -25,7 +25,7 @@ Before moving forward, be sure that both plugins (Vendure and vue-stripe or nuxt
 
 ### Step I: Extend the VSF API with a 'setStripePayment' method
 
-just call the mutation and you'll get a client secret in return.
+just call the Vendure's new mutation and you'll get a client secret in return.
 code example:
 
     ```TS
@@ -46,7 +46,7 @@ code example:
 
 ### Step II: Create the related composable 'useStripe'
 
-The composable call the new setStripePayment API and returns the secret value needed to process the payment on the payment page.
+The composable calls the new setStripePayment API and returns the secret value needed to process the payment on the payment page.
 
 code example:
 
@@ -71,7 +71,7 @@ code example:
 ## Step III: Import and call the composable in your payment page (ie:payment.vue) (script part)
 
 For more details and options on how to implement the Stripe elements form, refer to the Stripe documentation available here <https://stripe.com/docs/payments/elements>
-The following example use the nuxt-stripe-plugin <https://www.npmjs.com/package/nuxt-stripe-module> and suppose it's already installed along with the vendure stripe plugin.
+The following example uses the nuxt-stripe-plugin <https://www.npmjs.com/package/nuxt-stripe-module> and suppose it's already installed along with the vendure stripe plugin.
 
     ```JS
     ...
