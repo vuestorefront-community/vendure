@@ -99,7 +99,7 @@ import InstagramFeed from '~/components/InstagramFeed.vue';
 import LazyHydrate from 'vue-lazy-hydration';
 import cacheControl from './../helpers/cacheControl';
 import { useContext, computed } from '@nuxtjs/composition-api';
-import { useFacet } from '@vue-storefront/vendure';
+import { useFacet, useProducts } from '@vue-storefront/vendure';
 import { onSSR } from '@vue-storefront/core';
 import { getCalculatedPrice } from '~/helpers';
 
@@ -193,6 +193,7 @@ export default {
       }
     ];
     const { search, result } = useFacet();
+    const { search: ss, result: rr } = useProducts();
 
     onSSR(async () => {
       await search({ sort: { name: 'DESC' }, take: 8});

@@ -11,6 +11,7 @@ export type MutationResponse<K extends string, V> = FetchResult<Record<K, V>>;
 export type RequestDataStructure<K extends string, V> = Record<K, V>;
 
 export type GetProductResponse = QueryResponse<'product', Product>;
+export type GetProductsResponse = QueryResponse<'products', Product[]>;
 export type GetCategoryResponse = QueryResponse<'collections', CollectionList>;
 export type GetFacetResponse = QueryResponse<'search', SearchResponse>;
 export type GetCartResponse = QueryResponse<'activeOrder', Order>;
@@ -42,6 +43,7 @@ export type UpdateCustomerEmailAddressResponse = MutationResponse<'updateCustome
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
+  getProducts(params: any, customQuery?: CustomQuery): Promise<GetProductsResponse>;
   getFacet(params: SearchParams, customQuery?: CustomQuery): Promise<GetFacetResponse>;
   getCategory(params: CollectionParams, customQuery?: CustomQuery): Promise<GetCategoryResponse>;
   getCart(customQuery?: CustomQuery): Promise<GetCartResponse>;
