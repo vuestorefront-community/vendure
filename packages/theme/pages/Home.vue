@@ -102,6 +102,7 @@ import { useContext, computed } from '@nuxtjs/composition-api';
 import { useFacet, useProducts } from '@vue-storefront/vendure';
 import { onSSR } from '@vue-storefront/core';
 import { getCalculatedPrice } from '~/helpers';
+import { useVSFContext } from '@vue-storefront/core';
 
 export default {
   name: 'Home',
@@ -193,7 +194,9 @@ export default {
       }
     ];
     const { search, result } = useFacet();
-    const { search: ss, result: rr } = useProducts();
+    const context = useVSFContext();
+    const req = useProducts(context);
+    console.log(req);
 
     onSSR(async () => {
       await search({ sort: { name: 'DESC' }, take: 8});

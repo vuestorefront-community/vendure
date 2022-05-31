@@ -1,48 +1,77 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query product ($id: ID, $slug: String) {
-    product(id: $id, slug: $slug) {
-      slug
-      description
-      variants {
+  query products ($options: ProductListOptions) {
+    products(options: $options) {
+      items {
         id
-        sku
+        createdAt
+        updatedAt
+        languageCode
         name
-        price
-        priceWithTax
-        currencyCode
-        options {
+        slug
+        description
+        featuredAsset {
           id
           name
-          code
+          preview
         }
-      }
-      featuredAsset {
-        preview
-      }
-      assets {
-        preview
-      }
-      collections {
-        id
-        name
-        breadcrumbs {
+        assets {
           id
           name
-          slug
+          preview
         }
-      }
-      optionGroups {
-        id
-        name
-        code
-        options {
+        variants {
+          name
+          id
+          price
+          priceWithTax
+        }
+        facetValues {
           id
           name
-          code
+        }
+        translations {
+          name
+          languageCode
+        }
+        customFields {
+          productSet {
+            id
+            createdAt
+            updatedAt
+            languageCode
+            name
+            slug
+            description
+            featuredAsset {
+              id
+              name
+              preview
+            }
+            assets {
+              id
+              name
+              preview
+            }
+            variants {
+              name
+              id
+              price
+              priceWithTax
+            }
+            facetValues {
+              id
+              name
+            }
+            translations {
+              name
+              languageCode
+            }
+          }
         }
       }
+      totalItems
     }
   }
 `;
