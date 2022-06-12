@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@vue-storefront/core": "~2.4.6",
-    "@vue-storefront/vendure-api": "link:../api-client"
+    "@vue-storefront/vendure-api": "https://gitpkg.now.sh/qwexvf/storefront-vendure/packages/api-client?develop"
   },
   "peerDependencies": {
     "@vue/composition-api": "1.0.0-beta.21"

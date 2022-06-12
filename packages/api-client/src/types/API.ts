@@ -3,7 +3,7 @@ import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
 
 import { Address, CreateAddressInput, CurrentUser, DeleteCustomerAddress, UpdateCustomerEmailAddressParams, UpdateCustomerInput } from '.';
-import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, NativeAuthenticationResult, Order, PaymentInput, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, Success, UpdateAddressInput, UpdateOrderItemsResult, RequestPasswordResetResult, ResetPasswordResult } from './GraphQL';
+import { ActiveOrderResult, ApplyCouponCodeResult, CollectionList, CreateCustomerInput, Customer, NativeAuthenticationResult, Order, PaymentInput, PaymentMethodQuote, Product, RegisterCustomerAccountResult, RegisterCustomerInput, RemoveOrderItemsResult, SearchResponse, SetCustomerForOrderResult, ShippingMethodQuote, Success, UpdateAddressInput, UpdateOrderItemsResult, RequestPasswordResetResult, ResetPasswordResult, ProductListOptions } from './GraphQL';
 import { AddToCartParams, CartCouponParams, CollectionParams, LoginParams, ProductParams, RemoveFromCartParams, SearchParams, SetShippingMethodParams, TransitionOrderToStateParams, UpdateAddressDetailsParams, UpdateCartParams, UpdateCustomerPasswordParams, RequestPasswordResetParams, ResetPasswordParams } from './types';
 
 export type QueryResponse<K extends string, V> = ApolloQueryResult<Record<K, V>>;
@@ -43,7 +43,7 @@ export type UpdateCustomerEmailAddressResponse = MutationResponse<'updateCustome
 
 export interface VendureApiMethods {
   getProduct(params: ProductParams, customQuery?: CustomQuery): Promise<GetProductResponse>;
-  getProducts(params: any, customQuery?: CustomQuery): Promise<GetProductsResponse>;
+  getProducts(params: ProductListOptions, customQuery?: CustomQuery): Promise<GetProductsResponse>;
   getFacet(params: SearchParams, customQuery?: CustomQuery): Promise<GetFacetResponse>;
   getCategory(params: CollectionParams, customQuery?: CustomQuery): Promise<GetCategoryResponse>;
   getCart(customQuery?: CustomQuery): Promise<GetCartResponse>;
