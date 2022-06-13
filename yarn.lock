@@ -4122,6 +4122,22 @@
     lodash "^4.17.15"
     nuxt-purgecss "^1.0.0"
 
+"@vue-storefront/vendure-api@https://gitpkg.now.sh/qwexvf/storefront-vendure/packages/api-client?develop":
+  version "1.2.0"
+  resolved "https://gitpkg.now.sh/qwexvf/storefront-vendure/packages/api-client?develop#1e719f95370e33243afb375ebe05ad631902e880"
+  dependencies:
+    "@vue-storefront/core" "~2.4.6"
+    apollo-cache-inmemory "^1.6.6"
+    apollo-client "^2.6.10"
+    apollo-link "^1.2.14"
+    apollo-link-context "^1.0.20"
+    apollo-link-error "^1.1.13"
+    apollo-link-http "^1.5.17"
+    apollo-link-retry "^2.2.16"
+    graphql "^15.5.1"
+    graphql-tag "^2.12.5"
+    isomorphic-fetch "^3.0.0"
+
 "@vue-storefront/vendure-api@link:packages/api-client":
   version "1.2.0"
   dependencies:
@@ -4141,7 +4157,7 @@
   version "1.2.0"
   dependencies:
     "@vue-storefront/core" "~2.4.6"
-    "@vue-storefront/vendure-api" "link:../../Library/Caches/Yarn/v6/npm-@vue-storefront-vendure-1.2.0-a8e879d5-683c-4452-8077-09cb409d309d-1653897079823/node_modules/@vue-storefront/api-client"
+    "@vue-storefront/vendure-api" "link:../../Library/Caches/Yarn/v6/npm-@vue-storefront-vendure-1.2.0-abf0fd7e-6dae-4768-9f4b-f985a545bc6e-1653985420656/node_modules/@vue-storefront/api-client"
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
