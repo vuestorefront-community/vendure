@@ -4,7 +4,7 @@
         class="container__lang container__lang--selected"
         @click="isLangModalOpen = !isLangModalOpen"
     >
-      <SfImage :src="`/icons/langs/${locale}.webp`" width="20" alt="Flag" />
+      <SfImage :src="`/icons/langs/${locale}.webp`" :width=20 alt="Flag" />
     </SfButton>
     <SfBottomModal :is-open="isLangModalOpen" title="Choose language" @click:close="isLangModalOpen = !isLangModalOpen">
       <SfList>
@@ -15,7 +15,7 @@
                 <span>{{ lang.label }}</span>
               </template>
               <template #icon>
-                <SfImage :src="`/icons/langs/${lang.code}.webp`" width="20" alt="Flag" class="language__flag" />
+                <SfImage :src="`/icons/langs/${lang.code}.webp`" :width="20" alt="Flag" class="language__flag" />
               </template>
             </SfCharacteristic>
           </a>
