@@ -71,6 +71,14 @@ module.exports = {
         ]
       },
       {
+        title: 'Cookbook',
+        collapsable: true,
+        children: [
+          ['/cookbook/https', 'HTTPS configuration'],
+          ['/cookbook/multistore', 'Multistore'],
+        ]
+      },
+      {
         title: 'API Reference',
         collapsable: true,
         children: [
