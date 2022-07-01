@@ -19,3 +19,7 @@ Check out more at <https://www.vendure.io>
 ## Interview with Michael Bromley - founder of Vendure
 
 <iframe width="100%" height="669" src="https://www.youtube.com/embed/qA_cBsM_yjg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+
+## Building E-Commerce with Vendure
+
+<iframe width="100%" height="669" src="https://www.youtube.com/embed/-xadDHz7qpk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
