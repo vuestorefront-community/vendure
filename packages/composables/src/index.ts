@@ -6,6 +6,7 @@ export { useContent } from './composables/useContent';
 export { useFacet } from './composables/useFacet';
 export { useMakeOrder } from './composables/useMakeOrder';
 export { useProduct } from './composables/useProduct';
+export { useProducts } from './composables/useProducts';
 export { useReview } from './composables/useReview';
 export { useShipping } from './composables/useShipping';
 export { useShippingProvider } from './composables/useShippingProvider';
