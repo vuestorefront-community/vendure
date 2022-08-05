@@ -76,6 +76,7 @@ module.exports = {
         children: [
           ['/cookbook/https', 'HTTPS configuration'],
           ['/cookbook/multistore', 'Multistore'],
+          ['/cookbook/custom-api-methods', 'Custom API Methods'],
         ]
       },
       {
