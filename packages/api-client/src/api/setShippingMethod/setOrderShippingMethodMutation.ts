@@ -5,7 +5,7 @@ export default gql`
   ${CartFragment}
   ${ErrorResultFragment}
 
-  mutation setOrderShippingMethod($shippingMethodId: ID!) {
+  mutation setOrderShippingMethod($shippingMethodId: [ID!]!) {
     setOrderShippingMethod(shippingMethodId: $shippingMethodId) {
       ...Cart
       ...ErrorResult
